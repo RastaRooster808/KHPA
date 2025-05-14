@@ -1,10 +1,13 @@
 
 body {
-  font-family: 'Merriweather', serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f9f5ec;
-  color: #1b1b1b;
+font-family: 'Merriweather', serif;
+margin: 0;
+padding: 0;
+background-color: #f9f5ec;
+background-image: url("img/khpa-tapa-watermark.png");
+background-repeat: repeat;
+background-size: 400px auto;
+color: #1b1b1b;
 }
 
 header {
