@@ -1,0 +1,79 @@
+
+body {
+  font-family: 'Merriweather', serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f5ec;
+  color: #1b1b1b;
+}
+
+header {
+  text-align: center;
+  background: linear-gradient(to right, #8c1d40, #ffcc00);
+  color: white;
+  padding: 3rem 1rem;
+  border-bottom: 5px solid #1b1b1b;
+}
+
+.logo {
+  max-width: 120px;
+  margin-bottom: 1rem;
+}
+
+nav {
+  background: #1b1b1b;
+  text-align: center;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+nav li {
+  margin: 0.5rem 1.5rem;
+}
+
+nav a {
+  color: #fefae0;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+nav a:hover {
+  color: #ffcc00;
+  text-decoration: underline;
+}
+
+main {
+  max-width: 1000px;
+  margin: auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+section {
+  padding: 2rem 0;
+  border-bottom: 1px solid #ccc;
+}
+
+h1, h2 {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  background: #1b1b1b;
+  color: white;
+  font-size: 0.9rem;
+}
