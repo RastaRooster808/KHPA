@@ -100,3 +100,18 @@ footer {
   color: #ffcc00;
   border-color: #ffcc00;
 }
+#palace-banner {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: #fff;
+  border-top: 3px solid #de411b;
+  border-bottom: 3px solid #ffcc00;
+}
+
+#palace-banner img {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  display: block;
+}
