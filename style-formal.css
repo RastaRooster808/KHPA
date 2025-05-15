@@ -1,15 +1,13 @@
-
 body {
-font-family: 'Merriweather', serif;
-margin: 0;
-padding: 0;
-background-color: #f9f5ec;
-background-image: url("img/khpa-tapa-watermark.png");
-background-repeat: repeat;
-background-size: 400px auto;
-color: #1b1b1b;
+  font-family: 'Merriweather', serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f5ec;
+  background-image: url("img/khpa-tapa-watermark.png");
+  background-repeat: repeat;
+  background-size: 400px auto;
+  color: #1b1b1b;
 }
-
 header {
   text-align: center;
   background: linear-gradient(to right, #8c1d40, #ffcc00);
@@ -17,42 +15,10 @@ header {
   padding: 3rem 1rem;
   border-bottom: 5px solid #1b1b1b;
 }
-
 .logo {
   max-width: 120px;
   margin-bottom: 1rem;
 }
-
-nav {
-  background: #1b1b1b;
-  text-align: center;
-}
-
-nav ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-nav li {
-  margin: 0.5rem 1.5rem;
-}
-
-nav a {
-  color: #fefae0;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 1.1rem;
-}
-
-nav a:hover {
-  color: #ffcc00;
-  text-decoration: underline;
-}
-
 main {
   max-width: 1000px;
   margin: auto;
@@ -61,44 +27,21 @@ main {
   border-radius: 6px;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
-
 section {
   padding: 2rem 0;
   border-bottom: 1px solid #ccc;
 }
-
 h1, h2 {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
-
 footer {
   text-align: center;
   padding: 1rem;
   background: #1b1b1b;
   color: white;
   font-size: 0.9rem;
-}
-.hawaiian-button {
-  display: inline-block;
-  background: #de411b;
-  color: #fff8e1;
-  padding: 0.8rem 1.4rem;
-  border: 2px solid #fff8e1;
-  border-radius: 12px;
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  margin-top: 1rem;
-}
-
-.hawaiian-button:hover {
-  background: #b73219;
-  color: #ffcc00;
-  border-color: #ffcc00;
 }
 #palace-banner {
   width: 100%;
@@ -107,8 +50,8 @@ footer {
   background: #fff;
   border-top: 3px solid #de411b;
   border-bottom: 3px solid #ffcc00;
+  position: relative;
 }
-
 #palace-banner img {
   width: 100%;
   max-height: 420px;
@@ -117,7 +60,7 @@ footer {
 }
 .island-buttons {
   position: absolute;
-  top: 15%;
+  top: 10%;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -127,7 +70,6 @@ footer {
   padding: 1rem;
   z-index: 10;
 }
-
 .island-btn {
   background-color: rgba(255, 255, 255, 0.8);
   border: 2px solid #de411b;
@@ -140,9 +82,42 @@ footer {
   font-size: 0.85rem;
   transition: all 0.3s ease;
 }
-
 .island-btn:hover {
   background-color: #de411b;
   color: #fff8e1;
   border-color: #ffcc00;
+}
+#chant {
+  background-color: #fefae0;
+  padding: 2rem;
+  text-align: center;
+  border-top: 2px solid #de411b;
+  border-bottom: 2px solid #de411b;
+}
+#chant h2 {
+  font-size: 1.8rem;
+  color: #8c1d40;
+  margin-bottom: 1rem;
+}
+#chant p {
+  font-style: italic;
+  margin-bottom: 1rem;
+}
+#chant audio {
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+  display: block;
+}
+.shop-link {
+  background-color: #8c1d40;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+}
+.shop-link:hover {
+  background-color: #ffcc00;
+  color: #1b1b1b;
 }
