@@ -80,3 +80,23 @@ footer {
   color: white;
   font-size: 0.9rem;
 }
+.hawaiian-button {
+  display: inline-block;
+  background: #de411b;
+  color: #fff8e1;
+  padding: 0.8rem 1.4rem;
+  border: 2px solid #fff8e1;
+  border-radius: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+}
+
+.hawaiian-button:hover {
+  background: #b73219;
+  color: #ffcc00;
+  border-color: #ffcc00;
+}
