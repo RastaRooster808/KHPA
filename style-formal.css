@@ -30,12 +30,35 @@ nav ul {
   display: flex;
   justify-content: center;
   gap: 2rem;
+  flex-wrap: wrap;
+}
+
+nav li {
+  position: relative;
 }
 
 nav a {
   color: white;
   text-decoration: none;
   font-weight: bold;
+}
+
+nav .dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #eee;
+  color: #333;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+nav .dropdown-content li {
+  padding: 0.5rem;
+}
+
+nav .dropdown:hover .dropdown-content {
+  display: block;
 }
 
 #island-map-banner {
