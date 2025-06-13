@@ -50,3 +50,12 @@ footer {
   background: #333;
   color: white;
 }
+#hawaii-office ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+#hawaii-office li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #ccc;
+}
