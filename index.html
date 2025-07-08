@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,19 +14,33 @@
     <p class="slogan">Indigenous Cognizant Expressions of ʻĀina and Sacred Protocol</p>
     <nav>
       <ul>
-        <li><a href="history.html">History</a></li>
-        <li><a href="government-documents.html">Government Documents</a></li>
-        <li><a href="protocols.html">Sacred Protocols</a></li>
-        <li><a href="registration.html">Registration & Licensing</a></li>
-        <li><a href="emporium.html">Emporium</a></li>
-        <li><a href="contact.html">Contact</a></li>
+        <li class="dropdown">
+          <a href="#">Island Offices</a>
+          <ul class="dropdown-content">
+            <li><a href="hawaii.html">Hawaiʻi</a></li>
+            <li><a href="maui.html">Maui</a></li>
+            <li><a href="molokai.html">Molokaʻi</a></li>
+            <li><a href="oahu.html">Oʻahu</a></li>
+          </ul>
+        </li>
+        <li><a href="#documents">Government Documents</a></li>
+        <li><a href="#emporium">Emporium</a></li>
       </ul>
     </nav>
   </header>
-  <main>
-    <h2>Welcome to the Kingdom of the Hawaiian Islands</h2>
-    <p>Please select a section above to learn more or access services.</p>
-  </main>
+
+  <section id="island-map-banner">
+    <img src="img/island-map.jpg" alt="Map of Hawaiian Islands" class="island-map-banner"/>
+  </section>
+
+  <section id="kk3-scroll">
+    <h2 style="text-align: center;">Kamehameha III Proclamation</h2>
+    <img src="img/kk3_proclamation_scroll_style.jpeg" alt="King Kamehameha III Scroll" style="width: 100%; max-width: 800px; margin: 2rem auto; display: block; border: 2px solid #9a0000; border-radius: 8px;" />
+    <p style="text-align: center; margin-top: 1rem;">
+      <a href="pdf/KK3_Declaration.pdf" target="_blank" class="download-btn">Download the Declaration (PDF)</a>
+    </p>
+  </section>
+
   <footer>
     <p>© 2025 Ko Hawaiʻi Pae ʻĀina. All rights reserved.</p>
   </footer>

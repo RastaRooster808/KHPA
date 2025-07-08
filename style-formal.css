@@ -1,37 +1,61 @@
 
 body {
   font-family: 'Georgia', serif;
-  background-color: #fdf9f3;
+  background-color: #f5f1e9;
+  color: #2c2c2c;
   margin: 0;
   padding: 0;
 }
 header {
-  background-color: #522e1f;
+  background-color: #870000;
   color: white;
-  text-align: center;
   padding: 1rem;
+  text-align: center;
 }
 .logo {
-  width: 80px;
+  width: 100px;
+}
+.slogan {
+  font-style: italic;
+  margin-top: 0.5rem;
 }
 nav ul {
-  list-style-type: none;
+  list-style: none;
   padding: 0;
   display: flex;
   justify-content: center;
-  gap: 1rem;
+}
+nav ul li {
+  position: relative;
+  margin: 0 1rem;
 }
 nav ul li a {
   color: white;
   text-decoration: none;
-  font-weight: bold;
+  padding: 0.5rem 1rem;
+  display: block;
 }
-main {
-  padding: 2rem;
+nav ul li .dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  color: black;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  top: 100%;
+  left: 0;
+}
+nav ul li:hover .dropdown-content {
+  display: block;
+}
+nav ul li .dropdown-content li {
+  margin: 0;
 }
 footer {
+  background-color: #870000;
+  color: white;
   text-align: center;
   padding: 1rem;
-  background-color: #522e1f;
-  color: white;
+  position: relative;
+  bottom: 0;
+  width: 100%;
 }
