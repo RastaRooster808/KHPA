@@ -107,3 +107,71 @@ nav ul li a:hover {
 .dropdown:hover .dropdown-content {
   display: block;
 }
+/* Base Navigation Bar */
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  background-color: #f8f3e7; /* Parchment */
+  border-top: 2px solid #6b4e3d; /* Royal brown */
+  border-bottom: 2px solid #6b4e3d;
+  font-family: "Georgia", serif;
+}
+
+/* Main Nav Items */
+nav ul li {
+  display: inline-block;
+  position: relative;
+  margin: 0 1em;
+}
+
+nav ul li a {
+  display: block;
+  padding: 0.75em 1em;
+  font-weight: bold;
+  color: #5A2B0C; /* Regal brown */
+  text-decoration: none;
+  font-size: 1.1em;
+  transition: background-color 0.3s ease;
+}
+
+nav ul li a:hover {
+  background-color: #e0d6c2;
+  border-radius: 6px;
+}
+
+/* Dropdown Container */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #fffdf5;
+  min-width: 180px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  border: 1px solid #c2b497;
+  border-radius: 6px;
+  z-index: 999;
+}
+
+/* Dropdown Items */
+.dropdown-content li {
+  display: block;
+  text-align: left;
+  margin: 0;
+}
+
+.dropdown-content li a {
+  padding: 0.75em 1em;
+  color: #5A2B0C;
+  white-space: nowrap;
+}
+
+.dropdown-content li a:hover {
+  background-color: #e8dbc0;
+  border-radius: 0;
+}
+
+/* Show Dropdown on Hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
