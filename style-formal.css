@@ -88,3 +88,24 @@ footer {
   text-align: center;
   font-size: 0.9rem;
 }
+.cta-box {
+  background-color: #f8f3e7;
+  border: 2px solid #6b4e3d;
+  padding: 1em;
+  text-align: center;
+  margin: 2em auto;
+  width: 80%;
+  font-family: Georgia, serif;
+}
+
+.cta-button {
+  background-color: #6b4e3d;
+  color: white;
+  padding: 0.5em 1.5em;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+}
+.cta-button:hover {
+  background-color: #8e6d52;
+}
