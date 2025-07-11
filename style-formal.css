@@ -35,18 +35,41 @@ h1 {
 nav ul {
   list-style: none;
   padding: 0;
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  background: #fff5e1;
-  border-top: 2px solid #b28b43;
-  border-bottom: 2px solid #b28b43;
+  background-color: #f8f3e7;
+  text-align: center;
+  border-top: 2px solid #6b4e3d;
+  border-bottom: 2px solid #6b4e3d;
+}
+
+nav li {
+  display: inline-block;
+  position: relative;
+  margin: 0 1em;
 }
 
 nav a {
-  text-decoration: none;
-  color: #8a6f32;
+  display: block;
+  padding: 10px;
+  color: #5A2B0C;
   font-weight: bold;
+  text-decoration: none;
+  font-family: Georgia, serif;
+}
+
+nav a:hover {
+  background-color: #e0d6c2;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #fffdf5;
+  border: 1px solid #d4c9aa;
+  z-index: 10;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
 }
 
 section {
