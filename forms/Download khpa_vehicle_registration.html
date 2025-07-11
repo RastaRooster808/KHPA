@@ -1,0 +1,104 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KHPA Vehicle Registration Form</title>
+  <style>
+    body {
+      font-family: Georgia, serif;
+      background-color: #f9f6f1;
+      margin: 2rem;
+      color: #3a2f1f;
+    }
+    h1 {
+      text-align: center;
+      color: #5A2B0C;
+    }
+    form {
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #fffdf8;
+      border: 1px solid #c4b69d;
+      border-radius: 10px;
+    }
+    label {
+      display: block;
+      margin-top: 1em;
+      font-weight: bold;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 0.5em;
+      margin-top: 0.5em;
+      border: 1px solid #b8a989;
+      border-radius: 5px;
+      font-family: Georgia, serif;
+    }
+    button {
+      margin-top: 2em;
+      padding: 0.75em 1.5em;
+      background-color: #6b4e3d;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+    .seal {
+      text-align: center;
+      margin-top: 3rem;
+    }
+    .seal img {
+      width: 120px;
+    }
+    .seal p {
+      font-style: italic;
+      font-size: 0.9em;
+      color: #5A2B0C;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>KHPA Vehicle Registration Form</h1>
+  <form>
+    <label for="fullName">Full Legal Name</label>
+    <input type="text" id="fullName" name="fullName" required>
+
+    <label for="email">Contact Email</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="phone">Phone Number</label>
+    <input type="tel" id="phone" name="phone">
+
+    <label for="vehicleType">Vehicle Type</label>
+    <select id="vehicleType" name="vehicleType" required>
+      <option value="">-- Select --</option>
+      <option value="car">Car</option>
+      <option value="truck">Truck</option>
+      <option value="motorcycle">Motorcycle</option>
+      <option value="other">Other</option>
+    </select>
+
+    <label for="plateNumber">Current Plate Number</label>
+    <input type="text" id="plateNumber" name="plateNumber" required>
+
+    <label for="vin">Vehicle VIN</label>
+    <input type="text" id="vin" name="vin">
+
+    <label for="notes">Additional Notes</label>
+    <textarea id="notes" name="notes" rows="4"></textarea>
+
+    <button type="submit">Submit Registration</button>
+
+    <div class="seal">
+      <img src="images/khpa_seal.png" alt="KHPA Royal Seal">
+      <p>Ko Hawaiʻi Pae ʻĀina Royal Certification</p>
+    </div>
+  </form>
+
+</body>
+</html>

@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>KHPA Business Registration</title>
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      background: url('img/parchment.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #3b2f2f;
+      padding: 2rem;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 2rem;
+      border-radius: 10px;
+      max-width: 800px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+    .khpa-seal {
+      display: block;
+      margin: 0 auto 1rem auto;
+      max-width: 100px;
+    }
+    h1 {
+      text-align: center;
+      font-size: 2em;
+      margin-bottom: 1rem;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+    label {
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+    input, textarea, select {
+      padding: 0.5rem;
+      font-size: 1rem;
+      margin-top: 0.25rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      margin-top: 2rem;
+      padding: 0.75rem;
+      background-color: #5a3921;
+      color: white;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #7b5034;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="img/khpa-logo-transparent.png" alt="KHPA Seal" class="khpa-seal"/>
+    <h1>Business Registration Form</h1>
+    <form>
+      <label for="businessName">Business Name</label>
+      <input type="text" id="businessName" name="businessName" required />
+
+      <label for="ownerName">Owner's Full Name</label>
+      <input type="text" id="ownerName" name="ownerName" required />
+
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" required />
+
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" name="phone" required />
+
+      <label for="location">Business Location (Island, Town)</label>
+      <input type="text" id="location" name="location" required />
+
+      <label for="type">Type of Business</label>
+      <input type="text" id="type" name="type" required />
+
+      <label for="description">Business Description</label>
+      <textarea id="description" name="description" rows="4"></textarea>
+
+      <label for="license">Do you need a Kingdom License?</label>
+      <select id="license" name="license">
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </select>
+
+      <button type="submit">Submit Registration</button>
+    </form>
+  </div>
+</body>
+</html>
