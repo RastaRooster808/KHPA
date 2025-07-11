@@ -1,18 +1,28 @@
 body {
+  color: #3a2b18;
   font-family: 'Georgia', serif;
-  background-color: #f4f4f4;
-  color: #222;
-  line-height: 1.6;
+  background-color: #fffdf5;
 }
+
 a {
-  color: #0055aa;
+  color: #005b8c;
+  font-weight: 600;
   text-decoration: none;
 }
-nav ul {
-  list-style: none;
-  padding: 0;
+
+a:hover {
+  text-decoration: underline;
 }
-nav ul li {
-  display: inline;
-  margin-right: 15px;
+
+nav ul li a {
+  color: #5A2B0C;
+  background-color: #f4ede1;
+  padding: 0.75em 1em;
+  display: block;
+  font-weight: bold;
+  font-family: 'Georgia', serif;
+}
+
+h1, h2 {
+  color: #50210d;
 }
