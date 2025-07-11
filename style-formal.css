@@ -1,7 +1,6 @@
-
 body {
   font-family: 'Georgia', serif;
-  background: url('img/parchment.jpg') no-repeat center center fixed;
+  background: url('../img/parchment.jpg') no-repeat center center fixed;
   background-size: cover;
   margin: 0;
   padding: 0;
@@ -15,21 +14,10 @@ header {
   border-bottom: 3px solid #b28b43;
 }
 
-.logo {
-  max-height: 100px;
-  display: block;
-  margin: 0 auto;
-}
-
 h1 {
   font-family: 'Cinzel', serif;
   font-size: 2.5em;
   color: #5A2B0C;
-}
-
-.slogan {
-  font-style: italic;
-  color: #6e4f1d;
 }
 
 nav ul {
@@ -88,6 +76,7 @@ footer {
   text-align: center;
   font-size: 0.9rem;
 }
+
 .cta-box {
   background-color: #f8f3e7;
   border: 2px solid #6b4e3d;
@@ -106,6 +95,7 @@ footer {
   border-radius: 6px;
   font-weight: bold;
 }
+
 .cta-button:hover {
   background-color: #8e6d52;
 }
