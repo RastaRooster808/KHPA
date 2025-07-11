@@ -1,28 +1,70 @@
+
+/* Base Styling */
 body {
-  color: #3a2b18;
-  font-family: 'Georgia', serif;
-  background-color: #fffdf5;
+  background-color: #fffdf9;
+  color: #2c1508;
+  font-family: Georgia, serif;
+  font-size: 1.1em;
+  margin: 0;
+  padding: 0;
 }
 
-a {
-  color: #005b8c;
-  font-weight: 600;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-nav ul li a {
+h1, h2 {
+  font-family: 'Cinzel', serif;
   color: #5A2B0C;
-  background-color: #f4ede1;
-  padding: 0.75em 1em;
-  display: block;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  background-color: #e6dacd;
+}
+
+nav ul li {
+  position: relative;
+}
+
+nav ul a {
+  text-decoration: none;
+  color: #5A2B0C;
   font-weight: bold;
   font-family: 'Georgia', serif;
 }
 
-h1, h2 {
-  color: #50210d;
+nav .dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #fdf8f1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  z-index: 1;
+}
+
+nav .dropdown:hover .dropdown-content {
+  display: block;
+}
+
+nav .dropdown-content li {
+  padding: 5px 0;
+}
+
+/* CTA Button Styling */
+.cta-button {
+  padding: 10px 15px;
+  background-color: #8B4513;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  margin: 0 5px;
+}
+
+/* Download Link */
+.download-btn {
+  font-weight: bold;
+  color: #0b3d91;
+  text-decoration: underline;
 }
