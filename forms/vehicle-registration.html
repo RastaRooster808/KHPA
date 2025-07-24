@@ -1,27 +1,30 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Vehicle Registration - KHPA</title>
+  <title>Vehicle Registration</title>
   <link rel="stylesheet" href="../css/style-formal.css" />
 </head>
 <body>
   <header>
-    <img src="../img/logo.png" alt="KHPA Logo" style="width: 100px;" />
-    <h1>Vehicle Registration Form</h1>
-    <p>Please complete the information below to register your vehicle.</p>
+    <img src="../img/logo.png" alt="KHPA Logo" class="logo" />
+    <h1>Vehicle Registration</h1>
   </header>
-  <form style="max-width: 600px; margin: auto;">
-    <label>Full Name:<br><input type="text" name="fullname" required /></label><br><br>
-    <label>Address:<br><input type="text" name="address" required /></label><br><br>
-    <label>Vehicle Make & Model:<br><input type="text" name="make_model" required /></label><br><br>
-    <label>License Plate Number:<br><input type="text" name="plate" required /></label><br><br>
-    <label>VIN Number:<br><input type="text" name="vin" required /></label><br><br>
-    <label>Contact Email:<br><input type="email" name="email" required /></label><br><br>
-    <button type="submit" class="cta-button">Submit</button>
+  <form>
+    <label>Owner's Full Name: <input type="text" name="owner_name" /></label>
+    <label>Vehicle Make & Model: <input type="text" name="vehicle_model" /></label>
+    <label>Year: <input type="text" name="year" /></label>
+    <label>VIN: <input type="text" name="vin" /></label>
+    <label>Island: 
+      <select name="island">
+        <option value="hawaii">Hawai‘i</option>
+        <option value="maui">Maui</option>
+        <option value="molokai">Moloka‘i</option>
+        <option value="oahu">O‘ahu</option>
+      </select>
+    </label>
+    <button type="submit">Submit</button>
   </form>
-  <footer><p>© 2025 Ko Hawaiʻi Pae ʻĀina</p></footer>
 </body>
 </html>

@@ -8,63 +8,35 @@
   <link rel="stylesheet" href="../css/style-formal.css" />
 </head>
 <body>
-  <header style="text-align: center; padding: 1rem;">
+  <header>
     <img src="../img/logo.png" alt="KHPA Logo" style="width: 120px;" />
-    <h1>Motor Vehicle Operator & Identification Certificate</h1>
-    <p style="font-style: italic;">Select type below and fill out your details.</p>
+    <h1>Certificate Application</h1>
   </header>
 
-  <main style="max-width: 600px; margin: auto;">
-    <form action="#" method="POST">
-      <label for="cert-type">Certificate Type:</label>
-      <select id="cert-type" name="cert-type" required>
-        <option value="motor">Motor Vehicle Operator</option>
-        <option value="id">Identification Certificate</option>
+  <div class="help-banner">
+    Need help? Reach out to your local island office or email <strong>registration@khpa.io</strong> for assistance.
+  </div>
+
+  <form action="mailto:registration@khpa.io" method="post" enctype="text/plain" style="max-width: 600px; margin: auto;">
+    <label>Full Name:<br/><input type="text" name="Full Name" required></label><br/><br/>
+    <label>Date of Birth:<br/><input type="date" name="DOB" required></label><br/><br/>
+    <label>Height:<br/><input type="text" name="Height" required></label><br/><br/>
+    <label>Weight:<br/><input type="text" name="Weight" required></label><br/><br/>
+    <label>Hair Color:<br/><input type="text" name="Hair" required></label><br/><br/>
+    <label>Eye Color:<br/><input type="text" name="Eyes" required></label><br/><br/>
+    <label>Sex (K/W):<br/><input type="text" name="Sex" required></label><br/><br/>
+    <label>Island:<br/>
+      <select name="Island" required>
+        <option value="Hawai‘i">Hawai‘i</option>
+        <option value="Maui">Maui</option>
+        <option value="Moloka‘i">Moloka‘i</option>
+        <option value="O‘ahu">O‘ahu</option>
       </select>
+    </label><br/><br/>
+    <input type="submit" value="Submit" />
+  </form>
 
-      <label for="name">Full Name:</label>
-      <input type="text" id="name" name="name" required />
-
-      <label for="dob">Date of Birth:</label>
-      <input type="date" id="dob" name="dob" required />
-
-      <label for="address">Address:</label>
-      <input type="text" id="address" name="address" required />
-
-      <label for="height">Height:</label>
-      <input type="text" id="height" name="height" required />
-
-      <label for="weight">Weight:</label>
-      <input type="text" id="weight" name="weight" required />
-
-      <label for="hair">Hair:</label>
-      <input type="text" id="hair" name="hair" required />
-
-      <label for="eyes">Eyes:</label>
-      <input type="text" id="eyes" name="eyes" required />
-
-      <label for="sex">Sex:</label>
-      <select id="sex" name="sex" required>
-        <option value="k">Kāne (M)</option>
-        <option value="w">Wahine (F)</option>
-      </select>
-
-      <label for="island">Island of Registration:</label>
-      <select id="island" name="island" required>
-        <option value="hawaii">Hawai‘i</option>
-        <option value="maui">Maui</option>
-        <option value="molokai">Moloka‘i</option>
-        <option value="oahu">O‘ahu</option>
-      </select>
-
-      <label for="signature">Signature:</label>
-      <input type="text" id="signature" name="signature" required />
-
-      <button type="submit" style="margin-top: 1rem;">Submit</button>
-    </form>
-  </main>
-
-  <footer style="text-align: center; margin-top: 2rem;">
+  <footer>
     <p>© 2025 Ko Hawaiʻi Pae ʻĀina</p>
   </footer>
 </body>
