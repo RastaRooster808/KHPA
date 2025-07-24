@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>KHPA Certificate Application</title>
+  <link rel="stylesheet" href="../css/style-formal.css" />
+  <script>
+    function updateFormType() {
+      const type = document.getElementById('certificateType').value;
+      document.getElementById('formTitle').innerText = type + ' Application';
+    }
+  </script>
+</head>
+<body>
+  <header style="text-align: center; padding: 1rem 0;">
+    <img src="../img/logo.png" alt="KHPA Logo" style="width: 120px;" />
+    <h1 id="formTitle">KHPA Certificate Application</h1>
+    <p>Fill out the form below to apply for your Kingdom certificate.</p>
+  </header>
+
+  <section style="max-width: 800px; margin: auto;">
+    <form action="#" method="POST">
+      <label for="certificateType">Select Certificate Type:</label>
+      <select id="certificateType" name="certificateType" onchange="updateFormType()" required>
+        <option value="Motor Vehicle Operator’s Certificate">Motor Vehicle Operator’s Certificate</option>
+        <option value="Identification Certificate">Identification Certificate</option>
+      </select>
+
+      <label for="fullName">Full Legal Name:</label>
+      <input type="text" id="fullName" name="fullName" required>
+
+      <label for="dob">Date of Birth:</label>
+      <input type="date" id="dob" name="dob" required>
+
+      <label for="address">Current Address:</label>
+      <textarea id="address" name="address" rows="3" required></textarea>
+
+      <label for="phone">Phone Number:</label>
+      <input type="tel" id="phone" name="phone">
+
+      <label for="email">Email Address:</label>
+      <input type="email" id="email" name="email">
+
+      <button type="submit" class="cta-button">Submit</button>
+    </form>
+  </section>
+
+  <footer style="text-align: center; margin-top: 4rem;">
+    <p>© 2025 Ko Hawaiʻi Pae ʻĀina</p>
+  </footer>
+</body>
+</html>
