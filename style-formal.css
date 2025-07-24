@@ -1,28 +1,56 @@
-
 body {
-  font-family: Georgia, serif;
-  background-color: #f9f5f0;
-  color: #2c1c13;
+  font-family: serif;
   margin: 0;
-  padding: 0;
+  background: #faf6f2;
+  color: #3a2b1d;
 }
-
-h1 {
-  font-size: 2rem;
-  color: #3c1e1e;
+header {
+  text-align: center;
+  padding: 1rem;
 }
-
-.cta-button {
-  display: inline-block;
-  padding: 0.75em 1.5em;
-  margin: 0.5em;
-  background-color: #7c201c;
-  color: #fff;
-  border-radius: 6px;
+.navbar {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  background-color: #e5ddcc;
+  padding: 0.5rem;
+}
+.navbar a {
+  color: #3a2b1d;
   text-decoration: none;
-  font-weight: bold;
 }
-
-.cta-button:hover {
-  background-color: #a8231f;
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropbtn {
+  background-color: #e5ddcc;
+  color: #3a2b1d;
+  border: none;
+  cursor: pointer;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f5ef;
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+.dropdown-content a {
+  display: block;
+  padding: 8px 16px;
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+.help-banner {
+  background-color: #fff4dd;
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+  border-top: 2px solid #c7a162;
+}
+footer {
+  text-align: center;
+  margin: 2rem 0;
 }

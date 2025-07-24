@@ -1,29 +1,51 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Ko Hawaiʻi Pae ʻĀina</title>
+  <title>Ko Hawai‘i Pae ‘Āina</title>
   <link rel="stylesheet" href="css/style-formal.css" />
 </head>
 <body>
-  <header style="text-align: center; padding: 1rem 0;">
-    <img src="img/logo.png" alt="KHPA Logo" style="width: 150px;" />
-    <h1>Ko Hawaiʻi Pae ʻĀina</h1>
-    <p><em>Indigenous Cognizant Expressions of ʻĀina and Sacred Protocol</em></p>
+  <header>
+    <img src="img/logo.png" alt="KHPA Logo" style="width: 120px;" />
+    <h1>Ko Hawai‘i Pae ‘Āina</h1>
+    <p>Indigenous Cognizant Expressions of ʻĀina and Sacred Protocol</p>
   </header>
 
-  <main style="text-align: center; margin-top: 2rem;">
-    <div class="button-group">
-      <a href="islands.html" class="cta-button">Island Offices</a>
-      <a href="documents.html" class="cta-button">Government Documents</a>
-      <a href="emporium.html" class="cta-button">Emporium</a>
-      <a href="contact.html" class="cta-button">Contact</a>
+  <nav class="navbar">
+    <a href="index.html">Home</a>
+    <div class="dropdown">
+      <button class="dropbtn">Island Offices</button>
+      <div class="dropdown-content">
+        <a href="pdf/Hawaii_Island_Office.pdf">Hawai‘i</a>
+        <a href="pdf/Maui_Island_Office.pdf">Maui</a>
+        <a href="pdf/Molokai_Island_Office.pdf">Moloka‘i</a>
+        <a href="pdf/Oahu_Island_Office.pdf">Oʻahu</a>
+      </div>
     </div>
-  </main>
+    <a href="documents.html">Government Documents</a>
+    <a href="emporium.html">Emporium</a>
+    <a href="contact.html">Contact</a>
+    <a href="#help" class="help-link">Need Help?</a>
+  </nav>
 
-  <footer style="text-align: center; margin-top: 4rem;">
+  <section>
+    <h2>Map of the Kingdom</h2>
+    <img src="img/island-map.jpg" alt="Map of Hawaiian Islands" style="width: 100%; max-width: 600px;" />
+  </section>
+
+  <section>
+    <h2>Proclamation of King Kamehameha III</h2>
+    <img src="img/kk3_proclamation_scroll_style.jpeg" alt="KK3 Proclamation" style="width: 100%; max-width: 600px;" />
+  </section>
+
+  <section id="help" class="help-banner">
+    <h3>Need Assistance?</h3>
+    <p>Email us at <a href="mailto:registration@khpa.io">registration@khpa.io</a> or visit your nearest island office for support.</p>
+  </section>
+
+  <footer>
     <p>© 2025 Ko Hawaiʻi Pae ʻĀina</p>
   </footer>
 </body>
