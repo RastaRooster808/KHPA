@@ -1,21 +1,53 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Emporium</title>
-  <link rel="stylesheet" href="css/style-formal.css"/>
+  <meta charset="UTF‑8" />
+  <meta name="viewport" content="width=device‑width, initial‑scale=1.0"/>
+  <title>KHPA Emporium – Kingdom Wear</title>
+  <link rel="stylesheet" href="style-emporium.css"/>
 </head>
 <body>
   <header>
-    <a href="index.html"><img src="img/khpa-logo-transparent.png" alt="KHPA Logo" class="logo"/></a>
-    <h1>Emporium</h1>
+    <img src="img/khpa-logo-transparent.png" alt="KHPA Seal" class="seal-img"/>
+    <h1>Emporium – Artisan Marketplace</h1>
+    <p>A loving effort to uplift Kingdom creators and kuleana.</p>
   </header>
-  <main>
-    <p>This is the Emporium page. Content will be filled in.</p>
-  </main>
+
+  <section class="bio-section">
+    <h2>Featured Artisan: RastaRooster.com</h2>
+    <p>
+      Hailing from the Big Island, RastaRooster bridges sacred culture and aloha through his designs—Kingdom Wear honoring Kanaka Maoli heritage with bold colors, Hawaiian script, and deep purpose. His “Wahine 420 KHPA Tee” and vintage‑inspired KHPA collection celebrate unity, sovereignty, and spirituality on cotton canvas (<a href="https://rastarooster.com" target="_blank">rastarooster.com</a>).
+    </p>
+  </section>
+
+  <section class="slider-section">
+    <div class="slider">
+      <img src="img/sample1.jpg" alt="Kingdom Wear Sample 1">
+      <img src="img/sample2.jpg" alt="Kingdom Wear Sample 2">
+      <img src="img/sample3.jpg" alt="Kingdom Wear Sample 3">
+    </div>
+  </section>
+
+  <section class="apply-section">
+    <h2>Apply to Join the Emporium</h2>
+    <form action="mailto:emporium@khpa.io" method="POST" enctype="text/plain">
+      <label>Name:<br><input type="text" name="name" required></label><br>
+      <label>Email:<br><input type="email" name="email" required></label><br>
+      <label>Website / Portfolio:<br><input type="url" name="site"></label><br>
+      <label>Product Category:<br><input type="text" name="category"></label><br>
+      <label>Message:<br><textarea name="message"></textarea></label><br><br>
+      <button type="submit" class="cta-button">Submit Application</button>
+    </form>
+  </section>
+
+  <section class="help-section">
+    <h2>Need Help?</h2>
+    <p>If you have questions or need assistance, please visit our <a href="help.html" class="cta-button">Help Center</a>.</p>
+  </section>
+
   <footer>
-    <p>© 2025 Ko Hawaiʻi Pae ʻĀina. All rights reserved.</p>
+    <p>© 2025 Ko Hawaiʻi Pae ʻĀina</p>
   </footer>
 </body>
 </html>
