@@ -4,48 +4,58 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>KHPA Emporium – Artisan Portal</title>
-  <link rel="stylesheet" href="css/emporium.css" />
+  <title>KHPA Emporium</title>
+  <link rel="stylesheet" href="css/emporium-style.css">
 </head>
 <body>
-  <header>
+  <header class="banner">
     <h1>KHPA Emporium</h1>
-    <p>Indigenous Excellence – Artisan Bio & Offerings</p>
-    <nav><a href="index.html">← Back to Home</a> | <a href="help.html">Need Help?</a></nav>
+    <p>A product of <strong>Ko Hawai‘i Pae ʻĀina</strong></p>
+    <nav>
+      <a href="index.html">← Back to Home</a>
+      <a href="contact.html">Need Help?</a>
+    </nav>
   </header>
 
-  <section class="bio">
-    <h2>🌿 Featured Artisan: RastaRooster</h2>
-    <p>RastaRooster.com is a Kingdom-rooted artisan brand creating cultural, 420-friendly apparel inspired by the spirit of Ko Hawaiʻi Pae ʻĀina. Known for honoring ʻāina and tribal unity, their “Kingdom Wear” line bridges sovereignty with style.</p>
-  </section>
+  <main>
+    <section class="featured">
+      <h2>🌿 Featured Artisan: RastaRooster</h2>
+      <p><strong>RastaRooster.com</strong> is a Kingdom-rooted artisan brand creating cultural, 420-friendly apparel inspired by the spirit of Ko Hawaiʻi Pae ʻĀina. Known for honoring ʻāina and tribal unity, their “Kingdom Wear” line bridges sovereignty with style.</p>
+    </section>
 
-  <section class="slider">
-    <h2>🛍️ RastaRooster Kingdom Wear</h2>
-    <div class="slider-wrapper">
-      <img src="img/emporium_rastarooster_1.webp" alt="KHPA 420 Racerback Tank" />
-      <img src="img/emporium_rastarooster_2.webp" alt="KHPA 777 Moku O Keawe Tee" />
-      <img src="img/emporium_rastarooster_3.webp" alt="Kalapana Script Tee" />
-    </div>
-  </section>
+    <section class="slider">
+      <h3>🛍️ RastaRooster Kingdom Wear</h3>
+      <div class="slider-container">
+        <img src="img/emporium_rastarooster_1.webp" alt="Kingdom Wear 1">
+        <img src="img/emporium_rastarooster_2.webp" alt="Kingdom Wear 2">
+        <img src="img/emporium_rastarooster_3.webp" alt="Kingdom Wear 3">
+      </div>
+    </section>
 
-  <section class="apply">
-    <h2>📝 Artisan Application Form</h2>
-    <form action="mailto:registration@khpa.io" method="POST" enctype="text/plain">
-      <label for="name">Full Name:</label><input type="text" id="name" name="name" required><br>
-      <label for="email">Email:</label><input type="email" id="email" name="email" required><br>
-      <label for="website">Website/Portfolio:</label><input type="url" id="website" name="website"><br>
-      <label for="about">About Your Work:</label><textarea id="about" name="about" rows="4" required></textarea><br>
-      <label for="location">Island Location:</label>
-      <select name="island" id="island">
-        <option value="Hawaiʻi">Hawaiʻi</option>
-        <option value="Maui">Maui</option>
-        <option value="Molokaʻi">Molokaʻi</option>
-        <option value="Oʻahu">Oʻahu</option>
-      </select><br>
-      <button type="submit">Submit Application</button>
-    </form>
-  </section>
+    <section class="form">
+      <h3>📝 Artisan Application Form</h3>
+      <p class="kanaka">Kanaka Welina: Submit your application to be featured in the Emporium of KHPA.</p>
+      <form action="mailto:info@khpa.org" method="POST" enctype="text/plain">
+        <label>Full Name: <input type="text" name="name" required></label>
+        <label>Email: <input type="email" name="email" required></label>
+        <label>Website/Portfolio: <input type="url" name="website"></label>
+        <label>About Your Work: <textarea name="about" rows="4" required></textarea></label>
+        <label>Island Location:
+          <select name="island">
+            <option value="Hawaiʻi">Hawaiʻi</option>
+            <option value="Maui">Maui</option>
+            <option value="Molokaʻi">Molokaʻi</option>
+            <option value="Oʻahu">Oʻahu</option>
+          </select>
+        </label>
+        <button type="submit">Submit Application</button>
+      </form>
+      <p class="mahalo">🌺 Mahalo nui for your interest in uplifting local artistry under the banner of sovereignty. We will contact you soon!</p>
+    </section>
+  </main>
 
-  <footer><p>© 2025 KHPA Emporium – RastaRooster</p></footer>
+  <footer>
+    <p>© 2025 KHPA Emporium — RastaRooster</p>
+  </footer>
 </body>
 </html>
