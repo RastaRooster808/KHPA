@@ -1,0 +1,78 @@
+
+body {
+  font-family: 'Georgia', serif;
+  background: #f5f0eb;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  text-align: center;
+  padding: 2rem 0;
+  background: #fff;
+  border-bottom: 2px solid #ccc;
+}
+
+.seal-img {
+  width: 120px;
+  display: block;
+  margin: 0.5rem auto;
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: #5A2B0C;
+}
+
+.bio-section, .apply-section, .help-section {
+  max-width: 800px;
+  margin: auto;
+  padding: 2rem;
+  background: rgba(255,255,255,0.95);
+  border-radius: 8px;
+  margin-top: 2rem;
+}
+
+.bio-section h2, .apply-section h2, .help-section h2 {
+  font-family: 'Cinzel', serif;
+  color: #5A2B0C;
+  margin-bottom: 1rem;
+}
+
+.cta-button {
+  background: #6B4E3D;
+  color: white;
+  padding: 0.75em 1.5em;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.cta-button:hover {
+  background: #8E6D52;
+}
+
+footer {
+  text-align: center;
+  margin-top: 4rem;
+  padding: 2rem 0;
+  background: #eee;
+}
+
+.slider {
+  display: flex;
+  overflow-x: auto;
+  gap: 1rem;
+  padding: 1rem;
+  justify-content: center;
+}
+
+.slider img {
+  width: 200px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
