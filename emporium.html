@@ -2,52 +2,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF‑8" />
-  <meta name="viewport" content="width=device‑width, initial‑scale=1.0"/>
-  <title>KHPA Emporium – Kingdom Wear</title>
-  <link rel="stylesheet" href="style-emporium.css"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>KHPA Emporium – Artisan Portal</title>
+  <link rel="stylesheet" href="css/emporium.css" />
 </head>
 <body>
   <header>
-    <img src="img/khpa-logo-transparent.png" alt="KHPA Seal" class="seal-img"/>
-    <h1>Emporium – Artisan Marketplace</h1>
-    <p>A loving effort to uplift Kingdom creators and kuleana.</p>
+    <h1>KHPA Emporium</h1>
+    <p>Indigenous Excellence – Artisan Bio & Offerings</p>
+    <nav><a href="index.html">← Back to Home</a> | <a href="help.html">Need Help?</a></nav>
   </header>
 
-  <section class="bio-section">
-    <h2>Featured Artisan: RastaRooster.com</h2>
-    <p>
-      Hailing from the Big Island, RastaRooster bridges sacred culture and aloha through his designs—Kingdom Wear honoring Kanaka Maoli heritage with bold colors, Hawaiian script, and deep purpose. His “Wahine 420 KHPA Tee” and vintage‑inspired KHPA collection celebrate unity, sovereignty, and spirituality on cotton canvas (<a href="https://rastarooster.com" target="_blank">rastarooster.com</a>).
-    </p>
+  <section class="bio">
+    <h2>🌿 Featured Artisan: RastaRooster</h2>
+    <p>RastaRooster.com is a Kingdom-rooted artisan brand creating cultural, 420-friendly apparel inspired by the spirit of Ko Hawaiʻi Pae ʻĀina. Known for honoring ʻāina and tribal unity, their “Kingdom Wear” line bridges sovereignty with style.</p>
   </section>
 
-  <section class="slider-section">
-    <div class="slider">
-      <img src="img/sample1.jpg" alt="Kingdom Wear Sample 1">
-      <img src="img/sample2.jpg" alt="Kingdom Wear Sample 2">
-      <img src="img/sample3.jpg" alt="Kingdom Wear Sample 3">
+  <section class="slider">
+    <h2>🛍️ RastaRooster Kingdom Wear</h2>
+    <div class="slider-wrapper">
+      <img src="img/emporium_rastarooster_1.webp" alt="KHPA 420 Racerback Tank" />
+      <img src="img/emporium_rastarooster_2.webp" alt="KHPA 777 Moku O Keawe Tee" />
+      <img src="img/emporium_rastarooster_3.webp" alt="Kalapana Script Tee" />
     </div>
   </section>
 
-  <section class="apply-section">
-    <h2>Apply to Join the Emporium</h2>
-    <form action="mailto:emporium@khpa.io" method="POST" enctype="text/plain">
-      <label>Name:<br><input type="text" name="name" required></label><br>
-      <label>Email:<br><input type="email" name="email" required></label><br>
-      <label>Website / Portfolio:<br><input type="url" name="site"></label><br>
-      <label>Product Category:<br><input type="text" name="category"></label><br>
-      <label>Message:<br><textarea name="message"></textarea></label><br><br>
-      <button type="submit" class="cta-button">Submit Application</button>
+  <section class="apply">
+    <h2>📝 Artisan Application Form</h2>
+    <form action="mailto:registration@khpa.io" method="POST" enctype="text/plain">
+      <label for="name">Full Name:</label><input type="text" id="name" name="name" required><br>
+      <label for="email">Email:</label><input type="email" id="email" name="email" required><br>
+      <label for="website">Website/Portfolio:</label><input type="url" id="website" name="website"><br>
+      <label for="about">About Your Work:</label><textarea id="about" name="about" rows="4" required></textarea><br>
+      <label for="location">Island Location:</label>
+      <select name="island" id="island">
+        <option value="Hawaiʻi">Hawaiʻi</option>
+        <option value="Maui">Maui</option>
+        <option value="Molokaʻi">Molokaʻi</option>
+        <option value="Oʻahu">Oʻahu</option>
+      </select><br>
+      <button type="submit">Submit Application</button>
     </form>
   </section>
 
-  <section class="help-section">
-    <h2>Need Help?</h2>
-    <p>If you have questions or need assistance, please visit our <a href="help.html" class="cta-button">Help Center</a>.</p>
-  </section>
-
-  <footer>
-    <p>© 2025 Ko Hawaiʻi Pae ʻĀina</p>
-  </footer>
+  <footer><p>© 2025 KHPA Emporium – RastaRooster</p></footer>
 </body>
 </html>
