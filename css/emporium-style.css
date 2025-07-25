@@ -1,0 +1,105 @@
+
+body {
+  font-family: system-ui, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #fefdf9;
+  color: #1a1a1a;
+}
+
+header.banner {
+  background: #fcf1cd;
+  padding: 1em;
+  text-align: center;
+}
+
+header.banner nav a {
+  margin: 0 1em;
+  color: #0077cc;
+  text-decoration: none;
+}
+
+h1, h2, h3 {
+  color: #992200;
+}
+
+main {
+  padding: 1em;
+}
+
+.featured p,
+.form p {
+  max-width: 600px;
+  margin: auto;
+}
+
+.slider-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.slider-container img {
+  max-width: 180px;
+  height: auto;
+  border-radius: 5px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+form {
+  max-width: 600px;
+  margin: 1em auto;
+  display: flex;
+  flex-direction: column;
+}
+
+form label {
+  margin: 0.5em 0;
+}
+
+form input,
+form textarea,
+form select {
+  padding: 0.5em;
+  font-size: 1em;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+button {
+  margin-top: 1em;
+  padding: 0.7em;
+  background-color: #006600;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.mahalo {
+  text-align: center;
+  margin-top: 1em;
+  color: #009933;
+}
+
+.artisan-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1em;
+  padding: 1em;
+}
+
+.artisan-card {
+  background: white;
+  border-radius: 8px;
+  padding: 1em;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.artisan-card img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
