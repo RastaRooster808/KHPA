@@ -3,40 +3,121 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>KHPA Registration & Licensing</title>
+  <title>Registration & Licensing | Ko Hawaiʻi Pae ʻĀina</title>
   <link rel="stylesheet" href="css/style-formal.css" />
 </head>
 <body>
-  <header style="text-align: center; padding: 1rem 0;">
-    <img src="img/logo.png" alt="KHPA Logo" style="width: 120px;" />
+  <header>
     <h1>Registration & Licensing</h1>
-    <p>Submit official forms for vehicle, business, and operator certification under KHPA authority.</p>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="contact.html">Island Offices</a>
+      <a href="history.html">Government Documents</a>
+    </nav>
   </header>
 
-  <nav style="text-align: center; margin-bottom: 2rem;">
-    <a href="index.html" class="nav-btn">Home</a>
-    <a href="registration.html" class="nav-btn active">Registration & Licensing</a>
-    <a href="history.html" class="nav-btn">Government Documents</a>
-    <a href="emporium.html" class="nav-btn">Emporium</a>
-    <a href="contact.html" class="nav-btn">Contact</a>
-  </nav>
+  <section class="intro">
+    <h2>Register with Ko Hawaiʻi Pae ʻĀina</h2>
+    <p>Select the form you need below. Each registration includes a fillable form and a downloadable PDF version. Submissions are reviewed by your island office.</p>
+  </section>
 
-  <main style="padding: 1rem; max-width: 800px; margin: auto;">
-    <h2>Vehicle Registration</h2>
-    <p>Register your vehicle within the Kingdom of Hawaiʻi. Provide ownership verification and required identity info.</p>
-    <a href="forms/vehicle-registration.html" class="cta-button">Fill Out Vehicle Form</a>
+  <section class="form-cards">
+    <div class="card">
+      <h3>Motor Vehicle Operator's Identification</h3>
+      <a href="pdf/motor-vehicle-operator.pdf" download class="button">Download PDF</a>
+      <form action="https://formspree.io/f/xdkdjvpy" method="POST">
+        <input type="text" name="full-name" placeholder="Full Legal Name" required>
+        <input type="text" name="birth-date" placeholder="Date of Birth (MM/DD/YYYY)" required>
+        <select name="island" required>
+          <option value="">Select Island</option>
+          <option>Hawaiʻi</option>
+          <option>Maui</option>
+          <option>Molokaʻi</option>
+          <option>Oʻahu</option>
+        </select>
+        <input type="text" name="address" placeholder="Address" required>
+        <input type="text" name="eye-color" placeholder="Eye Color" required>
+        <input type="text" name="hair-color" placeholder="Hair Color" required>
+        <input type="text" name="height" placeholder="Height (ft/in)" required>
+        <input type="text" name="weight" placeholder="Weight (lbs)" required>
+        <input type="text" name="sex" placeholder="Sex (Kāne / Wāhine)" required>
+        <button type="submit">Submit Form</button>
+      </form>
+    </div>
 
-    <h2 style="margin-top: 2rem;">Business Registration</h2>
-    <p>Register a business or trade to operate lawfully with KHPA recognition and protocol adherence.</p>
-    <a href="forms/business-registration.html" class="cta-button">Fill Out Business Form</a>
+    <div class="card">
+      <h3>Merchandise License</h3>
+      <a href="pdf/merchandise-license.pdf" download class="button">Download PDF</a>
+      <form action="https://formspree.io/f/manbkzpv" method="POST">
+        <input type="text" name="full-name" placeholder="Business or Artisan Name" required>
+        <input type="text" name="product-type" placeholder="Type of Merchandise" required>
+        <input type="text" name="location" placeholder="Location of Sales or Services" required>
+        <button type="submit">Submit Form</button>
+      </form>
+    </div>
 
-    <h2 style="margin-top: 2rem;">Motor Vehicle Operator’s / ID Certificate</h2>
-    <p>Obtain your license to operate and a recognized form of KHPA identification.</p>
-    <a href="forms/operator-id-form.html" class="cta-button">Fill Out ID / Operator Form</a>
-  </main>
+    <div class="card">
+      <h3>Service License</h3>
+      <a href="pdf/service-license.pdf" download class="button">Download PDF</a>
+      <form action="https://formspree.io/f/xzzvwqjn" method="POST">
+        <input type="text" name="full-name" placeholder="Service Provider Name" required>
+        <input type="text" name="service-type" placeholder="Service Description" required>
+        <input type="text" name="license-duration" placeholder="License Duration Requested" required>
+        <button type="submit">Submit Form</button>
+      </form>
+    </div>
 
-  <footer style="text-align: center; margin-top: 4rem;">
-    <p>© 2025 Ko Hawaiʻi Pae ʻĀina. All rights reserved.</p>
+    <div class="card">
+      <h3>Safety Check</h3>
+      <a href="pdf/safety-check.pdf" download class="button">Download PDF</a>
+      <form action="https://formspree.io/f/xpwlneoq" method="POST">
+        <input type="text" name="vehicle-id" placeholder="Vehicle Identification Number (VIN)" required>
+        <input type="text" name="owner-name" placeholder="Owner Name" required>
+        <input type="text" name="check-location" placeholder="Inspection Location" required>
+        <button type="submit">Submit Form</button>
+      </form>
+    </div>
+
+    <div class="card">
+      <h3>Birth Certificate</h3>
+      <a href="pdf/birth-certificate.pdf" download class="button">Download PDF</a>
+      <form action="https://formspree.io/f/xvgqynva" method="POST">
+        <input type="text" name="child-name" placeholder="Full Name of Child" required>
+        <input type="text" name="birth-date" placeholder="Date of Birth" required>
+        <input type="text" name="parent-name" placeholder="Parent or Guardian Name" required>
+        <button type="submit">Submit Form</button>
+      </form>
+    </div>
+
+    <div class="card">
+      <h3>Passport</h3>
+      <a href="pdf/passport.pdf" download class="button">Download PDF</a>
+      <form action="https://formspree.io/f/xgvzqbpv" method="POST">
+        <input type="text" name="full-name" placeholder="Applicant Full Name" required>
+        <input type="text" name="birth-date" placeholder="Date of Birth" required>
+        <input type="text" name="island" placeholder="Island of Residence" required>
+        <button type="submit">Submit Form</button>
+      </form>
+    </div>
+
+    <div class="card">
+      <h3>Post Office Box (Postal Service)</h3>
+      <a href="pdf/post-office-box.pdf" download class="button">Download PDF</a>
+      <form action="https://formspree.io/f/mblkbepa" method="POST">
+        <input type="text" name="applicant-name" placeholder="Applicant Name" required>
+        <input type="text" name="desired-box-location" placeholder="Preferred Postal Location" required>
+        <button type="submit">Submit Form</button>
+      </form>
+    </div>
+  </section>
+
+  <section class="mahalo">
+    <h2>Mahalo nui loa 🌺</h2>
+    <p>Your submission has been received. Your island office will follow up with any further instructions.</p>
+  </section>
+
+  <footer>
+    <p>© 2025 Ko Hawaiʻi Pae ʻĀina</p>
   </footer>
 </body>
 </html>
