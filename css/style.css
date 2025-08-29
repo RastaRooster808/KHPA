@@ -1,36 +1,24 @@
 
 body {
-  font-family: 'Georgia', serif;
-  background: #fff8f0;
-  color: #2d2d2d;
-  margin: 0;
-  padding: 0;
-}
-header {
-  background: #b22222;
-  color: white;
+  font-family: serif;
+  background: #fdfcf9;
+  color: #2e2e2e;
   padding: 20px;
+}
+header, footer {
   text-align: center;
+  padding: 10px 0;
 }
-.logo {
-  max-width: 120px;
-  margin-bottom: 10px;
+section {
+  margin: 2em 0;
 }
-nav ul {
-  list-style: none;
-  padding: 0;
+h1, h2 {
+  color: #5A2B0C;
 }
-nav ul li {
-  display: inline-block;
-  margin: 0 10px;
-}
-nav a {
-  color: white;
+a {
+  color: #3366bb;
   text-decoration: none;
 }
-footer {
-  background: #222;
-  color: #fff;
-  text-align: center;
-  padding: 10px;
+a:hover {
+  text-decoration: underline;
 }
