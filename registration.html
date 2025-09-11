@@ -3,8 +3,28 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Registration & Licensing | Ko Hawaiʻi Pae ʻĀina</title>
+  <title>Registration & Licensing | Ko Hawaii Pae Aina</title>
   <link rel="stylesheet" href="css/style-formal.css" />
+  <style>
+    /* Minimal modal styles (kept inline so it works even if CSS is not updated) */
+    .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:9999;}
+    .modal{background:#fff;max-width:900px;width:95%;border-radius:8px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+    .modal-header{display:flex;justify-content:space-between;align-items:center;padding:.75rem 1rem;background:#f7f2e6;border-bottom:1px solid #e0d8c5}
+    .modal-title{font-weight:bold}
+    .modal-close{background:none;border:none;font-size:1.2rem;cursor:pointer}
+    .modal-body{padding:0;height:70vh}
+    .modal-body iframe{width:100%;height:100%;border:0}
+    .form-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem;max-width:1100px;margin:2rem auto;padding:0 1rem}
+    .card{background:#fffdf8;border:1px solid #e6dcc7;border-radius:8px;padding:1rem;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+    .card h3{margin:.25rem 0 1rem 0}
+    .button{display:inline-block;background:#6b4e3d;color:#fff;padding:.55rem 1rem;margin:.35rem 0;border-radius:6px;text-decoration:none;font-weight:600}
+    .button.alt{background:#a07b55}
+    .button:hover{opacity:.9}
+    form input, form select{width:100%;padding:.55rem;border:1px solid #cbbba0;border-radius:6px;margin:.35rem 0;background:#fff}
+    header, footer{text-align:center}
+    .intro{max-width:900px;margin:1rem auto;padding:0 1rem;text-align:center}
+    .help-banner{max-width:900px;margin:2rem auto;padding:1rem;border:2px solid #6b4e3d;background:#f8f3e7;border-radius:8px;text-align:center}
+  </style>
 </head>
 <body>
   <header>
@@ -12,119 +32,160 @@
     <nav>
       <a href="index.html">Home</a>
       <a href="contact.html">Island Offices</a>
-      <a href="history.html">Government Documents</a>
+      <a href="government-documents.html">Government Documents</a>
     </nav>
   </header>
 
   <section class="intro">
-    <h2>Register with Ko Hawaiʻi Pae ʻĀina</h2>
-    <p>Select the form you need below. Each registration includes a fillable form and a downloadable PDF version. Submissions are reviewed by your island office.</p>
+    <h2>Register with Ko Hawaii Pae Aina</h2>
+    <p>Select the form you need below. Each card lets you preview the PDF, download it, and submit a simple online request to your island office.</p>
   </section>
 
   <section class="form-cards">
+    <!-- Motor Vehicle Operators Identification -->
     <div class="card">
-      <h3>Motor Vehicle Operator’s Identification</h3>
-      <iframe src="pdf/Ko_Hawaii_Pae_Aina_Motor_Vehicle_Operators_Identification.pdf" width="100%" height="400px"></iframe>
-      <a href="pdf/Ko_Hawaii_Pae_Aina_Motor_Vehicle_Operators_Identification.pdf" download class="button">Download PDF</a>
+      <h3>Motor Vehicle Operators Identification</h3>
+      <a class="button" href="#" onclick="openPreview('pdf/Motor_Vehicle_Operators_Identification_Cleaned_With_Seal.pdf','Motor Vehicle Operators Identification');return false;">Preview PDF</a>
+      <a class="button alt" href="pdf/Motor_Vehicle_Operators_Identification_Cleaned_With_Seal.pdf" download>Download PDF</a>
       <form action="https://formspree.io/f/xdkdjvpy" method="POST">
         <input type="text" name="full-name" placeholder="Full Legal Name" required>
         <input type="text" name="birth-date" placeholder="Date of Birth (MM/DD/YYYY)" required>
         <select name="island" required>
           <option value="">Select Island</option>
-          <option>Hawaiʻi</option>
-          <option>Maui</option>
-          <option>Molokaʻi</option>
-          <option>Oʻahu</option>
+          <option>Hawaii</option><option>Maui</option><option>Molokai</option><option>Oahu</option>
         </select>
         <input type="text" name="address" placeholder="Address" required>
         <input type="text" name="eye-color" placeholder="Eye Color" required>
         <input type="text" name="hair-color" placeholder="Hair Color" required>
         <input type="text" name="height" placeholder="Height (ft/in)" required>
         <input type="text" name="weight" placeholder="Weight (lbs)" required>
-        <input type="text" name="sex" placeholder="Sex (Kāne / Wāhine)" required>
-        <button type="submit">Submit Form</button>
+        <input type="text" name="sex" placeholder="Sex (Kane / Wahine)" required>
+        <button class="button" type="submit">Submit Form</button>
       </form>
     </div>
 
+    <!-- Merchandise License -->
     <div class="card">
       <h3>Merchandise License</h3>
-      <iframe src="pdf/Merchandise_License.pdf" width="100%" height="400px"></iframe>
-      <a href="pdf/Merchandise_License.pdf" download class="button">Download PDF</a>
+      <a class="button" href="#" onclick="openPreview('pdf/Merchandise_License_Cleaned_With_Seal.pdf','Merchandise License');return false;">Preview PDF</a>
+      <a class="button alt" href="pdf/Merchandise_License_Cleaned_With_Seal.pdf" download>Download PDF</a>
       <form action="https://formspree.io/f/manbkzpv" method="POST">
         <input type="text" name="full-name" placeholder="Business or Artisan Name" required>
         <input type="text" name="product-type" placeholder="Type of Merchandise" required>
         <input type="text" name="location" placeholder="Location of Sales or Services" required>
-        <button type="submit">Submit Form</button>
+        <button class="button" type="submit">Submit Form</button>
       </form>
     </div>
 
+    <!-- Service License -->
     <div class="card">
       <h3>Service License</h3>
-      <iframe src="pdf/Service_License.pdf" width="100%" height="400px"></iframe>
-      <a href="pdf/Service_License.pdf" download class="button">Download PDF</a>
+      <a class="button" href="#" onclick="openPreview('pdf/Service_License_Cleaned_With_Seal.pdf','Service License');return false;">Preview PDF</a>
+      <a class="button alt" href="pdf/Service_License_Cleaned_With_Seal.pdf" download>Download PDF</a>
       <form action="https://formspree.io/f/xzzvwqjn" method="POST">
         <input type="text" name="full-name" placeholder="Service Provider Name" required>
         <input type="text" name="service-type" placeholder="Service Description" required>
         <input type="text" name="license-duration" placeholder="License Duration Requested" required>
-        <button type="submit">Submit Form</button>
+        <button class="button" type="submit">Submit Form</button>
       </form>
     </div>
 
+    <!-- Safety Check -->
     <div class="card">
       <h3>Safety Check</h3>
-      <iframe src="pdf/Safety_Check.pdf" width="100%" height="400px"></iframe>
-      <a href="pdf/Safety_Check.pdf" download class="button">Download PDF</a>
+      <a class="button" href="#" onclick="openPreview('pdf/Safety_Check_Cleaned_With_Seal.pdf','Safety Check');return false;">Preview PDF</a>
+      <a class="button alt" href="pdf/Safety_Check_Cleaned_With_Seal.pdf" download>Download PDF</a>
       <form action="https://formspree.io/f/xpwlneoq" method="POST">
         <input type="text" name="vehicle-id" placeholder="Vehicle Identification Number (VIN)" required>
         <input type="text" name="owner-name" placeholder="Owner Name" required>
         <input type="text" name="check-location" placeholder="Inspection Location" required>
-        <button type="submit">Submit Form</button>
+        <button class="button" type="submit">Submit Form</button>
       </form>
     </div>
 
+    <!-- Birth Certificate -->
     <div class="card">
       <h3>Birth Certificate</h3>
-      <iframe src="pdf/Birth_Certificate.pdf" width="100%" height="400px"></iframe>
-      <a href="pdf/Birth_Certificate.pdf" download class="button">Download PDF</a>
+      <a class="button" href="#" onclick="openPreview('pdf/Birth_Certificate_Cleaned_With_Seal.pdf','Birth Certificate');return false;">Preview PDF</a>
+      <a class="button alt" href="pdf/Birth_Certificate_Cleaned_With_Seal.pdf" download>Download PDF</a>
       <form action="https://formspree.io/f/xvgqynva" method="POST">
         <input type="text" name="child-name" placeholder="Full Name of Child" required>
         <input type="text" name="birth-date" placeholder="Date of Birth" required>
         <input type="text" name="parent-name" placeholder="Parent or Guardian Name" required>
-        <button type="submit">Submit Form</button>
+        <button class="button" type="submit">Submit Form</button>
       </form>
     </div>
 
+    <!-- Passport -->
     <div class="card">
       <h3>Passport</h3>
-      <iframe src="pdf/Passport.pdf" width="100%" height="400px"></iframe>
-      <a href="pdf/Passport.pdf" download class="button">Download PDF</a>
+      <a class="button" href="#" onclick="openPreview('pdf/Passport_Cleaned_With_Seal.pdf','Passport');return false;">Preview PDF</a>
+      <a class="button alt" href="pdf/Passport_Cleaned_With_Seal.pdf" download>Download PDF</a>
       <form action="https://formspree.io/f/xgvzqbpv" method="POST">
         <input type="text" name="full-name" placeholder="Applicant Full Name" required>
         <input type="text" name="birth-date" placeholder="Date of Birth" required>
         <input type="text" name="island" placeholder="Island of Residence" required>
-        <button type="submit">Submit Form</button>
+        <button class="button" type="submit">Submit Form</button>
       </form>
     </div>
 
+    <!-- Post Office Box (Postal Service) -->
     <div class="card">
       <h3>Post Office Box (Postal Service)</h3>
-      <iframe src="pdf/Post_Office_Box_(Postal_Service).pdf" width="100%" height="400px"></iframe>
-      <a href="pdf/Post_Office_Box_(Postal_Service).pdf" download class="button">Download PDF</a>
+      <a class="button" href="#" onclick="openPreview('pdf/Post_Office_Box_Postal_Service_Cleaned_With_Seal.pdf','Post Office Box (Postal Service)');return false;">Preview PDF</a>
+      <a class="button alt" href="pdf/Post_Office_Box_Postal_Service_Cleaned_With_Seal.pdf" download>Download PDF</a>
       <form action="https://formspree.io/f/mblkbepa" method="POST">
         <input type="text" name="applicant-name" placeholder="Applicant Name" required>
         <input type="text" name="desired-box-location" placeholder="Preferred Postal Location" required>
-        <button type="submit">Submit Form</button>
+        <button class="button" type="submit">Submit Form</button>
       </form>
     </div>
   </section>
 
-  <section class="mahalo">
-    <h2>Mahalo nui loa 🌺</h2>
-    <p>Your submission has been received. Your island office will follow up with any further instructions.</p>
+  <section class="help-banner">
+    <strong>Need help?</strong> Contact the Hawaii Island Office:
+    <br>Email: <a href="mailto:KHPARELATIONSAFFAIRS@gmail.com">KHPARELATIONSAFFAIRS@gmail.com</a> • Phone: (808) 333-3459
   </section>
 
   <footer>
-    <p>© 2025 Ko Hawaiʻi Pae ʻĀina</p>
+    <p>© 2025 Ko Hawaii Pae Aina</p>
   </footer>
+
+  <!-- Modal -->
+  <div id="pdfModal" class="modal-overlay" role="dialog" aria-modal="true" aria-label="PDF Preview">
+    <div class="modal">
+      <div class="modal-header">
+        <div class="modal-title" id="modalTitle">Preview</div>
+        <button class="modal-close" onclick="closePreview()" aria-label="Close preview">✕</button>
+      </div>
+      <div class="modal-body">
+        <iframe id="pdfFrame" src="" title="PDF preview"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openPreview(src, title){
+      const modal = document.getElementById('pdfModal');
+      const frame = document.getElementById('pdfFrame');
+      const header = document.getElementById('modalTitle');
+      header.textContent = title || 'Preview';
+      frame.src = src;
+      modal.style.display = 'flex';
+    }
+    function closePreview(){
+      const modal = document.getElementById('pdfModal');
+      const frame = document.getElementById('pdfFrame');
+      frame.src = '';
+      modal.style.display = 'none';
+    }
+    // Close modal on overlay click or Esc
+    document.getElementById('pdfModal').addEventListener('click', function(e){
+      if(e.target === this) closePreview();
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape') closePreview();
+    });
+  </script>
 </body>
 </html>
