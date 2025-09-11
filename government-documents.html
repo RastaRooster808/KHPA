@@ -1,41 +1,161 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Government Documents - Ko Hawaiʻi Pae ʻĀina</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Government Documents | Ko Hawaii Pae Aina</title>
+  <link rel="stylesheet" href="css/style-formal.css" />
+  <style>
+    header, footer { text-align:center }
+    nav { display:flex; gap:.75rem; justify-content:center; flex-wrap:wrap; margin:.5rem 0 1rem }
+    nav a { text-decoration:none; padding:.5rem .9rem; border-radius:6px; background:#6b4e3d; color:#fff; font-weight:600 }
+    nav a:hover { opacity:.9 }
+    .dropdown { position:relative }
+    .dropdown > a { background:#a07b55 }
+    .dropdown-content { display:none; position:absolute; top:110%; left:0; background:#fff; border:1px solid #e0d8c5; border-radius:6px; min-width:200px; z-index:99 }
+    .dropdown-content a { display:block; color:#5a2b0c; background:#fffdf8; margin:0; border-radius:0; text-align:left }
+    .dropdown:hover .dropdown-content { display:block }
+    .container { max-width:1100px; margin:0 auto; padding:0 1rem }
+    .section { background:#fffdf8; border:1px solid #e6dcc7; border-radius:10px; padding:1.25rem; margin:1.25rem auto }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:1rem }
+    .card { background:#fff; border:1px solid #e6dcc7; border-radius:10px; padding:1rem; box-shadow:0 2px 6px rgba(0,0,0,.04) }
+    .card h3 { margin:.25rem 0 .5rem }
+    .button { display:inline-block; background:#6b4e3d; color:#fff; padding:.5rem 1rem; border-radius:6px; text-decoration:none; font-weight:700; margin-right:.4rem; margin-bottom:.4rem }
+    .button.alt { background:#a07b55 }
+    .help-banner{max-width:900px;margin:2rem auto;padding:1rem;border:2px solid #6b4e3d;background:#f8f3e7;border-radius:8px;text-align:center}
+    .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:9999;}
+    .modal{background:#fff;max-width:900px;width:95%;border-radius:8px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+    .modal-header{display:flex;justify-content:space-between;align-items:center;padding:.75rem 1rem;background:#f7f2e6;border-bottom:1px solid #e0d8c5}
+    .modal-title{font-weight:bold}
+    .modal-close{background:none;border:none;font-size:1.2rem;cursor:pointer}
+    .modal-body{padding:0;height:70vh}
+    .modal-body iframe{width:100%;height:100%;border:0}
+  </style>
 </head>
 <body>
-  <header>
-    <h1>Government Documents</h1>
-    <p>Proclamations and Legal Foundations of Ko Hawaiʻi Pae ʻĀina</p>
+  <header class="container">
+    <img src="img/logo.png" alt="KHPA Logo" style="width:110px; margin-top:10px;" />
+    <h1 style="margin:.3rem 0 0 0; color:#5A2B0C;">Government Documents</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <div class="dropdown">
+        <a href="contact.html">Island Offices</a>
+        <div class="dropdown-content">
+          <a href="contact.html#hawaii">Hawaii (Big Island)</a>
+          <a href="contact.html#maui">Maui</a>
+          <a href="contact.html#molokai">Molokai</a>
+          <a href="contact.html#oahu">Oahu</a>
+        </div>
+      </div>
+      <a href="registration.html">Registration & Licensing</a>
+      <a href="government-documents.html">Government Documents</a>
+      <a href="history.html">History</a>
+      <a href="emporium.html">Emporium</a>
+      <a href="contact.html">Contact</a>
+    </nav>
   </header>
 
-  <section>
-    <h2>Proclamations</h2>
-    <ul>
-      <li><a href="pdf/Declaration_of_Rights_1839.pdf" target="_blank">Declaration of Rights (1839)</a></li>
-      <li><a href="pdf/Anglo_Franco_Proclamation_1843.pdf" target="_blank">Anglo-Franco Proclamation (1843)</a></li>
-      <li><a href="pdf/Constitution_1840.pdf" target="_blank">1840 Constitution</a></li>
-      <li><a href="pdf/First_Act_Kamehameha_III.pdf" target="_blank">First Act of Kamehameha III</a></li>
-      <li><a href="pdf/Second_Act_Kamehameha_III.pdf" target="_blank">Second Act of Kamehameha III</a></li>
-      <li><a href="pdf/Third_Act_Kamehameha_III.pdf" target="_blank">Third Act of Kamehameha III</a></li>
-      <li><a href="pdf/KK3_Proclamation.pdf" target="_blank">Kamehameha III Proclamation (KK3)</a></li>
-    </ul>
-  </section>
+  <main class="container">
+    <section class="section">
+      <h2 style="text-align:center">Proclamations</h2>
+      <div class="grid">
 
-  <section>
-    <h2>Additional Government Documents</h2>
-    <p>Details on Kingdom IDs, Application Requirements, Notarial Processes, and Submissions.</p>
-    <ul>
-      <li><a href="registration.html">View Registration & Licensing</a></li>
-    </ul>
+        <div class="card">
+          <h3>Declaration of Rights (1839)</h3>
+          <p>Foundational proclamation of rights and governance.</p>
+          <a class="button" href="#" onclick="openPreview('pdf/Declaration_of_Rights_1839.pdf','Declaration of Rights (1839)');return false;">Preview</a>
+          <a class="button alt" href="pdf/Declaration_of_Rights_1839.pdf" download>Download</a>
+        </div>
+
+        <div class="card">
+          <h3>Anglo-Franco Proclamation (1843)</h3>
+          <p>International recognition of the Hawaiian Kingdom.</p>
+          <a class="button" href="#" onclick="openPreview('pdf/Anglo_Franco_Proclamation_1843.pdf','Anglo-Franco Proclamation (1843)');return false;">Preview</a>
+          <a class="button alt" href="pdf/Anglo_Franco_Proclamation_1843.pdf" download>Download</a>
+        </div>
+
+        <div class="card">
+          <h3>Constitution (1840) - English</h3>
+          <p>First constitution as translated in English (1842).</p>
+          <a class="button" href="#" onclick="openPreview('pdf/Constitution_1840_English.pdf','Constitution (1840) - English');return false;">Preview</a>
+          <a class="button alt" href="pdf/Constitution_1840_English.pdf" download>Download</a>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 style="text-align:center">Acts of Kamehameha III</h2>
+      <div class="grid">
+
+        <div class="card">
+          <h3>First Act (1846)</h3>
+          <p>To organize the Executive Ministry of the Hawaiian Islands.</p>
+          <a class="button" href="#" onclick="openPreview('pdf/First_Act_Kamehameha_III.pdf','First Act (1846)');return false;">Preview</a>
+          <a class="button alt" href="pdf/First_Act_Kamehameha_III.pdf" download>Download</a>
+        </div>
+
+        <div class="card">
+          <h3>Second Act (1846)</h3>
+          <p>To organize the Executive Departments of the Hawaiian Islands.</p>
+          <a class="button" href="#" onclick="openPreview('pdf/Second_Act_of_Kamehameha_III_1846.pdf','Second Act (1846)');return false;">Preview</a>
+          <a class="button alt" href="pdf/Second_Act_of_Kamehameha_III_1846.pdf" download>Download</a>
+        </div>
+
+        <div class="card">
+          <h3>Third Act (1847)</h3>
+          <p>To organize the Judiciary Department of the Hawaiian Islands.</p>
+          <a class="button" href="#" onclick="openPreview('pdf/Third_Act_of_Kamehameha_III_1846.pdf','Third Act (1847)');return false;">Preview</a>
+          <a class="button alt" href="pdf/Third_Act_of_Kamehameha_III_1846.pdf" download>Download</a>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <section class="help-banner">
+    <strong>Need help?</strong> Contact the Hawaii Island Office:
+    <br>Email: <a href="mailto:KHPARELATIONSAFFAIRS@gmail.com">KHPARELATIONSAFFAIRS@gmail.com</a> • Phone: (808) 333-3459
   </section>
 
   <footer>
-    <p>© 2025 Ko Hawaiʻi Pae ʻĀina</p>
+    <p>© 2025 Ko Hawaii Pae Aina</p>
   </footer>
+
+  <!-- PDF Modal -->
+  <div id="pdfModal" class="modal-overlay" role="dialog" aria-modal="true" aria-label="PDF Preview">
+    <div class="modal">
+      <div class="modal-header">
+        <div class="modal-title" id="modalTitle">Preview</div>
+        <button class="modal-close" onclick="closePreview()" aria-label="Close preview">✕</button>
+      </div>
+      <div class="modal-body">
+        <iframe id="pdfFrame" src="" title="PDF preview"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openPreview(src, title){
+      const modal = document.getElementById('pdfModal');
+      const frame = document.getElementById('pdfFrame');
+      const header = document.getElementById('modalTitle');
+      header.textContent = title || 'Preview';
+      frame.src = src;
+      modal.style.display = 'flex';
+    }
+    function closePreview(){
+      const modal = document.getElementById('pdfModal');
+      const frame = document.getElementById('pdfFrame');
+      frame.src = '';
+      modal.style.display = 'none';
+    }
+    document.getElementById('pdfModal').addEventListener('click', function(e){
+      if(e.target === this) closePreview();
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape') closePreview();
+    });
+  </script>
 </body>
 </html>
