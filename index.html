@@ -2,50 +2,134 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KHPA - Home</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ko Hawaii Pae Aina</title>
+  <link rel="stylesheet" href="css/style-formal.css" />
+  <style>
+    /* keep a few essentials inline so drag-n-drop works instantly */
+    header, footer { text-align:center }
+    nav { display:flex; gap:.75rem; justify-content:center; flex-wrap:wrap; margin: .5rem 0 1rem }
+    nav a { text-decoration:none; padding:.5rem .9rem; border-radius:6px; background:#6b4e3d; color:#fff; font-weight:600 }
+    nav a:hover { opacity:.9 }
+    .dropdown { position:relative }
+    .dropdown > a { background:#a07b55 }
+    .dropdown-content { display:none; position:absolute; top:110%; left:0; background:#fff; border:1px solid #e0d8c5; border-radius:6px; min-width:200px; z-index:99 }
+    .dropdown-content a { display:block; color:#5a2b0c; background:#fffdf8; margin:0; border-radius:0; text-align:left }
+    .dropdown:hover .dropdown-content { display:block }
+    .container { max-width:1100px; margin:0 auto; padding:0 1rem }
+    .hero { text-align:center; margin:1rem auto 2rem }
+    .hero img { width:100%; max-width:980px; border:1px solid #e0d8c5; border-radius:8px }
+    .section { background:#fffdf8; border:1px solid #e6dcc7; border-radius:10px; padding:1.25rem; margin:1.25rem auto }
+    .buttons { text-align:center; margin-top:1rem }
+    .button { display:inline-block; background:#6b4e3d; color:#fff; padding:.6rem 1.1rem; border-radius:6px; text-decoration:none; font-weight:700; margin:.25rem }
+    .button.alt { background:#a07b55 }
+    .help-banner{max-width:900px;margin:2rem auto;padding:1rem;border:2px solid #6b4e3d;background:#f8f3e7;border-radius:8px;text-align:center}
+    /* PDF modal */
+    .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:9999;}
+    .modal{background:#fff;max-width:900px;width:95%;border-radius:8px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+    .modal-header{display:flex;justify-content:space-between;align-items:center;padding:.75rem 1rem;background:#f7f2e6;border-bottom:1px solid #e0d8c5}
+    .modal-title{font-weight:bold}
+    .modal-close{background:none;border:none;font-size:1.2rem;cursor:pointer}
+    .modal-body{padding:0;height:70vh}
+    .modal-body iframe{width:100%;height:100%;border:0}
+  </style>
 </head>
 <body>
-  <header>
-    <h1>Ko Hawaiʻi Pae ʻĀina</h1>
+  <header class="container">
+    <img src="img/logo.png" alt="KHPA Logo" style="width:120px; margin-top:10px;" />
+    <h1 style="margin:.3rem 0 0 0; color:#5A2B0C;">Ko Hawaii Pae Aina</h1>
+    <p style="margin:.25rem 0 1rem 0; color:#6B4E3D;">Indigenous Cognizant Expressions of Aina and Sacred Protocol</p>
+
     <nav>
       <a href="index.html">Home</a>
-      <a href="island-offices.html">Island Offices</a>
-      <a href="government-documents.html">Government Documents</a>
+      <div class="dropdown">
+        <a href="contact.html">Island Offices</a>
+        <div class="dropdown-content">
+          <a href="contact.html#hawaii">Hawaii (Big Island)</a>
+          <a href="contact.html#maui">Maui</a>
+          <a href="contact.html#molokai">Molokai</a>
+          <a href="contact.html#oahu">Oahu</a>
+        </div>
+      </div>
       <a href="registration.html">Registration & Licensing</a>
-      <a href="https://hawaiiankingdom.net" target="_blank">History</a>
+      <a href="government-documents.html">Government Documents</a>
+      <a href="history.html">History</a>
+      <a href="emporium.html">Emporium</a>
+      <a href="contact.html">Contact</a>
     </nav>
   </header>
 
-  <main>
-    <section style="text-align: center;">
-      <h2>MAP OF THE KINGDOM</h2>
-      <img src="img/island-map.jpg" alt="Map of Hawaiian Islands" style="width: 100%; max-width: 900px; border: 1px solid #ccc;" />
-    </section>
+  <!-- Map banner -->
+  <section class="container hero">
+    <h2>Map of the Kingdom</h2>
+    <img src="img/island-map.jpg" alt="Hawaiian Islands Map">
+  </section>
 
-    <section style="text-align: center; margin-top: 3rem;">
-      <h2>Kamehameha III Proclamation</h2>
-      <img src="img/kk3_proclamation_scroll_style.jpeg" alt="Kamehameha III Scroll" style="width: 100%; max-width: 800px; border: 2px solid #9A0000; border-radius: 10px;" />
-      <p><a href="pdf/KK3_Declaration.pdf" target="_blank">Download the Declaration (PDF)</a></p>
-    </section>
+  <!-- Proclamation -->
+  <section class="container section" id="kk3">
+    <h2 style="text-align:center;">Kamehameha III Proclamation</h2>
+    <p style="text-align:center; max-width:850px; margin:0 auto 1rem;">
+      Struggle. Strength. Peace. This declaration affirms neutrality among nations and protection of the people.
+    </p>
+    <div class="buttons">
+      <a class="button" href="#" onclick="openPreview('pdf/KK3_Declaration.pdf','Kamehameha III Proclamation');return false;">Preview PDF</a>
+      <a class="button alt" href="pdf/KK3_Declaration.pdf" download>Download PDF</a>
+    </div>
+    <img src="img/kk3_proclamation_scroll_style.jpeg" alt="Kamehameha III Proclamation Scroll" style="display:block; margin:1rem auto 0; width:100%; max-width:800px; border:2px solid #9a0000; border-radius:8px;">
+  </section>
 
-    <section style="text-align: center; margin-top: 3rem;">
-      <h2>Hawaiʻi: Our Story, Our Future</h2>
-      <img src="img/img_leon-siu-minister.png" alt="Hon. Leon Siu" style="width: 200px; border-radius: 10px; border: 1px solid #555;" />
-      <p>A free booklet available for all who wish to learn more about the Hawaiian Kingdom.</p>
-      <a href="pdf/Hawaii_Our_Story_Our_Future_2025.pdf" target="_blank">
-        <img src="img/img_booklet-preview.png" alt="Preview of Hawaiian Kingdom Booklet" style="max-width: 300px; border: 2px solid #5A2B0C; border-radius: 8px; margin-top: 1rem;" />
-      </a>
-      <div style="margin-top: 1rem;">
-        <a href="pdf/Hawaii_Our_Story_Our_Future_2025.pdf" class="cta-button" download>Download Booklet</a>
-        <a href="https://hawaiiankingdom.net" target="_blank" class="cta-button">Visit HawaiianKingdom.net</a>
-      </div>
-    </section>
-  </main>
+  <!-- Quick actions -->
+  <section class="container section" style="text-align:center">
+    <h2>Get Started</h2>
+    <div class="buttons">
+      <a class="button" href="registration.html">Start Registration</a>
+      <a class="button alt" href="government-documents.html">View Government Documents</a>
+    </div>
+  </section>
 
-  <footer style="text-align: center; padding: 2rem;">
-    <p>&copy; 2025 Ko Hawaiʻi Pae ʻĀina. All rights reserved.</p>
+  <section class="help-banner">
+    <strong>Need help?</strong> Contact the Hawaii Island Office:
+    <br>Email: <a href="mailto:KHPARELATIONSAFFAIRS@gmail.com">KHPARELATIONSAFFAIRS@gmail.com</a> • Phone: (808) 333-3459
+  </section>
+
+  <footer>
+    <p>© 2025 Ko Hawaii Pae Aina</p>
   </footer>
+
+  <!-- PDF Modal -->
+  <div id="pdfModal" class="modal-overlay" role="dialog" aria-modal="true" aria-label="PDF Preview">
+    <div class="modal">
+      <div class="modal-header">
+        <div class="modal-title" id="modalTitle">Preview</div>
+        <button class="modal-close" onclick="closePreview()" aria-label="Close preview">✕</button>
+      </div>
+      <div class="modal-body">
+        <iframe id="pdfFrame" src="" title="PDF preview"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openPreview(src, title){
+      const modal = document.getElementById('pdfModal');
+      const frame = document.getElementById('pdfFrame');
+      const header = document.getElementById('modalTitle');
+      header.textContent = title || 'Preview';
+      frame.src = src;
+      modal.style.display = 'flex';
+    }
+    function closePreview(){
+      const modal = document.getElementById('pdfModal');
+      const frame = document.getElementById('pdfFrame');
+      frame.src = '';
+      modal.style.display = 'none';
+    }
+    document.getElementById('pdfModal').addEventListener('click', function(e){
+      if(e.target === this) closePreview();
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape') closePreview();
+    });
+  </script>
 </body>
 </html>
