@@ -1,4 +1,68 @@
+/* === Global fixed banner + larger logo across all pages === */
+:root{
+  --khpa-brown:#6b4e3d;
+  --khpa-cream:#f8f3e7;
+  --banner-h:52px; /* tweak if you want a taller/shorter bar */
+}
 
+/* Make room for the fixed banner (iOS notch safe) */
+body{
+  padding-top: calc(var(--banner-h) + env(safe-area-inset-top, 0px));
+}
+
+/* Fixed help bar that stays at the very top */
+.sticky-banner{
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--banner-h);
+  display: flex; align-items: center; justify-content: center;
+  gap: .75rem; padding: 0 .75rem;
+  background: var(--khpa-cream);
+  border-bottom: 1px solid #d9c7a7;
+  box-shadow: 0 2px 6px rgba(0,0,0,.06);
+  z-index: 9999;
+  font-size: .95rem;
+}
+.sticky-banner a{
+  color: var(--khpa-brown);
+  text-decoration: none;
+  font-weight: 700;
+}
+.sticky-banner .banner-actions{ display:flex; gap:.5rem; flex-wrap:wrap }
+.sticky-banner .btn{
+  display:inline-block; padding:.35rem .6rem; border-radius:6px;
+  background: var(--khpa-brown); color:#fff; text-decoration:none; font-weight:700;
+}
+.sticky-banner .btn.alt{ background:#a07b55; }
+
+/* Make page headers sit nicely under the fixed banner */
+.site-header{
+  position: sticky; /* keeps the header visible under the fixed banner */
+  top: var(--banner-h);
+  z-index: 1000;
+  background: #f9f3e3;
+  border-bottom: 3px solid #b28b43;
+  text-align: center;
+  padding: .5rem 0 1rem;
+}
+
+/* Bigger, responsive logo everywhere */
+.site-header .logo,
+header .logo{
+  width: clamp(160px, 22vw, 260px);
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: .5rem auto .25rem;
+}
+
+/* Optional: site title polish */
+.site-title{
+  margin: 0;
+  font-family: "Cinzel", Georgia, serif;
+  font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+  color: #5A2B0C;
+}
 body {
   font-family: serif;
   background: #fdfcf9;
