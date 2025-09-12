@@ -4,112 +4,104 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Island Offices | Ko Hawaii Pae Aina</title>
-  <link rel="stylesheet" href="css/style-formal.css" />
+  <meta name="description" content="Our strength is our people. Across every island we carry the kuleana to care for one another and to malama the land. Connect with your island office for service and support."/>
+  <link rel="stylesheet" href="css/style-formal.css"/>
   <style>
-    header, footer { text-align:center }
-    nav { display:flex; gap:.75rem; justify-content:center; flex-wrap:wrap; margin:.5rem 0 1rem }
-    nav a { text-decoration:none; padding:.5rem .9rem; border-radius:6px; background:#6b4e3d; color:#fff; font-weight:600 }
-    nav a:hover { opacity:.9 }
-    .dropdown { position:relative }
-    .dropdown > a { background:#a07b55 }
-    .dropdown-content { display:none; position:absolute; top:110%; left:0; background:#fff; border:1px solid #e0d8c5; border-radius:6px; min-width:220px; z-index:99 }
-    .dropdown-content a { display:block; color:#5a2b0c; background:#fffdf8; margin:0; padding:.55rem .75rem; border-radius:0; text-align:left }
-    .dropdown:hover .dropdown-content { display:block }
-    .container { max-width:1100px; margin:0 auto; padding:0 1rem }
-    .intro { background:#fffdf8; border:1px solid #e6dcc7; border-radius:10px; padding:1.25rem; margin:1rem auto; text-align:center }
-    .intro h2 { margin:.25rem 0 .5rem 0; color:#5A2B0C }
-    .intro p { margin:.35rem auto; max-width:900px }
-    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(270px,1fr)); gap:1rem }
-    .card { background:#fff; border:1px solid #e6dcc7; border-radius:10px; padding:1rem; box-shadow:0 2px 6px rgba(0,0,0,.04) }
-    .card h3 { margin:.25rem 0 .5rem 0 }
-    .badge { display:inline-block; background:#a07b55; color:#fff; padding:.25rem .5rem; border-radius:4px; font-size:.85rem; margin-bottom:.5rem }
-    .button { display:inline-block; background:#6b4e3d; color:#fff; padding:.55rem 1rem; border-radius:6px; text-decoration:none; font-weight:700; margin-right:.4rem; margin-top:.35rem }
-    .button.alt { background:#a07b55 }
-    .help-banner{max-width:900px;margin:2rem auto;padding:1rem;border:2px solid #6b4e3d;background:#f8f3e7;border-radius:8px;text-align:center}
+    /* light enhancements in case your CSS doesn't include these */
+    header { text-align:center; padding:1rem 0; }
+    header img { width:110px; }
+    nav { display:flex; gap:.75rem; justify-content:center; flex-wrap:wrap; margin:.5rem 0 1rem; }
+    nav a { text-decoration:none; padding:.45rem .8rem; border-radius:6px; background:#6b4e3d; color:#fff; font-weight:600; }
+    nav a:hover { opacity:.9; }
+    .container { max-width:1100px; margin:0 auto; padding:0 1rem; }
+    .intro { text-align:center; margin:0 auto 1.25rem; }
+    .intro .lead { font-size:1.1rem; line-height:1.55; margin:.35rem auto .6rem; }
+    .intro .sublead { color:#5A2B0C; font-style:italic; }
+
+    .quick-nav { display:flex; gap:.5rem; justify-content:center; flex-wrap:wrap; margin:1rem 0 1.25rem; }
+    .quick-nav a { background:#f3e9d5; border:1px solid #d9c7a7; padding:.4rem .7rem; border-radius:20px; color:#5a2b0c; text-decoration:none; }
+
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); gap:1rem; }
+    .card { background:#fff; border:1px solid #e6dcc7; border-radius:12px; padding:1rem; box-shadow:0 2px 6px rgba(0,0,0,.04); }
+    .card h2 { margin:.25rem 0 .5rem; color:#5A2B0C; }
+    .card p { margin:.35rem 0; }
+    .badge { display:inline-block; font-size:.85rem; background:#f8f3e7; border:1px solid #d9c7a7; color:#5a2b0c; padding:.15rem .5rem; border-radius:6px; }
+    .button { display:inline-block; background:#6b4e3d; color:#fff; padding:.5rem .9rem; border-radius:6px; text-decoration:none; font-weight:700; }
+    .button.alt { background:#a07b55; }
+    .help { text-align:center; margin:1.5rem auto; padding:1rem; border:2px solid #6b4e3d; background:#f8f3e7; border-radius:10px; max-width:900px; }
+    footer { text-align:center; padding:1.25rem 0; color:#5a2b0c; }
   </style>
 </head>
 <body>
-  <header class="container">
-    <img src="img/logo.png" alt="KHPA Logo" style="width:110px; margin-top:10px;" />
-    <h1 style="margin:.3rem 0 0 0; color:#5A2B0C;">Island Offices</h1>
+  <header>
+    <img src="img/logo.png" alt="KHPA Logo"/>
     <nav>
       <a href="index.html">Home</a>
-      <div class="dropdown">
-        <a href="contact.html">Island Offices</a>
-        <div class="dropdown-content">
-          <a href="#hawaii">Hawaii (Big Island)</a>
-          <a href="#maui">Maui</a>
-          <a href="#molokai">Molokai</a>
-          <a href="#oahu">Oahu</a>
-        </div>
-      </div>
+      <a href="contact.html" aria-current="page">Island Offices</a>
       <a href="registration.html">Registration & Licensing</a>
       <a href="government-documents.html">Government Documents</a>
       <a href="history.html">History</a>
       <a href="emporium.html">Emporium</a>
-      <a href="contact.html">Contact</a>
     </nav>
   </header>
 
-  <section class="container intro">
-    <h2>The Power of the People</h2>
-    <p>
-      Our strength is our people. Across every island, families and communities carry the
-      kuleana to care for one another and for the land. This page connects you to the
-      island offices that serve you. Stand together. Act with dignity. Build our future.
-    </p>
-    <p><strong>Unity of the Pae Aina:</strong> One identity, many islands — with a shared purpose:
-      protection, service, and lawful self-determination.</p>
-    <div style="margin-top:.5rem">
-      <a class="button" href="registration.html">Start Registration</a>
-      <a class="button alt" href="government-documents.html">View Government Documents</a>
-    </div>
-  </section>
+  <main class="container">
+    <section class="intro">
+      <h1>The Power of the People</h1>
+      <p class="lead">
+        Our strength is our people. Across every island, families and communities carry the
+        <em>kuleana</em> to care for one another — and to <strong>malama</strong> the land and the people.
+        This page connects you to the island offices that serve you. Stand together. Act with dignity. Build our future.
+      </p>
+      <p class="sublead">
+        <em>Unity of the Pae Aina</em>: One identity, many islands — with a shared purpose:
+        protection, service, lawful self-determination, and <strong>malama</strong>.
+      </p>
+    </section>
 
-  <main class="container" style="margin-top:1rem">
-    <!-- Big Island (Hawaii) -->
-    <div id="hawaii" class="card">
-      <span class="badge">Open</span>
-      <h3>Hawaii (Big Island) Office</h3>
-      <p><strong>Address:</strong> 157 Keawe St, Hilo, Hawaiian Islands HI</p>
-      <p><strong>Email:</strong> <a href="mailto:KHPARELATIONSAFFAIRS@gmail.com">KHPARELATIONSAFFAIRS@gmail.com</a></p>
-      <p><strong>Phone:</strong> <a href="tel:+18083333459">(808) 333-3459</a></p>
-      <div>
-        <a class="button" href="registration.html">Registration & Licensing</a>
-        <a class="button alt" href="history.html">History</a>
-      </div>
+    <!-- quick anchor links -->
+    <div class="quick-nav">
+      <a href="#hawaii">Hawaii (Big Island)</a>
+      <a href="#oahu">Oahu</a>
+      <!-- Add more islands as they come online -->
     </div>
 
-    <div class="grid" style="margin-top:1rem">
-      <div id="maui" class="card">
-        <span class="badge">Coming Soon</span>
-        <h3>Maui Office</h3>
-        <p>Details coming soon. Services and contact information will be posted here.</p>
-      </div>
+    <section class="grid">
+      <!-- Hawaiʻi (the Big Island) -->
+      <article id="hawaii" class="card">
+        <h2>Hawaii Island Office <span class="badge">Active</span></h2>
+        <p><strong>Address:</strong> 157 Keawe Street, Hilo, Hawaii Island, H.I.</p>
+        <p><strong>Email:</strong> <a href="mailto:KHPARELATIONSAFFAIRS@gmail.com">KHPARELATIONSAFFAIRS@gmail.com</a></p>
+        <p><strong>Phone:</strong> <a href="tel:+18083333459">(808) 333-3459</a></p>
+        <p><strong>Service:</strong> Registration & Licensing, Community Relations, Public Affairs</p>
+        <div style="display:flex; gap:.5rem; flex-wrap:wrap; margin-top:.5rem">
+          <a class="button" href="registration.html">Start Registration</a>
+          <a class="button alt" href="pdf/Hawaii_Island_Office_KHPA_Cleaned.pdf" target="_blank">Download Office PDF</a>
+        </div>
+      </article>
 
-      <div id="molokai" class="card">
-        <span class="badge">Coming Soon</span>
-        <h3>Molokai Office</h3>
-        <p>Details coming soon. Services and contact information will be posted here.</p>
-      </div>
+      <!-- O'AHU -->
+      <article id="oahu" class="card">
+        <h2>Oahu Island Office <span class="badge">In Preparation</span></h2>
+        <p><strong>Mailing Address:</strong> Box 23055, Makiki Station, Oahu Island, H.I.</p>
+        <p><em>Additional contact details coming soon.</em></p>
+        <div style="display:flex; gap:.5rem; flex-wrap:wrap; margin-top:.5rem">
+          <a class="button alt" href="pdf/Oahu_Island_Office_KHPA.pdf" target="_blank">Download Office PDF</a>
+          <a class="button" href="index.html#help">Need Help?</a>
+        </div>
+      </article>
+    </section>
 
-      <!-- Oahu updated -->
-      <div id="oahu" class="card">
-        <span class="badge">Mailing Address</span>
-        <h3>Oahu Office</h3>
-        <p><strong>Mailing Address:</strong> Box 23055, Makik Station, Oahu</p>
-        <p>Additional details coming soon.</p>
-      </div>
-    </div>
+    <section class="help">
+      <strong>Need assistance now?</strong><br/>
+      Hawaii Island Office — Email:
+      <a href="mailto:KHPARELATIONSAFFAIRS@gmail.com">KHPARELATIONSAFFAIRS@gmail.com</a>
+      • Phone: <a href="tel:+18083333459">(808) 333-3459</a>
+    </section>
   </main>
 
-  <section class="help-banner">
-    <strong>Need help?</strong> The Hawaii Island Office is ready to assist.
-    <br>Email: <a href="mailto:KHPARELATIONSAFFAIRS@gmail.com">KHPARELATIONSAFFAIRS@gmail.com</a> • Phone: <a href="tel:+18083333459">(808) 333-3459</a>
-  </section>
-
   <footer>
-    <p>© 2025 Ko Hawaii Pae Aina</p>
+    <p>© 2025 Ko Hawaii Pae Aina. All rights reserved.</p>
   </footer>
 </body>
 </html>
