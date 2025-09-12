@@ -2,35 +2,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>KHPA Artisans</title>
-  <link rel="stylesheet" href="css/emporium-style.css">
+  <title>Artisans | KHPA Emporium</title>
+  <link rel="stylesheet" href="css/style-formal.css"/>
+  <style>
+    .container{max-width:1100px;margin:0 auto;padding:0 1rem}
+    header,footer{text-align:center}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin:1rem 0}
+    .card{background:#fff;border:1px solid #e6dcc7;border-radius:10px;padding:1rem;box-shadow:0 2px 6px rgba(0,0,0,.04)}
+    .thumb{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:8px;border:1px solid #e6dcc7}
+    nav{display:flex;gap:.6rem;justify-content:center;margin:.5rem 0 1rem}
+    nav a{padding:.45rem .8rem;background:#6b4e3d;color:#fff;border-radius:6px;text-decoration:none;font-weight:600}
+  </style>
 </head>
 <body>
-  <header class="banner">
-    <h1>KHPA Emporium Artisans</h1>
-    <p>Meet the featured creators and visionaries of Ko Hawai‘i Pae ʻĀina</p>
+  <header class="container">
+    <img src="img/logo.png" alt="KHPA Logo" style="width:90px;margin-top:10px">
+    <h1>KHPA Artisans</h1>
     <nav>
-      <a href="index.html">← Back to Home</a>
-      <a href="emporium.html">← KHPA Emporium</a>
+      <a href="index.html">Home</a>
+      <a href="emporium.html">Emporium</a>
+      <a href="registration.html">Apply</a>
     </nav>
   </header>
 
-  <main>
-    <section class="artisan-grid">
-      <div class="artisan-card">
-        <img src="img/emporium_rastarooster_1.webp" alt="RastaRooster Apparel">
-        <h2>RastaRooster</h2>
-        <p>A 420-friendly indigenous brand expressing sovereignty, style, and ʻāina awareness.</p>
-        <a href="https://rastarooster.com" target="_blank">Visit Site</a>
-      </div>
-      <!-- More artisan cards can be added here -->
+  <main class="container">
+    <section class="grid">
+      <article class="card">
+        <img class="thumb" src="img/Emporium/emporium_rastarooster_1.webp" alt="RastaRooster thumbnail">
+        <h3>RastaRooster</h3>
+        <p>Kingdom Wear tees, apparel, and more.</p>
+        <p><a href="https://rastarooster.com/collections/kingdom-wear" target="_blank" rel="noopener">Visit shop →</a></p>
+      </article>
+
+      <article class="card">
+        <img class="thumb" src="img/Emporium/emporium_rastarooster_2.webp" alt="Coming soon">
+        <h3>More artisans coming soon</h3>
+        <p>Apply to be featured in the Emporium.</p>
+        <p><a href="emporium.html#apply">Apply now →</a></p>
+      </article>
     </section>
   </main>
 
   <footer>
-    <p>© 2025 KHPA Emporium — All Rights Reserved</p>
+    <p>© 2025 Ko Hawaii Pae Aina</p>
   </footer>
 </body>
 </html>
