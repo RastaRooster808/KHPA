@@ -5,6 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Emporium | Ko Hawaii Pae Aina</title>
   <link rel="stylesheet" href="css/style-formal.css"/>
+
+  <!-- (Optional) small perf win -->
+  <link rel="preload" as="image" href="img/Emporium/emporium_rastarooster_1.webp">
+  <link rel="preload" as="image" href="img/Emporium/emporium_rastarooster_2.webp">
+  <link rel="preload" as="image" href="img/Emporium/emporium_rastarooster_3.webp">
+
   <style>
     header, footer { text-align:center }
     nav { display:flex; gap:.75rem; justify-content:center; flex-wrap:wrap; margin:.5rem 0 1rem }
@@ -16,16 +22,12 @@
     .dropdown-content a { display:block; color:#5a2b0c; background:#fffdf8; margin:0; border-radius:0; text-align:left }
     .dropdown:hover .dropdown-content { display:block }
     .container { max-width:1100px; margin:0 auto; padding:0 1rem }
-
     .hero { background:#fffdf8; border:1px solid #e6dcc7; border-radius:10px; padding:1rem; margin:1rem auto }
     .hero h1 { margin:.2rem 0 .5rem 0; color:#5A2B0C }
     .hero p { margin:0 auto .75rem; max-width:900px }
-
     .button { display:inline-block; background:#6b4e3d; color:#fff; padding:.55rem 1rem; border-radius:6px; text-decoration:none; font-weight:700; margin-right:.4rem; margin-top:.35rem }
     .button.alt { background:#a07b55 }
-
-    /* Slider */
-    .slider { position:relative; overflow:hidden; border-radius:10px; border:1px solid #e6dcc7; margin: .75rem auto }
+    .slider { position:relative; overflow:hidden; border-radius:10px; border:1px solid #e6dcc7; margin:.75rem auto }
     .slides { display:flex; transition:transform .35s ease; }
     .slide { min-width:100%; height:0; padding-bottom:56%; position:relative; background:#eee }
     .slide img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover }
@@ -34,16 +36,10 @@
     .dots { display:flex; gap:.35rem; justify-content:center; padding:.5rem 0 }
     .dot { width:10px; height:10px; border-radius:50%; background:#c9b89e; cursor:pointer }
     .dot.active { background:#6b4e3d }
-
-    /* Artisans grid */
     .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1rem; margin:1rem 0 }
     .card { background:#fff; border:1px solid #e6dcc7; border-radius:10px; padding:1rem; box-shadow:0 2px 6px rgba(0,0,0,.04) }
     .card h3 { margin:.25rem 0 .5rem 0 }
-
-    /* Apply form */
-    form input, form select, form textarea {
-      width:100%; padding:.6rem; border:1px solid #cbbba0; border-radius:6px; margin:.35rem 0; background:#fff;
-    }
+    form input, form select, form textarea { width:100%; padding:.6rem; border:1px solid #cbbba0; border-radius:6px; margin:.35rem 0; background:#fff; }
     form button { cursor:pointer }
     .help-banner {max-width:900px;margin:2rem auto;padding:1rem;border:2px solid #6b4e3d;background:#f8f3e7;border-radius:8px;text-align:center}
   </style>
@@ -70,17 +66,15 @@
     </nav>
   </header>
 
-  <!-- Hero + Slider -->
   <section class="container hero">
     <h1>KHPA Emporium</h1>
     <p>Shop Kingdom-friendly artisans and makers. Support the movement with Kingdom Wear, cultural goods, services, and more.</p>
 
     <div class="slider" id="rrSlider" aria-label="RastaRooster gallery">
       <div class="slides">
-        <!-- Update these image filenames to match your repo -->
-        <div class="slide"><img src="img/emporium/rastarooster-1.jpg" alt="RastaRooster Kingdom Wear 1"></div>
-        <div class="slide"><img src="img/emporium/rastarooster-2.jpg" alt="RastaRooster Kingdom Wear 2"></div>
-        <div class="slide"><img src="img/emporium/rastarooster-3.jpg" alt="RastaRooster Kingdom Wear 3"></div>
+        <div class="slide"><img src="img/Emporium/emporium_rastarooster_1.webp" alt="RastaRooster Kingdom Wear 1"></div>
+        <div class="slide"><img src="img/Emporium/emporium_rastarooster_2.webp" alt="RastaRooster Kingdom Wear 2"></div>
+        <div class="slide"><img src="img/Emporium/emporium_rastarooster_3.webp" alt="RastaRooster Kingdom Wear 3"></div>
       </div>
       <button class="prev" aria-label="Previous" onclick="slideMove(-1)">&larr;</button>
       <button class="next" aria-label="Next" onclick="slideMove(1)">&rarr;</button>
@@ -93,7 +87,6 @@
     </div>
   </section>
 
-  <!-- Artisans grid -->
   <main class="container">
     <section class="grid">
       <article class="card">
@@ -101,68 +94,46 @@
         <p>Kingdom Wear tees, apparel, and more. Proud to support Ko Hawaii Pae Aina. Etc.</p>
         <a class="button" href="https://rastarooster.com/collections/kingdom-wear" target="_blank" rel="noopener">Visit Shop</a>
       </article>
-
-      <!-- Add future artisans here as cards -->
       <article class="card">
         <h3>Coming Soon</h3>
         <p>More local artisans and services will be featured here. Apply below.</p>
       </article>
     </section>
 
-    <!-- Apply to Emporium -->
     <section id="apply" class="card" style="margin-top:1rem">
       <h2 style="margin-top:.25rem">Apply to Join the Emporium</h2>
       <p>Share your details and we will review. Mahalo.</p>
 
-      <!-- Uses your Merchandise License inbox to keep things simple -->
+      <!-- Uses your Merchandise License inbox -->
       <form action="https://formspree.io/f/manbkzpv" method="POST">
         <input type="hidden" name="form-type" value="emporium-application"/>
-
         <label>Artisan or Business Name</label>
         <input type="text" name="business-name" required>
-
         <label>Contact Name</label>
         <input type="text" name="contact-name" required>
-
         <label>Email</label>
         <input type="email" name="email" required>
-
         <label>Phone</label>
         <input type="tel" name="phone" required>
-
         <label>Website or Instagram</label>
         <input type="text" name="website">
-
         <label>Island</label>
         <select name="island" required>
           <option value="">Select Island</option>
           <option>Hawaii</option><option>Maui</option><option>Molokai</option><option>Oahu</option>
         </select>
-
         <label>Category</label>
         <select name="category" required>
           <option value="">Select Category</option>
-          <option>Merchandise</option>
-          <option>Service</option>
-          <option>Art</option>
-          <option>Food</option>
-          <option>Other</option>
+          <option>Merchandise</option><option>Service</option><option>Art</option><option>Food</option><option>Other</option>
         </select>
-
         <label>Short Bio</label>
         <textarea name="bio" rows="4" placeholder="Tell us about your craft, values, and products." required></textarea>
-
         <label>Products or Services (brief)</label>
         <textarea name="products" rows="3" placeholder="What do you offer? Shirts, jewelry, carving, printing, etc." required></textarea>
-
         <label>Portfolio or Upload Link (Drive, Dropbox, etc)</label>
         <input type="text" name="portfolio">
-
-        <label>
-          <input type="checkbox" name="affirm" required>
-          I affirm my offerings honor the community and aina and align with KHPA values.
-        </label>
-
+        <label><input type="checkbox" name="affirm" required> I affirm my offerings honor the community and aina and align with KHPA values.</label>
         <button class="button" type="submit">Submit Application</button>
       </form>
     </section>
@@ -178,7 +149,6 @@
   </footer>
 
   <script>
-    // Simple slider logic
     const slider = document.querySelector('#rrSlider .slides');
     const slides = document.querySelectorAll('#rrSlider .slide');
     const dotsWrap = document.getElementById('dots');
@@ -193,21 +163,16 @@
         dotsWrap.appendChild(d);
       });
     }
-
     function goTo(i){
       idx = (i + slides.length) % slides.length;
       slider.style.transform = 'translateX(' + (-idx * 100) + '%)';
       [...dotsWrap.children].forEach((d, j) => d.classList.toggle('active', j===idx));
     }
-
     function slideMove(dir){ goTo(idx + dir); }
 
-    // Init
     buildDots();
     goTo(0);
-
-    // Optional auto-play
-    // setInterval(()=>slideMove(1), 6000);
+    // setInterval(()=>slideMove(1), 6000); // optional auto-play
   </script>
 </body>
 </html>
