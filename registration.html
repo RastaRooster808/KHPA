@@ -1,191 +1,244 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Registration & Licensing | Ko Hawaii Pae Aina</title>
-  <link rel="stylesheet" href="css/style-formal.css" />
+  <title>Registration & Licensing | Ko Hawaiʻi Pae ʻĀina</title>
+  <link rel="stylesheet" href="css/style-formal.css"/>
   <style>
-    /* Minimal modal styles (kept inline so it works even if CSS is not updated) */
-    .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:9999;}
-    .modal{background:#fff;max-width:900px;width:95%;border-radius:8px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.4)}
-    .modal-header{display:flex;justify-content:space-between;align-items:center;padding:.75rem 1rem;background:#f7f2e6;border-bottom:1px solid #e0d8c5}
-    .modal-title{font-weight:bold}
-    .modal-close{background:none;border:none;font-size:1.2rem;cursor:pointer}
-    .modal-body{padding:0;height:70vh}
-    .modal-body iframe{width:100%;height:100%;border:0}
-    .form-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem;max-width:1100px;margin:2rem auto;padding:0 1rem}
-    .card{background:#fffdf8;border:1px solid #e6dcc7;border-radius:8px;padding:1rem;box-shadow:0 2px 8px rgba(0,0,0,.04)}
-    .card h3{margin:.25rem 0 1rem 0}
-    .button{display:inline-block;background:#6b4e3d;color:#fff;padding:.55rem 1rem;margin:.35rem 0;border-radius:6px;text-decoration:none;font-weight:600}
+    .wrap{max-width:1100px;margin:0 auto;padding:1rem}
+    header{text-align:center}
+    nav{display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap;margin:.5rem 0 1rem}
+    nav a{padding:.45rem .8rem;border-radius:6px;background:#6b4e3d;color:#fff;text-decoration:none;font-weight:600}
+    nav a:hover{opacity:.9}
+    .intro,.mahalo{background:#fffdf8;border:1px solid #e6dcc7;border-radius:10px;padding:1rem;margin:1rem 0}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem}
+    .card{background:#fff;border:1px solid #e6dcc7;border-radius:10px;padding:1rem;box-shadow:0 2px 6px rgba(0,0,0,.04)}
+    .card h3{margin:.2rem 0 .6rem;color:#5A2B0C}
+    .button{display:inline-block;background:#6b4e3d;color:#fff;padding:.5rem .9rem;border-radius:6px;text-decoration:none;font-weight:700}
     .button.alt{background:#a07b55}
-    .button:hover{opacity:.9}
-    form input, form select{width:100%;padding:.55rem;border:1px solid #cbbba0;border-radius:6px;margin:.35rem 0;background:#fff}
-    header, footer{text-align:center}
-    .intro{max-width:900px;margin:1rem auto;padding:0 1rem;text-align:center}
-    .help-banner{max-width:900px;margin:2rem auto;padding:1rem;border:2px solid #6b4e3d;background:#f8f3e7;border-radius:8px;text-align:center}
+    form input, form select, form textarea{width:100%;padding:.6rem;border:1px solid #cbbba0;border-radius:6px;margin:.35rem 0;background:#fff}
+    form button{background:#6b4e3d;color:#fff;border:none;padding:.55rem 1rem;border-radius:6px;font-weight:700;cursor:pointer}
+    form button:hover{opacity:.95}
+    .pdf-row{display:flex;gap:.5rem;flex-wrap:wrap;margin:.25rem 0 .6rem}
   </style>
 </head>
 <body>
-  <header>
-    <h1>Registration & Licensing</h1>
+  <!-- Fixed top banner (global) -->
+  <div class="sticky-banner" role="region" aria-label="Site actions">
+    <span>
+      Need help? <a href="mailto:KHPARELATIONSAFFAIRS@gmail.com">KHPARELATIONSAFFAIRS@gmail.com</a>
+      • <a href="tel:+18083333459">(808) 333-3459</a>
+    </span>
+    <div class="banner-actions">
+      <a class="btn" href="contact.html">Island Offices</a>
+      <a class="btn alt" href="history.html">Government Documents</a>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <img src="img/logo.png" alt="KHPA Coat of Arms" class="logo"/>
+    <h1 class="site-title">Registration & Licensing</h1>
     <nav>
       <a href="index.html">Home</a>
       <a href="contact.html">Island Offices</a>
       <a href="government-documents.html">Government Documents</a>
+      <a href="history.html">History</a>
+      <a href="emporium.html">Emporium</a>
     </nav>
   </header>
 
-  <section class="intro">
-    <h2>Register with Ko Hawaii Pae Aina</h2>
-    <p>Select the form you need below. Each card lets you preview the PDF, download it, and submit a simple online request to your island office.</p>
-  </section>
+  <main class="wrap">
+    <section class="intro">
+      <h2>Register with Ko Hawaiʻi Pae ʻĀina</h2>
+      <p>Select a form below. Each has a **Download PDF** and a **fillable form** that submits to the Kingdom team.
+         Submissions are reviewed by your island office.</p>
+    </section>
 
-  <section class="form-cards">
-    <!-- Motor Vehicle Operators Identification -->
-    <div class="card">
-      <h3>Motor Vehicle Operators Identification</h3>
-      <a class="button" href="#" onclick="openPreview('pdf/Motor_Vehicle_Operators_Identification_Cleaned_With_Seal.pdf','Motor Vehicle Operators Identification');return false;">Preview PDF</a>
-      <a class="button alt" href="pdf/Motor_Vehicle_Operators_Identification_Cleaned_With_Seal.pdf" download>Download PDF</a>
-      <form action="https://formspree.io/f/xdkdjvpy" method="POST">
-        <input type="text" name="full-name" placeholder="Full Legal Name" required>
-        <input type="text" name="birth-date" placeholder="Date of Birth (MM/DD/YYYY)" required>
-        <select name="island" required>
-          <option value="">Select Island</option>
-          <option>Hawaii</option><option>Maui</option><option>Molokai</option><option>Oahu</option>
-        </select>
-        <input type="text" name="address" placeholder="Address" required>
-        <input type="text" name="eye-color" placeholder="Eye Color" required>
-        <input type="text" name="hair-color" placeholder="Hair Color" required>
-        <input type="text" name="height" placeholder="Height (ft/in)" required>
-        <input type="text" name="weight" placeholder="Weight (lbs)" required>
-        <input type="text" name="sex" placeholder="Sex (Kane / Wahine)" required>
-        <button class="button" type="submit">Submit Form</button>
-      </form>
-    </div>
+    <section class="grid">
+      <!-- 1) Motor Vehicle Operators Identification -->
+      <article class="card">
+        <h3>Motor Vehicle Operators Identification</h3>
+        <div class="pdf-row">
+          <a class="button" href="pdf/Ko_Hawaii_Pae_Aina_Motor_Vehicle_Operators_Identification.pdf" download>Download PDF</a>
+        </div>
+        <form class="fs-form" action="https://formspree.io/f/xdkdjvpy" method="POST" data-next="mahalo.html#mv-operator">
+          <input type="hidden" name="form-name" value="Motor Vehicle Operators Identification"/>
+          <input type="hidden" name="_subject" value="KHPA — Motor Vehicle Operators Identification"/>
+          <input type="hidden" name="_autoresponse" value="Mahalo — we received your KHPA submission. An island representative will follow up shortly."/>
+          <input type="hidden" name="_captcha" value="false"/>
+          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off"/>
 
-    <!-- Merchandise License -->
-    <div class="card">
-      <h3>Merchandise License</h3>
-      <a class="button" href="#" onclick="openPreview('pdf/Merchandise_License_Cleaned_With_Seal.pdf','Merchandise License');return false;">Preview PDF</a>
-      <a class="button alt" href="pdf/Merchandise_License_Cleaned_With_Seal.pdf" download>Download PDF</a>
-      <form action="https://formspree.io/f/manbkzpv" method="POST">
-        <input type="text" name="full-name" placeholder="Business or Artisan Name" required>
-        <input type="text" name="product-type" placeholder="Type of Merchandise" required>
-        <input type="text" name="location" placeholder="Location of Sales or Services" required>
-        <button class="button" type="submit">Submit Form</button>
-      </form>
-    </div>
+          <input type="text"  name="full-name"   placeholder="Full Legal Name" required/>
+          <input type="text"  name="birth-date"  placeholder="Date of Birth (MM/DD/YYYY)" required/>
+          <select name="island" required>
+            <option value="">Select Island</option>
+            <option>Hawaiʻi</option><option>Maui</option><option>Molokaʻi</option><option>Oʻahu</option>
+          </select>
+          <input type="text"  name="address"     placeholder="Address" required/>
+          <input type="text"  name="eye-color"   placeholder="Eye Color" required/>
+          <input type="text"  name="hair-color"  placeholder="Hair Color" required/>
+          <input type="text"  name="height"      placeholder="Height (ft/in)" required/>
+          <input type="text"  name="weight"      placeholder="Weight (lbs)" required/>
+          <input type="text"  name="sex"         placeholder="Sex (Kāne / Wāhine)" required/>
+          <button type="submit">Submit Form</button>
+        </form>
+      </article>
 
-    <!-- Service License -->
-    <div class="card">
-      <h3>Service License</h3>
-      <a class="button" href="#" onclick="openPreview('pdf/Service_License_Cleaned_With_Seal.pdf','Service License');return false;">Preview PDF</a>
-      <a class="button alt" href="pdf/Service_License_Cleaned_With_Seal.pdf" download>Download PDF</a>
-      <form action="https://formspree.io/f/xzzvwqjn" method="POST">
-        <input type="text" name="full-name" placeholder="Service Provider Name" required>
-        <input type="text" name="service-type" placeholder="Service Description" required>
-        <input type="text" name="license-duration" placeholder="License Duration Requested" required>
-        <button class="button" type="submit">Submit Form</button>
-      </form>
-    </div>
+      <!-- 2) Merchandise License -->
+      <article class="card">
+        <h3>Merchandise License</h3>
+        <div class="pdf-row">
+          <a class="button" href="pdf/Merchandise_License.pdf" download>Download PDF</a>
+        </div>
+        <form class="fs-form" action="https://formspree.io/f/xdkdjvpy" method="POST" data-next="mahalo.html#merch">
+          <input type="hidden" name="form-name" value="Merchandise License"/>
+          <input type="hidden" name="_subject" value="KHPA — Merchandise License"/>
+          <input type="hidden" name="_autoresponse" value="Mahalo — we received your KHPA submission. An island representative will follow up shortly."/>
+          <input type="hidden" name="_captcha" value="false"/>
+          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off"/>
 
-    <!-- Safety Check -->
-    <div class="card">
-      <h3>Safety Check</h3>
-      <a class="button" href="#" onclick="openPreview('pdf/Safety_Check_Cleaned_With_Seal.pdf','Safety Check');return false;">Preview PDF</a>
-      <a class="button alt" href="pdf/Safety_Check_Cleaned_With_Seal.pdf" download>Download PDF</a>
-      <form action="https://formspree.io/f/xpwlneoq" method="POST">
-        <input type="text" name="vehicle-id" placeholder="Vehicle Identification Number (VIN)" required>
-        <input type="text" name="owner-name" placeholder="Owner Name" required>
-        <input type="text" name="check-location" placeholder="Inspection Location" required>
-        <button class="button" type="submit">Submit Form</button>
-      </form>
-    </div>
+          <input type="text" name="business-or-artisan" placeholder="Business or Artisan Name" required/>
+          <input type="text" name="product-type"        placeholder="Type of Merchandise" required/>
+          <input type="text" name="sales-location"      placeholder="Location of Sales or Services" required/>
+          <button type="submit">Submit Form</button>
+        </form>
+      </article>
 
-    <!-- Birth Certificate -->
-    <div class="card">
-      <h3>Birth Certificate</h3>
-      <a class="button" href="#" onclick="openPreview('pdf/Birth_Certificate_Cleaned_With_Seal.pdf','Birth Certificate');return false;">Preview PDF</a>
-      <a class="button alt" href="pdf/Birth_Certificate_Cleaned_With_Seal.pdf" download>Download PDF</a>
-      <form action="https://formspree.io/f/xvgqynva" method="POST">
-        <input type="text" name="child-name" placeholder="Full Name of Child" required>
-        <input type="text" name="birth-date" placeholder="Date of Birth" required>
-        <input type="text" name="parent-name" placeholder="Parent or Guardian Name" required>
-        <button class="button" type="submit">Submit Form</button>
-      </form>
-    </div>
+      <!-- 3) Service License -->
+      <article class="card">
+        <h3>Service License</h3>
+        <div class="pdf-row">
+          <a class="button" href="pdf/Service_License.pdf" download>Download PDF</a>
+        </div>
+        <form class="fs-form" action="https://formspree.io/f/xdkdjvpy" method="POST" data-next="mahalo.html#service">
+          <input type="hidden" name="form-name" value="Service License"/>
+          <input type="hidden" name="_subject" value="KHPA — Service License"/>
+          <input type="hidden" name="_autoresponse" value="Mahalo — we received your KHPA submission. An island representative will follow up shortly."/>
+          <input type="hidden" name="_captcha" value="false"/>
+          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off"/>
 
-    <!-- Passport -->
-    <div class="card">
-      <h3>Passport</h3>
-      <a class="button" href="#" onclick="openPreview('pdf/Passport_Cleaned_With_Seal.pdf','Passport');return false;">Preview PDF</a>
-      <a class="button alt" href="pdf/Passport_Cleaned_With_Seal.pdf" download>Download PDF</a>
-      <form action="https://formspree.io/f/xgvzqbpv" method="POST">
-        <input type="text" name="full-name" placeholder="Applicant Full Name" required>
-        <input type="text" name="birth-date" placeholder="Date of Birth" required>
-        <input type="text" name="island" placeholder="Island of Residence" required>
-        <button class="button" type="submit">Submit Form</button>
-      </form>
-    </div>
+          <input type="text" name="provider-name"     placeholder="Service Provider Name" required/>
+          <input type="text" name="service-type"      placeholder="Service Description" required/>
+          <input type="text" name="license-duration"  placeholder="License Duration Requested" required/>
+          <button type="submit">Submit Form</button>
+        </form>
+      </article>
 
-    <!-- Post Office Box (Postal Service) -->
-    <div class="card">
-      <h3>Post Office Box (Postal Service)</h3>
-      <a class="button" href="#" onclick="openPreview('pdf/Post_Office_Box_Postal_Service_Cleaned_With_Seal.pdf','Post Office Box (Postal Service)');return false;">Preview PDF</a>
-      <a class="button alt" href="pdf/Post_Office_Box_Postal_Service_Cleaned_With_Seal.pdf" download>Download PDF</a>
-      <form action="https://formspree.io/f/mblkbepa" method="POST">
-        <input type="text" name="applicant-name" placeholder="Applicant Name" required>
-        <input type="text" name="desired-box-location" placeholder="Preferred Postal Location" required>
-        <button class="button" type="submit">Submit Form</button>
-      </form>
-    </div>
-  </section>
+      <!-- 4) Safety Check -->
+      <article class="card">
+        <h3>Safety Check</h3>
+        <div class="pdf-row">
+          <a class="button" href="pdf/Safety_Check.pdf" download>Download PDF</a>
+        </div>
+        <form class="fs-form" action="https://formspree.io/f/xdkdjvpy" method="POST" data-next="mahalo.html#safety">
+          <input type="hidden" name="form-name" value="Safety Check"/>
+          <input type="hidden" name="_subject" value="KHPA — Safety Check"/>
+          <input type="hidden" name="_autoresponse" value="Mahalo — we received your KHPA submission. An island representative will follow up shortly."/>
+          <input type="hidden" name="_captcha" value="false"/>
+          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off"/>
 
-  <section class="help-banner">
-    <strong>Need help?</strong> Contact the Hawaii Island Office:
-    <br>Email: <a href="mailto:KHPARELATIONSAFFAIRS@gmail.com">KHPARELATIONSAFFAIRS@gmail.com</a> • Phone: (808) 333-3459
-  </section>
+          <input type="text" name="vin"           placeholder="Vehicle Identification Number (VIN)" required/>
+          <input type="text" name="owner-name"    placeholder="Owner Name" required/>
+          <input type="text" name="check-location"placeholder="Inspection Location" required/>
+          <button type="submit">Submit Form</button>
+        </form>
+      </article>
 
-  <footer>
-    <p>© 2025 Ko Hawaii Pae Aina</p>
+      <!-- 5) Birth Certificate -->
+      <article class="card">
+        <h3>Birth Certificate</h3>
+        <div class="pdf-row">
+          <a class="button" href="pdf/Birth_Certificate.pdf" download>Download PDF</a>
+        </div>
+        <form class="fs-form" action="https://formspree.io/f/xdkdjvpy" method="POST" data-next="mahalo.html#birth">
+          <input type="hidden" name="form-name" value="Birth Certificate"/>
+          <input type="hidden" name="_subject" value="KHPA — Birth Certificate"/>
+          <input type="hidden" name="_autoresponse" value="Mahalo — we received your KHPA submission. An island representative will follow up shortly."/>
+          <input type="hidden" name="_captcha" value="false"/>
+          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off"/>
+
+          <input type="text" name="child-name" placeholder="Full Name of Child" required/>
+          <input type="text" name="birth-date" placeholder="Date of Birth (MM/DD/YYYY)" required/>
+          <input type="text" name="parent-name" placeholder="Parent or Guardian Name" required/>
+          <button type="submit">Submit Form</button>
+        </form>
+      </article>
+
+      <!-- 6) Passport -->
+      <article class="card">
+        <h3>Passport</h3>
+        <div class="pdf-row">
+          <a class="button" href="pdf/Passport.pdf" download>Download PDF</a>
+        </div>
+        <form class="fs-form" action="https://formspree.io/f/xdkdjvpy" method="POST" data-next="mahalo.html#passport">
+          <input type="hidden" name="form-name" value="Passport"/>
+          <input type="hidden" name="_subject" value="KHPA — Passport"/>
+          <input type="hidden" name="_autoresponse" value="Mahalo — we received your KHPA submission. An island representative will follow up shortly."/>
+          <input type="hidden" name="_captcha" value="false"/>
+          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off"/>
+
+          <input type="text" name="full-name"  placeholder="Applicant Full Name" required/>
+          <input type="text" name="birth-date" placeholder="Date of Birth (MM/DD/YYYY)" required/>
+          <input type="text" name="island"     placeholder="Island of Residence" required/>
+          <button type="submit">Submit Form</button>
+        </form>
+      </article>
+
+      <!-- 7) Post Office Box (Postal Service) -->
+      <article class="card">
+        <h3>Post Office Box (Postal Service)</h3>
+        <div class="pdf-row">
+          <a class="button" href="pdf/Post_Office_Box_(Postal_Service).pdf" download>Download PDF</a>
+        </div>
+        <form class="fs-form" action="https://formspree.io/f/xdkdjvpy" method="POST" data-next="mahalo.html#pobox">
+          <input type="hidden" name="form-name" value="Post Office Box (Postal Service)"/>
+          <input type="hidden" name="_subject" value="KHPA — Post Office Box (Postal Service)"/>
+          <input type="hidden" name="_autoresponse" value="Mahalo — we received your KHPA submission. An island representative will follow up shortly."/>
+          <input type="hidden" name="_captcha" value="false"/>
+          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off"/>
+
+          <input type="text" name="applicant-name"       placeholder="Applicant Name" required/>
+          <input type="text" name="desired-box-location" placeholder="Preferred Postal Location" required/>
+          <button type="submit">Submit Form</button>
+        </form>
+      </article>
+    </section>
+
+    <section class="mahalo">
+      <h2>Mahalo nui loa 🌺</h2>
+      <p>Your submission will be reviewed by your island office. For urgent help, email
+        <a href="mailto:KHPARELATIONSAFFAIRS@gmail.com">KHPARELATIONSAFFAIRS@gmail.com</a> or call
+        <a href="tel:+18083333459">(808) 333-3459</a>.
+      </p>
+    </section>
+  </main>
+
+  <footer style="text-align:center;margin:2rem 0 1rem">
+    <p>© 2025 Ko Hawaiʻi Pae ʻĀina</p>
   </footer>
 
-  <!-- Modal -->
-  <div id="pdfModal" class="modal-overlay" role="dialog" aria-modal="true" aria-label="PDF Preview">
-    <div class="modal">
-      <div class="modal-header">
-        <div class="modal-title" id="modalTitle">Preview</div>
-        <button class="modal-close" onclick="closePreview()" aria-label="Close preview">✕</button>
-      </div>
-      <div class="modal-body">
-        <iframe id="pdfFrame" src="" title="PDF preview"></iframe>
-      </div>
-    </div>
-  </div>
-
+  <!-- One JS fallback for ALL forms -->
   <script>
-    function openPreview(src, title){
-      const modal = document.getElementById('pdfModal');
-      const frame = document.getElementById('pdfFrame');
-      const header = document.getElementById('modalTitle');
-      header.textContent = title || 'Preview';
-      frame.src = src;
-      modal.style.display = 'flex';
-    }
-    function closePreview(){
-      const modal = document.getElementById('pdfModal');
-      const frame = document.getElementById('pdfFrame');
-      frame.src = '';
-      modal.style.display = 'none';
-    }
-    // Close modal on overlay click or Esc
-    document.getElementById('pdfModal').addEventListener('click', function(e){
-      if(e.target === this) closePreview();
-    });
-    document.addEventListener('keydown', function(e){
-      if(e.key === 'Escape') closePreview();
-    });
+    (function(){
+      const forms = document.querySelectorAll('.fs-form');
+      forms.forEach(form => {
+        form.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const fd = new FormData(form);
+          const next = form.dataset.next || 'mahalo.html';
+          try {
+            await fetch(form.action, { method: 'POST', body: fd, mode: 'no-cors' });
+            window.location.href = next;
+          } catch (err) {
+            // Fallback to mailto
+            const esc = encodeURIComponent;
+            const body = Array.from(fd.entries()).map(([k,v]) => `${k}: ${v}`).join('%0A');
+            window.location.href = `mailto:KHPARELATIONSAFFAIRS@gmail.com?subject=${esc('KHPA Form Fallback')}&body=${body}`;
+          }
+        });
+      });
+    })();
   </script>
 </body>
 </html>
