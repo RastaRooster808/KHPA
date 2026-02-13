@@ -1,0 +1,13 @@
+:root{
+  --navy:#0a1c33;
+  --navy-2:#112c52;
+  --gold:#c9a227;
+  --gold-soft:#e6d7a3;
+  --ink:#1c2430;
+  --muted:#5c6673;
+  --line:#d7dbe2;
+  --panel:#f7f6f2;
+  --link:#0b4da2;
+  --max: 1160px;
+  --pad: 18px;
+}
