@@ -11,3 +11,8 @@
   --max: 1160px;
   --pad: 18px;
 }
+.section-divider{
+  height:4px;
+  background:var(--gold);
+  margin:6px 0 18px 0;
+}
