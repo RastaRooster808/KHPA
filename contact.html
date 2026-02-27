@@ -3,169 +3,128 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Island Offices | Ko Hawaiʻi Pae ʻĀina</title>
+  <title>Island Offices | Ko Hawai&#699;i Pae &#699;Aina</title>
   <link rel="stylesheet" href="css/style-formal.css" />
-  <style>
-    .wrap{max-width:1100px;margin:0 auto;padding:1rem}
-    .logo{width:110px;margin:12px auto 6px;display:block}
-    header h1{text-align:center;margin:.25rem 0;color:#5A2B0C}
-    nav{display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap;margin:.5rem 0 1.25rem}
-    nav a{padding:.45rem .8rem;border-radius:6px;background:#6b4e3d;color:#fff;text-decoration:none;font-weight:600}
-    nav a:hover{opacity:.9}
-
-    .hero{background:#fffdf8;border:1px solid #e6dcc7;border-radius:10px;padding:1rem;margin-bottom:1rem}
-    .hero h2{margin:.2rem 0 .5rem;color:#5A2B0C}
-
-    /* Assistance box */
-    .assist{background:#ffffff;border:2px solid #6b4e3d;border-radius:12px;padding:1rem;margin:1rem 0}
-    .assist h3{margin:.2rem 0 .6rem;color:#5A2B0C}
-    .assist p{margin:.25rem 0 .75rem}
-    .assist form{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:.65rem}
-    .assist input, .assist select, .assist textarea{
-      width:100%;padding:.65rem;border:1px solid #cbbba0;border-radius:8px;background:#fff;
-      font-size:1rem
-    }
-    .assist button{
-      grid-column:1/-1;justify-self:start;background:#6b4e3d;color:#fff;border:none;
-      padding:.6rem 1rem;border-radius:8px;font-weight:700;cursor:pointer
-    }
-    .assist button:hover{opacity:.95}
-
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin-top:1rem}
-    .card{background:#fff;border:1px solid #e6dcc7;border-radius:10px;padding:1rem;box-shadow:0 2px 6px rgba(0,0,0,.04)}
-    .card h3{margin:.2rem 0 .4rem}
-    .meta{margin:.25rem 0 .6rem;color:#5a2b0c}
-    .ctas a{display:inline-block;margin-right:.5rem;margin-top:.25rem;padding:.4rem .7rem;border-radius:6px;text-decoration:none;font-weight:700}
-    .btn{background:#6b4e3d;color:#fff}
-    .btn.alt{background:#a07b55;color:#fff}
-    .soon{background:#f8f3e7;border:1px dashed #c9b89e;border-radius:8px;padding:.6rem;margin-top:.5rem}
-    footer{margin:2rem 0 1rem;text-align:center}
-  </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <img class="logo" src="img/logo.png" alt="Ko Hawaiʻi Pae ʻĀina Coat of Arms" />
-      <h1>Island Offices</h1>
-      <nav>
-        <a href="index.html">Home</a>
-        <a href="registration.html">Registration & Licensing</a>
-        <a href="government-documents.html">Government Documents</a>
-        <a href="history.html">History</a>
-        <a href="emporium.html">Emporium</a>
-        <a href="contact.html" aria-current="page">Island Offices</a>
-      </nav>
-    </header>
 
-    <section class="hero">
-      <h2>The Power of the People</h2>
-      <p>
-        Our strength is our people. Across every island, families and communities carry the
-        <em>kuleana</em> to care for one another and to <strong>mālama</strong> the ʻāina.
-        This page connects you to the island offices that serve you. Stand together. Act with dignity.
-        Build our future.
-      </p>
-      <p style="margin:.4rem 0 0;">
-        <strong>Unity of the Pae ʻĀina:</strong> One identity, many islands — with a shared purpose:
-        protection, service, and lawful self-determination.
-      </p>
-    </section>
-
-    <!-- DIRECT-ASSISTANCE BOX -->
-    <section class="assist" aria-labelledby="assist-title">
-      <h3 id="assist-title">Need Direct Assistance?</h3>
-      <p>Complete this short form and our team will reach out. Submissions are forwarded to
-        <strong>KHPARELATIONSAFFAIRS@gmail.com</strong>.</p>
-
-      <!-- Email forwarding for static sites.
-           To switch to Formspree later, replace the action with your Formspree endpoint. -->
-      <form action="https://formsubmit.co/KHPARELATIONSAFFAIRS@gmail.com" method="POST">
-        <!-- FormSubmit options -->
-        <input type="hidden" name="_subject" value="KHPA — Contact Request (Island Offices)" />
-        <input type="hidden" name="_template" value="table" />
-        <input type="hidden" name="_captcha" value="false" />
-        <input type="hidden" name="_next" value="mahalo.html" />
-
-        <input type="text" name="first-name" placeholder="First Name" required />
-        <input type="text" name="last-name" placeholder="Last Name" required />
-        <input type="email" name="email" placeholder="Email" required />
-        <input type="tel" name="phone" placeholder="Phone" required />
-
-        <select name="island">
-          <option value="">Select Island (optional)</option>
-          <option>Hawaiʻi</option>
-          <option>Maui</option>
-          <option>Molokaʻi</option>
-          <option>Oʻahu</option>
-          <option>Kauaʻi</option>
-          <option>Lānaʻi</option>
-          <option>Niʻihau</option>
-        </select>
-
-        <textarea name="message" rows="3" placeholder="How can we help? (optional)"></textarea>
-
-        <!-- Honeypot -->
-        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off"/>
-
-        <button type="submit">Send Request</button>
-      </form>
-    </section>
-
-    <!-- Offices -->
-    <main class="grid">
-
-      <!-- Hawaiʻi (Big Island) -->
-      <article id="hawaii" class="card">
-        <h3>Hawaiʻi — Moku o Keawe (Big Island)</h3>
-        <p class="meta"><strong>Primary Office</strong></p>
-        <p style="margin:.25rem 0;">
-          <strong>Email:</strong>
-          <a href="mailto:KHPARELATIONSAFFAIRS@gmail.com">KHPARELATIONSAFFAIRS@gmail.com</a><br/>
-          <strong>Phone:</strong>
-          <a href="tel:+18083333459">(808) 333-3459</a><br/>
-          <strong>Address:</strong> 159 Keawe St unit 15, H ilo, Hawaiʻi Fri: 10:00
-        </p>
-        <div class="ctas">
-          <a class="btn" href="mailto:KHPARELATIONSAFFAIRS@gmail.com">Email Office</a>
-          <a class="btn alt" href="tel:+18083333459">Call</a>
-        </div>
-      </article>
-
-      <!-- Maui -->
-      <article id="maui" class="card">
-        <h3>Maui</h3>
-        <p class="soon">
-          Office information coming soon. Until then, please contact the Hawaiʻi Island Office at
-          <a href="mailto:KHPARELATIONSAFFAIRS@gmail.com">KHPARELATIONSAFFAIRS@gmail.com</a>
-          or <a href="tel:+18083333459">(808) 333-3459</a>.
-        </p>
-      </article>
-
-      <!-- Molokaʻi -->
-      <article id="molokai" class="card">
-        <h3>Molokaʻi</h3>
-        <p class="soon">
-          Office information coming soon. Until then, please contact the Hawaiʻi Island Office at
-          <a href="mailto:KHPARELATIONSAFFAIRS@gmail.com">KHPARELATIONSAFFAIRS@gmail.com</a>
-          or <a href="tel:+18083333459">(808) 333-3459</a>.
-        </p>
-      </article>
-
-      <!-- Oʻahu -->
-      <article id="oahu" class="card">
-        <h3>Oʻahu</h3>
-        <p class="soon">
-          Office information coming soon. Until then, please contact the Hawaiʻi Island Office at
-          <a href="mailto:KHPARELATIONSAFFAIRS@gmail.com">KHPARELATIONSAFFAIRS@gmail.com</a>
-          or <a href="tel:+18083333459">(808) 333-3459</a>.
-        </p>
-      </article>
-
-    </main>
-
-    <footer>
-      <p>© 2025 Ko Hawaiʻi Pae ʻĀina</p>
-    </footer>
+  <!-- Fixed assistance bar -->
+  <div class="topbar">
+    <div class="container">
+      <div class="help">
+        Assistance: <a href="mailto:KHPARELATIONSAFFAIRS@gmail.com">KHPARELATIONSAFFAIRS@gmail.com</a> |
+        <a href="tel:+18083333459">(808) 333-3459</a>
+      </div>
+      <div class="actions">
+        <a class="btn" href="index.html">Home</a>
+        <a class="btn primary" href="registration.html">Registration and Licensing</a>
+      </div>
+    </div>
   </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="row">
+        <img src="img/logo.png" alt="Seal" />
+        <div>
+          <h1>Island Offices</h1>
+          <p>Contact information and assistance.</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="container">
+      <a href="index.html">Home</a>
+
+      <div class="dropdown">
+        <a class="active" href="contact.html">Island Offices</a>
+        <div class="dropdown-menu">
+          <a href="#hawaii">Hawai&#699;i (Big Island)</a>
+          <a href="#oahu">O&#699;ahu</a>
+          <a href="#maui">Maui (Coming Soon)</a>
+          <a href="#molokai">Moloka&#699;i (Coming Soon)</a>
+        </div>
+      </div>
+
+      <a href="government-documents.html">Government Documents</a>
+      <a href="registration.html">Registration and Licensing</a>
+      <a href="history.html">History</a>
+      <a href="emporium.html">Emporium</a>
+    </div>
+  </nav>
+
+  <main class="container">
+
+    <section class="card">
+      <h2>The Power of the People</h2>
+      <p class="meta">
+        Our strength is our people. Across every island, families and communities carry the kuleana to care for one another and for the land.
+        This page connects you to the island offices that serve you. Stand together. Act with dignity. Build our future.
+      </p>
+      <p class="meta">
+        Unity of the Pae &#699;Aina: One identity, many islands — with a shared purpose: protection, service, and lawful self-determination.
+        <strong>M&#257;lama</strong> is most important: to care for the land, the people, and one another with steadiness and respect.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Direct Assistance</h2>
+      <p class="meta">
+        If you need help with forms, documents, or next steps, contact the assistance line below.
+      </p>
+      <div class="grid">
+        <div class="card" style="margin:0;">
+          <h3>Assistance Contact</h3>
+          <p class="meta" style="margin-bottom:8px;">
+            <strong>Email:</strong> <a href="mailto:KHPARELATIONSAFFAIRS@gmail.com">KHPARELATIONSAFFAIRS@gmail.com</a><br/>
+            <strong>Phone:</strong> <a href="tel:+18083333459">(808) 333-3459</a>
+          </p>
+          <p class="meta" style="margin:0;">
+            Messages are routed through the Island Offices for follow-up.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="hawaii" class="card">
+      <h2>Hawai&#699;i (Big Island) Office</h2>
+      <p class="meta">
+        <strong>Address:</strong> 157 Keawe St, Hilo, Hawai&#699;i<br/>
+        <strong>Office Hours:</strong> 10:00 AM – 12:00 PM<br/>
+        <strong>Email:</strong> <a href="mailto:KHPARELATIONSAFFAIRS@gmail.com">KHPARELATIONSAFFAIRS@gmail.com</a><br/>
+        <strong>Phone:</strong> <a href="tel:+18083333459">(808) 333-3459</a>
+      </p>
+    </section>
+
+    <section id="oahu" class="card">
+      <h2>O&#699;ahu Office</h2>
+      <p class="meta">
+        <strong>Mailing:</strong> Box 23055 Makiki Station, O&#699;ahu<br/>
+        <strong>Status:</strong> Additional details coming soon.
+      </p>
+    </section>
+
+    <section id="maui" class="card">
+      <h2>Maui Office</h2>
+      <p class="meta">Coming soon.</p>
+    </section>
+
+    <section id="molokai" class="card">
+      <h2>Moloka&#699;i Office</h2>
+      <p class="meta">Coming soon.</p>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      © 2025 Ko Hawai&#699;i Pae &#699;Aina
+    </div>
+  </footer>
+
 </body>
 </html>
