@@ -130,7 +130,43 @@
     });
     document.addEventListener('keydown', function(e){
       if(e.key === 'Escape') closePreview();
-    });
+ <section id="emporium" class="container section" style="margin-top:2rem;">
+  <h2 style="text-align:center;">KHPA Emporium</h2>
+  <p style="text-align:center; max-width:900px; margin:0 auto 1rem;">
+    The Emporium is a product of Ko Hawaiʻi Pae ʻĀina — a place to uplift artisans, services, and makers.
+    Support the movement by supporting the people. Etc.
+  </p>
+
+  <div class="grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;">
+    <!-- RastaRooster (Artisan 1) -->
+    <article class="card" style="background:#fff;border:1px solid #e6dcc7;border-radius:10px;padding:1rem;box-shadow:0 2px 6px rgba(0,0,0,.04);">
+      <img src="img/Emporium/emporium_rastarooster_1.webp" alt="RastaRooster Kingdom Wear"
+           style="width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:8px;border:1px solid #e6dcc7;">
+      <h3 style="margin:.6rem 0 .3rem;">RastaRooster</h3>
+      <p style="margin:.2rem 0 .8rem;">
+        Kingdom Wear collection and cultural apparel. Proud to support Ko Hawaiʻi Pae ʻĀina.
+      </p>
+      <a class="button" href="https://rastarooster.com/collections/kingdom-wear" target="_blank" rel="noopener">
+        Visit RastaRooster
+      </a>
+    </article>
+
+    <!-- Placeholder / Coming Soon -->
+    <article class="card" style="background:#fff;border:1px solid #e6dcc7;border-radius:10px;padding:1rem;box-shadow:0 2px 6px rgba(0,0,0,.04);">
+      <img src="img/Emporium/emporium_rastarooster_2.webp" alt="More artisans coming soon"
+           style="width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:8px;border:1px solid #e6dcc7;">
+      <h3 style="margin:.6rem 0 .3rem;">More Artisans Coming Soon</h3>
+      <p style="margin:.2rem 0 .8rem;">
+        Apply to be featured in the Emporium. Share your work, your values, and your offerings. Etc.
+      </p>
+      <a class="button alt" href="emporium.html#apply">Apply to Emporium</a>
+    </article>
+  </div>
+
+  <div style="text-align:center; margin-top:1rem;">
+    <a class="button alt" href="emporium.html">Open Emporium Page</a>
+  </div>
+</section>   });
   </script>
 </body>
 </html>
