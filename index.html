@@ -1,172 +1,119 @@
-
-</div><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>KHPA.io</title>
+  <title>Ko Hawai&#699;i Pae &#699;Aina</title>
   <link rel="stylesheet" href="css/style-formal.css" />
-  <style>
-    /* keep a few essentials inline so drag-n-drop works instantly */
-    header, footer { text-align:center }
-    nav { display:flex; gap:.75rem; justify-content:center; flex-wrap:wrap; margin: .5rem 0 1rem }
-    nav a { text-decoration:none; padding:.5rem .9rem; border-radius:6px; background:#6b4e3d; color:#fff; font-weight:600 }
-    nav a:hover { opacity:.9 }
-    .dropdown { position:relative }
-    .dropdown > a { background:#a07b55 }
-    .dropdown-content { display:none; position:absolute; top:110%; left:0; background:#fff; border:1px solid #e0d8c5; border-radius:6px; min-width:200px; z-index:99 }
-    .dropdown-content a { display:block; color:#5a2b0c; background:#fffdf8; margin:0; border-radius:0; text-align:left }
-    .dropdown:hover .dropdown-content { display:block }
-    .container { max-width:1100px; margin:0 auto; padding:0 1rem }
-    .hero { text-align:center; margin:1rem auto 2rem }
-    .hero img { width:100%; max-width:980px; border:1px solid #e0d8c5; border-radius:8px }
-    .section { background:#fffdf8; border:1px solid #e6dcc7; border-radius:10px; padding:1.25rem; margin:1.25rem auto }
-    .buttons { text-align:center; margin-top:1rem }
-    .button { display:inline-block; background:#6b4e3d; color:#fff; padding:.6rem 1.1rem; border-radius:6px; text-decoration:none; font-weight:700; margin:.25rem }
-    .button.alt { background:#a07b55 }
-    .help-banner{max-width:900px;margin:2rem auto;padding:1rem;border:2px solid #6b4e3d;background:#f8f3e7;border-radius:8px;text-align:center}
-    /* PDF modal */
-    .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:9999;}
-    .modal{background:#fff;max-width:900px;width:95%;border-radius:8px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.4)}
-    .modal-header{display:flex;justify-content:space-between;align-items:center;padding:.75rem 1rem;background:#f7f2e6;border-bottom:1px solid #e0d8c5}
-    .modal-title{font-weight:bold}
-    .modal-close{background:none;border:none;font-size:1.2rem;cursor:pointer}
-    .modal-body{padding:0;height:70vh}
-    .modal-body iframe{width:100%;height:100%;border:0}
-  </style>
 </head>
 <body>
-  <header class="container">
-    <img src="img/logo.png" alt="KHPA Logo" style="width:120px; margin-top:10px;" />
-    <h1 style="margin:.3rem 0 0 0; color:#5A2B0C;">Ko Hawaii Pae Aina</h1>
-    <p style="margin:.25rem 0 1rem 0; color:#6B4E3D;">Aloha, Welcome to our Country & the official website of K.H.P.A</p>
 
-    <nav>
-      <a href="index.html">Home</a>
-      <div class="dropdown">
-        <a href="contact.html">Island Offices</a>
-        <div class="dropdown-content">
-          <a href="contact.html#hawaii">Hawaii (Big Island)</a>
-          <a href="contact.html#maui">Maui</a>
-          <a href="contact.html#molokai">Molokai</a>
-          <a href="contact.html#oahu">Oahu</a>
+  <!-- Fixed assistance bar -->
+  <div class="topbar">
+    <div class="container">
+      <div class="help">
+        Assistance: <a href="mailto:KHPARELATIONSAFFAIRS@gmail.com">KHPARELATIONSAFFAIRS@gmail.com</a> |
+        <a href="tel:+18083333459">(808) 333-3459</a>
+      </div>
+      <div class="actions">
+        <a class="btn" href="contact.html">Island Offices</a>
+        <a class="btn primary" href="registration.html">Registration and Licensing</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="row">
+        <img src="img/logo.png" alt="Seal" />
+        <div>
+          <h1>Ko Hawai&#699;i Pae &#699;Aina</h1>
+          <p>Official Portal</p>
         </div>
       </div>
-      <a href="registration.html">Registration & Licensing</a>
-      <a href="government-documents.html">Government Documents</a>
-      <a href="history.html">History</a>
-      <a href="index.html#emporium">Emporium</a>
-      <a href="contact.thtml">Contact</a>
-    </nav>
+    </div>
   </header>
 
-  <!-- Map banner -->
-  <section class="container hero">
-    <h2>Map of the Kingdom</h2>
-    <img src="img/island-map.jpg" alt="Hawaiian Islands Map">
-  </section>
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="container">
+      <a class="active" href="index.html">Home</a>
 
-  <!-- Proclamation -->
-  <section class="container section" id="kk3">
-    <h2 style="text-align:center;">Kamehameha III Proclamation</h2>
-    <p style="text-align:center; max-width:850px; margin:0 auto 1rem;">
-      Struggle. Strength. Peace. This declaration affirms neutrality among nations and protection of the people.
-    </p>
-    <div class="buttons">
-      <a class="button" href="#" onclick="openPreview('pdf/KK3_Declaration.pdf','Kamehameha III Proclamation');return false;">Preview PDF</a>
-      <a class="button alt" href="pdf/KK3_Declaration.pdf" download>Download PDF</a>
+      <div class="dropdown">
+        <a href="contact.html">Island Offices</a>
+        <div class="dropdown-menu">
+          <!-- Only Big Island for now -->
+          <a href="contact.html#hawaii">Hawai&#699;i (Big Island) — (808) 333-3459</a>
+        </div>
+      </div>
+
+      <a href="government-documents.html">Government Documents</a>
+      <a href="registration.html">Registration and Licensing</a>
+      <a href="history.html">History</a>
+      <a href="emporium.html">Emporium</a>
     </div>
-    <img src="img/kk3_proclamation_scroll_style.jpeg" alt="Kamehameha III Proclamation Scroll" style="display:block; margin:1rem auto 0; width:100%; max-width:800px; border:2px solid #9a0000; border-radius:8px;">
-  </section>
+  </nav>
 
-  <!-- Quick actions -->
-  <section class="container section" style="text-align:center">
-    <h2>Get Started</h2>
-    <div class="buttons">
-      <a class="button" href="registration.html">Start Registration</a>
-      <a class="button alt" href="government-documents.html">View Government Documents</a>
+  <main class="container">
+
+    <section class="card">
+      <h2>Map of the Kingdom</h2>
+      <p class="meta">Reference map of the Hawaiian archipelago.</p>
+      <img class="hero-img" src="img/island-map.jpg" alt="Map of the Hawaiian Islands" />
+    </section>
+
+    <section class="card">
+      <h2>Proclamation of King Kamehameha III</h2>
+      <p class="meta">Featured declaration. Download the PDF below.</p>
+      <img class="hero-img" src="img/kk3_proclamation_scroll_style.jpeg" alt="Kamehameha III Proclamation" />
+      <p style="margin-top:12px;">
+        <a class="btn primary" href="pdf/KK3_Declaration.pdf" target="_blank" rel="noopener">Download Proclamation (PDF)</a>
+      </p>
+    </section>
+
+    <!-- Booklet + HawaiianKingdom.net preview section -->
+    <section class="card">
+      <h2>Hawai&#699;i — Our Story, Our Future</h2>
+      <p class="meta">
+        Official reference booklet. View the preview and download the booklet. External reference is available at HawaiianKingdom.net.
+      </p>
+
+      <div class="grid">
+        <div class="card" style="margin:0;">
+          <h3>Honorable Leon Siu Kaulahao (Minister of Foreign Affairs)</h3>
+          <img class="hero-img" src="img/img_leon-siu-minister.png" alt="Honorable Leon Siu Kaulahao" />
+          <p style="margin-top:10px;">
+            <a class="btn" href="https://hawaiiankingdom.net" target="_blank" rel="noopener">Visit HawaiianKingdom.net</a>
+          </p>
+        </div>
+
+        <div class="card" style="margin:0;">
+          <h3>Booklet Preview</h3>
+          <a href="pdf/Hawaii_Our_Story_Our_Future_2025.pdf" target="_blank" rel="noopener">
+            <img class="hero-img" src="img/img_booklet-preview.png" alt="Booklet preview image" />
+          </a>
+          <p style="margin-top:10px;">
+            <a class="btn primary" href="pdf/Hawaii_Our_Story_Our_Future_2025.pdf" target="_blank" rel="noopener">Download Booklet (PDF)</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Emporium stays on homepage as requested -->
+    <section class="card">
+      <h2>Emporium</h2>
+      <p class="meta">The Emporium is a product of Ko Hawai&#699;i Pae &#699;Aina. Featured artisans and offerings are available via the Emporium page.</p>
+      <a class="btn primary" href="emporium.html">Open Emporium</a>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      © 2025 Ko Hawai&#699;i Pae &#699;Aina
     </div>
-  </section>
-
-  <section class="help-banner">
-    <strong>Need help?</strong> Contact the Hawaii Island Office:
-    <br>Email: <a href="mailto:KHPARELATIONSAFFAIRS@gmail.com">KHPARELATIONSAFFAIRS@gmail.com</a> • Phone: (808) 333-3459
-  </section>
-
-  <footer>
-    <p>© 2025 Ko Hawaii Pae Aina</p>
   </footer>
 
-  <!-- PDF Modal -->
-  <div id="pdfModal" class="modal-overlay" role="dialog" aria-modal="true" aria-label="PDF Preview">
-    <div class="modal">
-      <div class="modal-header">
-        <div class="modal-title" id="modalTitle">Preview</div>
-        <button class="modal-close" onclick="closePreview()" aria-label="Close preview">✕</button>
-      </div>
-      <div class="modal-body">
-        <iframe id="pdfFrame" src="" title="PDF preview"></iframe>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    function openPreview(src, title){
-      const modal = document.getElementById('pdfModal');
-      const frame = document.getElementById('pdfFrame');
-      const header = document.getElementById('modalTitle');
-      header.textContent = title || 'Preview';
-      frame.src = src;
-      modal.style.display = 'flex';
-    }
-    function closePreview(){
-      const modal = document.getElementById('pdfModal');
-      const frame = document.getElementById('pdfFrame');
-      frame.src = '';
-      modal.style.display = 'none';
-    }
-    document.getElementById('pdfModal').addEventListener('click', function(e){
-      if(e.target === this) closePreview();
-    });
-    document.addEventListener('keydown', function(e){
-      if(e.key === 'Escape') closePreview();
- <section id="emporium" class="container section" style="margin-top:2rem;">
-  <h2 style="text-align:center;">KHPA Emporium</h2>
-  <p style="text-align:center; max-width:900px; margin:0 auto 1rem;">
-    The Emporium is a product of Ko Hawaiʻi Pae ʻĀina — a place to uplift artisans, services, and makers.
-    Support the movement by supporting the people. Etc.
-  </p>
-
-  <div class="grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;">
-    <!-- RastaRooster (Artisan 1) -->
-    <article class="card" style="background:#fff;border:1px solid #e6dcc7;border-radius:10px;padding:1rem;box-shadow:0 2px 6px rgba(0,0,0,.04);">
-      <img src="img/Emporium/emporium_rastarooster_1.webp" alt="RastaRooster Kingdom Wear"
-           style="width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:8px;border:1px solid #e6dcc7;">
-      <h3 style="margin:.6rem 0 .3rem;">RastaRooster</h3>
-      <p style="margin:.2rem 0 .8rem;">
-        Kingdom Wear collection and cultural apparel. Proud to support Ko Hawaiʻi Pae ʻĀina.
-      </p>
-      <a class="button" href="https://rastarooster.com/collections/kingdom-wear" target="_blank" rel="noopener">
-        Visit RastaRooster
-      </a>
-    </article>
-
-    <!-- Placeholder / Coming Soon -->
-    <article class="card" style="background:#fff;border:1px solid #e6dcc7;border-radius:10px;padding:1rem;box-shadow:0 2px 6px rgba(0,0,0,.04);">
-      <img src="img/Emporium/emporium_rastarooster_2.webp" alt="More artisans coming soon"
-           style="width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:8px;border:1px solid #e6dcc7;">
-      <h3 style="margin:.6rem 0 .3rem;">More Artisans Coming Soon</h3>
-      <p style="margin:.2rem 0 .8rem;">
-        Apply to be featured in the Emporium. Share your work, your values, and your offerings. Etc.
-      </p>
-      <a class="button alt" href="emporium.html#apply">Apply to Emporium</a>
-    </article>
-  </div>
-
-  <div style="text-align:center; margin-top:1rem;">
-    <a class="button alt" href="emporium.html">Open Emporium Page</a>
-  </div>
-</section>   });
-  </script>
 </body>
 </html>
