@@ -2,423 +2,239 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Registration and Licensing | Ko Hawaii Pae Aina</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Registration and Licensing | Ko Hawai&#699;i Pae &#699;Aina</title>
   <link rel="stylesheet" href="css/style-formal.css" />
 </head>
-
 <body>
-  <!-- Sticky header -->
-  <header class="site-header">
-    <div class="header-inner">
-      <a class="brand" href="index.html" aria-label="Ko Hawaii Pae Aina Home">
-        <img src="img/logo.png" alt="Ko Hawaii Pae Aina Seal" class="brand-logo" />
-        <div class="brand-text">
-          <div class="brand-title">Ko Hawaii Pae Aina</div>
-          <div class="brand-subtitle">Registration and Licensing</div>
-        </div>
-      </a>
 
-      <nav class="top-nav" aria-label="Primary">
-        <a href="index.html">Home</a>
-        <a href="contact.html">Island Offices</a>
-        <a href="government-documents.html">Government Documents</a>
-        <a href="history.html">History</a>
-        <a href="emporium.html">Emporium</a>
-      </nav>
+  <!-- Fixed assistance bar -->
+  <div class="topbar">
+    <div class="container topbar-row">
+      <div class="help">
+        Assistance:
+        <a href="mailto:KHPARELATIONSAFFAIRS@gmail.com">KHPARELATIONSAFFAIRS@gmail.com</a>
+        <span class="sep">|</span>
+        <a href="tel:+18083333459">(808) 333-3459</a>
+        <span class="sep">|</span>
+        Hilo Office Hours: 10:00 AM – 12:00 PM
+      </div>
+      <div class="actions">
+        <a class="btn" href="index.html">Home</a>
+        <a class="btn" href="contact.html">Island Offices</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="header">
+    <div class="container header-row">
+      <img class="seal" src="img/logo.png" alt="Ko Hawai&#699;i Pae &#699;Aina Seal" />
+      <div>
+        <h1>Registration and Licensing</h1>
+        <p class="subtitle">Submit an online form or download the official Portable Document Format for submission.</p>
+      </div>
     </div>
   </header>
 
-  <main class="page">
-    <section class="page-intro">
-      <h1>Registration and Licensing</h1>
-      <p class="muted">
-        Select the form you need below. Each item includes a downloadable PDF and an online submission form.
+  <nav class="nav">
+    <div class="container nav-row">
+      <a href="index.html">Home</a>
+      <a href="government-documents.html">Government Documents</a>
+      <a class="active" href="registration.html">Registration and Licensing</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </nav>
+
+  <main class="container">
+
+    <section class="panel">
+      <h2>Choose a Form</h2>
+      <p class="meta">
+        Each item below includes an online submission and a downloadable Portable Document Format version.
         Submissions are reviewed by your island office.
       </p>
     </section>
 
-    <!-- HELP BANNER -->
-    <section class="help-banner" aria-label="Help banner">
-      <div class="help-left">
-        <strong>Need help?</strong>
-        <div class="muted">For questions or assistance with submissions, contact the Hawaii (Big Island) office.</div>
+    <!-- Motor Vehicle Operators Identification -->
+    <section class="form-card" id="motor-vehicle-operators-identification">
+      <div class="form-card-head">
+        <h3>Ko Hawai&#699;i Pae &#699;Aina Motor Vehicle Operators Identification</h3>
+        <div class="form-card-actions">
+          <a class="btn" href="pdf/Motor_Vehicle_Operators_Identification_Cleaned_With_Seal.pdf" target="_blank" rel="noopener">Download Portable Document Format</a>
+        </div>
       </div>
-      <div class="help-right">
-        <a class="help-pill" href="mailto:khparelationsaffairs@gmail.com">khparelationsaffairs@gmail.com</a>
-        <a class="help-pill" href="tel:+18083333459">(808) 333-3459</a>
-      </div>
+
+      <form action="https://formspree.io/f/xdkdjvpy" method="POST" class="form-grid">
+        <input name="full_legal_name" type="text" placeholder="Full Legal Name" required />
+        <input name="date_of_birth" type="text" placeholder="Date of Birth (Month/Day/Year)" required />
+        <select name="island" required>
+          <option value="">Select Island</option>
+          <option>Hawai&#699;i</option>
+          <option>Maui</option>
+          <option>Moloka&#699;i</option>
+          <option>O&#699;ahu</option>
+        </select>
+
+        <input name="address" type="text" placeholder="Mailing Address" required />
+        <input name="eye_color" type="text" placeholder="Eye Color" required />
+        <input name="hair_color" type="text" placeholder="Hair Color" required />
+
+        <input name="height" type="text" placeholder="Height (feet/inches)" required />
+        <input name="weight" type="text" placeholder="Weight (pounds)" required />
+
+        <select name="sex" required>
+          <option value="">Sex</option>
+          <option>K&#257;ne</option>
+          <option>W&#257;hine</option>
+        </select>
+
+        <div class="full">
+          <label class="check">
+            <input type="checkbox" name="affirmation" required />
+            I certify the information submitted is true and correct.
+          </label>
+        </div>
+
+        <div class="full">
+          <button class="btn primary" type="submit">Submit Form</button>
+        </div>
+      </form>
     </section>
 
-    <!-- Cards -->
-    <section class="cards" aria-label="Registration and licensing forms">
+    <!-- Merchandise License -->
+    <section class="form-card" id="merchandise-license">
+      <div class="form-card-head">
+        <h3>Merchandise License</h3>
+        <div class="form-card-actions">
+          <a class="btn" href="pdf/Merchandise_License_Cleaned_With_Seal.pdf" target="_blank" rel="noopener">Download Portable Document Format</a>
+        </div>
+      </div>
 
-      <!-- Motor Vehicle Operators Identification -->
-      <article class="card" id="motor-vehicle-operators-identification">
-        <header class="card-head">
-          <h2>Ko Hawaii Pae Aina Motor Vehicle Operators Identification</h2>
-          <p class="muted">Apply for motor vehicle operators identification.</p>
+      <form action="https://formspree.io/f/manbkzpv" method="POST" class="form-grid">
+        <input name="business_or_artisan_name" type="text" placeholder="Business or Artisan Name" required />
+        <input name="type_of_merchandise" type="text" placeholder="Type of Merchandise" required />
+        <input name="location_of_sales" type="text" placeholder="Location of Sales" required />
 
-          <div class="actions">
-            <a class="btn btn-outline" href="pdf/Ko_Hawaii_Pae_Aina_Motor_Vehicle_Operators_Identification.pdf" download>
-              Download PDF
-            </a>
-            <button class="btn" type="button"
-              data-preview="pdf/Ko_Hawaii_Pae_Aina_Motor_Vehicle_Operators_Identification.pdf"
-              data-title="Motor Vehicle Operators Identification (PDF)">
-              Preview PDF
-            </button>
-          </div>
-        </header>
-
-        <form class="form" action="https://formspree.io/f/xdkdjvpy" method="POST">
-          <div class="grid">
-            <label>
-              Full legal name
-              <input name="full_legal_name" type="text" required />
-            </label>
-
-            <label>
-              Date of birth (MM/DD/YYYY)
-              <input name="date_of_birth" type="text" placeholder="MM/DD/YYYY" required />
-            </label>
-
-            <label>
-              Island
-              <select name="island" required>
-                <option value="">Select island</option>
-                <option>Hawaii (Big Island)</option>
-                <option>Maui</option>
-                <option>Molokai</option>
-                <option>Oahu</option>
-              </select>
-            </label>
-
-            <label class="span-2">
-              Address
-              <input name="address" type="text" required />
-            </label>
-
-            <label>
-              Eye color
-              <input name="eye_color" type="text" required />
-            </label>
-
-            <label>
-              Hair color
-              <input name="hair_color" type="text" required />
-            </label>
-
-            <label>
-              Height (feet/inches)
-              <input name="height" type="text" placeholder="e.g., 5 ft 10 in" required />
-            </label>
-
-            <label>
-              Weight (pounds)
-              <input name="weight" type="text" placeholder="e.g., 175" required />
-            </label>
-
-            <label>
-              Sex (Kane or Wahine)
-              <select name="sex" required>
-                <option value="">Select</option>
-                <option>Kane</option>
-                <option>Wahine</option>
-              </select>
-            </label>
-          </div>
-
-          <div class="form-footer">
-            <button class="btn" type="submit">Submit form</button>
-            <p class="muted small">
-              Submissions are sent securely to your office email system via Formspree.
-            </p>
-          </div>
-        </form>
-      </article>
-
-      <!-- Merchandise License -->
-      <article class="card" id="merchandise-license">
-        <header class="card-head">
-          <h2>Merchandise License</h2>
-          <p class="muted">Apply for a merchandise license.</p>
-
-          <div class="actions">
-            <a class="btn btn-outline" href="pdf/Merchandise_License.pdf" download>Download PDF</a>
-            <button class="btn" type="button"
-              data-preview="pdf/Merchandise_License.pdf"
-              data-title="Merchandise License (PDF)">
-              Preview PDF
-            </button>
-          </div>
-        </header>
-
-        <form class="form" action="https://formspree.io/f/manbkzpv" method="POST">
-          <div class="grid">
-            <label>
-              Business or artisan name
-              <input name="business_or_artisan_name" type="text" required />
-            </label>
-
-            <label>
-              Type of merchandise
-              <input name="type_of_merchandise" type="text" required />
-            </label>
-
-            <label class="span-2">
-              Location of sales
-              <input name="location_of_sales" type="text" required />
-            </label>
-          </div>
-
-          <div class="form-footer">
-            <button class="btn" type="submit">Submit form</button>
-          </div>
-        </form>
-      </article>
-
-      <!-- Service License -->
-      <article class="card" id="service-license">
-        <header class="card-head">
-          <h2>Service License</h2>
-          <p class="muted">Apply for a service license.</p>
-
-          <div class="actions">
-            <a class="btn btn-outline" href="pdf/Service_License.pdf" download>Download PDF</a>
-            <button class="btn" type="button"
-              data-preview="pdf/Service_License.pdf"
-              data-title="Service License (PDF)">
-              Preview PDF
-            </button>
-          </div>
-        </header>
-
-        <form class="form" action="https://formspree.io/f/xzzvwqjn" method="POST">
-          <div class="grid">
-            <label>
-              Service provider name
-              <input name="service_provider_name" type="text" required />
-            </label>
-
-            <label>
-              Service description
-              <input name="service_description" type="text" required />
-            </label>
-
-            <label class="span-2">
-              License duration requested
-              <input name="license_duration_requested" type="text" required />
-            </label>
-          </div>
-
-          <div class="form-footer">
-            <button class="btn" type="submit">Submit form</button>
-          </div>
-        </form>
-      </article>
-
-      <!-- Safety Check -->
-      <article class="card" id="safety-check">
-        <header class="card-head">
-          <h2>Safety Check</h2>
-          <p class="muted">Submit safety check information.</p>
-
-          <div class="actions">
-            <a class="btn btn-outline" href="pdf/Safety_Check.pdf" download>Download PDF</a>
-            <button class="btn" type="button"
-              data-preview="pdf/Safety_Check.pdf"
-              data-title="Safety Check (PDF)">
-              Preview PDF
-            </button>
-          </div>
-        </header>
-
-        <form class="form" action="https://formspree.io/f/xpwlneoq" method="POST">
-          <div class="grid">
-            <label>
-              Vehicle identification number
-              <input name="vehicle_identification_number" type="text" required />
-            </label>
-
-            <label>
-              Owner name
-              <input name="owner_name" type="text" required />
-            </label>
-
-            <label class="span-2">
-              Inspection location
-              <input name="inspection_location" type="text" required />
-            </label>
-          </div>
-
-          <div class="form-footer">
-            <button class="btn" type="submit">Submit form</button>
-          </div>
-        </form>
-      </article>
-
-      <!-- Birth Certificate -->
-      <article class="card" id="birth-certificate">
-        <header class="card-head">
-          <h2>Birth Certificate</h2>
-          <p class="muted">Submit birth certificate request information.</p>
-
-          <div class="actions">
-            <a class="btn btn-outline" href="pdf/Birth_Certificate.pdf" download>Download PDF</a>
-            <button class="btn" type="button"
-              data-preview="pdf/Birth_Certificate.pdf"
-              data-title="Birth Certificate (PDF)">
-              Preview PDF
-            </button>
-          </div>
-        </header>
-
-        <form class="form" action="https://formspree.io/f/xvgqynva" method="POST">
-          <div class="grid">
-            <label>
-              Full name of child
-              <input name="full_name_of_child" type="text" required />
-            </label>
-
-            <label>
-              Date of birth
-              <input name="date_of_birth" type="text" required />
-            </label>
-
-            <label class="span-2">
-              Parent or guardian name
-              <input name="parent_or_guardian_name" type="text" required />
-            </label>
-          </div>
-
-          <div class="form-footer">
-            <button class="btn" type="submit">Submit form</button>
-          </div>
-        </form>
-      </article>
-
-      <!-- Passport -->
-      <article class="card" id="passport">
-        <header class="card-head">
-          <h2>Passport</h2>
-          <p class="muted">Submit passport request information.</p>
-
-          <div class="actions">
-            <a class="btn btn-outline" href="pdf/Passport.pdf" download>Download PDF</a>
-            <button class="btn" type="button"
-              data-preview="pdf/Passport.pdf"
-              data-title="Passport (PDF)">
-              Preview PDF
-            </button>
-          </div>
-        </header>
-
-        <form class="form" action="https://formspree.io/f/xgvzqbpv" method="POST">
-          <div class="grid">
-            <label>
-              Applicant full name
-              <input name="applicant_full_name" type="text" required />
-            </label>
-
-            <label>
-              Date of birth
-              <input name="date_of_birth" type="text" required />
-            </label>
-
-            <label class="span-2">
-              Island of residence
-              <input name="island_of_residence" type="text" required />
-            </label>
-          </div>
-
-          <div class="form-footer">
-            <button class="btn" type="submit">Submit form</button>
-          </div>
-        </form>
-      </article>
-
-      <!-- Post Office Box Postal Service -->
-      <article class="card" id="post-office-box">
-        <header class="card-head">
-          <h2>Post Office Box (Postal Service)</h2>
-          <p class="muted">Request a post office box service.</p>
-
-          <div class="actions">
-            <a class="btn btn-outline" href="pdf/Post_Office_Box_(Postal_Service).pdf" download>Download PDF</a>
-            <button class="btn" type="button"
-              data-preview="pdf/Post_Office_Box_(Postal_Service).pdf"
-              data-title="Post Office Box (Postal Service) (PDF)">
-              Preview PDF
-            </button>
-          </div>
-        </header>
-
-        <form class="form" action="https://formspree.io/f/mblkbepa" method="POST">
-          <div class="grid">
-            <label>
-              Applicant name
-              <input name="applicant_name" type="text" required />
-            </label>
-
-            <label class="span-2">
-              Preferred postal location
-              <input name="preferred_postal_location" type="text" required />
-            </label>
-          </div>
-
-          <div class="form-footer">
-            <button class="btn" type="submit">Submit form</button>
-          </div>
-        </form>
-      </article>
-
+        <div class="full">
+          <button class="btn primary" type="submit">Submit Form</button>
+        </div>
+      </form>
     </section>
+
+    <!-- Service License -->
+    <section class="form-card" id="service-license">
+      <div class="form-card-head">
+        <h3>Service License</h3>
+        <div class="form-card-actions">
+          <a class="btn" href="pdf/Service_License_Cleaned_With_Seal.pdf" target="_blank" rel="noopener">Download Portable Document Format</a>
+        </div>
+      </div>
+
+      <form action="https://formspree.io/f/xzzvwqjn" method="POST" class="form-grid">
+        <input name="service_provider_name" type="text" placeholder="Service Provider Name" required />
+        <input name="service_description" type="text" placeholder="Service Description" required />
+        <input name="license_duration_requested" type="text" placeholder="License Duration Requested" required />
+
+        <div class="full">
+          <button class="btn primary" type="submit">Submit Form</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Safety Check -->
+    <section class="form-card" id="safety-check">
+      <div class="form-card-head">
+        <h3>Safety Check</h3>
+        <div class="form-card-actions">
+          <a class="btn" href="pdf/Safety_Check.pdf" target="_blank" rel="noopener">Download Portable Document Format</a>
+        </div>
+      </div>
+
+      <form action="https://formspree.io/f/xpwlneoq" method="POST" class="form-grid">
+        <input name="vehicle_identification_number" type="text" placeholder="Vehicle Identification Number" required />
+        <input name="owner_name" type="text" placeholder="Owner Name" required />
+        <input name="inspection_location" type="text" placeholder="Inspection Location" required />
+
+        <div class="full">
+          <button class="btn primary" type="submit">Submit Form</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Birth Certificate -->
+    <section class="form-card" id="birth-certificate">
+      <div class="form-card-head">
+        <h3>Birth Certificate</h3>
+        <div class="form-card-actions">
+          <a class="btn" href="pdf/Birth_Certificate.pdf" target="_blank" rel="noopener">Download Portable Document Format</a>
+        </div>
+      </div>
+
+      <form action="https://formspree.io/f/xvgqynva" method="POST" class="form-grid">
+        <input name="full_name_of_child" type="text" placeholder="Full Name of Child" required />
+        <input name="date_of_birth" type="text" placeholder="Date of Birth (Month/Day/Year)" required />
+        <input name="parent_or_guardian_name" type="text" placeholder="Parent or Guardian Name" required />
+
+        <div class="full">
+          <button class="btn primary" type="submit">Submit Form</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Passport -->
+    <section class="form-card" id="passport">
+      <div class="form-card-head">
+        <h3>Passport</h3>
+        <div class="form-card-actions">
+          <a class="btn" href="pdf/Passport_Cleaned_With_Seal.pdf" target="_blank" rel="noopener">Download Portable Document Format</a>
+        </div>
+      </div>
+
+      <form action="https://formspree.io/f/xgvzqbpv" method="POST" class="form-grid">
+        <input name="applicant_full_name" type="text" placeholder="Applicant Full Name" required />
+        <input name="date_of_birth" type="text" placeholder="Date of Birth (Month/Day/Year)" required />
+        <input name="island_of_residence" type="text" placeholder="Island of Residence" required />
+
+        <div class="full">
+          <button class="btn primary" type="submit">Submit Form</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Post Office Box Postal Service -->
+    <section class="form-card" id="post-office-box-postal-service">
+      <div class="form-card-head">
+        <h3>Post Office Box (Postal Service)</h3>
+        <div class="form-card-actions">
+          <a class="btn" href="pdf/Post_Office_Box_(Postal_Service).pdf" target="_blank" rel="noopener">Download Portable Document Format</a>
+        </div>
+      </div>
+
+      <form action="https://formspree.io/f/mblkbepa" method="POST" class="form-grid">
+        <input name="applicant_name" type="text" placeholder="Applicant Name" required />
+        <input name="preferred_postal_location" type="text" placeholder="Preferred Postal Location" required />
+
+        <div class="full">
+          <button class="btn primary" type="submit">Submit Form</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="panel">
+      <h2>Mahalo nui loa</h2>
+      <p class="meta">
+        Your submission will be delivered to the appropriate office for review. You will be contacted with next steps.
+      </p>
+    </section>
+
   </main>
 
-  <!-- PDF Preview Modal -->
-  <div class="modal" id="pdfModal" aria-hidden="true" role="dialog" aria-label="PDF Preview">
-    <div class="modal-backdrop" data-close></div>
-    <div class="modal-panel" role="document">
-      <div class="modal-bar">
-        <div class="modal-title" id="modalTitle">PDF Preview</div>
-        <button class="modal-close" type="button" data-close aria-label="Close">Close</button>
-      </div>
-      <iframe id="modalFrame" title="PDF preview frame" loading="lazy"></iframe>
+  <footer class="footer">
+    <div class="container">
+      <strong>Ko Hawai&#699;i Pae &#699;Aina</strong><br/>
+      © 2025 • All rights reserved.
     </div>
-  </div>
+  </footer>
 
-  <script>
-    const modal = document.getElementById('pdfModal');
-    const frame = document.getElementById('modalFrame');
-    const titleEl = document.getElementById('modalTitle');
-
-    function openModal(pdfUrl, titleText) {
-      frame.src = pdfUrl;
-      titleEl.textContent = titleText || 'PDF Preview';
-      modal.setAttribute('aria-hidden', 'false');
-      document.body.classList.add('modal-open');
-    }
-
-    function closeModal() {
-      frame.src = '';
-      modal.setAttribute('aria-hidden', 'true');
-      document.body.classList.remove('modal-open');
-    }
-
-    document.querySelectorAll('[data-preview]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        openModal(btn.getAttribute('data-preview'), btn.getAttribute('data-title'));
-      });
-    });
-
-    modal.addEventListener('click', (e) => {
-      if (e.target.matches('[data-close]')) closeModal();
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && modal.getAttribute('aria-hidden') === 'false') closeModal();
-    });
-  </script>
 </body>
 </html>
