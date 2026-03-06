@@ -4,63 +4,85 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title data-title-en="KHPA — Registration & Licensing" data-title-haw="KHPA — Kākau & Laikini">KHPA — Registration & Licensing</title>
+
+  <!-- Use the same formal stylesheet used by your other pages -->
+  <link rel="stylesheet" href="/css/style-formal.css" />
 </head>
 
 <body>
 
-  <!-- KHPA Header (Home + Nav + Language Toggle) -->
-  <header class="khpa-header" role="banner">
-    <div class="khpa-header__inner">
+  <!-- Fixed assistance bar (matches your formal pages) -->
+  <div class="topbar">
+    <div class="container">
+      <div class="help">
+        Assistance: <a href="mailto:KHPARELATIONSAFFAIRS@gmail.com">KHPARELATIONSAFFAIRS@gmail.com</a> |
+        <a href="tel:+18083333459">(808) 333-3459</a>
+      </div>
 
-      <a class="khpa-home" href="/index.html" aria-label="Home">
-        <span class="khpa-home__crest" aria-hidden="true">KHPA</span>
+      <div class="actions">
+        <a class="btn" href="/contact.html" data-lang-ui="en">Island Offices</a>
+        <a class="btn" href="/contact.html" data-lang-ui="haw" style="display:none;">Nā Keʻena Mokupuni</a>
 
-        <span class="khpa-home__text">
-          <!-- EN -->
-          <span class="khpa-home__title" data-lang-ui="en">Ko Hawaiʻi Pae ʻĀina</span>
-          <span class="khpa-home__sub" data-lang-ui="en">Kingdom Services Portal</span>
+        <button class="btn primary" id="langToggle" type="button" aria-label="Toggle language">
+          ʻŌlelo Hawaiʻi
+        </button>
+      </div>
+    </div>
+  </div>
 
-          <!-- HAW -->
-          <span class="khpa-home__title" data-lang-ui="haw" style="display:none;">Ko Hawaiʻi Pae ʻĀina</span>
-          <span class="khpa-home__sub" data-lang-ui="haw" style="display:none;">Puka Lawelawe o ke Aupuni</span>
-        </span>
-      </a>
+  <!-- Header (matches formal pages) -->
+  <header class="header">
+    <div class="container">
+      <div class="row">
+        <!-- IMPORTANT: logo.png is your Coat of Arms on khpa.io -->
+        <img src="/img/logo.png" alt="Kingdom Coat of Arms" />
+        <div>
+          <h1 data-lang="en">Registration &amp; Licensing</h1>
+          <p data-lang="en">Pre-check forms and submission instructions.</p>
 
-      <nav class="khpa-nav" aria-label="Primary">
-        <!-- ENGLISH NAV -->
-        <a class="khpa-nav__link" data-lang-ui="en" href="/index.html">Home</a>
-        <a class="khpa-nav__link" data-lang-ui="en" href="/government-documents.html">Government Documents</a>
-        <a class="khpa-nav__link is-active" data-lang-ui="en" href="/registration.html">Registration &amp; Licensing</a>
-        <a class="khpa-nav__link" data-lang-ui="en" href="/emporium">Emporium</a>
-        <a class="khpa-nav__link" data-lang-ui="en" href="/contact.html">Contact</a>
-
-        <!-- HAWAIIAN NAV -->
-        <a class="khpa-nav__link" data-lang-ui="haw" style="display:none;" href="/index.html">Ka Home</a>
-        <a class="khpa-nav__link" data-lang-ui="haw" style="display:none;" href="/government-documents.html">Nā Palapala Aupuni</a>
-        <a class="khpa-nav__link is-active" data-lang-ui="haw" style="display:none;" href="/registration.html">Kākau &amp; Laikini</a>
-        <a class="khpa-nav__link" data-lang-ui="haw" style="display:none;" href="/emporium">Hale Kūʻai</a>
-        <a class="khpa-nav__link" data-lang-ui="haw" style="display:none;" href="/contact.html">Kāhea</a>
-      </nav>
-
-      <div class="khpa-lang" role="navigation" aria-label="Language Toggle">
-        <button class="khpa-lang__btn is-active" type="button" data-lang="en" aria-pressed="true">English</button>
-        <button class="khpa-lang__btn" type="button" data-lang="haw" aria-pressed="false">ʻŌlelo Hawaiʻi</button>
+          <h1 data-lang="haw" style="display:none;">Kākau &amp; Laikini</h1>
+          <p data-lang="haw" style="display:none;">Nā pepa mua-nānā a me nā kuhikuhi waiho.</p>
+        </div>
       </div>
     </div>
   </header>
 
-  <main class="page" id="main">
+  <!-- Nav (matches formal pages; bilingual) -->
+  <nav class="nav">
+    <div class="container">
+      <a href="/index.html" data-lang="en">Home</a>
+      <a href="/index.html" data-lang="haw" style="display:none;">Ka Home</a>
 
-    <!-- ENGLISH (visible by default) -->
-    <section data-lang-section="en">
-      <h1>Registration &amp; Licensing</h1>
+      <a href="/contact.html" data-lang="en">Island Offices</a>
+      <a href="/contact.html" data-lang="haw" style="display:none;">Nā Keʻena Mokupuni</a>
 
-      <div class="notice">
+      <a href="/government-documents.html" data-lang="en">Government Documents</a>
+      <a href="/government-documents.html" data-lang="haw" style="display:none;">Nā Palapala Aupuni</a>
+
+      <a class="active" href="/registration.html" data-lang="en">Registration and Licensing</a>
+      <a class="active" href="/registration.html" data-lang="haw" style="display:none;">Kākau &#699;Ana a me ka Laikini</a>
+
+      <a href="/history.html" data-lang="en">History</a>
+      <a href="/history.html" data-lang="haw" style="display:none;">Moʻolelo</a>
+
+      <a href="/emporium.html" data-lang="en">Emporium</a>
+      <a href="/emporium.html" data-lang="haw" style="display:none;">Hale Kū&#699;ai</a>
+    </div>
+  </nav>
+
+  <main class="container">
+
+    <!-- ENGLISH -->
+    <section class="card" data-lang="en">
+      <h2>Pre-Check Notice</h2>
+      <p class="meta">Forms are provided for pre-information only.</p>
+
+      <div class="notice-box">
         <p><strong>Pre-Check Notice:</strong> The forms listed below are provided as <strong>pre-information / pre-check forms only</strong>. Online submission through this website is not available.</p>
         <p><strong>Submission &amp; Processing:</strong> Applications shall be <strong>submitted and processed through KHPA</strong>. Applicants must <strong>call the office</strong> or <strong>visit in person during operating hours</strong> for instructions and processing.</p>
       </div>
 
-      <h2>Forms (PDF)</h2>
+      <h2 style="margin-top:18px;">Forms (PDF)</h2>
       <ul class="formlist">
         <li>
           <a href="/img/APPLICATION%20FOR%20CHB_71125.pdf" target="_blank" rel="noopener">
@@ -82,16 +104,17 @@
       <p class="foot"><strong>Office:</strong> Call or visit during operating hours for submission requirements and next steps.</p>
     </section>
 
-    <!-- ʻŌLELO HAWAIʻI (hidden until toggled) -->
-    <section data-lang-section="haw" hidden>
-      <h1>Kākau &amp; Laikini</h1>
+    <!-- HAWAIIAN -->
+    <section class="card" data-lang="haw" style="display:none;">
+      <h2>Hoʻolaha Mua-Nānā</h2>
+      <p class="meta">Hāʻawi ʻia nā pepa no ka mua-ʻike wale nō.</p>
 
-      <div class="notice">
+      <div class="notice-box">
         <p><strong>Hoʻolaha Mua-Nānā:</strong> Hāʻawi ʻia nā pepa ma lalo nei no ka <strong>mua-ʻike / mua-nānā wale nō</strong>. ʻAʻole hiki ke waiho noi ma o kēia pūnaewele.</p>
         <p><strong>Waiho &amp; Hoʻoponopono:</strong> <strong>E waiho</strong> a <strong>e hoʻoponopono</strong> ʻia nā noi ma o ka <strong>KHPA</strong>. Pono ka mea noi e <strong>kelepona i ke keʻena</strong> a i ʻole <strong>kipa kino i ka wā hana</strong> no nā kuhikuhi a me ka hoʻoponopono ʻana.</p>
       </div>
 
-      <h2>Nā Pepa (PDF)</h2>
+      <h2 style="margin-top:18px;">Nā Pepa (PDF)</h2>
       <ul class="formlist">
         <li>
           <a href="/img/APPLICATION%20FOR%20CHB_71125.pdf" target="_blank" rel="noopener">
@@ -115,159 +138,62 @@
 
   </main>
 
+  <footer class="footer">
+    <div class="container">© 2025 Ko Hawai&#699;i Pae &#699;Aina</div>
+  </footer>
+
+  <!-- Local page helpers (keeps formal style but adds the notice look) -->
   <style>
-    /* ===== Header ===== */
-    .khpa-header{
-      position: sticky; top: 0; z-index: 50;
-      background: #fff;
-      border-bottom: 1px solid rgba(0,0,0,.12);
-    }
-    .khpa-header__inner{
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 12px 16px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-    .khpa-home{
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-      color: inherit;
-      border: 1px solid rgba(0,0,0,.14);
-      border-radius: 14px;
-      padding: 10px 12px;
-      background: #fff;
-    }
-    .khpa-home__crest{
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 44px; height: 44px;
-      border-radius: 12px;
-      border: 1px solid rgba(0,0,0,.18);
-      font-weight: 800;
-      letter-spacing: .6px;
-    }
-    .khpa-home__text{ display: grid; line-height: 1.1; }
-    .khpa-home__title{ font-weight: 800; }
-    .khpa-home__sub{ font-size: .86rem; opacity: .8; margin-top: 3px; }
-
-    .khpa-nav{
-      display: flex;
-      gap: 10px;
-      flex: 1 1 auto;
-      min-width: 240px;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: center;
-    }
-    .khpa-nav__link{
-      text-decoration: none;
-      color: inherit;
-      padding: 10px 12px;
-      border-radius: 12px;
-      border: 1px solid transparent;
-      opacity: .9;
-      white-space: nowrap;
-    }
-    .khpa-nav__link:hover{
-      border-color: rgba(0,0,0,.14);
-      background: rgba(0,0,0,.03);
-      opacity: 1;
-    }
-    .khpa-nav__link.is-active{
-      border-color: rgba(0,0,0,.28);
-      font-weight: 800;
-      opacity: 1;
-    }
-
-    .khpa-lang{ display: inline-flex; gap: 8px; margin-left: auto; }
-    .khpa-lang__btn{
-      border: 1px solid rgba(0,0,0,.18);
-      border-radius: 12px;
-      padding: 10px 12px;
-      background: #fff;
-      cursor: pointer;
-      font-weight: 600;
-    }
-    .khpa-lang__btn.is-active{
-      border-color: rgba(0,0,0,.42);
-      font-weight: 800;
-    }
-
-    /* ===== Page ===== */
-    .page{ max-width: 900px; margin: 0 auto; padding: 26px 16px; line-height: 1.65; }
-    h1{ margin: 0 0 14px; font-size: 2rem; }
-    h2{ margin: 20px 0 10px; font-size: 1.15rem; }
-    a{ text-decoration: underline; }
-
-    .notice{
+    .notice-box{
       border: 1px solid rgba(0,0,0,.14);
       border-radius: 14px;
       padding: 14px 14px;
       background: rgba(0,0,0,.02);
     }
-    .notice p{ margin: 8px 0; }
+    .notice-box p{ margin: 8px 0; }
 
     .formlist{ margin: 10px 0 0 18px; }
     .formlist li{ margin: 10px 0; }
 
     .foot{ margin-top: 18px; opacity: .95; }
-
-    @media (max-width: 760px){
-      .khpa-header__inner{ justify-content: center; }
-      .khpa-lang{ width: 100%; justify-content: center; margin-left: 0; }
-    }
   </style>
 
   <script>
     (function () {
-      const buttons = document.querySelectorAll(".khpa-lang__btn");
-      const sections = document.querySelectorAll("[data-lang-section]");
-      const ui = document.querySelectorAll("[data-lang-ui]");
-      const titleEl = document.querySelector("title");
+      const btn = document.getElementById('langToggle');
+      const KEY = 'khpa_lang';
+      let lang = 'en';
+      try { lang = localStorage.getItem(KEY) || 'en'; } catch(e) {}
 
-      function setLang(lang) {
-        // Main page sections
-        sections.forEach(sec => {
-          sec.hidden = (sec.getAttribute("data-lang-section") !== lang);
+      function applyLang(next) {
+        lang = next;
+        try { localStorage.setItem(KEY, lang); } catch(e) {}
+
+        // swap content blocks
+        document.querySelectorAll('[data-lang="en"]').forEach(el => {
+          el.style.display = (lang === 'en') ? '' : 'none';
+        });
+        document.querySelectorAll('[data-lang="haw"]').forEach(el => {
+          el.style.display = (lang === 'haw') ? '' : 'none';
         });
 
-        // Header/UI pieces
-        ui.forEach(el => {
-          el.style.display = (el.getAttribute("data-lang-ui") === lang) ? "" : "none";
-        });
+        // swap topbar button label
+        btn.textContent = (lang === 'en') ? 'ʻŌlelo Hawaiʻi' : 'English';
 
-        // Buttons
-        buttons.forEach(btn => {
-          const on = btn.getAttribute("data-lang") === lang;
-          btn.classList.toggle("is-active", on);
-          btn.setAttribute("aria-pressed", String(on));
-        });
+        // set html lang
+        document.documentElement.setAttribute('lang', (lang === 'haw') ? 'haw' : 'en');
 
-        // Persist
-        try { localStorage.setItem("khpa_lang", lang); } catch(e) {}
-
-        // Document lang
-        document.documentElement.setAttribute("lang", lang === "haw" ? "haw" : "en");
-
-        // Title swap (optional but clean)
-        if (titleEl) {
-          const tEn = titleEl.getAttribute("data-title-en") || titleEl.textContent;
-          const tHw = titleEl.getAttribute("data-title-haw") || titleEl.textContent;
-          titleEl.textContent = (lang === "haw") ? tHw : tEn;
+        // swap title (optional but clean)
+        const t = document.querySelector('title');
+        if (t) {
+          const tEn = t.getAttribute('data-title-en') || t.textContent;
+          const tHw = t.getAttribute('data-title-haw') || t.textContent;
+          t.textContent = (lang === 'haw') ? tHw : tEn;
         }
       }
 
-      buttons.forEach(btn => btn.addEventListener("click", () => setLang(btn.getAttribute("data-lang"))));
-
-      let saved = "en";
-      try { saved = localStorage.getItem("khpa_lang") || "en"; } catch(e) {}
-      setLang(saved);
+      btn.addEventListener('click', () => applyLang(lang === 'en' ? 'haw' : 'en'));
+      applyLang(lang);
     })();
   </script>
 
