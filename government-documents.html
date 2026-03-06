@@ -17,6 +17,11 @@
       <div class="actions">
         <a class="btn" href="index.html">Home</a>
         <a class="btn primary" href="registration.html">Registration and Licensing</a>
+
+        <!-- Language Toggle -->
+        <button class="btn" id="langToggle" type="button" aria-label="Toggle language">
+          ʻŌlelo Hawaiʻi
+        </button>
       </div>
     </div>
   </div>
@@ -26,8 +31,13 @@
       <div class="row">
         <img src="img/logo.png" alt="Seal" />
         <div>
-          <h1>Government Documents</h1>
-          <p>Founding documents and proclamations.</p>
+          <!-- English -->
+          <h1 data-lang="en">Government Documents</h1>
+          <p data-lang="en">Founding documents and proclamations.</p>
+
+          <!-- Hawaiian -->
+          <h1 data-lang="haw" style="display:none;">Nā Palapala Aupuni</h1>
+          <p data-lang="haw" style="display:none;">Nā palapala kumu a me nā hoʻolaha aliʻi.</p>
         </div>
       </div>
     </div>
@@ -35,57 +45,92 @@
 
   <nav class="nav">
     <div class="container">
-      <a href="index.html">Home</a>
-      <a href="contact.html">Island Offices</a>
-      <a class="active" href="government-documents.html">Government Documents</a>
-      <a href="registration.html">Registration and Licensing</a>
-      <a href="emporium.html">Emporium</a>
+      <a href="index.html" data-lang="en">Home</a>
+      <a href="index.html" data-lang="haw" style="display:none;">Ka Home</a>
+
+      <a href="contact.html" data-lang="en">Island Offices</a>
+      <a href="contact.html" data-lang="haw" style="display:none;">Nā Keʻena Mokupuni</a>
+
+      <a class="active" href="government-documents.html" data-lang="en">Government Documents</a>
+      <a class="active" href="government-documents.html" data-lang="haw" style="display:none;">Nā Palapala Aupuni</a>
+
+      <a href="registration.html" data-lang="en">Registration and Licensing</a>
+      <a href="registration.html" data-lang="haw" style="display:none;">Kakau &#699;Ana a me ka Laikini</a>
+
+      <a href="emporium.html" data-lang="en">Emporium</a>
+      <a href="emporium.html" data-lang="haw" style="display:none;">Hale Kū&#699;ai</a>
     </div>
   </nav>
 
   <main class="container">
 
     <section class="card">
-      <h2>Proclamations</h2>
+      <!-- English -->
+      <h2 data-lang="en">Proclamations</h2>
+      <!-- Hawaiian -->
+      <h2 data-lang="haw" style="display:none;">Nā Hoʻolaha</h2>
+
       <div class="grid">
         <div class="card" style="margin:0;">
-          <h3>Kamehameha III Declaration</h3>
-          <p class="meta">Primary proclamation reference.</p>
+          <!-- English -->
+          <h3 data-lang="en">Kamehameha III Declaration</h3>
+          <p class="meta" data-lang="en">Primary proclamation reference.</p>
+
+          <!-- Hawaiian -->
+          <h3 data-lang="haw" style="display:none;">Ka Hoʻolaha a Kamehameha III</h3>
+          <p class="meta" data-lang="haw" style="display:none;">Kumu kuhikuhi no ka hoʻolaha nui.</p>
+
           <a class="btn primary" href="pdf/KK3_Declaration.pdf" target="_blank" rel="noopener">View PDF</a>
         </div>
+
         <div class="card" style="margin:0;">
-          <h3>Anglo-Franco Proclamation (1843)</h3>
-          <p class="meta">International recognition reference.</p>
+          <!-- English -->
+          <h3 data-lang="en">Anglo-Franco Proclamation (1843)</h3>
+          <p class="meta" data-lang="en">International recognition reference.</p>
+
+          <!-- Hawaiian -->
+          <h3 data-lang="haw" style="display:none;">Ka Hoʻolaha Anglo-Franco (1843)</h3>
+          <p class="meta" data-lang="haw" style="display:none;">Kuhikuhi no ka ʻae ʻia ma ka honua.</p>
+
           <a class="btn primary" href="pdf/Anglo_Franco_Proclamation_1843.pdf" target="_blank" rel="noopener">View PDF</a>
         </div>
       </div>
     </section>
 
     <section class="card">
-      <h2>Government Founding Documents</h2>
+      <!-- English -->
+      <h2 data-lang="en">Government Founding Documents</h2>
+      <!-- Hawaiian -->
+      <h2 data-lang="haw" style="display:none;">Nā Palapala Kumu o ke Aupuni</h2>
+
       <div class="grid">
         <div class="card" style="margin:0;">
-          <h3>Declaration of Rights (1839)</h3>
+          <h3 data-lang="en">Declaration of Rights (1839)</h3>
+          <h3 data-lang="haw" style="display:none;">Ka Palapala Hoʻike Pono (1839)</h3>
           <a class="btn primary" href="pdf/Declaration_of_Rights_1839.pdf" target="_blank" rel="noopener">View PDF</a>
         </div>
 
         <div class="card" style="margin:0;">
-          <h3>Constitution (1840) — English</h3>
+          <h3 data-lang="en">Constitution (1840) — English</h3>
+          <h3 data-lang="haw" style="display:none;">Kumukānāwai (1840) — Pelekānia</h3>
           <a class="btn primary" href="pdf/Constitution_1840_English.pdf" target="_blank" rel="noopener">View PDF</a>
         </div>
 
         <div class="card" style="margin:0;">
-          <h3>First Act of Kamehameha III</h3>
+          <h3 data-lang="en">First Act of Kamehameha III</h3>
+          <h3 data-lang="haw" style="display:none;">Ka Hana Mua a Kamehameha III</h3>
           <a class="btn primary" href="pdf/First_Act_Kamehameha_III.pdf" target="_blank" rel="noopener">View PDF</a>
         </div>
 
         <div class="card" style="margin:0;">
-          <h3>Second Act of Kamehameha III</h3>
+          <h3 data-lang="en">Second Act of Kamehameha III</h3>
+          <h3 data-lang="haw" style="display:none;">Ka Hana ʻElua a Kamehameha III</h3>
           <a class="btn primary" href="pdf/Second_Act_Kamehameha_III_1846.pdf" target="_blank" rel="noopener">View PDF</a>
         </div>
 
         <div class="card" style="margin:0;">
-          <h3>Third Act of Kamehameha III</h3>
+          <h3 data-lang="en">Third Act of Kamehameha III</h3>
+          <h3 data-lang="haw" style="display:none;">Ka Hana ʻEkolu a Kamehameha III</h3>
           <a class="btn primary" href="pdf/Third_Act_Kamehameha_III_1846.pdf" target="_blank" rel="noopener">View PDF</a>
         </div>
       </div>
@@ -96,5 +141,34 @@
   <footer class="footer">
     <div class="container">© 2025 Ko Hawai&#699;i Pae &#699;Aina</div>
   </footer>
+
+  <script>
+    (function () {
+      const btn = document.getElementById('langToggle');
+      const KEY = 'khpa_lang';
+      let lang = localStorage.getItem(KEY) || 'en';
+
+      function applyLang(next) {
+        lang = next;
+        localStorage.setItem(KEY, lang);
+
+        document.querySelectorAll('[data-lang="en"]').forEach(el => {
+          el.style.display = (lang === 'en') ? '' : 'none';
+        });
+        document.querySelectorAll('[data-lang="haw"]').forEach(el => {
+          el.style.display = (lang === 'haw') ? '' : 'none';
+        });
+
+        btn.textContent = (lang === 'en') ? 'ʻŌlelo Hawaiʻi' : 'English';
+      }
+
+      btn.addEventListener('click', () => {
+        applyLang(lang === 'en' ? 'haw' : 'en');
+      });
+
+      applyLang(lang);
+    })();
+  </script>
+
 </body>
 </html>
