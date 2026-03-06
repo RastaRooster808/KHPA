@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>KHPA — Registration & Licensing</title>
+  <title data-title-en="KHPA — Registration & Licensing" data-title-haw="KHPA — Kākau & Laikini">KHPA — Registration & Licensing</title>
 </head>
 
 <body>
@@ -11,20 +11,35 @@
   <!-- KHPA Header (Home + Nav + Language Toggle) -->
   <header class="khpa-header" role="banner">
     <div class="khpa-header__inner">
+
       <a class="khpa-home" href="/index.html" aria-label="Home">
         <span class="khpa-home__crest" aria-hidden="true">KHPA</span>
+
         <span class="khpa-home__text">
-          <span class="khpa-home__title">Ko Hawaiʻi Pae ʻĀina</span>
-          <span class="khpa-home__sub">Kingdom Services Portal</span>
+          <!-- EN -->
+          <span class="khpa-home__title" data-lang-ui="en">Ko Hawaiʻi Pae ʻĀina</span>
+          <span class="khpa-home__sub" data-lang-ui="en">Kingdom Services Portal</span>
+
+          <!-- HAW -->
+          <span class="khpa-home__title" data-lang-ui="haw" style="display:none;">Ko Hawaiʻi Pae ʻĀina</span>
+          <span class="khpa-home__sub" data-lang-ui="haw" style="display:none;">Puka Lawelawe o ke Aupuni</span>
         </span>
       </a>
 
       <nav class="khpa-nav" aria-label="Primary">
-        <a class="khpa-nav__link" href="/index.html">Home</a>
-        <a class="khpa-nav__link" href="/government-documents.html">Government Documents</a>
-        <a class="khpa-nav__link is-active" href="/registration.html">Registration &amp; Licensing</a>
-        <a class="khpa-nav__link" href="/emporium">Emporium</a>
-        <a class="khpa-nav__link" href="/contact.html">Contact</a>
+        <!-- ENGLISH NAV -->
+        <a class="khpa-nav__link" data-lang-ui="en" href="/index.html">Home</a>
+        <a class="khpa-nav__link" data-lang-ui="en" href="/government-documents.html">Government Documents</a>
+        <a class="khpa-nav__link is-active" data-lang-ui="en" href="/registration.html">Registration &amp; Licensing</a>
+        <a class="khpa-nav__link" data-lang-ui="en" href="/emporium">Emporium</a>
+        <a class="khpa-nav__link" data-lang-ui="en" href="/contact.html">Contact</a>
+
+        <!-- HAWAIIAN NAV -->
+        <a class="khpa-nav__link" data-lang-ui="haw" style="display:none;" href="/index.html">Ka Home</a>
+        <a class="khpa-nav__link" data-lang-ui="haw" style="display:none;" href="/government-documents.html">Nā Palapala Aupuni</a>
+        <a class="khpa-nav__link is-active" data-lang-ui="haw" style="display:none;" href="/registration.html">Kākau &amp; Laikini</a>
+        <a class="khpa-nav__link" data-lang-ui="haw" style="display:none;" href="/emporium">Hale Kūʻai</a>
+        <a class="khpa-nav__link" data-lang-ui="haw" style="display:none;" href="/contact.html">Kāhea</a>
       </nav>
 
       <div class="khpa-lang" role="navigation" aria-label="Language Toggle">
@@ -213,20 +228,39 @@
     (function () {
       const buttons = document.querySelectorAll(".khpa-lang__btn");
       const sections = document.querySelectorAll("[data-lang-section]");
+      const ui = document.querySelectorAll("[data-lang-ui]");
+      const titleEl = document.querySelector("title");
 
       function setLang(lang) {
+        // Main page sections
         sections.forEach(sec => {
           sec.hidden = (sec.getAttribute("data-lang-section") !== lang);
         });
 
+        // Header/UI pieces
+        ui.forEach(el => {
+          el.style.display = (el.getAttribute("data-lang-ui") === lang) ? "" : "none";
+        });
+
+        // Buttons
         buttons.forEach(btn => {
           const on = btn.getAttribute("data-lang") === lang;
           btn.classList.toggle("is-active", on);
           btn.setAttribute("aria-pressed", String(on));
         });
 
+        // Persist
         try { localStorage.setItem("khpa_lang", lang); } catch(e) {}
+
+        // Document lang
         document.documentElement.setAttribute("lang", lang === "haw" ? "haw" : "en");
+
+        // Title swap (optional but clean)
+        if (titleEl) {
+          const tEn = titleEl.getAttribute("data-title-en") || titleEl.textContent;
+          const tHw = titleEl.getAttribute("data-title-haw") || titleEl.textContent;
+          titleEl.textContent = (lang === "haw") ? tHw : tEn;
+        }
       }
 
       buttons.forEach(btn => btn.addEventListener("click", () => setLang(btn.getAttribute("data-lang"))));
