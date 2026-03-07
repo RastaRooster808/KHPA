@@ -1,0 +1,31 @@
+.quote-pair{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+.quote-card{
+  border: 1px solid rgba(0,0,0,.14);
+  border-radius: 14px;
+  padding: 12px 12px;
+  background: rgba(0,0,0,.02);
+}
+.quote-label{
+  font-weight: 800;
+  letter-spacing: .2px;
+  margin-bottom: 6px;
+}
+.quote-card blockquote{
+  margin: 0;
+  padding-left: 12px;
+  border-left: 3px solid rgba(0,0,0,.25);
+  font-style: italic;
+  line-height: 1.45;
+}
+.quote-meta{
+  margin-top: 8px;
+  font-size: .9rem;
+  opacity: .8;
+}
+@media (min-width: 860px){
+  .quote-pair{ grid-template-columns: 1fr 1fr; }
+}
