@@ -5,6 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Island Offices | Ko Hawai&#699;i Pae &#699;Aina</title>
   <link rel="stylesheet" href="css/style-formal.css" />
+  <style>
+    .lang-toggle {
+      display: inline-flex;
+      gap: 6px;
+      margin-right: 10px;
+      align-items: center;
+    }
+
+    .lang-toggle .btn {
+      cursor: pointer;
+    }
+
+    .lang-toggle .btn.active {
+      opacity: 1;
+      border: 1px solid rgba(255,255,255,0.4);
+    }
+  </style>
 </head>
 <body>
 
@@ -16,8 +33,12 @@
         <a href="tel:+18083333459">(808) 333-3459</a>
       </div>
       <div class="actions">
-        <a class="btn" href="index.html">Home</a>
-        <a class="btn primary" href="registration.html">Registration and Licensing</a>
+        <div class="lang-toggle">
+          <button type="button" class="btn active" id="lang-en">English</button>
+          <button type="button" class="btn" id="lang-haw">&#699;&#332;lelo Hawai&#699;i</button>
+        </div>
+        <a class="btn" href="index.html" data-en="Home" data-haw="Ka Home">Home</a>
+        <a class="btn primary" href="registration.html" data-en="Registration and Licensing" data-haw="Kakau Inoa a me ka Laikini">Registration and Licensing</a>
       </div>
     </div>
   </div>
@@ -28,8 +49,8 @@
       <div class="row">
         <img src="img/logo.png" alt="Seal" />
         <div>
-          <h1>Island Offices</h1>
-          <p>Contact information and assistance.</p>
+          <h1 id="page-title" data-en="Island Offices" data-haw="N&#257; Ke&#699;ena Mokupuni">Island Offices</h1>
+          <p id="page-subtitle" data-en="Contact information and assistance." data-haw="N&#257; &#699;ike ho&#699;oka&#699;a&#699;ike a me ke k&#333;kua.">Contact information and assistance.</p>
         </div>
       </div>
     </div>
@@ -38,51 +59,60 @@
   <!-- Nav -->
   <nav class="nav">
     <div class="container">
-      <a href="index.html">Home</a>
+      <a href="index.html" data-en="Home" data-haw="Ka Home">Home</a>
 
       <div class="dropdown">
-        <a class="active" href="contact.html">Island Offices</a>
+        <a class="active" href="contact.html" data-en="Island Offices" data-haw="N&#257; Ke&#699;ena Mokupuni">Island Offices</a>
         <div class="dropdown-menu">
-          <a href="#hawaii">Hawai&#699;i (Big Island)</a>
-          <a href="#oahu">O&#699;ahu</a>
-          <a href="#maui">Maui (Coming Soon)</a>
-          <a href="#molokai">Moloka&#699;i (Coming Soon)</a>
+          <a href="#hawaii" data-en="Hawai&#699;i (Big Island)" data-haw="Hawai&#699;i">Hawai&#699;i (Big Island)</a>
+          <a href="#oahu" data-en="O&#699;ahu" data-haw="O&#699;ahu">O&#699;ahu</a>
+          <a href="#maui" data-en="Maui (Coming Soon)" data-haw="Maui (E hiki koke mai ana)">Maui (Coming Soon)</a>
+          <a href="#molokai" data-en="Moloka&#699;i (Coming Soon)" data-haw="Moloka&#699;i (E hiki koke mai ana)">Moloka&#699;i (Coming Soon)</a>
         </div>
       </div>
 
-      <a href="government-documents.html">Government Documents</a>
-      <a href="registration.html">Registration and Licensing</a>
-      
+      <a href="government-documents.html" data-en="Government Documents" data-haw="N&#257; Palapala Aupuni">Government Documents</a>
+      <a href="registration.html" data-en="Registration and Licensing" data-haw="Kakau Inoa a me ka Laikini">Registration and Licensing</a>
     </div>
   </nav>
 
   <main class="container">
 
     <section class="card">
-      <h2>The Power of the People</h2>
-      <p class="meta">
+      <h2 id="power-title" data-en="The Power of the People" data-haw="Ka Mana o ka L&#257;hui">The Power of the People</h2>
+      <p class="meta" id="power-text-1"
+         data-en="Our strength is our people. Across every island, families and communities carry the kuleana to care for one another and for the land. This page connects you to the island offices that serve you. Stand together. Act with dignity. Build our future."
+         data-haw="&#699;O ko k&#257;kou ikaika, &#699;o ia n&#333; ko k&#257;kou po&#699;e. Ma n&#257; mokupuni a pau, lawe n&#257; &#699;ohana a me n&#257; kai&#257;ulu i ke kuleana e mālama kekahi i kekahi a me ka &#699;&#257;ina. Ho&#699;ohui k&#275;ia &#699;ao&#699;ao iā &#699;oe i n&#257; ke&#699;ena mokupuni e lawelawe ana iā &#699;oe. E kū like. E hana me ka hanohano. E kūkulu i ko k&#257;kou mua aku.">
         Our strength is our people. Across every island, families and communities carry the kuleana to care for one another and for the land.
         This page connects you to the island offices that serve you. Stand together. Act with dignity. Build our future.
       </p>
-      <p class="meta">
+      <p class="meta" id="power-text-2"
+         data-en="Unity of the Pae &#699;Aina: One identity, many islands — with a shared purpose: protection, service, and lawful self-determination. <strong>M&#257;lama</strong> is most important: to care for the land, the people, and one another with steadiness and aloha."
+         data-haw="Ka lōkahi o ka Pae &#699;Āina: Ho&#699;okahi &#699;ano, nui n&#257; mokupuni — me ho&#699;okahi pahuhopu like: ka pale, ka lawelawe, a me ka ho&#699;oholo pono&#699;&#299; ma lalo o ke kānāwai. &#699;O <strong>ka mālama</strong> ka mea nui loa: e mālama i ka &#699;&#257;ina, i n&#257; k&#257;naka, a me kekahi i kekahi me ke aloha a me ke kūpa&#699;a.">
         Unity of the Pae &#699;Aina: One identity, many islands — with a shared purpose: protection, service, and lawful self-determination.
         <strong>M&#257;lama</strong> is most important: to care for the land, the people, and one another with steadiness and aloha.
       </p>
     </section>
 
     <section class="card">
-      <h2>Direct Assistance</h2>
-      <p class="meta">
+      <h2 id="assist-title" data-en="Direct Assistance" data-haw="K&#333;kua Pololei">Direct Assistance</h2>
+      <p class="meta" id="assist-text"
+         data-en="If you need help with forms, documents, or next steps, contact the assistance line below."
+         data-haw="In&#257; pono ke k&#333;kua me n&#257; palapala, n&#257; palapala kūhelu, a i &#699;ole n&#257; hana hou aku, e kelepona i ka laina k&#333;kua ma lalo nei.">
         If you need help with forms, documents, or next steps, contact the assistance line below.
       </p>
       <div class="grid">
         <div class="card" style="margin:0;">
-          <h3>Assistance Contact</h3>
-          <p class="meta" style="margin-bottom:8px;">
+          <h3 id="assist-contact-title" data-en="Assistance Contact" data-haw="Ho&#699;oka&#699;a&#699;ike K&#333;kua">Assistance Contact</h3>
+          <p class="meta" style="margin-bottom:8px;" id="assist-contact-info"
+             data-en="<strong>Email:</strong> <a href='mailto:KHPARELATIONSAFFAIRS@gmail.com'>KHPARELATIONSAFFAIRS@gmail.com</a><br/><strong>Phone:</strong> <a href='tel:+18083333459'>(808) 333-3459</a>"
+             data-haw="<strong>Leka uila:</strong> <a href='mailto:KHPARELATIONSAFFAIRS@gmail.com'>KHPARELATIONSAFFAIRS@gmail.com</a><br/><strong>Kelepona:</strong> <a href='tel:+18083333459'>(808) 333-3459</a>">
             <strong>Email:</strong> <a href="mailto:KHPARELATIONSAFFAIRS@gmail.com">KHPARELATIONSAFFAIRS@gmail.com</a><br/>
             <strong>Phone:</strong> <a href="tel:+18083333459">(808) 333-3459</a>
           </p>
-          <p class="meta" style="margin:0;">
+          <p class="meta" style="margin:0;" id="assist-contact-note"
+             data-en="Messages are routed through the Island Offices for follow-up."
+             data-haw="Ho&#699;ouna &#699;ia n&#257; leka ma o n&#257; Ke&#699;ena Mokupuni no ka hahai &#699;ana aku.">
             Messages are routed through the Island Offices for follow-up.
           </p>
         </div>
@@ -90,8 +120,10 @@
     </section>
 
     <section id="hawaii" class="card">
-      <h2>Hawai&#699;i (Big Island) Office</h2>
-      <p class="meta">
+      <h2 data-en="Hawai&#699;i (Big Island) Office" data-haw="Ke&#699;ena Hawai&#699;i">Hawai&#699;i (Big Island) Office</h2>
+      <p class="meta" id="hawaii-info"
+         data-en="<strong>Address:</strong> 159 Keawe St, Hilo, Hawai&#699;i<br/><strong>Office Hours:</strong> 10:00 AM – 12:00 PM Friday<br/><strong>Email:</strong> <a href='mailto:KHPARELATIONSAFFAIRS@gmail.com'>KHPARELATIONSAFFAIRS@gmail.com</a><br/><strong>Phone:</strong> <a href='tel:+18083333459'>(808) 333-3459</a>"
+         data-haw="<strong>Wahi noho:</strong> 159 Keawe St, Hilo, Hawai&#699;i<br/><strong>N&#257; hola ke&#699;ena:</strong> 10:00 AM – 12:00 PM P&#333;&#699;alima<br/><strong>Leka uila:</strong> <a href='mailto:KHPARELATIONSAFFAIRS@gmail.com'>KHPARELATIONSAFFAIRS@gmail.com</a><br/><strong>Kelepona:</strong> <a href='tel:+18083333459'>(808) 333-3459</a>">
         <strong>Address:</strong> 159 Keawe St, Hilo, Hawai&#699;i<br/>
         <strong>Office Hours:</strong> 10:00 AM – 12:00 PM Friday<br/>
         <strong>Email:</strong> <a href="mailto:KHPARELATIONSAFFAIRS@gmail.com">KHPARELATIONSAFFAIRS@gmail.com</a><br/>
@@ -100,31 +132,63 @@
     </section>
 
     <section id="oahu" class="card">
-      <h2>O&#699;ahu Office</h2>
-      <p class="meta">
+      <h2 data-en="O&#699;ahu Office" data-haw="Ke&#699;ena O&#699;ahu">O&#699;ahu Office</h2>
+      <p class="meta" id="oahu-info"
+         data-en="<strong>Mailing:</strong> Box 23055 Makiki Station, O&#699;ahu<br/>Assistance: <a href='mailto:SCCJ.KHPA@pm.me'>SCCJ.KHPA@pm.me</a> |<br/><strong>Status:</strong> Additional details coming soon."
+         data-haw="<strong>Wahi leka:</strong> Box 23055 Makiki Station, O&#699;ahu<br/>K&#333;kua: <a href='mailto:SCCJ.KHPA@pm.me'>SCCJ.KHPA@pm.me</a> |<br/><strong>Kūlana:</strong> E hiki koke mai ana n&#257; &#699;ike hou aku.">
         <strong>Mailing:</strong> Box 23055 Makiki Station, O&#699;ahu<br/>
-       Assistance: <a href="mailto:SCCJ.KHPA@pm.me">SCCJ.KHPA@pm.me</a> |
+        Assistance: <a href="mailto:SCCJ.KHPA@pm.me">SCCJ.KHPA@pm.me</a> |
         <strong>Status:</strong> Additional details coming soon.
       </p>
     </section>
 
     <section id="maui" class="card">
-      <h2>Maui Office</h2>
-      <p class="meta">Coming soon.</p>
+      <h2 data-en="Maui Office" data-haw="Ke&#699;ena Maui">Maui Office</h2>
+      <p class="meta" data-en="Coming soon." data-haw="E hiki koke mai ana.">Coming soon.</p>
     </section>
 
     <section id="molokai" class="card">
-      <h2>Moloka&#699;i Office</h2>
-      <p class="meta">Coming soon.</p>
+      <h2 data-en="Moloka&#699;i Office" data-haw="Ke&#699;ena Moloka&#699;i">Moloka&#699;i Office</h2>
+      <p class="meta" data-en="Coming soon." data-haw="E hiki koke mai ana.">Coming soon.</p>
     </section>
 
   </main>
 
   <footer class="footer">
-    <div class="container">
+    <div class="container" id="footer-text"
+         data-en="© 2025 Ko Hawai&#699;i Pae &#699;Aina"
+         data-haw="© 2025 Ko Hawai&#699;i Pae &#699;Aina">
       © 2025 Ko Hawai&#699;i Pae &#699;Aina
     </div>
   </footer>
+
+  <script>
+    const enBtn = document.getElementById('lang-en');
+    const hawBtn = document.getElementById('lang-haw');
+
+    function setLanguage(lang) {
+      document.documentElement.lang = lang === 'haw' ? 'haw' : 'en';
+
+      document.querySelectorAll('[data-en]').forEach(el => {
+        if (lang === 'haw' && el.dataset.haw) {
+          el.innerHTML = el.dataset.haw;
+        } else {
+          el.innerHTML = el.dataset.en;
+        }
+      });
+
+      enBtn.classList.toggle('active', lang === 'en');
+      hawBtn.classList.toggle('active', lang === 'haw');
+
+      localStorage.setItem('khpaLang', lang);
+    }
+
+    enBtn.addEventListener('click', () => setLanguage('en'));
+    hawBtn.addEventListener('click', () => setLanguage('haw'));
+
+    const savedLang = localStorage.getItem('khpaLang') || 'en';
+    setLanguage(savedLang);
+  </script>
 
 </body>
 </html>
