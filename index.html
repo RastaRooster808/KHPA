@@ -5,6 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Ko Hawai&#699;i Pae &#699;Aina</title>
   <link rel="stylesheet" href="css/style-formal.css" />
+  <style>
+    .lang-toggle {
+      display: inline-flex;
+      gap: 6px;
+      margin-right: 10px;
+      align-items: center;
+    }
+
+    .lang-toggle .btn {
+      cursor: pointer;
+    }
+
+    .lang-toggle .btn.active {
+      opacity: 1;
+      border: 1px solid rgba(255,255,255,0.4);
+    }
+  </style>
 </head>
 <body>
 
@@ -16,8 +33,12 @@
         <a href="tel:+18083333459">(808) 333-3459</a>
       </div>
       <div class="actions">
-        <a class="btn" href="contact.html">Island Offices</a>
-        <a class="btn primary" href="registration.html">Registration and Licensing</a>
+        <div class="lang-toggle">
+          <button type="button" class="btn active" id="lang-en">English</button>
+          <button type="button" class="btn" id="lang-haw">&#699;&#332;lelo Hawai&#699;i</button>
+        </div>
+        <a class="btn" href="contact.html" data-en="Island Offices" data-haw="N&#257; Ke&#699;ena Mokupuni">Island Offices</a>
+        <a class="btn primary" href="registration.html" data-en="Registration and Licensing" data-haw="Kakau Inoa a me ka Laikini">Registration and Licensing</a>
       </div>
     </div>
   </div>
@@ -28,8 +49,8 @@
       <div class="row">
         <img src="img/logo.png" alt="Kingdom Coat of Arms" />
         <div>
-          <h1>Ko Hawai&#699;i Pae &#699;Aina</h1>
-          <p>Official Portal</p>
+          <h1 data-en="Ko Hawai&#699;i Pae &#699;Aina" data-haw="Ko Hawai&#699;i Pae &#699;Aina">Ko Hawai&#699;i Pae &#699;Aina</h1>
+          <p data-en="Official Portal" data-haw="Puka K&#363;helu">Official Portal</p>
         </div>
       </div>
     </div>
@@ -38,71 +59,101 @@
   <!-- Nav (NO History / NO Emporium in header) -->
   <nav class="nav">
     <div class="container">
-      <a class="active" href="index.html">Home</a>
+      <a class="active" href="index.html" data-en="Home" data-haw="Ka Home">Home</a>
 
       <div class="dropdown">
-        <a href="contact.html">Island Offices</a>
+        <a href="contact.html" data-en="Island Offices" data-haw="N&#257; Ke&#699;ena Mokupuni">Island Offices</a>
         <div class="dropdown-menu">
-          <a href="contact.html#hawaii">Hawai&#699;i (Big Island) — (808) 333-3459</a>
+          <a href="contact.html#hawaii" data-en="Hawai&#699;i (Big Island) — (808) 333-3459" data-haw="Hawai&#699;i — (808) 333-3459">Hawai&#699;i (Big Island) — (808) 333-3459</a>
         </div>
       </div>
 
-      <a href="government-documents.html">Government Documents</a>
-      <a href="registration.html">Registration and Licensing</a>
+      <a href="government-documents.html" data-en="Government Documents" data-haw="N&#257; Palapala Aupuni">Government Documents</a>
+      <a href="registration.html" data-en="Registration and Licensing" data-haw="Kakau Inoa a me ka Laikini">Registration and Licensing</a>
     </div>
   </nav>
 
   <main class="container">
 
     <section class="card">
-      <h2>Map of the Kingdom</h2>
-      <p class="meta">Reference map of the Hawaiian archipelago.</p>
+      <h2 data-en="Map of the Kingdom" data-haw="Palapala &#699;&#256;ina o ke Aupuni">Map of the Kingdom</h2>
+      <p class="meta" data-en="Reference map of the Hawaiian archipelago." data-haw="He palapala &#699;&#257;ina kuhikuhi no ka pae moku Hawai&#699;i.">Reference map of the Hawaiian archipelago.</p>
       <img class="hero-img" src="img/island-map.jpg" alt="Map of the Hawaiian Islands" />
     </section>
 
     <section class="card">
-      <h2>Proclamation of King Kamehameha III</h2>
-      <p class="meta">Featured declaration. Download the PDF below.</p>
+      <h2 data-en="Proclamation of King Kamehameha III" data-haw="Ka Ho&#699;olaha a Kamehameha III">Proclamation of King Kamehameha III</h2>
+      <p class="meta" data-en="Featured declaration. Download the PDF below." data-haw="He ho&#699;olaha i ho&#699;ike &#699;ia. E ki&#699;i i ka PDF ma lalo nei.">Featured declaration. Download the PDF below.</p>
       <img class="hero-img" src="img/kk3_proclamation_scroll_style.jpeg" alt="Kamehameha III Proclamation" />
       <p style="margin-top:12px;">
-        <a class="btn primary" href="pdf/KK3_Declaration.pdf" target="_blank" rel="noopener">
-          Download Proclamation (PDF)
-        </a>
+        <a class="btn primary" href="pdf/KK3_Declaration.pdf" target="_blank" rel="noopener"
+           data-en="Download Proclamation (PDF)" data-haw="Ki&#699;i i ka Ho&#699;olaha (PDF)">Download Proclamation (PDF)</a>
       </p>
     </section>
 
     <!-- Foreign Affairs (replaces booklet entirely) -->
     <section class="card">
-      <h2>Office of Foreign Affairs</h2>
-      <p class="meta">Public reference. Formal principles and ministerial standard.</p>
+      <h2 data-en="Office of Foreign Affairs" data-haw="Ke Ke&#699;ena O Nā Hana Haole">Office of Foreign Affairs</h2>
+      <p class="meta" data-en="Public reference. Formal principles and ministerial standard." data-haw="He kuhikuhi lehulehu. Nā kumu kūhelu a me ke kūlana lawelawe kuhina.">Public reference. Formal principles and ministerial standard.</p>
 
       <p style="margin-top:12px;">
-        <a class="btn primary" href="/img/foreign-affairs.jpg" target="_blank" rel="noopener">
-          View Foreign Affairs (Coat of Arms)
-        </a>
+        <a class="btn primary" href="/img/foreign-affairs.jpg" target="_blank" rel="noopener"
+           data-en="View Foreign Affairs (Coat of Arms)" data-haw="Nānā i Nā Hana Haole (Hōʻailona Aliʻi)">View Foreign Affairs (Coat of Arms)</a>
       </p>
 
-      <p style="margin-top:12px;margin-bottom:0;">
+      <p style="margin-top:12px;margin-bottom:0;"
+         data-en="<strong>Minister of Foreign Affairs:</strong> Harvey Keliikoa"
+         data-haw="<strong>Kuhina o Nā Hana Haole:</strong> Harvey Keliikoa">
         <strong>Minister of Foreign Affairs:</strong> Harvey Keliikoa
       </p>
     </section>
 
     <!-- Emporium section can remain on the homepage (but not in header/nav) -->
     <section class="card">
-      <h2>Emporium</h2>
-      <p class="meta">
+      <h2 data-en="Emporium" data-haw="Hale Kū&#699;ai">Emporium</h2>
+      <p class="meta"
+         data-en="The Emporium is a product of Ko Hawai&#699;i Pae &#699;Aina. Featured artisans and offerings are available via the Emporium page."
+         data-haw="He huahana ka Hale Kū&#699;ai na Ko Hawai&#699;i Pae &#699;Aina. Aia nā mea hana no&#699;eau a me nā makana ma ka &#699;ao&#699;ao Emporium.">
         The Emporium is a product of Ko Hawai&#699;i Pae &#699;Aina. Featured artisans and offerings are available via the Emporium page.
       </p>
-      <a class="btn primary" href="emporium.html">Open Emporium</a>
+      <a class="btn primary" href="emporium.html" data-en="Open Emporium" data-haw="E Wehe i ka Hale Kū&#699;ai">Open Emporium</a>
     </section>
 
   </main>
 
   <footer class="footer">
-    <div class="container">
-      © 2025 Ko Hawai&#699;i Pae &#699;Aina
+    <div class="container" data-en="© 2026 Ko Hawai&#699;i Pae &#699;Aina" data-haw="© 2026 Ko Hawai&#699;i Pae &#699;Aina">
+      © 2026 Ko Hawai&#699;i Pae &#699;Aina
     </div>
   </footer>
+
+  <script>
+    const enBtn = document.getElementById('lang-en');
+    const hawBtn = document.getElementById('lang-haw');
+
+    function setLanguage(lang) {
+      document.documentElement.lang = lang === 'haw' ? 'haw' : 'en';
+
+      document.querySelectorAll('[data-en]').forEach(el => {
+        if (lang === 'haw' && el.dataset.haw) {
+          el.innerHTML = el.dataset.haw;
+        } else {
+          el.innerHTML = el.dataset.en;
+        }
+      });
+
+      enBtn.classList.toggle('active', lang === 'en');
+      hawBtn.classList.toggle('active', lang === 'haw');
+
+      localStorage.setItem('khpaLang', lang);
+    }
+
+    enBtn.addEventListener('click', () => setLanguage('en'));
+    hawBtn.addEventListener('click', () => setLanguage('haw'));
+
+    const savedLang = localStorage.getItem('khpaLang') || 'en';
+    setLanguage(savedLang);
+  </script>
 
 </body>
 </html>
