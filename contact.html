@@ -1,194 +1,301 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Island Offices | Ko Hawai&#699;i Pae &#699;Aina</title>
-  <link rel="stylesheet" href="css/style-formal.css" />
-  <style>
-    .lang-toggle {
-      display: inline-flex;
-      gap: 6px;
-      margin-right: 10px;
-      align-items: center;
-    }
-
-    .lang-toggle .btn {
-      cursor: pointer;
-    }
-
-    .lang-toggle .btn.active {
-      opacity: 1;
-      border: 1px solid rgba(255,255,255,0.4);
-    }
-  </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact | KHPA</title>
+  <link rel="stylesheet" href="css/main.css" />
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- Fixed assistance bar -->
-  <div class="topbar">
-    <div class="container">
-      <div class="help">
-        Assistance: <a href="mailto:KHPARELATIONSAFFAIRS@gmail.com">KHPARELATIONSAFFAIRS@gmail.com</a> |
-        <a href="tel:+18083333459">(808) 333-3459</a>
-      </div>
-      <div class="actions">
-        <div class="lang-toggle">
-          <button type="button" class="btn active" id="lang-en">English</button>
-          <button type="button" class="btn" id="lang-haw">&#699;&#332;lelo Hawai&#699;i</button>
-        </div>
-        <a class="btn" href="index.html" data-en="Home" data-haw="Ka Home">Home</a>
-        <a class="btn primary" href="registration.html" data-en="Registration and Licensing" data-haw="Kakau Inoa a me ka Laikini">Registration and Licensing</a>
-      </div>
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="seal">
+      <img src="img/seal.png" alt="KHPA Seal" onerror="this.style.display='none'">
+    </div>
+    <div class="brand">
+      <h1>Ko Hawaiʻi Pae ʻĀina (KHPA)</h1>
+      <p class="tagline">Contact • Public Assistance & Administrative Routing</p>
     </div>
   </div>
 
-  <!-- Header -->
-  <header class="header">
+  <div class="navbar">
     <div class="container">
-      <div class="row">
-        <img src="img/logo.png" alt="Seal" />
-        <div>
-          <h1 id="page-title" data-en="Island Offices" data-haw="N&#257; Ke&#699;ena Mokupuni">Island Offices</h1>
-          <p id="page-subtitle" data-en="Contact information and assistance." data-haw="N&#257; &#699;ike ho&#699;oka&#699;a&#699;ike a me ke k&#333;kua.">Contact information and assistance.</p>
+      <ul class="nav" aria-label="Primary">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="hawaii.html">Island Offices</a></li>
+        <li><a href="government-documents.html">Government Documents</a></li>
+        <li><a href="registration.html">Registration &amp; Licensing</a></li>
+        <li><a href="emporium.html">Emporium</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="container">
+
+    <h2 class="page-title">Contact</h2>
+    <div class="section-divider"></div>
+
+    <p class="lede">
+      This page provides administrative contact information, automated guidance through the KHPA Assistance Bot, and direct assistance routing for matters requiring review.
+    </p>
+
+    <div class="notice" role="status">
+      <strong>Official Notice:</strong> The KHPA Assistance Bot provides general administrative guidance only. For record review, submission support, or official clarification, please use the Direct Assistance form.
+    </div>
+
+    <!-- CONTACT SUMMARY -->
+    <section class="panel" aria-label="Contact summary">
+      <div class="panel-header">
+        <h3 class="panel-title">Administrative Contact</h3>
+        <span class="badge">Public</span>
+      </div>
+
+      <ul class="doclist">
+        <li>
+          <div class="left">
+            <strong>Email</strong>
+            <div class="meta">Primary public routing for assistance and office follow-up</div>
+          </div>
+          <div>
+            <a class="button secondary" href="mailto:khparelationsaffairs@gmail.com">
+              khparelationsaffairs@gmail.com
+            </a>
+          </div>
+        </li>
+
+        <li>
+          <div class="left">
+            <strong>Phone</strong>
+            <div class="meta">Public contact line</div>
+          </div>
+          <div>
+            <a class="button secondary" href="tel:+18083333459">
+              (808) 333-3459
+            </a>
+          </div>
+        </li>
+
+        <li>
+          <div class="left">
+            <strong>Office Hours</strong>
+            <div class="meta">Public walk-in / office availability listing</div>
+          </div>
+          <div>
+            <span class="pill">Hilo Hours 10:00 AM – 12:00 PM</span>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- BOT -->
+    <section class="panel" aria-label="KHPA Assistance Bot">
+      <div class="panel-header">
+        <h3 class="panel-title">KHPA Assistance Bot</h3>
+        <span class="badge">Beta</span>
+      </div>
+
+      <p class="small" style="margin:0 0 10px 0;">
+        The KHPA Assistance Bot provides general guidance regarding island offices, registration, forms, protocol, and public records.
+      </p>
+
+      <div class="bot-wrap">
+        <div id="botMessages" class="bot-messages">
+          <div class="bot-message bot">
+            Aloha. I am the KHPA Assistance Bot. Please enter your question regarding documents, registration, protocol, island offices, or administrative process.
+          </div>
+        </div>
+
+        <div class="bot-input-row">
+          <input
+            id="botInput"
+            type="text"
+            placeholder="Type your question here..."
+            aria-label="Ask the KHPA bot a question"
+          />
+          <button id="botSend" class="button" type="button">Ask</button>
+        </div>
+
+        <div style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap;">
+          <button id="botAssist" class="button secondary" type="button">
+            Go to Direct Assistance
+          </button>
+          <a class="button secondary" href="registration.html">Registration &amp; Licensing</a>
+          <a class="button secondary" href="hawaii.html">Island Offices</a>
         </div>
       </div>
-    </div>
-  </header>
+    </section>
 
-  <!-- Nav -->
-  <nav class="nav">
-    <div class="container">
-      <a href="index.html" data-en="Home" data-haw="Ka Home">Home</a>
-
-      <div class="dropdown">
-        <a class="active" href="contact.html" data-en="Island Offices" data-haw="N&#257; Ke&#699;ena Mokupuni">Island Offices</a>
-        <div class="dropdown-menu">
-          <a href="#hawaii" data-en="Hawai&#699;i (Big Island)" data-haw="Hawai&#699;i">Hawai&#699;i (Big Island)</a>
-          <a href="#oahu" data-en="O&#699;ahu" data-haw="O&#699;ahu">O&#699;ahu</a>
-          <a href="#maui" data-en="Maui (Coming Soon)" data-haw="Maui (E hiki koke mai ana)">Maui (Coming Soon)</a>
-          <a href="#molokai" data-en="Moloka&#699;i (Coming Soon)" data-haw="Moloka&#699;i (E hiki koke mai ana)">Moloka&#699;i (Coming Soon)</a>
-        </div>
+    <!-- QUICK LINKS -->
+    <section class="panel" aria-label="Quick links">
+      <div class="panel-header">
+        <h3 class="panel-title">Quick Links</h3>
+        <span class="badge">Resources</span>
       </div>
 
-      <a href="government-documents.html" data-en="Government Documents" data-haw="N&#257; Palapala Aupuni">Government Documents</a>
-      <a href="registration.html" data-en="Registration and Licensing" data-haw="Kakau Inoa a me ka Laikini">Registration and Licensing</a>
-    </div>
-  </nav>
-
-  <main class="container">
-
-    <section class="card">
-      <h2 id="power-title" data-en="The Power of the People" data-haw="Ka Mana o ka L&#257;hui">The Power of the People</h2>
-      <p class="meta" id="power-text-1"
-         data-en="Our strength is our people. Across every island, families and communities carry the kuleana to care for one another and for the land. This page connects you to the island offices that serve you. Stand together. Act with dignity. Build our future."
-         data-haw="&#699;O ko k&#257;kou ikaika, &#699;o ia n&#333; ko k&#257;kou po&#699;e. Ma n&#257; mokupuni a pau, lawe n&#257; &#699;ohana a me n&#257; kai&#257;ulu i ke kuleana e mālama kekahi i kekahi a me ka &#699;&#257;ina. Ho&#699;ohui k&#275;ia &#699;ao&#699;ao iā &#699;oe i n&#257; ke&#699;ena mokupuni e lawelawe ana iā &#699;oe. E kū like. E hana me ka hanohano. E kūkulu i ko k&#257;kou mua aku.">
-        Our strength is our people. Across every island, families and communities carry the kuleana to care for one another and for the land.
-        This page connects you to the island offices that serve you. Stand together. Act with dignity. Build our future.
-      </p>
-      <p class="meta" id="power-text-2"
-         data-en="Unity of the Pae &#699;Aina: One identity, many islands — with a shared purpose: protection, service, and lawful self-determination. <strong>M&#257;lama</strong> is most important: to care for the land, the people, and one another with steadiness and aloha."
-         data-haw="Ka lōkahi o ka Pae &#699;Āina: Ho&#699;okahi &#699;ano, nui n&#257; mokupuni — me ho&#699;okahi pahuhopu like: ka pale, ka lawelawe, a me ka ho&#699;oholo pono&#699;&#299; ma lalo o ke kānāwai. &#699;O <strong>ka mālama</strong> ka mea nui loa: e mālama i ka &#699;&#257;ina, i n&#257; k&#257;naka, a me kekahi i kekahi me ke aloha a me ke kūpa&#699;a.">
-        Unity of the Pae &#699;Aina: One identity, many islands — with a shared purpose: protection, service, and lawful self-determination.
-        <strong>M&#257;lama</strong> is most important: to care for the land, the people, and one another with steadiness and aloha.
-      </p>
+      <ul class="doclist">
+        <li>
+          <div class="left">
+            <a href="hawaii.html">Island Offices</a>
+            <div class="meta">Locate office routing and submission pathway information</div>
+          </div>
+          <div><a class="button secondary" href="hawaii.html">Open</a></div>
+        </li>
+        <li>
+          <div class="left">
+            <a href="registration.html">Registration &amp; Licensing</a>
+            <div class="meta">Forms, services, and filing categories</div>
+          </div>
+          <div><a class="button secondary" href="registration.html">Open</a></div>
+        </li>
+        <li>
+          <div class="left">
+            <a href="government-documents.html">Government Documents</a>
+            <div class="meta">Founding documents and public records archive</div>
+          </div>
+          <div><a class="button secondary" href="government-documents.html">Open</a></div>
+        </li>
+        <li>
+          <div class="left">
+            <a href="protocols.html">Protocol</a>
+            <div class="meta">Submission requirements and participation protocol</div>
+          </div>
+          <div><a class="button secondary" href="protocols.html">Open</a></div>
+        </li>
+      </ul>
     </section>
 
-    <section class="card">
-      <h2 id="assist-title" data-en="Direct Assistance" data-haw="K&#333;kua Pololei">Direct Assistance</h2>
-      <p class="meta" id="assist-text"
-         data-en="If you need help with forms, documents, or next steps, contact the assistance line below."
-         data-haw="In&#257; pono ke k&#333;kua me n&#257; palapala, n&#257; palapala kūhelu, a i &#699;ole n&#257; hana hou aku, e kelepona i ka laina k&#333;kua ma lalo nei.">
-        If you need help with forms, documents, or next steps, contact the assistance line below.
-      </p>
-      <div class="grid">
-        <div class="card" style="margin:0;">
-          <h3 id="assist-contact-title" data-en="Assistance Contact" data-haw="Ho&#699;oka&#699;a&#699;ike K&#333;kua">Assistance Contact</h3>
-          <p class="meta" style="margin-bottom:8px;" id="assist-contact-info"
-             data-en="<strong>Email:</strong> <a href='mailto:KHPARELATIONSAFFAIRS@gmail.com'>KHPARELATIONSAFFAIRS@gmail.com</a><br/><strong>Phone:</strong> <a href='tel:+18083333459'>(808) 333-3459</a>"
-             data-haw="<strong>Leka uila:</strong> <a href='mailto:KHPARELATIONSAFFAIRS@gmail.com'>KHPARELATIONSAFFAIRS@gmail.com</a><br/><strong>Kelepona:</strong> <a href='tel:+18083333459'>(808) 333-3459</a>">
-            <strong>Email:</strong> <a href="mailto:KHPARELATIONSAFFAIRS@gmail.com">KHPARELATIONSAFFAIRS@gmail.com</a><br/>
-            <strong>Phone:</strong> <a href="tel:+18083333459">(808) 333-3459</a>
-          </p>
-          <p class="meta" style="margin:0;" id="assist-contact-note"
-             data-en="Messages are routed through the Island Offices for follow-up."
-             data-haw="Ho&#699;ouna &#699;ia n&#257; leka ma o n&#257; Ke&#699;ena Mokupuni no ka hahai &#699;ana aku.">
-            Messages are routed through the Island Offices for follow-up.
-          </p>
-        </div>
+    <!-- DIRECT ASSISTANCE -->
+    <section id="direct-assistance-form" class="panel" aria-label="Direct Assistance Form">
+      <div class="panel-header">
+        <h3 class="panel-title">Direct Assistance</h3>
+        <span class="badge">Official Routing</span>
       </div>
+
+      <p class="small" style="margin:0 0 12px 0;">
+        Use this form for matters requiring administrative review, routing support, submission clarification, or document guidance.
+        Messages are forwarded to <strong>khparelationsaffairs@gmail.com</strong>.
+      </p>
+
+      <!-- Replace the Formspree endpoint below with your live endpoint -->
+      <form
+        action="https://formspree.io/f/xdkdjvpy"
+        method="POST"
+        class="assist-form"
+      >
+        <div class="form-grid">
+          <div class="field">
+            <label for="fullName">Full Name</label>
+            <input id="fullName" name="Full Name" type="text" required />
+          </div>
+
+          <div class="field">
+            <label for="email">Email Address</label>
+            <input id="email" name="Email" type="email" required />
+          </div>
+
+          <div class="field">
+            <label for="phone">Phone Number</label>
+            <input id="phone" name="Phone" type="tel" />
+          </div>
+
+          <div class="field">
+            <label for="island">Island / Routing Area</label>
+            <select id="island" name="Island / Routing Area">
+              <option value="">Select one</option>
+              <option>Hawaiʻi</option>
+              <option>Maui</option>
+              <option>Molokaʻi</option>
+              <option>Oʻahu</option>
+              <option>Other / Not Sure</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="topic">Assistance Topic</label>
+            <select id="topic" name="Assistance Topic" required>
+              <option value="">Select one</option>
+              <option>Registration & Licensing</option>
+              <option>Identification / Operator Certificate</option>
+              <option>Vehicle Registration</option>
+              <option>Vessel Registration</option>
+              <option>Business Registration</option>
+              <option>Government Documents</option>
+              <option>Protocol Requirements</option>
+              <option>Island Office Routing</option>
+              <option>Emporium / General Inquiry</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="subject">Subject</label>
+            <input id="subject" name="Subject" type="text" required />
+          </div>
+
+          <div class="field field-full">
+            <label for="message">Message</label>
+            <textarea
+              id="message"
+              name="Message"
+              rows="8"
+              required
+              placeholder="Provide the details of your request, including the service, document, or routing issue requiring assistance."
+            ></textarea>
+          </div>
+        </div>
+
+        <input type="hidden" name="_subject" value="KHPA Direct Assistance Submission" />
+
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;">
+          <button type="submit" class="button">Submit Request</button>
+          <a class="button secondary" href="mailto:khparelationsaffairs@gmail.com">Email Directly</a>
+        </div>
+      </form>
     </section>
 
-    <section id="hawaii" class="card">
-      <h2 data-en="Hawai&#699;i (Big Island) Office" data-haw="Ke&#699;ena Hawai&#699;i">Hawai&#699;i (Big Island) Office</h2>
-      <p class="meta" id="hawaii-info"
-         data-en="<strong>Address:</strong> 159 Keawe St, Hilo, Hawai&#699;i<br/><strong>Office Hours:</strong> 10:00 AM – 12:00 PM Friday<br/><strong>Email:</strong> <a href='mailto:KHPARELATIONSAFFAIRS@gmail.com'>KHPARELATIONSAFFAIRS@gmail.com</a><br/><strong>Phone:</strong> <a href='tel:+18083333459'>(808) 333-3459</a>"
-         data-haw="<strong>Wahi noho:</strong> 159 Keawe St, Hilo, Hawai&#699;i<br/><strong>N&#257; hola ke&#699;ena:</strong> 10:00 AM – 12:00 PM P&#333;&#699;alima<br/><strong>Leka uila:</strong> <a href='mailto:KHPARELATIONSAFFAIRS@gmail.com'>KHPARELATIONSAFFAIRS@gmail.com</a><br/><strong>Kelepona:</strong> <a href='tel:+18083333459'>(808) 333-3459</a>">
-        <strong>Address:</strong> 159 Keawe St, Hilo, Hawai&#699;i<br/>
-        <strong>Office Hours:</strong> 10:00 AM – 12:00 PM Friday<br/>
-        <strong>Email:</strong> <a href="mailto:KHPARELATIONSAFFAIRS@gmail.com">KHPARELATIONSAFFAIRS@gmail.com</a><br/>
-        <strong>Phone:</strong> <a href="tel:+18083333459">(808) 333-3459</a>
+    <!-- ADMINISTRATIVE STATEMENT -->
+    <section class="panel" aria-label="Administrative statement">
+      <div class="panel-header">
+        <h3 class="panel-title">Administrative Statement</h3>
+        <span class="badge">Standard</span>
+      </div>
+
+      <p class="small" style="margin:0;">
+        KHPA provides public administrative information, routing guidance, and access to service categories through this portal.
+        Matters requiring review, verification, or record handling must proceed through proper office channels in accordance with uniform protocol.
       </p>
     </section>
 
-    <section id="oahu" class="card">
-      <h2 data-en="O&#699;ahu Office" data-haw="Ke&#699;ena O&#699;ahu">O&#699;ahu Office</h2>
-      <p class="meta" id="oahu-info"
-         data-en="<strong>Mailing:</strong> Box 23055 Makiki Station, O&#699;ahu<br/>Assistance: <a href='mailto:SCCJ.KHPA@pm.me'>SCCJ.KHPA@pm.me</a> |<br/><strong>Status:</strong> Additional details coming soon."
-         data-haw="<strong>Wahi leka:</strong> Box 23055 Makiki Station, O&#699;ahu<br/>K&#333;kua: <a href='mailto:SCCJ.KHPA@pm.me'>SCCJ.KHPA@pm.me</a> |<br/><strong>Kūlana:</strong> E hiki koke mai ana n&#257; &#699;ike hou aku.">
-        <strong>Mailing:</strong> Box 23055 Makiki Station, O&#699;ahu<br/>
-        Assistance: <a href="mailto:SCCJ.KHPA@pm.me">SCCJ.KHPA@pm.me</a> |
-        <strong>Status:</strong> Additional details coming soon.
-      </p>
-    </section>
+  </div>
+</main>
 
-    <section id="maui" class="card">
-      <h2 data-en="Maui Office" data-haw="Ke&#699;ena Maui">Maui Office</h2>
-      <p class="meta" data-en="Coming soon." data-haw="E hiki koke mai ana.">Coming soon.</p>
-    </section>
-
-    <section id="molokai" class="card">
-      <h2 data-en="Moloka&#699;i Office" data-haw="Ke&#699;ena Moloka&#699;i">Moloka&#699;i Office</h2>
-      <p class="meta" data-en="Coming soon." data-haw="E hiki koke mai ana.">Coming soon.</p>
-    </section>
-
-  </main>
-
-  <footer class="footer">
-    <div class="container" id="footer-text"
-         data-en="© 2025 Ko Hawai&#699;i Pae &#699;Aina"
-         data-haw="© 2025 Ko Hawai&#699;i Pae &#699;Aina">
-      © 2025 Ko Hawai&#699;i Pae &#699;Aina
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <p>Email: <a href="mailto:khparelationsaffairs@gmail.com">khparelationsaffairs@gmail.com</a></p>
+      <p>Phone: <a href="tel:+18083333459">(808) 333-3459</a></p>
     </div>
-  </footer>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <p><a href="hawaii.html">Island Offices</a></p>
+      <p><a href="registration.html">Registration &amp; Licensing</a></p>
+      <p><a href="protocols.html">Protocol</a></p>
+    </div>
+    <div class="footer-col">
+      <h4>Notice</h4>
+      <p>&copy; <span id="year"></span> KHPA</p>
+      <p class="small">Public information portal</p>
+    </div>
+  </div>
+</footer>
 
-  <script>
-    const enBtn = document.getElementById('lang-en');
-    const hawBtn = document.getElementById('lang-haw');
-
-    function setLanguage(lang) {
-      document.documentElement.lang = lang === 'haw' ? 'haw' : 'en';
-
-      document.querySelectorAll('[data-en]').forEach(el => {
-        if (lang === 'haw' && el.dataset.haw) {
-          el.innerHTML = el.dataset.haw;
-        } else {
-          el.innerHTML = el.dataset.en;
-        }
-      });
-
-      enBtn.classList.toggle('active', lang === 'en');
-      hawBtn.classList.toggle('active', lang === 'haw');
-
-      localStorage.setItem('khpaLang', lang);
-    }
-
-    enBtn.addEventListener('click', () => setLanguage('en'));
-    hawBtn.addEventListener('click', () => setLanguage('haw'));
-
-    const savedLang = localStorage.getItem('khpaLang') || 'en';
-    setLanguage(savedLang);
-  </script>
-
+<script src="Js/site.js"></script>
+<script src="Js/khpa-bot.js"></script>
 </body>
 </html>
