@@ -25,83 +25,47 @@
       return "Please enter your question so that guidance may be provided.";
     }
 
-    if (
-      q.includes("office") ||
-      q.includes("island office") ||
-      q.includes("where do i submit") ||
-      q.includes("submit")
-    ) {
-      return "All documents are processed through the appropriate island office in order to maintain proper routing, verification, and record integrity. If you need help identifying the correct office pathway, please use the Direct Assistance form.";
+    if (q.includes("office") || q.includes("submit")) {
+      return "All documents are processed through the appropriate island office to maintain proper routing, verification, and record integrity. Use Direct Assistance for guidance.";
     }
 
-    if (
-      q.includes("protocol") ||
-      q.includes("requirement") ||
-      q.includes("what do i need") ||
-      q.includes("required")
-    ) {
-      return "Uniform protocol applies to submissions, verification, and filing review. Supporting documents, completed forms, and proper routing are part of the standard administrative process. Please review the Protocol page or use Direct Assistance for clarification.";
+    if (q.includes("protocol") || q.includes("requirement")) {
+      return "Uniform protocol applies to all submissions, verification, and filing review. Please consult the Protocol section or request assistance.";
     }
 
-    if (q.includes("registration") || q.includes("register")) {
-      return "Registration services are handled through official filing procedure. Please review the Registration and Licensing section and prepare the proper form packet before submission through the island office process.";
+    if (q.includes("registration")) {
+      return "Registration services follow official filing procedures. Prepare the correct form packet and submit through the island office process.";
     }
 
-    if (q.includes("license") || q.includes("licensing")) {
-      return "Licensing matters follow the Registration and Licensing pathway. Completion of the proper form packet and submission through the island office process are required for administrative review.";
+    if (q.includes("license")) {
+      return "Licensing services are handled through the Registration and Licensing portal and require proper documentation and submission routing.";
     }
 
-    if (
-      q.includes("id") ||
-      q.includes("identification") ||
-      q.includes("operator")
-    ) {
-      return "Identification and operator certificate matters follow the same administrative submission pathway. Please use the proper application packet and submit through island office protocol for review and processing.";
+    if (q.includes("id") || q.includes("operator")) {
+      return "Identification and operator certificates follow the same administrative submission pathway through island offices.";
     }
 
     if (q.includes("vehicle")) {
-      return "Vehicle-related filings require the appropriate registration packet and supporting ownership documentation. Please consult the Registration and Licensing section and submit through the island office process.";
+      return "Vehicle registration requires proper documentation and must be submitted through the island office process.";
     }
 
     if (q.includes("vessel") || q.includes("boat")) {
-      return "Vessel registration matters require the proper packet and supporting documentation. Administrative routing and verification are handled through the island office submission process.";
+      return "Vessel registration requires proper documentation and submission through the island office process.";
     }
 
     if (q.includes("business")) {
-      return "Business registration matters must follow the standard filing pathway. Please review the Registration and Licensing section for the applicable category and required submission route.";
+      return "Business registration follows standard filing procedures. Please review Registration & Licensing for details.";
     }
 
-    if (
-      q.includes("document") ||
-      q.includes("pdf") ||
-      q.includes("record") ||
-      q.includes("archive")
-    ) {
-      return "Government documents are maintained in the Government Documents section for public administrative reference. If you need help locating a specific record, please use the Direct Assistance form for routing support.";
+    if (q.includes("document") || q.includes("pdf")) {
+      return "Government documents are available in the Government Documents section for public administrative reference.";
     }
 
-    if (
-      q.includes("history") ||
-      q.includes("constitution") ||
-      q.includes("kamehameha") ||
-      q.includes("proclamation")
-    ) {
-      return "Historical and founding records are maintained through the Government Documents section as part of the public reference archive.";
+    if (q.includes("help") || q.includes("contact")) {
+      return "For official assistance, please use the Direct Assistance form below so your request can be properly routed and processed.";
     }
 
-    if (
-      q.includes("contact") ||
-      q.includes("help") ||
-      q.includes("assistance")
-    ) {
-      return "For official help regarding routing, submissions, filings, or records, please use the Direct Assistance form on this page. Matters requiring review are handled through administrative follow-up.";
-    }
-
-    if (q.includes("emporium") || q.includes("artisan") || q.includes("vendor")) {
-      return "Emporium and artisan-related matters should be routed through the appropriate public contact pathway for review. Please use the Direct Assistance form so the inquiry can be properly received and processed.";
-    }
-
-    return "This inquiry may require official review. For routing, document guidance, submission clarification, or administrative assistance, please use the Direct Assistance form below so the matter can be properly received and processed.";
+    return "This inquiry may require official review. Please use the Direct Assistance form so your request can be properly received and processed.";
   }
 
   function sendQuestion() {
@@ -109,10 +73,9 @@
     if (!text) return;
 
     addMessage(text, "user");
-    const reply = getReply(text);
 
     setTimeout(function () {
-      addMessage(reply, "bot");
+      addMessage(getReply(text), "bot");
     }, 150);
 
     botInput.value = "";
@@ -131,7 +94,7 @@
     botAssist.addEventListener("click", function () {
       const form = document.getElementById("direct-assistance-form");
       if (form) {
-        form.scrollIntoView({ behavior: "smooth", block: "start" });
+        form.scrollIntoView({ behavior: "smooth" });
       }
     });
   }
