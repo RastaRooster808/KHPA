@@ -1,198 +1,332 @@
-<<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>KHPA — Emporium</title>
+  <title>Emporium | KHPA</title>
+  <link rel="stylesheet" href="css/main.css" />
 </head>
-
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- KHPA Header (Home + Nav + Language Toggle) -->
-  <header class="khpa-header" role="banner">
-    <div class="khpa-header__inner">
-      <a class="khpa-home" href="/index.html" aria-label="Home">
-        <span class="khpa-home__crest" aria-hidden="true">KHPA</span>
-        <span class="khpa-home__text">
-          <span class="khpa-home__title">Ko Hawaiʻi Pae ʻĀina</span>
-          <span class="khpa-home__sub">Kingdom Services Portal</span>
-        </span>
-      </a>
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="seal">
+      <img src="img/seal.png" alt="KHPA Seal" onerror="this.style.display='none'">
+    </div>
+    <div class="brand">
+      <h1>Ko Hawaiʻi Pae ʻĀina (KHPA)</h1>
+      <p class="tagline">Emporium • Community Listings & Public Information</p>
+    </div>
+  </div>
 
-      <nav class="khpa-nav" aria-label="Primary">
-        <a class="khpa-nav__link" href="/index.html">Home</a>
-        <a class="khpa-nav__link" href="/government-documents.html">Government Documents</a>
-        <a class="khpa-nav__link" href="/registration.html">Registration &amp; Licensing</a>
-        <a class="khpa-nav__link is-active" href="/emporium">Emporium</a>
-        <a class="khpa-nav__link" href="/contact.html">Contact</a>
-      </nav>
+  <div class="navbar">
+    <div class="container" style="justify-content:space-between; flex-wrap:wrap;">
+      <ul class="nav" aria-label="Primary">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="hawaii.html">Island Offices</a></li>
+        <li><a href="government-documents.html">Government Documents</a></li>
+        <li><a href="registration.html">Registration &amp; Licensing</a></li>
+        <li><a href="emporium.html">Emporium</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
 
-      <div class="khpa-lang" role="navigation" aria-label="Language Toggle">
-        <button class="khpa-lang__btn is-active" type="button" data-lang="en" aria-pressed="true">English</button>
-        <button class="khpa-lang__btn" type="button" data-lang="haw" aria-pressed="false">ʻŌlelo Hawaiʻi</button>
+      <div class="lang-toggle" aria-label="Language Toggle">
+        <button class="lang-btn active" type="button" data-lang="en" aria-pressed="true">English</button>
+        <button class="lang-btn" type="button" data-lang="haw" aria-pressed="false">ʻŌlelo Hawaiʻi</button>
       </div>
     </div>
-  </header>
+  </div>
+</header>
 
-  <main class="page" id="main">
-    <!-- ENGLISH (visible by default) -->
+<main id="main">
+  <div class="container">
+
+    <!-- ENGLISH -->
     <section data-lang-section="en">
-      <h1>Emporium</h1>
+      <h2 class="page-title">Emporium</h2>
+      <div class="section-divider"></div>
 
-      <p><strong>Affiliation:</strong> The KHPA Emporium is a product of <strong>Ko Hawaiʻi Pae ʻĀina (KHPA)</strong>.</p>
-
-      <p><strong>Purpose:</strong> The Emporium provides informational listings for community offerings. KHPA does not conduct sales, accept payment, or process transactions through this page.</p>
-
-      <p><strong>Eligibility Requirement:</strong> Applicants <strong>must</strong> hold a valid <strong>KHPA Business Identification</strong> and <strong>KHPA Business Registration</strong> prior to submission.</p>
-
-      <p><strong>Submission &amp; Processing:</strong> Emporium applications <strong>shall</strong> be submitted in accordance with <strong>Kingdom Protocol</strong> and <strong>shall</strong> be received, reviewed, and processed through <strong>KHPA</strong>.</p>
-
-      <p><strong>External Link:</strong> This page includes a link to
-        <a href="https://rastarooster.com" target="_blank" rel="noopener">RastaRooster.com</a>.
+      <p class="lede">
+        The KHPA Emporium provides informational listings for approved community offerings and affiliated providers.
+        This page serves as a public reference portal and does not function as a direct transaction platform.
       </p>
+
+      <div class="notice" role="status">
+        <strong>Official Notice:</strong> KHPA does not conduct direct sales, collect payments, or process transactions through this page.
+        Listings are presented for informational purposes and are subject to Kingdom protocol and administrative review.
+      </div>
+
+      <section class="panel" aria-label="Emporium affiliation">
+        <div class="panel-header">
+          <h3 class="panel-title">Affiliation & Purpose</h3>
+          <span class="badge">Public</span>
+        </div>
+
+        <ul class="doclist">
+          <li>
+            <div class="left">
+              <strong>Affiliation</strong>
+              <div class="meta">The KHPA Emporium is a product of Ko Hawaiʻi Pae ʻĀina (KHPA).</div>
+            </div>
+          </li>
+          <li>
+            <div class="left">
+              <strong>Purpose</strong>
+              <div class="meta">The Emporium provides informational listings for community offerings, independent providers, and approved affiliated expressions.</div>
+            </div>
+          </li>
+          <li>
+            <div class="left">
+              <strong>Eligibility Requirement</strong>
+              <div class="meta">Applicants must hold a valid KHPA Business Identification and KHPA Business Registration prior to submission.</div>
+            </div>
+          </li>
+          <li>
+            <div class="left">
+              <strong>Submission &amp; Processing</strong>
+              <div class="meta">Emporium applications shall be submitted in accordance with Kingdom Protocol and shall be received, reviewed, and processed through KHPA.</div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <section class="panel" aria-label="Featured listings">
+        <div class="panel-header">
+          <h3 class="panel-title">Featured Listings</h3>
+          <span class="badge">Informational</span>
+        </div>
+
+        <div class="tiles">
+          <article class="tile">
+            <h3>Elijah U Blessings</h3>
+            <p>
+              Ceremonials and sacred items intended to support cultural expression, spiritual observance, and traditional presentation.
+              Services and items are presented for informational purposes through the Emporium and are offered independently through the listed provider.
+            </p>
+            <div class="actions">
+              <a class="button secondary" href="https://eijahublissings.godaddysites.com" target="_blank" rel="noopener">Visit Provider</a>
+            </div>
+          </article>
+
+          <article class="tile">
+            <h3>RastaRooster.com</h3>
+            <p>
+              External affiliated link for products, apparel, and related offerings connected to the broader community network.
+              This link is provided as an external reference and is maintained independently.
+            </p>
+            <div class="actions">
+              <a class="button secondary" href="https://rastarooster.com" target="_blank" rel="noopener">Visit Site</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel" aria-label="Application guidance">
+        <div class="panel-header">
+          <h3 class="panel-title">Application Guidance</h3>
+          <span class="badge">Standard</span>
+        </div>
+
+        <ul class="doclist">
+          <li>
+            <div class="left">
+              <strong>Step 1 — Establish Eligibility</strong>
+              <div class="meta">Obtain valid KHPA Business Identification and KHPA Business Registration.</div>
+            </div>
+            <div><span class="pill">Required</span></div>
+          </li>
+          <li>
+            <div class="left">
+              <strong>Step 2 — Follow Protocol</strong>
+              <div class="meta">Prepare and submit your application in accordance with Kingdom Protocol.</div>
+            </div>
+            <div><a class="button secondary" href="protocols.html">Protocol</a></div>
+          </li>
+          <li>
+            <div class="left">
+              <strong>Step 3 — Review & Processing</strong>
+              <div class="meta">Applications are received, reviewed, and processed through KHPA administrative channels.</div>
+            </div>
+            <div><a class="button secondary" href="contact.html">Direct Assistance</a></div>
+          </li>
+        </ul>
+      </section>
     </section>
 
-    <!-- ʻŌLELO HAWAIʻI (hidden until toggled) -->
+    <!-- HAWAIIAN -->
     <section data-lang-section="haw" hidden>
-      <h1>Hale Kūʻai</h1>
+      <h2 class="page-title">Hale Kūʻai</h2>
+      <div class="section-divider"></div>
 
-      <p><strong>Pili Kūlana:</strong> He huahana ka Hale Kūʻai KHPA na <strong>Ko Hawaiʻi Pae ʻĀina (KHPA)</strong>.</p>
-
-      <p><strong>Kumu:</strong> Hāʻawi kēia ʻaoʻao i ka ʻike no nā papa inoa pili kaiāulu. ʻAʻole mālama ka KHPA i ke kūʻai aku, ka ʻae uku, a i ʻole ka hoʻoponopono kālepa ma kēia ʻaoʻao.</p>
-
-      <p><strong>Koi Komo:</strong> <strong>Pono</strong> i ka mea noi ke loaʻa he <strong>KHPA Business Identification</strong> a me <strong>KHPA Business Registration</strong> kūpono ma mua o ka waiho ʻana.</p>
-
-      <p><strong>Waiho &amp; Hoʻoponopono:</strong> <strong>E waiho ʻia</strong> nā noi no ka Hale Kūʻai ma lalo o ka <strong>Kingdom Protocol</strong>, a <strong>e nānā ʻia</strong> a <strong>e hoʻoponopono ʻia</strong> ma o ka <strong>KHPA</strong>.</p>
-
-      <p><strong>Loulou Kūwaho:</strong> Aia ma kēia ʻaoʻao he loulou i
-        <a href="https://rastarooster.com" target="_blank" rel="noopener">RastaRooster.com</a>.
+      <p class="lede">
+        Hāʻawi ka Hale Kūʻai KHPA i nā papa ʻike no nā mea hāʻawi kaiāulu i ʻae ʻia a me nā mea pili kūhelu.
+        He ʻaoʻao ʻike lehulehu kēia, ʻaʻole ia he kahua kūʻai pololei.
       </p>
+
+      <div class="notice" role="status">
+        <strong>Hoʻolaha Kūhelu:</strong> ʻAʻole mālama ka KHPA i ke kūʻai pololei, ka ʻohi uku, a me ka hoʻoponopono kālepa ma kēia ʻaoʻao.
+        Hōʻike ʻia nā papa inoa no ka ʻike wale nō, a pili lākou i ke Kingdom Protocol a me ka nānā hoʻokele.
+      </div>
+
+      <section class="panel" aria-label="Emporium affiliation in Hawaiian">
+        <div class="panel-header">
+          <h3 class="panel-title">Pili Kūlana & Kumu</h3>
+          <span class="badge">Lehulehu</span>
+        </div>
+
+        <ul class="doclist">
+          <li>
+            <div class="left">
+              <strong>Pili Kūlana</strong>
+              <div class="meta">He huahana ka Hale Kūʻai KHPA na Ko Hawaiʻi Pae ʻĀina (KHPA).</div>
+            </div>
+          </li>
+          <li>
+            <div class="left">
+              <strong>Kumu</strong>
+              <div class="meta">Hāʻawi ka Hale Kūʻai i nā papa ʻike no nā mea hāʻawi kaiāulu, nā mea lawelawe kūʻokoʻa, a me nā hōʻike pili i ʻae ʻia.</div>
+            </div>
+          </li>
+          <li>
+            <div class="left">
+              <strong>Koi Komo</strong>
+              <div class="meta">Pono i ka mea noi ke loaʻa he KHPA Business Identification kūpono a me KHPA Business Registration kūpono ma mua o ka waiho ʻana.</div>
+            </div>
+          </li>
+          <li>
+            <div class="left">
+              <strong>Waiho &amp; Hoʻoponopono</strong>
+              <div class="meta">E waiho ʻia nā noi no ka Hale Kūʻai ma lalo o ke Kingdom Protocol, a e nānā ʻia a e hoʻoponopono ʻia ma o ka KHPA.</div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <section class="panel" aria-label="Featured listings in Hawaiian">
+        <div class="panel-header">
+          <h3 class="panel-title">Nā Papa Hōʻike Kūikawā</h3>
+          <span class="badge">ʻIke</span>
+        </div>
+
+        <div class="tiles">
+          <article class="tile">
+            <h3>Elijah U Blessings</h3>
+            <p>
+              Nā hana ceremonial a me nā mea hemolele e kākoʻo ana i ka hōʻike moʻomeheu, ka mālama ʻuhane, a me nā hana kuʻuna.
+              Hōʻike ʻia kēia mau lawelawe a me nā mea no ka ʻike wale nō ma o ka Emporium, a mālama kūʻokoʻa ʻia e ka mea hāʻawi i helu ʻia.
+            </p>
+            <div class="actions">
+              <a class="button secondary" href="https://eijahublissings.godaddysites.com" target="_blank" rel="noopener">E Kipa</a>
+            </div>
+          </article>
+
+          <article class="tile">
+            <h3>RastaRooster.com</h3>
+            <p>
+              He loulou kūwaho pili kēia no nā huahana, nā lole, a me nā mea hāʻawi ʻē aʻe e pili ana i ka pūnaewele kaiāulu ākea.
+              Hāʻawi ʻia kēia loulou ma ke ʻano he kuhikuhi kūwaho, a mālama kūʻokoʻa ʻia.
+            </p>
+            <div class="actions">
+              <a class="button secondary" href="https://rastarooster.com" target="_blank" rel="noopener">E Kipa</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel" aria-label="Application guidance in Hawaiian">
+        <div class="panel-header">
+          <h3 class="panel-title">Alakaʻi Noi</h3>
+          <span class="badge">Kūlana</span>
+        </div>
+
+        <ul class="doclist">
+          <li>
+            <div class="left">
+              <strong>ʻAnuʻu 1 — Hoʻokumu i ke Kuleana</strong>
+              <div class="meta">E loaʻa mua ka KHPA Business Identification a me ka KHPA Business Registration kūpono.</div>
+            </div>
+            <div><span class="pill">Pono</span></div>
+          </li>
+          <li>
+            <div class="left">
+              <strong>ʻAnuʻu 2 — E Hahai i ke Protocol</strong>
+              <div class="meta">E hoʻomākaukau a e waiho i kāu noi ma lalo o ke Kingdom Protocol.</div>
+            </div>
+            <div><a class="button secondary" href="protocols.html">Protocol</a></div>
+          </li>
+          <li>
+            <div class="left">
+              <strong>ʻAnuʻu 3 — Nānā & Hoʻoponopono</strong>
+              <div class="meta">E loaʻa, e nānā, a e hoʻoponopono ʻia nā noi ma nā ala hoʻokele o KHPA.</div>
+            </div>
+            <div><a class="button secondary" href="contact.html">Kōkua Pololei</a></div>
+          </li>
+        </ul>
+      </section>
     </section>
-  </main>
 
-  <style>
-    /* Header */
-    .khpa-header{
-      position: sticky; top: 0; z-index: 50;
-      background: #fff;
-      border-bottom: 1px solid rgba(0,0,0,.12);
-    }
-    .khpa-header__inner{
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 12px 16px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-    .khpa-home{
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-      color: inherit;
-      border: 1px solid rgba(0,0,0,.14);
-      border-radius: 14px;
-      padding: 10px 12px;
-      background: #fff;
-    }
-    .khpa-home__crest{
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 44px; height: 44px;
-      border-radius: 12px;
-      border: 1px solid rgba(0,0,0,.18);
-      font-weight: 800;
-      letter-spacing: .6px;
-    }
-    .khpa-home__text{ display: grid; line-height: 1.1; }
-    .khpa-home__title{ font-weight: 800; }
-    .khpa-home__sub{ font-size: .86rem; opacity: .8; margin-top: 3px; }
+  </div>
+</main>
 
-    .khpa-nav{
-      display: flex;
-      gap: 10px;
-      flex: 1 1 auto;
-      min-width: 240px;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: center;
-    }
-    .khpa-nav__link{
-      text-decoration: none;
-      color: inherit;
-      padding: 10px 12px;
-      border-radius: 12px;
-      border: 1px solid transparent;
-      opacity: .9;
-      white-space: nowrap;
-    }
-    .khpa-nav__link:hover{
-      border-color: rgba(0,0,0,.14);
-      background: rgba(0,0,0,.03);
-      opacity: 1;
-    }
-    .khpa-nav__link.is-active{
-      border-color: rgba(0,0,0,.28);
-      font-weight: 800;
-      opacity: 1;
-    }
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <p>Email: <a href="mailto:khparelationsaffairs@gmail.com">khparelationsaffairs@gmail.com</a></p>
+      <p>Phone: <a href="tel:+18083333459">(808) 333-3459</a></p>
+    </div>
+    <div class="footer-col">
+      <h4>Resources</h4>
+      <p><a href="registration.html">Registration &amp; Licensing</a></p>
+      <p><a href="protocols.html">Protocol</a></p>
+      <p><a href="contact.html">Direct Assistance</a></p>
+    </div>
+    <div class="footer-col">
+      <h4>Notice</h4>
+      <p>&copy; <span id="year"></span> KHPA</p>
+      <p class="small">Public information portal</p>
+    </div>
+  </div>
+</footer>
 
-    .khpa-lang{ display: inline-flex; gap: 8px; margin-left: auto; }
-    .khpa-lang__btn{
-      border: 1px solid rgba(0,0,0,.18);
-      border-radius: 12px;
-      padding: 10px 12px;
-      background: #fff;
-      cursor: pointer;
-      font-weight: 600;
-    }
-    .khpa-lang__btn.is-active{
-      border-color: rgba(0,0,0,.42);
-      font-weight: 800;
-    }
+<script src="Js/site.js"></script>
+<script>
+(function () {
+  const buttons = document.querySelectorAll(".lang-btn");
+  const sections = document.querySelectorAll("[data-lang-section]");
 
-    /* Page body */
-    .page{ max-width: 900px; margin: 0 auto; padding: 26px 16px; line-height: 1.65; }
-    h1{ margin: 0 0 14px; font-size: 2rem; }
-    p{ margin: 10px 0; }
-    a{ text-decoration: underline; }
+  function setLang(lang) {
+    sections.forEach(function (section) {
+      section.hidden = section.getAttribute("data-lang-section") !== lang;
+    });
 
-    @media (max-width: 760px){
-      .khpa-header__inner{ justify-content: center; }
-      .khpa-lang{ width: 100%; justify-content: center; margin-left: 0; }
-    }
-  </style>
+    buttons.forEach(function (btn) {
+      const active = btn.getAttribute("data-lang") === lang;
+      btn.classList.toggle("active", active);
+      btn.setAttribute("aria-pressed", String(active));
+    });
 
-  <script>
-    (function () {
-      const buttons = document.querySelectorAll(".khpa-lang__btn");
-      const sections = document.querySelectorAll("[data-lang-section]");
+    try {
+      localStorage.setItem("khpa_lang", lang);
+    } catch (e) {}
 
-      function setLang(lang) {
-        sections.forEach(sec => {
-          sec.hidden = (sec.getAttribute("data-lang-section") !== lang);
-        });
+    document.documentElement.setAttribute("lang", lang === "haw" ? "haw" : "en");
+  }
 
-        buttons.forEach(btn => {
-          const on = btn.getAttribute("data-lang") === lang;
-          btn.classList.toggle("is-active", on);
-          btn.setAttribute("aria-pressed", String(on));
-        });
+  buttons.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      setLang(btn.getAttribute("data-lang"));
+    });
+  });
 
-        try { localStorage.setItem("khpa_lang", lang); } catch(e) {}
-        document.documentElement.setAttribute("lang", lang === "haw" ? "haw" : "en");
-      }
+  let saved = "en";
+  try {
+    saved = localStorage.getItem("khpa_lang") || "en";
+  } catch (e) {}
 
-      buttons.forEach(btn => btn.addEventListener("click", () => setLang(btn.getAttribute("data-lang"))));
-
-      let saved = "en";
-      try { saved = localStorage.getItem("khpa_lang") || "en"; } catch(e) {}
-      setLang(saved);
-    })();
-  </script>
-
+  setLang(saved);
+})();
+</script>
 </body>
 </html>
