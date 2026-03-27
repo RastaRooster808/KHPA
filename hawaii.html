@@ -1,56 +1,298 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head><link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap" rel="stylesheet">
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Ko Hawaiʻi Pae ʻĀina</title>
-  <link rel="stylesheet" href="/css/style-formal.css"/>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Island Offices | KHPA</title>
+  <link rel="stylesheet" href="css/main.css" />
+  <style>
+    .island-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .island-button-stack {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .island-button-stack .button {
+      width: 100%;
+      text-align: left;
+      justify-content: flex-start;
+    }
+
+    .office-card {
+      border: 1px solid rgba(0,0,0,0.12);
+      border-radius: 12px;
+      padding: 16px;
+      background: rgba(255,255,255,0.82);
+    }
+
+    .office-card h4 {
+      margin: 0 0 8px 0;
+    }
+
+    .office-card p {
+      margin: 0 0 8px 0;
+    }
+
+    .decree-box {
+      border-left: 4px solid #8b6b2e;
+      padding-left: 14px;
+      margin-top: 12px;
+    }
+
+    @media (min-width: 860px) {
+      .island-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
-  <header style="text-align: center; padding: 1rem 0; font-family: 'Georgia', serif;">
-    <img src="/images/khpa-logo-transparent.png" alt="Kingdom Coat of Arms" style="width: 150px;">
-    <h1 style="font-size: 2.5em; margin: 0; font-weight: bold; color: #5A2B0C;">Ko Hawai‘i Pae ʻĀina</h1>
-    <p style="font-style: italic; color: #6B4E3D; font-size: 1.1em;">
-      Indigenous Cognizant Expressions of ʻĀina and Sacred Protocol
-    </p>
-  </header>
+<a class="skip-link" href="#main">Skip to content</a>
 
-  <nav>
-    <ul>
-      <li class="dropdown">
-        <a href="#">Island Offices</a>
-        <ul class="dropdown-content">
-          <li><a href="hawaii.html">Hawai‘i</a></li>
-          <li><a href="maui.html">Maui</a></li>
-          <li><a href="molokai.html">Moloka‘i</a></li>
-          <li><a href="oahu.html">O‘ahu</a></li>
-        </ul>
-      </li>
-      <li><a href="#documents">Government Documents</a></li>
-      <li><a href="#emporium">Emporium</a></li>
-    </ul>
-  </nav>
-
-  <h2 style="text-align: center; font-family: Cinzel;">Map of the Kingdom</h2>
-  <section id="island-map-banner">
-    <img src="/img/island-map.jpg" alt="Map of Hawaiian Islands" class="island-map-banner"/>
-  </section>
-
-  <section id="kk3-scroll">
-    <h2 style="text-align: center;">Kamehameha III Proclamation</h2>
-    <img src="/img/kk3_proclamation_scroll_style.jpeg" alt="King Kamehameha III Scroll" style="width: 100%; max-width: 800px; margin: 2rem auto; display: block; border: 2px solid #9a0000; border-radius: 8px;" />
-    <p style="text-align: center; margin-top: 1rem;">
-      <a href="/pdf/KK3_Declaration.pdf" target="_blank" class="download-btn">Download the Declaration (PDF)</a>
-    </p>
-  </section>
-
-  <div class="cta-box">
-    <p>Ready to Register Your Vehicle, Boat, or Business?</p>
-    <a href="/registration.html" class="cta-button">Start Registration</a>
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="seal">
+      <img src="img/seal.png" alt="KHPA Seal" onerror="this.style.display='none'">
+    </div>
+    <div class="brand">
+      <h1>Ko Hawaiʻi Pae ʻĀina (KHPA)</h1>
+      <p class="tagline">Island Offices • Public Routing & Administrative Access</p>
+    </div>
   </div>
 
-  <footer>
-    <p>© 2025 Ko Hawaiʻi Pae ʻĀina. All rights reserved.</p>
-  </footer>
+  <div class="navbar">
+    <div class="container">
+      <ul class="nav" aria-label="Primary">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="hawaii.html" aria-current="page">Island Offices</a></li>
+        <li><a href="government-documents.html">Government Documents</a></li>
+        <li><a href="registration.html">Registration &amp; Licensing</a></li>
+        <li><a href="emporium.html">Emporium</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="container">
+
+    <h2 class="page-title">Island Offices</h2>
+    <div class="section-divider"></div>
+
+    <p class="lede">
+      This page provides ceremonial and administrative routing for island offices of Ko Hawaiʻi Pae ʻĀina.
+      It is presented as a public point of access for contact, submission direction, and orderly communication across the islands.
+    </p>
+
+    <div class="notice" role="status">
+      <strong>Official Notice:</strong> This page is organized as a ceremonial declaration of office access and public administrative routing. It does not use state-based framing. Matters requiring review, protocol, or document handling proceed through proper office channels.
+    </div>
+
+    <!-- ISLAND ACCESS -->
+    <section class="panel" aria-label="Island office access">
+      <div class="panel-header">
+        <h3 class="panel-title">Island Office Access</h3>
+        <span class="badge">Public Routing</span>
+      </div>
+
+      <p class="small" style="margin:0 0 10px 0;">
+        Use the buttons below for direct island access. This layout is designed for easy mobile navigation and orderly vertical access.
+      </p>
+
+      <div class="island-button-stack">
+        <a class="button" href="#hawaii-office">Hawaiʻi Island Office</a>
+        <a class="button" href="#oahu-office">Oʻahu Office</a>
+        <a class="button" href="#maui-office">Maui Office</a>
+        <a class="button" href="#molokai-office">Molokaʻi Office</a>
+      </div>
+    </section>
+
+    <!-- PRIME MINISTER DECREE -->
+    <section class="panel" aria-label="Prime Minister ceremonial decree">
+      <div class="panel-header">
+        <h3 class="panel-title">Office of the Prime Minister</h3>
+        <span class="badge">Ceremonial Declaration</span>
+      </div>
+
+      <div class="decree-box">
+        <p class="small" style="margin:0 0 10px 0;">
+          <strong>Decree of Administrative Order and Public Access</strong>
+        </p>
+        <p class="small" style="margin:0 0 10px 0;">
+          Let it be publicly known that the island offices listed herein are presented for ceremonial recognition, administrative order, and accessible communication within Ko Hawaiʻi Pae ʻĀina.
+        </p>
+        <p class="small" style="margin:0 0 10px 0;">
+          These offices stand as points of routing, guidance, and reception for matters concerning documents, protocol, registration, island correspondence, and public assistance.
+        </p>
+        <p class="small" style="margin:0;">
+          All persons approaching these channels are asked to proceed with dignity, respect, and observance of proper protocol, so that communication may remain orderly, transparent, and beneficial to the people and the ʻāina.
+        </p>
+      </div>
+    </section>
+
+    <!-- BOOKLET OUTLINE -->
+    <section class="panel" aria-label="Hawaiian Kingdom booklet outline">
+      <div class="panel-header">
+        <h3 class="panel-title">Hawaiian Kingdom Booklet</h3>
+        <span class="badge">Basic Outline</span>
+      </div>
+
+      <ul class="doclist">
+        <li>
+          <div class="left">
+            <strong>1. Ceremonial Introduction</strong>
+            <div class="meta">Purpose of the booklet, public notice, and formal opening language</div>
+          </div>
+        </li>
+        <li>
+          <div class="left">
+            <strong>2. Foundational Declarations</strong>
+            <div class="meta">Selected proclamations, declarations, and public ceremonial texts</div>
+          </div>
+        </li>
+        <li>
+          <div class="left">
+            <strong>3. Office of the Prime Minister</strong>
+            <div class="meta">Administrative decree, routing standard, and public communication order</div>
+          </div>
+        </li>
+        <li>
+          <div class="left">
+            <strong>4. Island Offices</strong>
+            <div class="meta">Island-by-island contact access, office roles, and submission pathways</div>
+          </div>
+        </li>
+        <li>
+          <div class="left">
+            <strong>5. Registration &amp; Licensing</strong>
+            <div class="meta">Public-facing outline of service categories and filing direction</div>
+          </div>
+        </li>
+        <li>
+          <div class="left">
+            <strong>6. Protocol &amp; Participation</strong>
+            <div class="meta">Submission standards, document order, and ceremonial observance</div>
+          </div>
+        </li>
+        <li>
+          <div class="left">
+            <strong>7. Government Documents</strong>
+            <div class="meta">Reference archive and public materials</div>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ISLAND OFFICES -->
+    <section class="panel" aria-label="Island office directory">
+      <div class="panel-header">
+        <h3 class="panel-title">Island Office Directory</h3>
+        <span class="badge">Access</span>
+      </div>
+
+      <div class="island-grid">
+
+        <article id="hawaii-office" class="office-card" aria-label="Hawaiʻi Island Office">
+          <h4>Hawaiʻi Island Office</h4>
+          <p><strong>Location:</strong> 159 Keawe St, Hilo, Hawaiʻi</p>
+          <p><strong>Hours:</strong> Hilo Hours 10:00 AM – 12:00 PM</p>
+          <p><strong>Email:</strong> <a href="mailto:khparelationsaffairs@gmail.com">khparelationsaffairs@gmail.com</a></p>
+          <p><strong>Phone:</strong> <a href="tel:+18083333459">(808) 333-3459</a></p>
+          <p class="small" style="margin-bottom:0;">
+            Primary public routing for assistance, office follow-up, and administrative guidance.
+          </p>
+        </article>
+
+        <article id="oahu-office" class="office-card" aria-label="Oʻahu Office">
+          <h4>Oʻahu Office</h4>
+          <p><strong>Mailing:</strong> Box 23055 Makiki Station, Oʻahu</p>
+          <p><strong>Email:</strong> <a href="mailto:SCCJ.KHPA@pm.me">SCCJ.KHPA@pm.me</a></p>
+          <p><strong>Status:</strong> Public contact access available</p>
+          <p class="small" style="margin-bottom:0;">
+            Oʻahu communications and administrative matters may be directed through this office contact.
+          </p>
+        </article>
+
+        <article id="maui-office" class="office-card" aria-label="Maui Office">
+          <h4>Maui Office</h4>
+          <p><strong>Status:</strong> Coming Soon</p>
+          <p class="small" style="margin-bottom:0;">
+            Administrative routing details for Maui will be posted here as public access information becomes available.
+          </p>
+        </article>
+
+        <article id="molokai-office" class="office-card" aria-label="Molokaʻi Office">
+          <h4>Molokaʻi Office</h4>
+          <p><strong>Status:</strong> Coming Soon</p>
+          <p class="small" style="margin-bottom:0;">
+            Administrative routing details for Molokaʻi will be posted here as public access information becomes available.
+          </p>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- QUICK ACTIONS -->
+    <section class="panel" aria-label="Quick actions">
+      <div class="panel-header">
+        <h3 class="panel-title">Quick Actions</h3>
+        <span class="badge">Mobile Access</span>
+      </div>
+
+      <div class="island-button-stack">
+        <a class="button secondary" href="mailto:khparelationsaffairs@gmail.com">Email Primary Office</a>
+        <a class="button secondary" href="mailto:SCCJ.KHPA@pm.me">Email Oʻahu Office</a>
+        <a class="button secondary" href="contact.html#direct-assistance-form">Go to Direct Assistance</a>
+        <a class="button secondary" href="registration.html">Open Registration &amp; Licensing</a>
+        <a class="button secondary" href="government-documents.html">Open Government Documents</a>
+      </div>
+    </section>
+
+    <!-- ADMINISTRATIVE STATEMENT -->
+    <section class="panel" aria-label="Administrative statement">
+      <div class="panel-header">
+        <h3 class="panel-title">Administrative Statement</h3>
+        <span class="badge">Standard</span>
+      </div>
+
+      <p class="small" style="margin:0;">
+        This directory is presented as a ceremonial and administrative access page. Its purpose is to support orderly communication, office contact, document routing, and practical navigation for the public. Ceremonial proclamations are commonly used to designate observances and public recognitions, which fits the framing you asked for here.  [oai_citation:0‡National Archives](https://www.archives.gov/federal-register/tutorial/online-html.html?utm_source=chatgpt.com)
+      </p>
+    </section>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <p>Email: <a href="mailto:khparelationsaffairs@gmail.com">khparelationsaffairs@gmail.com</a></p>
+      <p>Phone: <a href="tel:+18083333459">(808) 333-3459</a></p>
+      <p>Oʻahu: <a href="mailto:SCCJ.KHPA@pm.me">SCCJ.KHPA@pm.me</a></p>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <p><a href="registration.html">Registration &amp; Licensing</a></p>
+      <p><a href="government-documents.html">Government Documents</a></p>
+      <p><a href="contact.html">Direct Assistance</a></p>
+    </div>
+    <div class="footer-col">
+      <h4>Notice</h4>
+      <p>&copy; <span id="year"></span> KHPA</p>
+      <p class="small">Public administrative portal</p>
+    </div>
+  </div>
+</footer>
+
+<script src="Js/site.js"></script>
 </body>
 </html>
