@@ -1,4 +1,4 @@
-Replace the full contact.html with this cleaned version. It removes the bad email paths and makes SCHEDULE APPOINTMENT the clear main action.
+Replace the entire contact.html with this:
 
 <!doctype html>
 <html lang="en">
@@ -42,26 +42,30 @@ Replace the full contact.html with this cleaned version. It removes the bad emai
       This page provides administrative contact information, appointment scheduling, automated guidance through the KHPA Assistance Bot, and direct assistance routing.
     </p>
     <div class="notice" role="status">
-      <strong>Official Notice:</strong> Access to administrative services and restricted areas should be scheduled through the Judiciary portal before arrival.
+      <strong>Official Notice:</strong> Access to administrative services and restricted areas requires a scheduled appointment before arrival.
     </div>
+    <!-- SCHEDULE APPOINTMENT -->
     <section class="panel" aria-label="Schedule appointment">
       <div class="panel-header">
         <h3 class="panel-title">Schedule Appointment</h3>
         <span class="badge">Primary Action</span>
       </div>
       <p class="small" style="text-align:center; margin:0 0 14px 0;">
-        All access to restricted areas and administrative services requires a scheduled appointment through the Judiciary portal.
+        All access to restricted areas and administrative services requires a scheduled appointment before arrival.
       </p>
       <div style="text-align:center; margin:20px 0;">
         <a class="button"
-           href="https://judiciary.khpa.io"
-           target="_blank"
-           rel="noopener"
+           href="tel:+18087201129"
            style="font-size:18px; padding:14px 24px;">
           SCHEDULE APPOINTMENT
         </a>
       </div>
+      <p class="small" style="text-align:center; margin:0;">
+        Appointment line:
+        <a href="tel:+18087201129">(808) 720-1129</a>
+      </p>
     </section>
+    <!-- CONTACT SUMMARY -->
     <section class="panel" aria-label="Contact summary">
       <div class="panel-header">
         <h3 class="panel-title">Administrative Contact</h3>
@@ -74,16 +78,31 @@ Replace the full contact.html with this cleaned version. It removes the bad emai
             <div class="meta">Public routing for assistance and office follow-up</div>
           </div>
           <div>
-            <a class="button secondary" href="mailto:khparelationsaffairs@gmail.com">khparelationsaffairs@gmail.com</a>
+            <a class="button secondary" href="mailto:khparelationsaffairs@gmail.com">
+              khparelationsaffairs@gmail.com
+            </a>
           </div>
         </li>
         <li>
           <div class="left">
-            <strong>Phone</strong>
-            <div class="meta">Public contact line</div>
+            <strong>Public Contact Line</strong>
+            <div class="meta">General public contact line</div>
           </div>
           <div>
-            <a class="button secondary" href="tel:+18083333459">(808) 333-3459</a>
+            <a class="button secondary" href="tel:+18083333459">
+              (808) 333-3459
+            </a>
+          </div>
+        </li>
+        <li>
+          <div class="left">
+            <strong>Appointment Line</strong>
+            <div class="meta">Call to schedule appointments for restricted access and administrative services</div>
+          </div>
+          <div>
+            <a class="button secondary" href="tel:+18087201129">
+              (808) 720-1129
+            </a>
           </div>
         </li>
         <li>
@@ -92,11 +111,14 @@ Replace the full contact.html with this cleaned version. It removes the bad emai
             <div class="meta">Judiciary and appointment-related contact</div>
           </div>
           <div>
-            <a class="button secondary" href="mailto:JUDICIARY@KHPA.IO">JUDICIARY@KHPA.IO</a>
+            <a class="button secondary" href="mailto:JUDICIARY@KHPA.IO">
+              JUDICIARY@KHPA.IO
+            </a>
           </div>
         </li>
       </ul>
     </section>
+    <!-- KHPA BOT -->
     <section class="panel" aria-label="KHPA Assistance Bot">
       <div class="panel-header">
         <h3 class="panel-title">KHPA Assistance Bot</h3>
@@ -112,16 +134,25 @@ Replace the full contact.html with this cleaned version. It removes the bad emai
           </div>
         </div>
         <div class="bot-input-row">
-          <input id="botInput" type="text" placeholder="Type your question here..." aria-label="Ask the KHPA bot a question" />
+          <input
+            id="botInput"
+            type="text"
+            placeholder="Type your question here..."
+            aria-label="Ask the KHPA bot a question"
+          />
           <button id="botSend" class="button" type="button">Ask</button>
         </div>
         <div style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap;">
-          <button id="botAssist" class="button secondary" type="button">Go to Direct Assistance</button>
+          <button id="botAssist" class="button secondary" type="button">
+            Go to Direct Assistance
+          </button>
           <a class="button secondary" href="registration.html">Registration &amp; Licensing</a>
           <a class="button secondary" href="hawaii.html">Island Offices</a>
+          <a class="button secondary" href="tel:+18087201129">Schedule Appointment</a>
         </div>
       </div>
     </section>
+    <!-- QUICK LINKS -->
     <section class="panel" aria-label="Quick links">
       <div class="panel-header">
         <h3 class="panel-title">Quick Links</h3>
@@ -130,41 +161,52 @@ Replace the full contact.html with this cleaned version. It removes the bad emai
       <ul class="doclist">
         <li>
           <div class="left">
-            <a href="hawaii.html">Island Offices</a>
-            <div class="meta">Locate office routing and submission pathway information</div>
+            <a href="tel:+18087201129">Judiciary Appointment Line</a>
+            <div class="meta">Call to schedule appointments for restricted access and administrative services</div>
           </div>
-          <div><a class="button secondary" href="hawaii.html">Open</a></div>
+          <div>
+            <a class="button secondary" href="tel:+18087201129">Call</a>
+          </div>
         </li>
         <li>
           <div class="left">
-            <a href="https://judiciary.khpa.io" target="_blank" rel="noopener">Judiciary Appointment Portal</a>
-            <div class="meta">Schedule appointments for restricted access and administrative services</div>
+            <a href="hawaii.html">Island Offices</a>
+            <div class="meta">Locate office routing and submission pathway information</div>
           </div>
-          <div><a class="button secondary" href="https://judiciary.khpa.io" target="_blank" rel="noopener">Schedule</a></div>
+          <div>
+            <a class="button secondary" href="hawaii.html">Open</a>
+          </div>
         </li>
         <li>
           <div class="left">
             <a href="registration.html">Registration &amp; Licensing</a>
             <div class="meta">Forms, services, and filing categories</div>
           </div>
-          <div><a class="button secondary" href="registration.html">Open</a></div>
+          <div>
+            <a class="button secondary" href="registration.html">Open</a>
+          </div>
         </li>
         <li>
           <div class="left">
             <a href="government-documents.html">Government Documents</a>
             <div class="meta">Founding documents and public records archive</div>
           </div>
-          <div><a class="button secondary" href="government-documents.html">Open</a></div>
+          <div>
+            <a class="button secondary" href="government-documents.html">Open</a>
+          </div>
         </li>
         <li>
           <div class="left">
             <a href="foreign-affairs.html">Foreign Affairs</a>
             <div class="meta">Official posted signage, restricted entry, and access protocol</div>
           </div>
-          <div><a class="button secondary" href="foreign-affairs.html">Open</a></div>
+          <div>
+            <a class="button secondary" href="foreign-affairs.html">Open</a>
+          </div>
         </li>
       </ul>
     </section>
+    <!-- DIRECT ASSISTANCE -->
     <section id="direct-assistance-form" class="panel" aria-label="Direct Assistance Form">
       <div class="panel-header">
         <h3 class="panel-title">Direct Assistance</h3>
@@ -223,18 +265,25 @@ Replace the full contact.html with this cleaned version. It removes the bad emai
           </div>
           <div class="field field-full">
             <label for="message">Message</label>
-            <textarea id="message" name="Message" rows="8" required placeholder="Provide the details of your request, including appointment, service, document, or routing issue."></textarea>
+            <textarea
+              id="message"
+              name="Message"
+              rows="8"
+              required
+              placeholder="Provide the details of your request, including appointment, service, document, or routing issue."
+            ></textarea>
           </div>
         </div>
         <input type="hidden" name="_subject" value="KHPA Direct Assistance Submission" />
         <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;">
           <button type="submit" class="button">Submit Request</button>
+          <a class="button secondary" href="tel:+18087201129">Schedule Appointment</a>
           <a class="button secondary" href="mailto:khparelationsaffairs@gmail.com">Email Public Assistance</a>
           <a class="button secondary" href="mailto:JUDICIARY@KHPA.IO">Email Judiciary</a>
-          <a class="button secondary" href="https://judiciary.khpa.io" target="_blank" rel="noopener">Schedule Appointment</a>
         </div>
       </form>
     </section>
+    <!-- ADMINISTRATIVE STATEMENT -->
     <section class="panel" aria-label="Administrative statement">
       <div class="panel-header">
         <h3 class="panel-title">Administrative Statement</h3>
@@ -253,7 +302,8 @@ Replace the full contact.html with this cleaned version. It removes the bad emai
       <h4>Contact</h4>
       <p>Email: <a href="mailto:khparelationsaffairs@gmail.com">khparelationsaffairs@gmail.com</a></p>
       <p>Judiciary: <a href="mailto:JUDICIARY@KHPA.IO">JUDICIARY@KHPA.IO</a></p>
-      <p>Phone: <a href="tel:+18083333459">(808) 333-3459</a></p>
+      <p>Public Line: <a href="tel:+18083333459">(808) 333-3459</a></p>
+      <p>Appointments: <a href="tel:+18087201129">(808) 720-1129</a></p>
     </div>
     <div class="footer-col">
       <h4>Services</h4>
