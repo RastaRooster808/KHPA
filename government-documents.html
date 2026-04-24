@@ -1,172 +1,208 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Government Documents | Ko Hawai&#699;i Pae &#699;Aina</title>
-  <link rel="stylesheet" href="css/style-formal.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Government Documents | KHPA</title>
+  <link rel="stylesheet" href="css/main.css" />
 </head>
+
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 
-  <div class="topbar">
-    <div class="container">
-      <div class="help">
-        Assistance: <a href="mailto:KHPARELATIONSAFFAIRS@gmail.com">KHPARELATIONSAFFAIRS@gmail.com</a> |
-        <a href="tel:+18083333459">(808) 333-3459</a>
-      </div>
-      <div class="actions">
-        <a class="btn" href="index.html">Home</a>
-        <a class="btn primary" href="registration.html">Registration and Licensing</a>
-
-        <!-- Language Toggle -->
-        <button class="btn" id="langToggle" type="button" aria-label="Toggle language">
-          ʻŌlelo Hawaiʻi
-        </button>
-      </div>
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="seal">
+      <img src="img/logo.png" alt="KHPA Coat of Arms" onerror="this.style.display='none'">
+    </div>
+    <div class="brand">
+      <h1>Ko Hawaiʻi Pae ʻĀina (KHPA)</h1>
+      <p class="tagline">Government Documents • Public Records & Founding References</p>
     </div>
   </div>
 
-  <header class="header">
+  <div class="navbar">
     <div class="container">
-      <div class="row">
-        <img src="img/logo.png" alt="Seal" />
-        <div>
-          <!-- English -->
-          <h1 data-lang="en">Government Documents</h1>
-          <p data-lang="en">Founding documents and proclamations.</p>
-
-          <!-- Hawaiian -->
-          <h1 data-lang="haw" style="display:none;">Nā Palapala Aupuni</h1>
-          <p data-lang="haw" style="display:none;">Nā palapala kumu a me nā hoʻolaha aliʻi.</p>
-        </div>
-      </div>
+      <ul class="nav" aria-label="Primary">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="hawaii.html">Island Offices</a></li>
+        <li><a href="government-documents.html" class="active">Government Documents</a></li>
+        <li><a href="registration.html">Registration &amp; Licensing</a></li>
+        <li><a href="emporium.html">Emporium</a></li>
+        <li><a href="foreign-affairs.html">Foreign Affairs</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
     </div>
-  </header>
+  </div>
+</header>
 
-  <nav class="nav">
-    <div class="container">
-      <a href="index.html" data-lang="en">Home</a>
-      <a href="index.html" data-lang="haw" style="display:none;">Ka Home</a>
+<main id="main">
+  <div class="container">
 
-      <a href="contact.html" data-lang="en">Island Offices</a>
-      <a href="contact.html" data-lang="haw" style="display:none;">Nā Keʻena Mokupuni</a>
+    <h2 class="page-title">Government Documents</h2>
+    <div class="section-divider"></div>
 
-      <a class="active" href="government-documents.html" data-lang="en">Government Documents</a>
-      <a class="active" href="government-documents.html" data-lang="haw" style="display:none;">Nā Palapala Aupuni</a>
+    <p class="lede">
+      Public reference archive for foundational documents, proclamations, constitutional records, and administrative materials.
+    </p>
 
-      <a href="registration.html" data-lang="en">Registration and Licensing</a>
-      <a href="registration.html" data-lang="haw" style="display:none;">Kakau &#699;Ana a me ka Laikini</a>
-
+    <div class="notice" role="status">
+      <strong>Official Notice:</strong> These materials are provided for public reference. Questions about filings, records, or document routing should be directed through the Contact page.
     </div>
-  </nav>
 
-  <main class="container">
-
-    <section class="card">
-      <!-- English -->
-      <h2 data-lang="en">Proclamations</h2>
-      <!-- Hawaiian -->
-      <h2 data-lang="haw" style="display:none;">Nā Hoʻolaha</h2>
-
-      <div class="grid">
-        <div class="card" style="margin:0;">
-          <!-- English -->
-          <h3 data-lang="en">Kamehameha III Declaration</h3>
-          <p class="meta" data-lang="en">Primary proclamation reference.</p>
-
-          <!-- Hawaiian -->
-          <h3 data-lang="haw" style="display:none;">Ka Hoʻolaha a Kamehameha III</h3>
-          <p class="meta" data-lang="haw" style="display:none;">Kumu kuhikuhi no ka hoʻolaha nui.</p>
-
-          <a class="btn primary" href="pdf/KK3_Declaration.pdf" target="_blank" rel="noopener">View PDF</a>
-        </div>
-
-        <div class="card" style="margin:0;">
-          <!-- English -->
-          <h3 data-lang="en">Anglo-Franco Proclamation (1843)</h3>
-          <p class="meta" data-lang="en">International recognition reference.</p>
-
-          <!-- Hawaiian -->
-          <h3 data-lang="haw" style="display:none;">Ka Hoʻolaha Anglo-Franco (1843)</h3>
-          <p class="meta" data-lang="haw" style="display:none;">Kuhikuhi no ka ʻae ʻia ma ka honua.</p>
-
-          <a class="btn primary" href="pdf/Anglo_Franco_Proclamation_1843.pdf" target="_blank" rel="noopener">View PDF</a>
-        </div>
+    <section class="panel" aria-label="Proclamations">
+      <div class="panel-header">
+        <h3 class="panel-title">Proclamations</h3>
+        <span class="badge">Public Records</span>
       </div>
+
+      <ul class="doclist">
+        <li>
+          <div class="left">
+            <strong>Kamehameha III Declaration</strong>
+            <div class="meta">Primary proclamation reference.</div>
+          </div>
+          <div>
+            <a class="button secondary" href="pdf/KK3_Declaration.pdf" target="_blank" rel="noopener">View PDF</a>
+          </div>
+        </li>
+
+        <li>
+          <div class="left">
+            <strong>Anglo-Franco Proclamation (1843)</strong>
+            <div class="meta">International recognition reference.</div>
+          </div>
+          <div>
+            <a class="button secondary" href="pdf/Anglo_Franco_Proclamation_1843.pdf" target="_blank" rel="noopener">View PDF</a>
+          </div>
+        </li>
+      </ul>
     </section>
 
-    <section class="card">
-      <!-- English -->
-      <h2 data-lang="en">Government Founding Documents</h2>
-      <!-- Hawaiian -->
-      <h2 data-lang="haw" style="display:none;">Nā Palapala Kumu o ke Aupuni</h2>
-
-      <div class="grid">
-        <div class="card" style="margin:0;">
-          <h3 data-lang="en">Declaration of Rights (1839)</h3>
-          <h3 data-lang="haw" style="display:none;">Ka Palapala Hoʻike Pono (1839)</h3>
-          <a class="btn primary" href="pdf/Declaration_of_Rights_1839.pdf" target="_blank" rel="noopener">View PDF</a>
-        </div>
-
-        <div class="card" style="margin:0;">
-          <h3 data-lang="en">Constitution (1840) — English</h3>
-          <h3 data-lang="haw" style="display:none;">Kumukānāwai (1840) — Pelekānia</h3>
-          <a class="btn primary" href="pdf/Constitution_1840_English.pdf" target="_blank" rel="noopener">View PDF</a>
-        </div>
-
-        <div class="card" style="margin:0;">
-          <h3 data-lang="en">First Act of Kamehameha III</h3>
-          <h3 data-lang="haw" style="display:none;">Ka Hana Mua a Kamehameha III</h3>
-          <a class="btn primary" href="pdf/First_Act_Kamehameha_III.pdf" target="_blank" rel="noopener">View PDF</a>
-        </div>
-
-        <div class="card" style="margin:0;">
-          <h3 data-lang="en">Second Act of Kamehameha III</h3>
-          <h3 data-lang="haw" style="display:none;">Ka Hana ʻElua a Kamehameha III</h3>
-          <a class="btn primary" href="pdf/Second_Act_Kamehameha_III_1846.pdf" target="_blank" rel="noopener">View PDF</a>
-        </div>
-
-        <div class="card" style="margin:0;">
-          <h3 data-lang="en">Third Act of Kamehameha III</h3>
-          <h3 data-lang="haw" style="display:none;">Ka Hana ʻEkolu a Kamehameha III</h3>
-          <a class="btn primary" href="pdf/Third_Act_Kamehameha_III_1846.pdf" target="_blank" rel="noopener">View PDF</a>
-        </div>
+    <section class="panel" aria-label="Government founding documents">
+      <div class="panel-header">
+        <h3 class="panel-title">Government Founding Documents</h3>
+        <span class="badge">Foundational Records</span>
       </div>
+
+      <ul class="doclist">
+        <li>
+          <div class="left">
+            <strong>Declaration of Rights (1839)</strong>
+            <div class="meta">Foundational rights declaration and civil reference.</div>
+          </div>
+          <div>
+            <a class="button secondary" href="pdf/Declaration_of_Rights_1839.pdf" target="_blank" rel="noopener">View PDF</a>
+          </div>
+        </li>
+
+        <li>
+          <div class="left">
+            <strong>Constitution (1840) — English</strong>
+            <div class="meta">Constitutional framework and government record.</div>
+          </div>
+          <div>
+            <a class="button secondary" href="pdf/Constitution_1840_English.pdf" target="_blank" rel="noopener">View PDF</a>
+          </div>
+        </li>
+
+        <li>
+          <div class="left">
+            <strong>First Act of Kamehameha III</strong>
+            <div class="meta">Legislative and administrative reference.</div>
+          </div>
+          <div>
+            <a class="button secondary" href="pdf/First_Act_Kamehameha_III.pdf" target="_blank" rel="noopener">View PDF</a>
+          </div>
+        </li>
+
+        <li>
+          <div class="left">
+            <strong>Second Act of Kamehameha III</strong>
+            <div class="meta">Administrative and legislative record.</div>
+          </div>
+          <div>
+            <a class="button secondary" href="pdf/Second_Act_Kamehameha_III_1846.pdf" target="_blank" rel="noopener">View PDF</a>
+          </div>
+        </li>
+
+        <li>
+          <div class="left">
+            <strong>Third Act of Kamehameha III</strong>
+            <div class="meta">Administrative and legislative record.</div>
+          </div>
+          <div>
+            <a class="button secondary" href="pdf/Third_Act_Kamehameha_III_1846.pdf" target="_blank" rel="noopener">View PDF</a>
+          </div>
+        </li>
+      </ul>
     </section>
 
-  </main>
+    <section class="panel" aria-label="Administrative routing">
+      <div class="panel-header">
+        <h3 class="panel-title">Administrative Routing</h3>
+        <span class="badge">Assistance</span>
+      </div>
 
-  <footer class="footer">
-    <div class="container">© 2026 Ko Hawai&#699;i Pae &#699;Aina</div>
-  </footer>
+      <ul class="doclist">
+        <li>
+          <div class="left">
+            <strong>Document Questions</strong>
+            <div class="meta">For assistance with records, routing, or document access, use the Contact page.</div>
+          </div>
+          <div>
+            <a class="button secondary" href="contact.html">Contact</a>
+          </div>
+        </li>
 
-  <script>
-    (function () {
-      const btn = document.getElementById('langToggle');
-      const KEY = 'khpa_lang';
-      let lang = localStorage.getItem(KEY) || 'en';
+        <li>
+          <div class="left">
+            <strong>Appointments</strong>
+            <div class="meta">Call to schedule access for restricted areas or administrative services.</div>
+          </div>
+          <div>
+            <a class="button" href="tel:+18087201129">Call (808) 720-1129</a>
+          </div>
+        </li>
 
-      function applyLang(next) {
-        lang = next;
-        localStorage.setItem(KEY, lang);
+        <li>
+          <div class="left">
+            <strong>Judiciary Email</strong>
+            <div class="meta">Judiciary and appointment-related contact.</div>
+          </div>
+          <div>
+            <a class="button secondary" href="mailto:JUDICIARY@KHPA.IO">JUDICIARY@KHPA.IO</a>
+          </div>
+        </li>
+      </ul>
+    </section>
 
-        document.querySelectorAll('[data-lang="en"]').forEach(el => {
-          el.style.display = (lang === 'en') ? '' : 'none';
-        });
-        document.querySelectorAll('[data-lang="haw"]').forEach(el => {
-          el.style.display = (lang === 'haw') ? '' : 'none';
-        });
+  </div>
+</main>
 
-        btn.textContent = (lang === 'en') ? 'ʻŌlelo Hawaiʻi' : 'English';
-      }
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <p>Judiciary: <a href="mailto:JUDICIARY@KHPA.IO">JUDICIARY@KHPA.IO</a></p>
+      <p>Appointments: <a href="tel:+18087201129">(808) 720-1129</a></p>
+      <p>Public Line: <a href="tel:+18083333459">(808) 333-3459</a></p>
+    </div>
 
-      btn.addEventListener('click', () => {
-        applyLang(lang === 'en' ? 'haw' : 'en');
-      });
+    <div class="footer-col">
+      <h4>Services</h4>
+      <p><a href="hawaii.html">Island Offices</a></p>
+      <p><a href="registration.html">Registration &amp; Licensing</a></p>
+      <p><a href="foreign-affairs.html">Foreign Affairs</a></p>
+    </div>
 
-      applyLang(lang);
-    })();
-  </script>
+    <div class="footer-col">
+      <h4>Notice</h4>
+      <p>&copy; 2026 KHPA</p>
+      <p class="small">Public information portal</p>
+    </div>
+  </div>
+</footer>
 
 </body>
 </html>
