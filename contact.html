@@ -1,3 +1,5 @@
+Replace the full contact.html with this cleaned version. It removes the bad email paths and makes SCHEDULE APPOINTMENT the clear main action.
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -8,7 +10,6 @@
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
-
 <header class="site-header">
   <div class="container header-inner">
     <div class="seal">
@@ -19,7 +20,6 @@
       <p class="tagline">Contact • Public Assistance & Administrative Routing</p>
     </div>
   </div>
-
   <div class="navbar">
     <div class="container">
       <ul class="nav" aria-label="Primary">
@@ -28,127 +28,105 @@
         <li><a href="government-documents.html">Government Documents</a></li>
         <li><a href="registration.html">Registration &amp; Licensing</a></li>
         <li><a href="emporium.html">Emporium</a></li>
-        <li><a href="contact.html">Contact</a></li>
+        <li><a href="foreign-affairs.html">Foreign Affairs</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
       </ul>
     </div>
   </div>
 </header>
-
 <main id="main">
   <div class="container">
-
     <h2 class="page-title">Contact</h2>
     <div class="section-divider"></div>
-
     <p class="lede">
-      This page provides administrative contact information, automated guidance through the KHPA Assistance Bot, and direct assistance routing for matters requiring review.
+      This page provides administrative contact information, appointment scheduling, automated guidance through the KHPA Assistance Bot, and direct assistance routing.
     </p>
-
     <div class="notice" role="status">
-      <strong>Official Notice:</strong> The KHPA Assistance Bot provides general administrative guidance only. For record review, submission support, or official clarification, please use the Direct Assistance form.
+      <strong>Official Notice:</strong> Access to administrative services and restricted areas should be scheduled through the Judiciary portal before arrival.
     </div>
-
-    <!-- CONTACT SUMMARY -->
+    <section class="panel" aria-label="Schedule appointment">
+      <div class="panel-header">
+        <h3 class="panel-title">Schedule Appointment</h3>
+        <span class="badge">Primary Action</span>
+      </div>
+      <p class="small" style="text-align:center; margin:0 0 14px 0;">
+        All access to restricted areas and administrative services requires a scheduled appointment through the Judiciary portal.
+      </p>
+      <div style="text-align:center; margin:20px 0;">
+        <a class="button"
+           href="https://judiciary.khpa.io"
+           target="_blank"
+           rel="noopener"
+           style="font-size:18px; padding:14px 24px;">
+          SCHEDULE APPOINTMENT
+        </a>
+      </div>
+    </section>
     <section class="panel" aria-label="Contact summary">
       <div class="panel-header">
         <h3 class="panel-title">Administrative Contact</h3>
         <span class="badge">Public</span>
       </div>
-
       <ul class="doclist">
         <li>
           <div class="left">
-            <strong>Email</strong>
-            <div class="meta">Primary public routing for assistance and office follow-up</div>
+            <strong>Primary Email</strong>
+            <div class="meta">Public routing for assistance and office follow-up</div>
           </div>
           <div>
-            <a class="button secondary" href="mailto:khparelationsaffairs@gmail.com">
-              khparelationsaffairs@gmail.com
-            </a>
+            <a class="button secondary" href="mailto:khparelationsaffairs@gmail.com">khparelationsaffairs@gmail.com</a>
           </div>
         </li>
-
         <li>
           <div class="left">
             <strong>Phone</strong>
             <div class="meta">Public contact line</div>
           </div>
           <div>
-            <a class="button secondary" href="tel:+18083333459">
-              (808) 333-3459
-            </a>
+            <a class="button secondary" href="tel:+18083333459">(808) 333-3459</a>
           </div>
         </li>
-
         <li>
           <div class="left">
-            <strong>Office Hours</strong>
-            <div class="meta">Public walk-in / office availability listing</div>
+            <strong>Oʻahu / Judiciary Email</strong>
+            <div class="meta">Judiciary and appointment-related contact</div>
           </div>
           <div>
-            <span class="pill">Hilo Hours 10:00 AM – 12:00 PM</span>
-          </div>
-        </li>
-
-        <li>
-          <div class="left">
-            <strong>Oʻahu Office Email</strong>
-            <div class="meta">Direct Oʻahu office contact and administrative access</div>
-          </div>
-          <div>
-            <a class="button secondary" href="mailto:JUDICIARY@khpa.io">
-              JUDICIARY@khpa.io
-            </a>
+            <a class="button secondary" href="mailto:JUDICIARY@KHPA.IO">JUDICIARY@KHPA.IO</a>
           </div>
         </li>
       </ul>
     </section>
-
-    <!-- BOT -->
     <section class="panel" aria-label="KHPA Assistance Bot">
       <div class="panel-header">
         <h3 class="panel-title">KHPA Assistance Bot</h3>
         <span class="badge">Beta</span>
       </div>
-
       <p class="small" style="margin:0 0 10px 0;">
         The KHPA Assistance Bot provides general guidance regarding island offices, registration, forms, protocol, and public records.
       </p>
-
       <div class="bot-wrap">
         <div id="botMessages" class="bot-messages">
           <div class="bot-message bot">
             Aloha. I am the KHPA Assistance Bot. Please enter your question regarding documents, registration, protocol, island offices, or administrative process.
           </div>
         </div>
-
         <div class="bot-input-row">
-          <input
-            id="botInput"
-            type="text"
-            placeholder="Type your question here..."
-            aria-label="Ask the KHPA bot a question"
-          />
+          <input id="botInput" type="text" placeholder="Type your question here..." aria-label="Ask the KHPA bot a question" />
           <button id="botSend" class="button" type="button">Ask</button>
         </div>
-
         <div style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap;">
-          <button id="botAssist" class="button secondary" type="button">
-            Go to Direct Assistance
-          </button>
+          <button id="botAssist" class="button secondary" type="button">Go to Direct Assistance</button>
           <a class="button secondary" href="registration.html">Registration &amp; Licensing</a>
           <a class="button secondary" href="hawaii.html">Island Offices</a>
         </div>
       </div>
     </section>
-
-    <!-- QUICK LINKS -->
     <section class="panel" aria-label="Quick links">
       <div class="panel-header">
         <h3 class="panel-title">Quick Links</h3>
         <span class="badge">Resources</span>
       </div>
-
       <ul class="doclist">
         <li>
           <div class="left">
@@ -159,12 +137,10 @@
         </li>
         <li>
           <div class="left">
-            <strong>Oʻahu Office</strong>
-            <div class="meta">Mailing: Box 23055 Makiki Station, Oʻahu • Email: JUDICIARY.KHPA@io</div>
+            <a href="https://judiciary.khpa.io" target="_blank" rel="noopener">Judiciary Appointment Portal</a>
+            <div class="meta">Schedule appointments for restricted access and administrative services</div>
           </div>
-          <div>
-            <a class="button secondary" href="JUDICIARY.KHPA@io">Email Oʻahu</a>
-          </div>
+          <div><a class="button secondary" href="https://judiciary.khpa.io" target="_blank" rel="noopener">Schedule</a></div>
         </li>
         <li>
           <div class="left">
@@ -182,49 +158,37 @@
         </li>
         <li>
           <div class="left">
-            <a href="protocols.html">Protocol</a>
-            <div class="meta">Submission requirements and participation protocol</div>
+            <a href="foreign-affairs.html">Foreign Affairs</a>
+            <div class="meta">Official posted signage, restricted entry, and access protocol</div>
           </div>
-          <div><a class="button secondary" href="protocols.html">Open</a></div>
+          <div><a class="button secondary" href="foreign-affairs.html">Open</a></div>
         </li>
       </ul>
     </section>
-
-    <!-- DIRECT ASSISTANCE -->
     <section id="direct-assistance-form" class="panel" aria-label="Direct Assistance Form">
       <div class="panel-header">
         <h3 class="panel-title">Direct Assistance</h3>
         <span class="badge">Official Routing</span>
       </div>
-
       <p class="small" style="margin:0 0 12px 0;">
-        Use this form for matters requiring administrative review, routing support, submission clarification, or document guidance.
-        Messages are forwarded to <strong>khparelationsaffairs@gmail.com</strong>.
-          Oʻahu office matters may also be directed to <JUDICIARY.KHPA@io</strong>.
+        Use this form for administrative review, routing support, submission clarification, or document guidance.
+        Messages are routed to the public assistance office. Judiciary matters may also be directed to
+        <a href="mailto:JUDICIARY@KHPA.IO">JUDICIARY@KHPA.IO</a>.
       </p>
-
-      <!-- Replace the Formspree endpoint below with your live endpoint -->
-      <form
-        action="https://formspree.io/f/xdkdjvpy"
-        method="POST"
-        class="assist-form"
-      >
+      <form action="https://formspree.io/f/xdkdjvpy" method="POST" class="assist-form">
         <div class="form-grid">
           <div class="field">
             <label for="fullName">Full Name</label>
             <input id="fullName" name="Full Name" type="text" required />
           </div>
-
           <div class="field">
             <label for="email">Email Address</label>
             <input id="email" name="Email" type="email" required />
           </div>
-
           <div class="field">
             <label for="phone">Phone Number</label>
             <input id="phone" name="Phone" type="tel" />
           </div>
-
           <div class="field">
             <label for="island">Island / Routing Area</label>
             <select id="island" name="Island / Routing Area">
@@ -236,11 +200,11 @@
               <option>Other / Not Sure</option>
             </select>
           </div>
-
           <div class="field">
             <label for="topic">Assistance Topic</label>
             <select id="topic" name="Assistance Topic" required>
               <option value="">Select one</option>
+              <option>Appointment Scheduling</option>
               <option>Registration & Licensing</option>
               <option>Identification / Operator Certificate</option>
               <option>Vehicle Registration</option>
@@ -249,77 +213,61 @@
               <option>Government Documents</option>
               <option>Protocol Requirements</option>
               <option>Island Office Routing</option>
-              <option>Emporium / General Inquiry</option>
+              <option>Foreign Affairs / Posted Signage</option>
               <option>Other</option>
             </select>
           </div>
-
           <div class="field">
             <label for="subject">Subject</label>
             <input id="subject" name="Subject" type="text" required />
           </div>
-
           <div class="field field-full">
             <label for="message">Message</label>
-            <textarea
-              id="message"
-              name="Message"
-              rows="8"
-              required
-              placeholder="Provide the details of your request, including the service, document, or routing issue requiring assistance."
-            ></textarea>
+            <textarea id="message" name="Message" rows="8" required placeholder="Provide the details of your request, including appointment, service, document, or routing issue."></textarea>
           </div>
         </div>
-
         <input type="hidden" name="_subject" value="KHPA Direct Assistance Submission" />
-
         <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;">
           <button type="submit" class="button">Submit Request</button>
-          <a class="button secondary" href="mailto:khparelationsaffairs@gmail.com">Email Directly</a>
-          <a class="button secondary" href="mailto:JUDICIARY.KHPA@io">Email Oʻahu Office</a>
+          <a class="button secondary" href="mailto:khparelationsaffairs@gmail.com">Email Public Assistance</a>
+          <a class="button secondary" href="mailto:JUDICIARY@KHPA.IO">Email Judiciary</a>
+          <a class="button secondary" href="https://judiciary.khpa.io" target="_blank" rel="noopener">Schedule Appointment</a>
         </div>
       </form>
     </section>
-
-    <!-- ADMINISTRATIVE STATEMENT -->
     <section class="panel" aria-label="Administrative statement">
       <div class="panel-header">
         <h3 class="panel-title">Administrative Statement</h3>
         <span class="badge">Standard</span>
       </div>
-
       <p class="small" style="margin:0;">
         KHPA provides public administrative information, routing guidance, and access to service categories through this portal.
-        Matters requiring review, verification, or record handling must proceed through proper office channels in accordance with uniform protocol.
+        Matters requiring review, verification, appointment scheduling, or record handling must proceed through proper office channels in accordance with uniform protocol.
       </p>
     </section>
-
   </div>
 </main>
-
 <footer class="site-footer">
   <div class="container footer-grid">
     <div class="footer-col">
       <h4>Contact</h4>
       <p>Email: <a href="mailto:khparelationsaffairs@gmail.com">khparelationsaffairs@gmail.com</a></p>
+      <p>Judiciary: <a href="mailto:JUDICIARY@KHPA.IO">JUDICIARY@KHPA.IO</a></p>
       <p>Phone: <a href="tel:+18083333459">(808) 333-3459</a></p>
-      <p>Oʻahu: <a href="mailto:JUDICIARY.KHPA@io">JUDICIARY.KHPA@io</a></p>
     </div>
     <div class="footer-col">
       <h4>Services</h4>
       <p><a href="hawaii.html">Island Offices</a></p>
       <p><a href="registration.html">Registration &amp; Licensing</a></p>
-      <p><a href="protocols.html">Protocol</a></p>
+      <p><a href="foreign-affairs.html">Foreign Affairs</a></p>
     </div>
     <div class="footer-col">
       <h4>Notice</h4>
-      <p>&copy; <span id="year"></span> KHPA</p>
+      <p>&copy; 2026 KHPA</p>
       <p class="small">Public information portal</p>
     </div>
   </div>
 </footer>
-
-<script src="Js/site.js"></script>
 <script src="Js/khpa-bot.js"></script>
 </body>
 </html>
