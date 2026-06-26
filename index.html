@@ -3,28 +3,35 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Ko Hawaiʻi Pae ʻĀina | KHPA</title>
+  <meta name="description" content="Ko Hawaiʻi Pae ʻĀina (KHPA) - Official portal for island offices, government documents, registration services, and administrative routing." />
+  <meta property="og:title" content="Ko Hawaiʻi Pae ʻĀina | KHPA - Official Portal" />
+  <meta property="og:description" content="Public access point for KHPA island offices, government documents, registration services, and administrative information." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <title>Ko Hawaiʻi Pae ʻĀina | KHPA - Official Portal</title>
   <link rel="stylesheet" href="css/main.css" />
 </head>
 
 <body>
-<a class="skip-link" href="#main">Skip to content</a>
+<a class="skip-link" href="#main">Skip to main content</a>
 
-<header class="site-header">
+<header class="site-header" role="banner">
   <div class="container header-inner">
-    <div class="seal">
-      <img src="img/logo.png" alt="KHPA Coat of Arms" onerror="this.style.display='none'">
-    </div>
-    <div class="brand">
-      <h1>Ko Hawaiʻi Pae ʻĀina (KHPA)</h1>
-      <p class="tagline">Official Portal • Public Information & Services</p>
-    </div>
+    <a class="brand-wrap" href="index.html" aria-label="KHPA Home">
+      <div class="seal">
+        <img src="img/logo.png" alt="KHPA Coat of Arms" onerror="this.style.display='none'">
+      </div>
+      <div class="brand">
+        <h1>Ko Hawaiʻi Pae ʻĀina (KHPA)</h1>
+        <p class="tagline">Official Portal • Public Information & Services</p>
+      </div>
+    </a>
   </div>
 
-  <div class="navbar">
-    <div class="container">
-      <ul class="nav" aria-label="Primary">
-        <li><a href="index.html" class="active">Home</a></li>
+  <nav class="navbar" aria-label="Primary Navigation">
+    <div class="container nav-row">
+      <ul class="nav" aria-label="Main Menu">
+        <li><a href="index.html" aria-current="page">Home</a></li>
         <li><a href="hawaii.html">Island Offices</a></li>
         <li><a href="government-documents.html">Government Documents</a></li>
         <li><a href="registration.html">Registration &amp; Licensing</a></li>
@@ -33,172 +40,182 @@
         <li><a href="contact.html">Contact</a></li>
       </ul>
     </div>
-  </div>
+  </nav>
 </header>
 
-<main id="main">
+<main id="main" role="main">
   <div class="container">
 
     <h2 class="page-title">Official Portal</h2>
-    <div class="section-divider"></div>
+    <div class="section-divider" aria-hidden="true"></div>
 
     <p class="lede">
       Public access point for KHPA island offices, government documents, registration services, posted signage, and administrative routing.
     </p>
 
-    <div class="notice" role="status">
+    <div class="notice" role="status" aria-live="polite">
       <strong>Official Notice:</strong> Access to restricted areas and administrative services requires proper protocol and scheduled appointment before arrival.
     </div>
 
-    <section class="panel" aria-label="Map of the Kingdom">
-      <div class="panel-header">
-        <h3 class="panel-title">Map of the Kingdom</h3>
-        <span class="badge">Reference</span>
-      </div>
+    <section aria-label="Map of the Kingdom">
+      <div class="panel">
+        <div class="panel-header">
+          <h3 class="panel-title">Map of the Kingdom</h3>
+          <span class="badge">Reference</span>
+        </div>
 
-      <p class="small">Reference map of the Hawaiian archipelago.</p>
+        <p class="small">Reference map of the Hawaiian archipelago.</p>
 
-      <img
-        class="hero-img"
-        src="img/island-map.jpg"
-        alt="Map of the Hawaiian Islands"
-        style="width:100%; border:1px solid var(--line);"
-      >
-    </section>
-
-    <section class="panel" aria-label="Proclamation of King Kamehameha III">
-      <div class="panel-header">
-        <h3 class="panel-title">Proclamation of King Kamehameha III</h3>
-        <span class="badge">Featured Declaration</span>
-      </div>
-
-      <p class="small">Featured declaration. Download the PDF below.</p>
-
-      <img
-        class="hero-img"
-        src="img/kk3_proclamation_scroll_style.jpeg"
-        alt="Kamehameha III Proclamation"
-        style="width:100%; border:1px solid var(--line);"
-      >
-
-      <div style="margin-top:12px;">
-        <a class="button" href="pdf/KK3_Declaration.pdf" target="_blank" rel="noopener">
-          Download Proclamation PDF
-        </a>
+        <img
+          class="hero-img"
+          src="img/island-map.jpg"
+          alt="Map of the Hawaiian archipelago showing the islands of Hawaiʻi, Maui, Oʻahu, Molokaʻi, Lānaʻi, Kahoʻolawe, and Niʻihau"
+          loading="lazy"
+        >
       </div>
     </section>
 
-    <section class="panel" aria-label="Office of Foreign Affairs">
-      <div class="panel-header">
-        <h3 class="panel-title">Office of Foreign Affairs</h3>
-        <span class="badge">Official Notice</span>
-      </div>
+    <section aria-label="Proclamation of King Kamehameha III">
+      <div class="panel">
+        <div class="panel-header">
+          <h3 class="panel-title">Proclamation of King Kamehameha III</h3>
+          <span class="badge">Featured Declaration</span>
+        </div>
 
-      <p>
-        Official public reference for posted KHPA signage, restricted entry, appointment-based access, and administrative protocol.
-      </p>
+        <p class="small">Featured declaration. Download the PDF below.</p>
 
-      <img
-        class="hero-img"
-        src="KHPANOENTRYSIGN.png"
-        alt="Posted KHPA restricted area sign stating entry by appointment only"
-        style="width:100%; border:1px solid var(--line);"
-      >
+        <img
+          class="hero-img"
+          src="img/kk3_proclamation_scroll_style.jpeg"
+          alt="Historical proclamation document from King Kamehameha III with formal royal seals and calligraphy"
+          loading="lazy"
+        >
 
-      <div class="notice" style="margin-top:14px;">
-        <strong>Posted Signage:</strong> Areas bearing this signage are restricted. Entry is by appointment only and subject to KHPA administrative protocol.
-      </div>
-
-      <p style="margin-top:12px;margin-bottom:0;">
-        <strong>Minister of Foreign Affairs:</strong> Harvey Keliikoa
-      </p>
-
-      <div style="margin-top:12px;">
-        <a class="button" href="foreign-affairs.html">Open Office of Foreign Affairs</a>
+        <div style="margin-top:12px;">
+          <a class="button" href="pdf/KK3_Declaration.pdf" target="_blank" rel="noopener noreferrer">
+            Download Proclamation PDF
+          </a>
+        </div>
       </div>
     </section>
 
-    <section class="grid" aria-label="Portal services">
-
-      <article class="card">
-        <h3>Island Office Access</h3>
-        <p>
-          Use the Island Offices page for ceremonial and administrative routing, direct office access, and public contact information for Hawaiʻi Island, Oʻahu, Maui, and Molokaʻi.
-        </p>
-        <div class="actions">
-          <a class="button" href="hawaii.html">Open Island Offices</a>
+    <section aria-label="Office of Foreign Affairs">
+      <div class="panel">
+        <div class="panel-header">
+          <h3 class="panel-title">Office of Foreign Affairs</h3>
+          <span class="badge">Official Notice</span>
         </div>
-      </article>
 
-      <article class="card">
-        <h3>Registration &amp; Licensing</h3>
         <p>
-          Access service categories, forms, and public instructions for registration, licensing, certificates, and administrative filing.
+          Official public reference for posted KHPA signage, restricted entry, appointment-based access, and administrative protocol.
         </p>
-        <div class="actions">
-          <a class="button" href="registration.html">Open Registration</a>
-        </div>
-      </article>
 
-      <article class="card">
-        <h3>Government Documents</h3>
-        <p>
-          View public records, foundational documents, proclamations, and reference materials maintained for administrative access.
+        <img
+          class="hero-img"
+          src="KHPANOENTRYSIGN.png"
+          alt="Posted KHPA restricted area sign stating entry by appointment only - official notice"
+          loading="lazy"
+        >
+
+        <div class="notice" style="margin-top:14px;">
+          <strong>Posted Signage:</strong> Areas bearing this signage are restricted. Entry is by appointment only and subject to KHPA administrative protocol.
+        </div>
+
+        <p style="margin-top:12px;margin-bottom:0;">
+          <strong>Minister of Foreign Affairs:</strong> Harvey Keliikoa
         </p>
-        <div class="actions">
-          <a class="button secondary" href="government-documents.html">Open Documents</a>
-        </div>
-      </article>
 
-      <article class="card">
-        <h3>Emporium</h3>
-        <p>
-          The Emporium is a product of Ko Hawaiʻi Pae ʻĀina. Featured artisans and offerings are available through the Emporium page.
-        </p>
-        <div class="actions">
-          <a class="button secondary" href="emporium.html">Open Emporium</a>
+        <div style="margin-top:12px;">
+          <a class="button" href="foreign-affairs.html">Open Office of Foreign Affairs</a>
         </div>
-      </article>
-
+      </div>
     </section>
 
-    <section class="panel" aria-label="Appointment and assistance">
-      <div class="panel-header">
-        <h3 class="panel-title">Appointment & Assistance</h3>
-        <span class="badge">Public Routing</span>
-      </div>
+    <section aria-label="Portal Services">
+      <div class="grid">
 
-      <ul class="doclist">
-        <li>
-          <div class="left">
-            <strong>Schedule Appointment</strong>
-            <div class="meta">Call to schedule access for restricted areas and administrative services.</div>
+        <article class="card">
+          <h3>Island Office Access</h3>
+          <p>
+            Use the Island Offices page for ceremonial and administrative routing, direct office access, and public contact information for Hawaiʻi Island, Oʻahu, Maui, and Molokaʻi.
+          </p>
+          <div class="actions">
+            <a class="button" href="hawaii.html">Open Island Offices</a>
           </div>
-          <div><a class="button" href="tel:+18087201129">Call (808) 720-1129</a></div>
-        </li>
+        </article>
 
-        <li>
-          <div class="left">
-            <strong>Judiciary Email</strong>
-            <div class="meta">Judiciary and appointment-related contact.</div>
+        <article class="card">
+          <h3>Registration &amp; Licensing</h3>
+          <p>
+            Access service categories, forms, and public instructions for registration, licensing, certificates, and administrative filing.
+          </p>
+          <div class="actions">
+            <a class="button" href="registration.html">Open Registration</a>
           </div>
-          <div><a class="button secondary" href="mailto:JUDICIARY@KHPA.IO">JUDICIARY@KHPA.IO</a></div>
-        </li>
+        </article>
 
-        <li>
-          <div class="left">
-            <strong>Public Assistance</strong>
-            <div class="meta">General public routing and administrative contact.</div>
+        <article class="card">
+          <h3>Government Documents</h3>
+          <p>
+            View public records, foundational documents, proclamations, and reference materials maintained for administrative access.
+          </p>
+          <div class="actions">
+            <a class="button secondary" href="government-documents.html">Open Documents</a>
           </div>
-          <div><a class="button secondary" href="contact.html">Open Contact</a></div>
-        </li>
-      </ul>
+        </article>
+
+        <article class="card">
+          <h3>Emporium</h3>
+          <p>
+            The Emporium is a product of Ko Hawaiʻi Pae ʻĀina. Featured artisans and offerings are available through the Emporium page.
+          </p>
+          <div class="actions">
+            <a class="button secondary" href="emporium.html">Open Emporium</a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <section aria-label="Appointment and Assistance">
+      <div class="panel">
+        <div class="panel-header">
+          <h3 class="panel-title">Appointment &amp; Assistance</h3>
+          <span class="badge">Public Routing</span>
+        </div>
+
+        <ul class="doclist">
+          <li>
+            <div class="left">
+              <strong>Schedule Appointment</strong>
+              <div class="meta">Call to schedule access for restricted areas and administrative services.</div>
+            </div>
+            <div><a class="button" href="tel:+18087201129" aria-label="Call appointment line at (808) 720-1129">(808) 720-1129</a></div>
+          </li>
+
+          <li>
+            <div class="left">
+              <strong>Judiciary Email</strong>
+              <div class="meta">Judiciary and appointment-related contact.</div>
+            </div>
+            <div><a class="button secondary" href="mailto:JUDICIARY@KHPA.IO" aria-label="Email judiciary office">JUDICIARY@KHPA.IO</a></div>
+          </li>
+
+          <li>
+            <div class="left">
+              <strong>Public Assistance</strong>
+              <div class="meta">General public routing and administrative contact.</div>
+            </div>
+            <div><a class="button secondary" href="contact.html">Open Contact Form</a></div>
+          </li>
+        </ul>
+      </div>
     </section>
 
   </div>
 </main>
 
-<footer class="site-footer">
+<footer class="site-footer" role="contentinfo">
   <div class="container footer-grid">
     <div class="footer-col">
       <h4>Contact</h4>
@@ -216,11 +233,12 @@
 
     <div class="footer-col">
       <h4>Notice</h4>
-      <p>&copy; 2026 KHPA</p>
+      <p>&copy; <span id="year"></span> KHPA</p>
       <p class="small">Public information portal</p>
     </div>
   </div>
 </footer>
 
+<script src="Js/site.js"></script>
 </body>
 </html>
