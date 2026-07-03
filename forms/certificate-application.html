@@ -5,6 +5,55 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Identification / Operator Certificate Application | KHPA</title>
   <meta name="description" content="KHPA pre-check application for the Identification Certificate or Motor Vehicle Operator's Certificate." />
+  <link rel="canonical" href="https://khpa.io/forms/certificate-application.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Ko Hawaiʻi Pae ʻĀina (KHPA)" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:url" content="https://khpa.io/forms/certificate-application.html" />
+  <meta property="og:title" content="Identification / Operator Certificate Application | KHPA" />
+  <meta property="og:description" content="KHPA pre-check application for the Identification Certificate or Motor Vehicle Operator's Certificate." />
+  <meta property="og:image" content="https://khpa.io/img/logo.png" />
+  <meta property="og:image:alt" content="Seal of Ko Hawaiʻi Pae ʻĀina" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Identification / Operator Certificate Application | KHPA" />
+  <meta name="twitter:description" content="KHPA pre-check application for the Identification Certificate or Motor Vehicle Operator's Certificate." />
+  <meta name="twitter:image" content="https://khpa.io/img/logo.png" />
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Ko Hawaiʻi Pae ʻĀina (KHPA)",
+  "alternateName": "KHPA",
+  "url": "https://khpa.io/",
+  "logo": "https://khpa.io/img/logo.png",
+  "email": "khparelationsaffairs@gmail.com",
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "telephone": "+1-808-333-3459",
+      "contactType": "customer service",
+      "email": "khparelationsaffairs@gmail.com",
+      "areaServed": "US-HI",
+      "availableLanguage": [
+        "English"
+      ]
+    },
+    {
+      "@type": "ContactPoint",
+      "telephone": "+1-808-720-1129",
+      "contactType": "reservations",
+      "email": "JUDICIARY@KHPA.IO",
+      "areaServed": "US-HI",
+      "availableLanguage": [
+        "English"
+      ]
+    }
+  ]
+}
+  </script>
   <link rel="stylesheet" href="/css/main.css" />
 </head>
 <body>
@@ -106,14 +155,15 @@
 
         <fieldset>
           <legend>Applicant Information</legend>
+          <p class="hint mb-sm">Enter your legal information exactly as it should appear on the certificate.</p>
           <div class="form-grid">
             <div class="field">
               <label for="fullName">Full Name *</label>
-              <input id="fullName" name="Full Name" type="text" required />
+              <input id="fullName" name="Full Name" type="text" autocomplete="name" required />
             </div>
             <div class="field">
               <label for="dob">Date of Birth *</label>
-              <input id="dob" name="Date of Birth" type="date" required />
+              <input id="dob" name="Date of Birth" type="date" autocomplete="bday" required />
             </div>
             <div class="field">
               <label for="height">Height *</label>
@@ -151,17 +201,17 @@
             </div>
             <div class="field">
               <label for="email">Email Address *</label>
-              <input id="email" name="Email" type="email" required />
+              <input id="email" name="Email" type="email" autocomplete="email" required />
             </div>
             <div class="field">
               <label for="phone">Phone Number</label>
-              <input id="phone" name="Phone" type="tel" />
+              <input id="phone" name="Phone" type="tel" autocomplete="tel" />
             </div>
           </div>
         </fieldset>
 
         <input type="hidden" name="_subject" value="KHPA Identification / Operator Certificate Pre-Check" />
-        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;">
+        <div class="form-actions">
           <button type="submit" class="button">Submit Pre-Check Form</button>
           <a class="button secondary" href="tel:+18087201129">Call Instead</a>
           <a class="button secondary" href="/registration.html#identification">Back to Registration</a>

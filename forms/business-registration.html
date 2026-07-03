@@ -5,6 +5,55 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Business Registration | KHPA</title>
   <meta name="description" content="KHPA pre-check application for business registration." />
+  <link rel="canonical" href="https://khpa.io/forms/business-registration.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Ko Hawaiʻi Pae ʻĀina (KHPA)" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:url" content="https://khpa.io/forms/business-registration.html" />
+  <meta property="og:title" content="Business Registration | KHPA" />
+  <meta property="og:description" content="KHPA pre-check application for business registration." />
+  <meta property="og:image" content="https://khpa.io/img/logo.png" />
+  <meta property="og:image:alt" content="Seal of Ko Hawaiʻi Pae ʻĀina" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Business Registration | KHPA" />
+  <meta name="twitter:description" content="KHPA pre-check application for business registration." />
+  <meta name="twitter:image" content="https://khpa.io/img/logo.png" />
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Ko Hawaiʻi Pae ʻĀina (KHPA)",
+  "alternateName": "KHPA",
+  "url": "https://khpa.io/",
+  "logo": "https://khpa.io/img/logo.png",
+  "email": "khparelationsaffairs@gmail.com",
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "telephone": "+1-808-333-3459",
+      "contactType": "customer service",
+      "email": "khparelationsaffairs@gmail.com",
+      "areaServed": "US-HI",
+      "availableLanguage": [
+        "English"
+      ]
+    },
+    {
+      "@type": "ContactPoint",
+      "telephone": "+1-808-720-1129",
+      "contactType": "reservations",
+      "email": "JUDICIARY@KHPA.IO",
+      "areaServed": "US-HI",
+      "availableLanguage": [
+        "English"
+      ]
+    }
+  ]
+}
+  </script>
   <link rel="stylesheet" href="/css/main.css" />
 </head>
 <body>
@@ -94,15 +143,15 @@
           <div class="form-grid">
             <div class="field">
               <label for="ownerName">Owner's Full Name *</label>
-              <input id="ownerName" name="Owner Name" type="text" required />
+              <input id="ownerName" name="Owner Name" type="text" autocomplete="name" required />
             </div>
             <div class="field">
               <label for="email">Email Address *</label>
-              <input id="email" name="Email" type="email" required />
+              <input id="email" name="Email" type="email" autocomplete="email" required />
             </div>
             <div class="field">
               <label for="phone">Phone Number *</label>
-              <input id="phone" name="Phone" type="tel" required />
+              <input id="phone" name="Phone" type="tel" autocomplete="tel" required />
             </div>
             <div class="field">
               <label for="island">Island *</label>
@@ -119,6 +168,7 @@
 
         <fieldset>
           <legend>Business Information</legend>
+          <p class="hint mb-sm">Describe your business activity briefly — this helps the office route your application correctly.</p>
           <div class="form-grid">
             <div class="field">
               <label for="businessName">Business Name *</label>
@@ -148,7 +198,7 @@
         </fieldset>
 
         <input type="hidden" name="_subject" value="KHPA Business Registration Pre-Check" />
-        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;">
+        <div class="form-actions">
           <button type="submit" class="button">Submit Pre-Check Form</button>
           <a class="button secondary" href="tel:+18087201129">Call Instead</a>
           <a class="button secondary" href="/registration.html#business">Back to Registration</a>
