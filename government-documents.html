@@ -4,37 +4,67 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Government Documents | KHPA</title>
-  <link rel="stylesheet" href="css/main.css" />
+  <meta name="description" content="Searchable library of KHPA founding documents, proclamations, and administrative reference records." />
+  <link rel="stylesheet" href="/css/main.css" />
 </head>
 
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 
+<div class="topbar">
+  <div class="container">
+    <div class="topbar-links">
+      <a href="mailto:khparelationsaffairs@gmail.com">khparelationsaffairs@gmail.com</a>
+      <a href="tel:+18083333459">(808) 333-3459</a>
+    </div>
+    <div class="lang-toggle" aria-label="Language selection">
+      <button type="button" class="lang-btn active" data-lang-btn="en" aria-pressed="true">English</button>
+      <button type="button" class="lang-btn" data-lang-btn="haw" aria-pressed="false">ʻŌlelo Hawaiʻi</button>
+    </div>
+  </div>
+</div>
+
 <header class="site-header">
   <div class="container header-inner">
-    <div class="seal">
-      <img src="img/logo.png" alt="KHPA Coat of Arms" onerror="this.style.display='none'">
-    </div>
-    <div class="brand">
-      <h1>Ko Hawaiʻi Pae ʻĀina (KHPA)</h1>
-      <p class="tagline">Government Documents • Public Records & Founding References</p>
-    </div>
+    <a class="brand-wrap" href="/index.html" aria-label="KHPA Home">
+      <div class="seal">
+        <img src="/img/logo.png" alt="Seal of Ko Hawaiʻi Pae ʻĀina" onerror="this.style.display='none'">
+      </div>
+      <div class="brand">
+        <h1>Ko Hawaiʻi Pae ʻĀina (KHPA)</h1>
+        <p class="tagline">Government Documents • Public Records &amp; Founding References</p>
+      </div>
+    </a>
   </div>
 
-  <div class="navbar">
-    <div class="container">
-      <ul class="nav" aria-label="Primary">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="hawaii.html">Island Offices</a></li>
-        <li><a href="government-documents.html" class="active">Government Documents</a></li>
-        <li><a href="registration.html">Registration &amp; Licensing</a></li>
-        <li><a href="emporium.html">Emporium</a></li>
-        <li><a href="foreign-affairs.html">Foreign Affairs</a></li>
-        <li><a href="contact.html">Contact</a></li>
+  <nav class="navbar" aria-label="Primary">
+    <div class="container nav-row">
+      <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="primaryNav">
+        <span class="bar" aria-hidden="true"></span>
+        Menu
+      </button>
+      <ul class="nav" id="primaryNav">
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/hawaii.html">Island Offices</a></li>
+        <li><a href="/government-documents.html" aria-current="page">Government Documents</a></li>
+        <li><a href="/registration.html">Registration &amp; Licensing</a></li>
+        <li><a href="/emporium.html">Emporium</a></li>
+        <li><a href="/foreign-affairs.html">Foreign Affairs</a></li>
+        <li><a href="/protocols.html">Protocol</a></li>
+        <li><a href="/contact.html">Contact</a></li>
       </ul>
     </div>
-  </div>
+  </nav>
 </header>
+
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <div class="container">
+    <ol>
+      <li><a href="/index.html">Home</a></li>
+      <li aria-current="page">Government Documents</li>
+    </ol>
+  </div>
+</nav>
 
 <main id="main">
   <div class="container">
@@ -44,98 +74,149 @@
 
     <p class="lede">
       Public reference archive for foundational documents, proclamations, constitutional records, and administrative materials.
+      Use the search bar and category filters below to find a document, then view it in your browser or download the PDF.
     </p>
 
     <div class="notice" role="status">
       <strong>Official Notice:</strong> These materials are provided for public reference. Questions about filings, records, or document routing should be directed through the Contact page.
     </div>
 
-    <section class="panel" aria-label="Proclamations">
+    <!-- DOCUMENT LIBRARY -->
+    <section class="panel" aria-label="Document library">
       <div class="panel-header">
-        <h3 class="panel-title">Proclamations</h3>
+        <h3 class="panel-title">Document Library</h3>
         <span class="badge">Public Records</span>
       </div>
 
-      <ul class="doclist">
-        <li>
-          <div class="left">
-            <strong>Kamehameha III Declaration</strong>
-            <div class="meta">Primary proclamation reference.</div>
-          </div>
-          <div>
-            <a class="button secondary" href="pdf/KK3_Declaration.pdf" target="_blank" rel="noopener">View PDF</a>
-          </div>
-        </li>
+      <div class="doc-toolbar">
+        <div class="doc-search">
+          <label for="docSearch" class="visually-hidden">Search documents</label>
+          <input type="search" id="docSearch" placeholder="Search documents by title or keyword…" autocomplete="off" />
+        </div>
 
-        <li>
-          <div class="left">
-            <strong>Anglo-Franco Proclamation (1843)</strong>
-            <div class="meta">International recognition reference.</div>
-          </div>
-          <div>
-            <a class="button secondary" href="pdf/Anglo_Franco_Proclamation_1843.pdf" target="_blank" rel="noopener">View PDF</a>
-          </div>
-        </li>
-      </ul>
-    </section>
-
-    <section class="panel" aria-label="Government founding documents">
-      <div class="panel-header">
-        <h3 class="panel-title">Government Founding Documents</h3>
-        <span class="badge">Foundational Records</span>
+        <div class="doc-filters" role="group" aria-label="Filter documents by category">
+          <button type="button" class="doc-filter" data-filter="all" aria-pressed="true">All Documents</button>
+          <button type="button" class="doc-filter" data-filter="proclamations" aria-pressed="false">Proclamations</button>
+          <button type="button" class="doc-filter" data-filter="founding" aria-pressed="false">Founding Documents</button>
+          <button type="button" class="doc-filter" data-filter="reference" aria-pressed="false">Administrative &amp; Reference</button>
+        </div>
       </div>
 
-      <ul class="doclist">
-        <li>
-          <div class="left">
-            <strong>Declaration of Rights (1839)</strong>
-            <div class="meta">Foundational rights declaration and civil reference.</div>
-          </div>
-          <div>
-            <a class="button secondary" href="pdf/Declaration_of_Rights_1839.pdf" target="_blank" rel="noopener">View PDF</a>
-          </div>
-        </li>
+      <div class="doc-grid">
 
-        <li>
-          <div class="left">
-            <strong>Constitution (1840) — English</strong>
-            <div class="meta">Constitutional framework and government record.</div>
+        <article class="doc-card" data-category="proclamations">
+          <span class="badge doc-category">Proclamations</span>
+          <h3>Kamehameha III Declaration</h3>
+          <p>Primary proclamation reference of Kamehameha III.</p>
+          <div class="doc-actions">
+            <a class="button secondary" href="/pdf/KK3_Declaration.pdf" target="_blank" rel="noopener">View PDF</a>
+            <a class="button" href="/pdf/KK3_Declaration.pdf" download>Download PDF</a>
           </div>
-          <div>
-            <a class="button secondary" href="pdf/Constitution_1840_English.pdf" target="_blank" rel="noopener">View PDF</a>
-          </div>
-        </li>
+        </article>
 
-        <li>
-          <div class="left">
-            <strong>First Act of Kamehameha III</strong>
-            <div class="meta">Legislative and administrative reference.</div>
+        <article class="doc-card" data-category="proclamations">
+          <span class="badge doc-category">Proclamations</span>
+          <h3>Anglo-Franco Proclamation (1843)</h3>
+          <p>International recognition reference from 1843.</p>
+          <div class="doc-actions">
+            <a class="button secondary" href="/pdf/Anglo_Franco_Proclamation_1843.pdf" target="_blank" rel="noopener">View PDF</a>
+            <a class="button" href="/pdf/Anglo_Franco_Proclamation_1843.pdf" download>Download PDF</a>
           </div>
-          <div>
-            <a class="button secondary" href="pdf/First_Act_Kamehameha_III.pdf" target="_blank" rel="noopener">View PDF</a>
-          </div>
-        </li>
+        </article>
 
-        <li>
-          <div class="left">
-            <strong>Second Act of Kamehameha III</strong>
-            <div class="meta">Administrative and legislative record.</div>
+        <article class="doc-card" data-category="founding">
+          <span class="badge doc-category">Founding Documents</span>
+          <h3>Declaration of Rights (1839)</h3>
+          <p>Foundational rights declaration and civil reference.</p>
+          <div class="doc-actions">
+            <a class="button secondary" href="/pdf/Declaration_of_Rights_1839.pdf" target="_blank" rel="noopener">View PDF</a>
+            <a class="button" href="/pdf/Declaration_of_Rights_1839.pdf" download>Download PDF</a>
           </div>
-          <div>
-            <a class="button secondary" href="pdf/Second_Act_Kamehameha_III_1846.pdf" target="_blank" rel="noopener">View PDF</a>
-          </div>
-        </li>
+        </article>
 
-        <li>
-          <div class="left">
-            <strong>Third Act of Kamehameha III</strong>
-            <div class="meta">Administrative and legislative record.</div>
+        <article class="doc-card" data-category="founding">
+          <span class="badge doc-category">Founding Documents</span>
+          <h3>Constitution (1840) — English</h3>
+          <p>Constitutional framework and government record.</p>
+          <div class="doc-actions">
+            <a class="button secondary" href="/pdf/Constitution_1840_English.pdf" target="_blank" rel="noopener">View PDF</a>
+            <a class="button" href="/pdf/Constitution_1840_English.pdf" download>Download PDF</a>
           </div>
-          <div>
-            <a class="button secondary" href="pdf/Third_Act_Kamehameha_III_1846.pdf" target="_blank" rel="noopener">View PDF</a>
+        </article>
+
+        <article class="doc-card" data-category="founding">
+          <span class="badge doc-category">Founding Documents</span>
+          <h3>First Act of Kamehameha III</h3>
+          <p>Legislative and administrative reference.</p>
+          <div class="doc-actions">
+            <a class="button secondary" href="/pdf/First_Act_Kamehameha_III.pdf" target="_blank" rel="noopener">View PDF</a>
+            <a class="button" href="/pdf/First_Act_Kamehameha_III.pdf" download>Download PDF</a>
           </div>
-        </li>
-      </ul>
+        </article>
+
+        <article class="doc-card" data-category="founding">
+          <span class="badge doc-category">Founding Documents</span>
+          <h3>Second Act of Kamehameha III (1846)</h3>
+          <p>Administrative and legislative record.</p>
+          <div class="doc-actions">
+            <a class="button secondary" href="/pdf/Second_Act_Kamehameha_III_1846.pdf" target="_blank" rel="noopener">View PDF</a>
+            <a class="button" href="/pdf/Second_Act_Kamehameha_III_1846.pdf" download>Download PDF</a>
+          </div>
+        </article>
+
+        <article class="doc-card" data-category="founding">
+          <span class="badge doc-category">Founding Documents</span>
+          <h3>Third Act of Kamehameha III (1846)</h3>
+          <p>Administrative and legislative record.</p>
+          <div class="doc-actions">
+            <a class="button secondary" href="/pdf/Third_Act_Kamehameha_III_1846.pdf" target="_blank" rel="noopener">View PDF</a>
+            <a class="button" href="/pdf/Third_Act_Kamehameha_III_1846.pdf" download>Download PDF</a>
+          </div>
+        </article>
+
+        <article class="doc-card" data-category="reference">
+          <span class="badge doc-category">Administrative &amp; Reference</span>
+          <h3>KHPA Protocols and Procedures</h3>
+          <p>Reference guide for public submission and administrative protocol.</p>
+          <div class="doc-actions">
+            <a class="button secondary" href="/pdf/KHPA_Protocols_and_Procedures.pdf" target="_blank" rel="noopener">View PDF</a>
+            <a class="button" href="/pdf/KHPA_Protocols_and_Procedures.pdf" download>Download PDF</a>
+          </div>
+        </article>
+
+        <article class="doc-card" data-category="reference">
+          <span class="badge doc-category">Administrative &amp; Reference</span>
+          <h3>Hawaiʻi — Our Story, Our Future (2025)</h3>
+          <p>Public informational booklet.</p>
+          <div class="doc-actions">
+            <a class="button secondary" href="/pdf/Hawaii_Our_Story_Our_Future_2025.pdf" target="_blank" rel="noopener">View PDF</a>
+            <a class="button" href="/pdf/Hawaii_Our_Story_Our_Future_2025.pdf" download>Download PDF</a>
+          </div>
+        </article>
+
+        <article class="doc-card" data-category="reference">
+          <span class="badge doc-category">Administrative &amp; Reference</span>
+          <h3>Hawaiʻi Island Office Reference</h3>
+          <p>Public reference sheet for the Hawaiʻi Island office.</p>
+          <div class="doc-actions">
+            <a class="button secondary" href="/pdf/Hawaii_Island_Office_KHPA_Cleaned.pdf" target="_blank" rel="noopener">View PDF</a>
+            <a class="button" href="/pdf/Hawaii_Island_Office_KHPA_Cleaned.pdf" download>Download PDF</a>
+          </div>
+        </article>
+
+        <article class="doc-card" data-category="reference">
+          <span class="badge doc-category">Administrative &amp; Reference</span>
+          <h3>Oʻahu Island Office Reference</h3>
+          <p>Public reference sheet for the Oʻahu office.</p>
+          <div class="doc-actions">
+            <a class="button secondary" href="/pdf/Oahu_Island_Office_KHPA.pdf" target="_blank" rel="noopener">View PDF</a>
+            <a class="button" href="/pdf/Oahu_Island_Office_KHPA.pdf" download>Download PDF</a>
+          </div>
+        </article>
+
+      </div>
+
+      <p id="docEmpty" class="doc-empty" hidden>No documents match your search. Try a different keyword or clear the filter.</p>
     </section>
 
     <section class="panel" aria-label="Administrative routing">
@@ -151,7 +232,7 @@
             <div class="meta">For assistance with records, routing, or document access, use the Contact page.</div>
           </div>
           <div>
-            <a class="button secondary" href="contact.html">Contact</a>
+            <a class="button secondary" href="/contact.html">Contact</a>
           </div>
         </li>
 
@@ -191,18 +272,27 @@
 
     <div class="footer-col">
       <h4>Services</h4>
-      <p><a href="hawaii.html">Island Offices</a></p>
-      <p><a href="registration.html">Registration &amp; Licensing</a></p>
-      <p><a href="foreign-affairs.html">Foreign Affairs</a></p>
+      <p><a href="/hawaii.html">Island Offices</a></p>
+      <p><a href="/registration.html">Registration &amp; Licensing</a></p>
+      <p><a href="/foreign-affairs.html">Foreign Affairs</a></p>
+    </div>
+
+    <div class="footer-col">
+      <h4>More</h4>
+      <p><a href="/emporium.html">Emporium</a></p>
+      <p><a href="/protocols.html">Protocol</a></p>
+      <p><a href="/contact.html">Contact</a></p>
     </div>
 
     <div class="footer-col">
       <h4>Notice</h4>
-      <p>&copy; 2026 KHPA</p>
+      <p>&copy; <span id="year"></span> KHPA</p>
       <p class="small">Public information portal</p>
     </div>
   </div>
 </footer>
 
+<script src="/Js/site.js"></script>
+<script src="/Js/doc-library.js"></script>
 </body>
 </html>

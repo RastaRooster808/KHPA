@@ -4,7 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Island Offices | KHPA</title>
-  <link rel="stylesheet" href="css/main.css" />
+  <meta name="description" content="KHPA island office directory and public administrative routing for Hawaiʻi Island, Oʻahu, Maui, and Molokaʻi." />
+  <link rel="stylesheet" href="/css/main.css" />
   <style>
     .island-grid {
       display: grid;
@@ -34,6 +35,7 @@
 
     .office-card h4 {
       margin: 0 0 8px 0;
+      color: var(--navy);
     }
 
     .office-card p {
@@ -41,7 +43,7 @@
     }
 
     .decree-box {
-      border-left: 4px solid #8b6b2e;
+      border-left: 4px solid var(--gold);
       padding-left: 14px;
       margin-top: 12px;
     }
@@ -56,30 +58,60 @@
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 
+<div class="topbar">
+  <div class="container">
+    <div class="topbar-links">
+      <a href="mailto:khparelationsaffairs@gmail.com">khparelationsaffairs@gmail.com</a>
+      <a href="tel:+18083333459">(808) 333-3459</a>
+    </div>
+    <div class="lang-toggle" aria-label="Language selection">
+      <button type="button" class="lang-btn active" data-lang-btn="en" aria-pressed="true">English</button>
+      <button type="button" class="lang-btn" data-lang-btn="haw" aria-pressed="false">ʻŌlelo Hawaiʻi</button>
+    </div>
+  </div>
+</div>
+
 <header class="site-header">
   <div class="container header-inner">
-    <div class="seal">
-      <img src="img/seal.png" alt="KHPA Seal" onerror="this.style.display='none'">
-    </div>
-    <div class="brand">
-      <h1>Ko Hawaiʻi Pae ʻĀina (KHPA)</h1>
-      <p class="tagline">Island Offices • Public Routing & Administrative Access</p>
-    </div>
+    <a class="brand-wrap" href="/index.html" aria-label="KHPA Home">
+      <div class="seal">
+        <img src="/img/logo.png" alt="Seal of Ko Hawaiʻi Pae ʻĀina" onerror="this.style.display='none'">
+      </div>
+      <div class="brand">
+        <h1>Ko Hawaiʻi Pae ʻĀina (KHPA)</h1>
+        <p class="tagline">Island Offices • Public Routing &amp; Administrative Access</p>
+      </div>
+    </a>
   </div>
 
-  <div class="navbar">
-    <div class="container">
-      <ul class="nav" aria-label="Primary">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="hawaii.html" aria-current="page">Island Offices</a></li>
-        <li><a href="government-documents.html">Government Documents</a></li>
-        <li><a href="registration.html">Registration &amp; Licensing</a></li>
-        <li><a href="emporium.html">Emporium</a></li>
-        <li><a href="contact.html">Contact</a></li>
+  <nav class="navbar" aria-label="Primary">
+    <div class="container nav-row">
+      <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="primaryNav">
+        <span class="bar" aria-hidden="true"></span>
+        Menu
+      </button>
+      <ul class="nav" id="primaryNav">
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/hawaii.html" aria-current="page">Island Offices</a></li>
+        <li><a href="/government-documents.html">Government Documents</a></li>
+        <li><a href="/registration.html">Registration &amp; Licensing</a></li>
+        <li><a href="/emporium.html">Emporium</a></li>
+        <li><a href="/foreign-affairs.html">Foreign Affairs</a></li>
+        <li><a href="/protocols.html">Protocol</a></li>
+        <li><a href="/contact.html">Contact</a></li>
       </ul>
     </div>
-  </div>
+  </nav>
 </header>
+
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <div class="container">
+    <ol>
+      <li><a href="/index.html">Home</a></li>
+      <li aria-current="page">Island Offices</li>
+    </ol>
+  </div>
+</nav>
 
 <main id="main">
   <div class="container">
@@ -138,9 +170,6 @@
       </div>
     </section>
 
-    <!-- BOOKLET OUTLINE -->
- 
-
     <!-- ISLAND OFFICES -->
     <section class="panel" aria-label="Island office directory">
       <div class="panel-header">
@@ -164,7 +193,7 @@
         <article id="oahu-office" class="office-card" aria-label="Oʻahu Office">
           <h4>Oʻahu Office</h4>
           <p><strong>Mailing:</strong> Box 23055 Makiki Station, Oʻahu</p>
-          <p><strong>Email:</strong> <a href="JUDICIARY.KHPA@io">JUDICIARY.KHPA@io</a></p>
+          <p><strong>Email:</strong> <a href="mailto:JUDICIARY@KHPA.IO">JUDICIARY@KHPA.IO</a></p>
           <p><strong>Status:</strong> Public contact access available</p>
           <p class="small" style="margin-bottom:0;">
             Oʻahu communications and administrative matters may be directed through this office contact.
@@ -199,10 +228,10 @@
 
       <div class="island-button-stack">
         <a class="button secondary" href="mailto:khparelationsaffairs@gmail.com">Email Primary Office</a>
-        <a class="button secondary" href="mailto:JUDICIARY.KHPA@io">Email Oʻahu Office</a>
-        <a class="button secondary" href="contact.html#direct-assistance-form">Go to Direct Assistance</a>
-        <a class="button secondary" href="registration.html">Open Registration &amp; Licensing</a>
-        <a class="button secondary" href="government-documents.html">Open Government Documents</a>
+        <a class="button secondary" href="mailto:JUDICIARY@KHPA.IO">Email Oʻahu Office</a>
+        <a class="button secondary" href="/contact.html#direct-assistance-form">Go to Direct Assistance</a>
+        <a class="button secondary" href="/registration.html">Open Registration &amp; Licensing</a>
+        <a class="button secondary" href="/government-documents.html">Open Government Documents</a>
       </div>
     </section>
 
@@ -227,13 +256,19 @@
       <h4>Contact</h4>
       <p>Email: <a href="mailto:khparelationsaffairs@gmail.com">khparelationsaffairs@gmail.com</a></p>
       <p>Phone: <a href="tel:+18083333459">(808) 333-3459</a></p>
-      <p>Oʻahu: <a href="mailto:JUDICIARY.KHPA@io">JUDICIARY.KHPA@io</a></p>
+      <p>Oʻahu: <a href="mailto:JUDICIARY@KHPA.IO">JUDICIARY@KHPA.IO</a></p>
     </div>
     <div class="footer-col">
       <h4>Services</h4>
-      <p><a href="registration.html">Registration &amp; Licensing</a></p>
-      <p><a href="government-documents.html">Government Documents</a></p>
-      <p><a href="contact.html">Direct Assistance</a></p>
+      <p><a href="/registration.html">Registration &amp; Licensing</a></p>
+      <p><a href="/government-documents.html">Government Documents</a></p>
+      <p><a href="/contact.html">Direct Assistance</a></p>
+    </div>
+    <div class="footer-col">
+      <h4>More</h4>
+      <p><a href="/emporium.html">Emporium</a></p>
+      <p><a href="/protocols.html">Protocol</a></p>
+      <p><a href="/foreign-affairs.html">Foreign Affairs</a></p>
     </div>
     <div class="footer-col">
       <h4>Notice</h4>
@@ -243,6 +278,6 @@
   </div>
 </footer>
 
-<script src="Js/site.js"></script>
+<script src="/Js/site.js"></script>
 </body>
 </html>

@@ -4,37 +4,67 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Office of Foreign Affairs | KHPA</title>
-  <link rel="stylesheet" href="css/main.css" />
+  <meta name="description" content="KHPA Office of Foreign Affairs — official notices, posted signage, restricted entry, and appointment-based access protocol." />
+  <link rel="stylesheet" href="/css/main.css" />
 </head>
 
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 
+<div class="topbar">
+  <div class="container">
+    <div class="topbar-links">
+      <a href="mailto:khparelationsaffairs@gmail.com">khparelationsaffairs@gmail.com</a>
+      <a href="tel:+18083333459">(808) 333-3459</a>
+    </div>
+    <div class="lang-toggle" aria-label="Language selection">
+      <button type="button" class="lang-btn active" data-lang-btn="en" aria-pressed="true">English</button>
+      <button type="button" class="lang-btn" data-lang-btn="haw" aria-pressed="false">ʻŌlelo Hawaiʻi</button>
+    </div>
+  </div>
+</div>
+
 <header class="site-header">
   <div class="container header-inner">
-    <div class="seal">
-      <img src="img/seal.png" alt="KHPA Seal" onerror="this.style.display='none'">
-    </div>
-    <div class="brand">
-      <h1>Ko Hawaiʻi Pae ʻĀina (KHPA)</h1>
-      <p class="tagline">Office of Foreign Affairs • Official Notices & Access Protocol</p>
-    </div>
+    <a class="brand-wrap" href="/index.html" aria-label="KHPA Home">
+      <div class="seal">
+        <img src="/img/logo.png" alt="Seal of Ko Hawaiʻi Pae ʻĀina" onerror="this.style.display='none'">
+      </div>
+      <div class="brand">
+        <h1>Ko Hawaiʻi Pae ʻĀina (KHPA)</h1>
+        <p class="tagline">Office of Foreign Affairs • Official Notices &amp; Access Protocol</p>
+      </div>
+    </a>
   </div>
 
-  <div class="navbar">
-    <div class="container">
-      <ul class="nav" aria-label="Primary">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="hawaii.html">Island Offices</a></li>
-        <li><a href="government-documents.html">Government Documents</a></li>
-        <li><a href="registration.html">Registration &amp; Licensing</a></li>
-        <li><a href="emporium.html">Emporium</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="foreign-affairs.html" class="active">Foreign Affairs</a></li>
+  <nav class="navbar" aria-label="Primary">
+    <div class="container nav-row">
+      <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="primaryNav">
+        <span class="bar" aria-hidden="true"></span>
+        Menu
+      </button>
+      <ul class="nav" id="primaryNav">
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/hawaii.html">Island Offices</a></li>
+        <li><a href="/government-documents.html">Government Documents</a></li>
+        <li><a href="/registration.html">Registration &amp; Licensing</a></li>
+        <li><a href="/emporium.html">Emporium</a></li>
+        <li><a href="/foreign-affairs.html" aria-current="page">Foreign Affairs</a></li>
+        <li><a href="/protocols.html">Protocol</a></li>
+        <li><a href="/contact.html">Contact</a></li>
       </ul>
     </div>
-  </div>
+  </nav>
 </header>
+
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <div class="container">
+    <ol>
+      <li><a href="/index.html">Home</a></li>
+      <li aria-current="page">Foreign Affairs</li>
+    </ol>
+  </div>
+</nav>
 
 <main id="main">
   <div class="container">
@@ -65,13 +95,12 @@
         Entry is by appointment only and must follow proper KHPA office procedure.
       </p>
 
-      <div style="margin:16px 0;">
-        <img
-          src="KHPANOENTRYSIGN.png"
-          alt="Posted KHPA government restricted area sign stating entry by appointment only"
-          style="width:100%; max-width:900px; border:1px solid var(--line); margin:0 auto;"
-        >
-      </div>
+      <img
+        class="hero-img"
+        src="/KHPANOENTRYSIGN.png"
+        alt="Posted KHPA government restricted area sign stating entry by appointment only"
+        style="margin:16px 0;"
+      >
 
       <div class="notice">
         <strong>Restricted Entry:</strong> Areas bearing this signage are subject to appointment-based access, administrative control, and protocol observance.
@@ -130,10 +159,10 @@
         <a class="button secondary" href="mailto:JUDICIARY@KHPA.IO">JUDICIARY@KHPA.IO</a>
       </p>
 
-      <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;">
-        <a class="button" href="contact.html">Direct Assistance</a>
-        <a class="button secondary" href="registration.html">Registration &amp; Licensing</a>
-        <a class="button secondary" href="government-documents.html">Government Documents</a>
+      <div class="actions">
+        <a class="button" href="/contact.html">Direct Assistance</a>
+        <a class="button secondary" href="/registration.html">Registration &amp; Licensing</a>
+        <a class="button secondary" href="/government-documents.html">Government Documents</a>
       </div>
     </section>
 
@@ -162,18 +191,26 @@
 
     <div class="footer-col">
       <h4>Resources</h4>
-      <p><a href="contact.html">Contact</a></p>
-      <p><a href="registration.html">Registration &amp; Licensing</a></p>
-      <p><a href="government-documents.html">Government Documents</a></p>
+      <p><a href="/contact.html">Contact</a></p>
+      <p><a href="/registration.html">Registration &amp; Licensing</a></p>
+      <p><a href="/government-documents.html">Government Documents</a></p>
+    </div>
+
+    <div class="footer-col">
+      <h4>More</h4>
+      <p><a href="/hawaii.html">Island Offices</a></p>
+      <p><a href="/emporium.html">Emporium</a></p>
+      <p><a href="/protocols.html">Protocol</a></p>
     </div>
 
     <div class="footer-col">
       <h4>Notice</h4>
-      <p>&copy; 2026 KHPA</p>
+      <p>&copy; <span id="year"></span> KHPA</p>
       <p class="small">Public information portal</p>
     </div>
   </div>
 </footer>
 
+<script src="/Js/site.js"></script>
 </body>
 </html>
