@@ -65,4 +65,37 @@
 
     applyLang(saved);
   }
+
+  /* Dark mode toggle. The theme itself is applied synchronously by a tiny
+     inline script in <head> (before first paint) so there's no flash of
+     the wrong theme; this just keeps the toggle button in sync and lets
+     the visitor override the system preference either way. */
+  var THEME_KEY = "khpa_theme";
+  var themeToggle = document.getElementById("themeToggle");
+
+  function effectiveTheme() {
+    var stored = document.documentElement.getAttribute("data-theme");
+    if (stored === "light" || stored === "dark") return stored;
+    return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+  }
+
+  function syncThemeButton() {
+    if (!themeToggle) return;
+    var dark = effectiveTheme() === "dark";
+    themeToggle.setAttribute("aria-pressed", String(dark));
+    themeToggle.querySelector(".icon").textContent = dark ? "☀️" : "🌙";
+    themeToggle.querySelector(".label").textContent = dark ? "Light Mode" : "Dark Mode";
+  }
+
+  if (themeToggle) {
+    themeToggle.addEventListener("click", function () {
+      var next = effectiveTheme() === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", next);
+      try { localStorage.setItem(THEME_KEY, next); } catch (e) {}
+      syncThemeButton();
+    });
+    syncThemeButton();
+  }
 })();
