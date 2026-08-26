@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("khpa_theme");
+        if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    })();
+  </script>
+  <title>Offline | KHPA</title>
+  <meta name="robots" content="noindex" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#1e2a36" />
+  <link rel="icon" href="/icons/favicon-32.png" sizes="32x32" type="image/png" />
+  <link rel="icon" href="/icons/favicon-16.png" sizes="16x16" type="image/png" />
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+  <link rel="stylesheet" href="/css/main.css" />
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand-wrap" href="/index.html" aria-label="KHPA Home">
+      <div class="seal">
+        <img src="/img/logo.png" alt="Seal of Ko Hawaiʻi Pae ʻĀina" onerror="this.style.display='none'">
+      </div>
+      <div class="brand">
+        <h1>Ko Hawaiʻi Pae ʻĀina (KHPA)</h1>
+        <p class="tagline">Offline</p>
+      </div>
+    </a>
+  </div>
+</header>
+
+<main id="main">
+  <div class="container">
+    <h2 class="page-title">You're Offline</h2>
+    <div class="section-divider"></div>
+
+    <p class="lede">
+      This page hasn't been saved for offline use yet. Pages, government documents, and forms you've already
+      visited remain available — try one of the links below, or reconnect to load new content.
+    </p>
+
+    <div class="notice" role="status">
+      <strong>Offline Mode:</strong> KHPA.io works offline for pages and documents you've previously visited.
+      Connect to the internet to browse new sections.
+    </div>
+
+    <section class="panel" aria-label="Available offline">
+      <div class="panel-header">
+        <h3 class="panel-title">Try These</h3>
+        <span class="badge">Cached for Offline Use</span>
+      </div>
+
+      <ul class="doclist">
+        <li>
+          <div class="left">
+            <strong>Home</strong>
+            <div class="meta">Official Portal overview and quick access</div>
+          </div>
+          <div><a class="button secondary" href="/index.html">Open</a></div>
+        </li>
+        <li>
+          <div class="left">
+            <strong>Government Documents</strong>
+            <div class="meta">Founding documents and proclamations, saved for offline reading</div>
+          </div>
+          <div><a class="button secondary" href="/government-documents.html">Open</a></div>
+        </li>
+        <li>
+          <div class="left">
+            <strong>Registration &amp; Licensing</strong>
+            <div class="meta">Service categories and pre-check forms</div>
+          </div>
+          <div><a class="button secondary" href="/registration.html">Open</a></div>
+        </li>
+      </ul>
+    </section>
+
+    <div class="actions">
+      <button type="button" class="button" onclick="location.reload()">Try Again</button>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-bottom">
+    <p>Ko Hawaiʻi Pae ʻĀina — Public information portal</p>
+  </div>
+</footer>
+
+</body>
+</html>

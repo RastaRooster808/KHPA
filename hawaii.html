@@ -3,8 +3,71 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("khpa_theme");
+        if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    })();
+  </script>
   <title>Island Offices | KHPA</title>
-  <link rel="stylesheet" href="css/main.css" />
+  <meta name="description" content="KHPA island office directory and public administrative routing for Hawaiʻi Island, Oʻahu, Maui, and Molokaʻi." />
+  <link rel="canonical" href="https://khpa.io/hawaii.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Ko Hawaiʻi Pae ʻĀina (KHPA)" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:url" content="https://khpa.io/hawaii.html" />
+  <meta property="og:title" content="Island Offices | KHPA" />
+  <meta property="og:description" content="KHPA island office directory and public administrative routing for Hawaiʻi Island, Oʻahu, Maui, and Molokaʻi." />
+  <meta property="og:image" content="https://khpa.io/icons/icon-512.png" />
+  <meta property="og:image:alt" content="Seal of Ko Hawaiʻi Pae ʻĀina" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Island Offices | KHPA" />
+  <meta name="twitter:description" content="KHPA island office directory and public administrative routing for Hawaiʻi Island, Oʻahu, Maui, and Molokaʻi." />
+  <meta name="twitter:image" content="https://khpa.io/icons/icon-512.png" />
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Ko Hawaiʻi Pae ʻĀina (KHPA)",
+  "alternateName": "KHPA",
+  "url": "https://khpa.io/",
+  "logo": "https://khpa.io/icons/icon-512.png",
+  "email": "SCCJ.KHPA@pm.me",
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "telephone": "+1-808-333-3459",
+      "contactType": "customer service",
+      "email": "SCCJ.KHPA@pm.me",
+      "areaServed": "US-HI",
+      "availableLanguage": [
+        "English"
+      ]
+    },
+    {
+      "@type": "ContactPoint",
+      "telephone": "+1-808-720-1129",
+      "contactType": "reservations",
+      "email": "SCCJ.KHPA@pm.me",
+      "areaServed": "US-HI",
+      "availableLanguage": [
+        "English"
+      ]
+    }
+  ]
+}
+  </script>
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#1e2a36" />
+  <link rel="icon" href="/icons/favicon-32.png" sizes="32x32" type="image/png" />
+  <link rel="icon" href="/icons/favicon-16.png" sizes="16x16" type="image/png" />
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+  <link rel="stylesheet" href="/css/main.css" />
   <style>
     .island-grid {
       display: grid;
@@ -34,14 +97,11 @@
 
     .office-card h4 {
       margin: 0 0 8px 0;
-    }
-
-    .office-card p {
-      margin: 0 0 8px 0;
+      color: var(--navy);
     }
 
     .decree-box {
-      border-left: 4px solid #8b6b2e;
+      border-left: 4px solid var(--gold);
       padding-left: 14px;
       margin-top: 12px;
     }
@@ -56,30 +116,77 @@
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 
+<div id="offlineBanner" class="system-banner" role="status" hidden>
+  You&rsquo;re offline &mdash; showing saved content.
+</div>
+<div id="updateBanner" class="system-banner" role="status" hidden>
+  <span>A new version of this site is available.</span>
+  <button id="updateReload" type="button" class="button secondary">Refresh</button>
+</div>
+
+<div class="topbar">
+  <div class="container">
+    <div class="topbar-links">
+      <a href="mailto:SCCJ.KHPA@pm.me">SCCJ.KHPA@pm.me</a>
+      <a href="tel:+18083333459">(808) 333-3459</a>
+    </div>
+    <div class="topbar-controls">
+      <button type="button" id="themeToggle" class="theme-toggle" aria-pressed="false">
+        <span class="icon" aria-hidden="true">🌙</span>
+        <span class="label">Dark Mode</span>
+      </button>
+      <button type="button" id="installBtn" class="install-btn" hidden>
+        <span aria-hidden="true">⬇️</span> Install App
+      </button>
+      <div class="lang-toggle" aria-label="Language selection">
+        <button type="button" class="lang-btn active" data-lang-btn="en" aria-pressed="true">English</button>
+        <button type="button" class="lang-btn" data-lang-btn="haw" aria-pressed="false">ʻŌlelo Hawaiʻi</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <header class="site-header">
   <div class="container header-inner">
-    <div class="seal">
-      <img src="img/seal.png" alt="KHPA Seal" onerror="this.style.display='none'">
-    </div>
-    <div class="brand">
-      <h1>Ko Hawaiʻi Pae ʻĀina (KHPA)</h1>
-      <p class="tagline">Island Offices • Public Routing & Administrative Access</p>
-    </div>
+    <a class="brand-wrap" href="/index.html" aria-label="KHPA Home">
+      <div class="seal">
+        <img src="/img/logo.png" alt="Seal of Ko Hawaiʻi Pae ʻĀina" onerror="this.style.display='none'">
+      </div>
+      <div class="brand">
+        <h1>Ko Hawaiʻi Pae ʻĀina (KHPA)</h1>
+        <p class="tagline">Island Offices • Public Routing &amp; Administrative Access</p>
+      </div>
+    </a>
   </div>
 
-  <div class="navbar">
-    <div class="container">
-      <ul class="nav" aria-label="Primary">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="hawaii.html" aria-current="page">Island Offices</a></li>
-        <li><a href="government-documents.html">Government Documents</a></li>
-        <li><a href="registration.html">Registration &amp; Licensing</a></li>
-        <li><a href="emporium.html">Emporium</a></li>
-        <li><a href="contact.html">Contact</a></li>
+  <nav class="navbar" aria-label="Primary">
+    <div class="container nav-row">
+      <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="primaryNav">
+        <span class="bar" aria-hidden="true"></span>
+        Menu
+      </button>
+      <ul class="nav" id="primaryNav">
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/hawaii.html" aria-current="page">Island Offices</a></li>
+        <li><a href="/government-documents.html">Government Documents</a></li>
+        <li><a href="/registration.html">Registration &amp; Licensing</a></li>
+        <li><a href="/emporium.html">Emporium</a></li>
+        <li><a href="/foreign-affairs.html">Foreign Affairs</a></li>
+        <li><a href="/protocols.html">Protocol</a></li>
+        <li><a href="/contact.html">Contact</a></li>
       </ul>
     </div>
-  </div>
+  </nav>
 </header>
+
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <div class="container">
+    <ol>
+      <li><a href="/index.html">Home</a></li>
+      <li aria-current="page">Island Offices</li>
+    </ol>
+  </div>
+</nav>
 
 <main id="main">
   <div class="container">
@@ -96,6 +203,12 @@
       <strong>Official Notice:</strong> This page is organized as a ceremonial declaration of office access and public administrative routing.
     </div>
 
+    <div class="notice notice-earth" role="status">
+      <strong>Administrative Notice:</strong> KHPA office locations are in the process of relocating. Updated location
+      details will be posted on this page once finalized. KHPA is also pursuing formal registration of an official
+      <strong>.gov</strong> domain. The contact numbers listed below remain in service during this transition.
+    </div>
+
     <!-- ISLAND ACCESS -->
     <section class="panel" aria-label="Island office access">
       <div class="panel-header">
@@ -103,7 +216,7 @@
         <span class="badge">Public Routing</span>
       </div>
 
-      <p class="small" style="margin:0 0 10px 0;">
+      <p class="small stack-sm">
         Use the buttons below for direct island access. This layout is designed for easy mobile navigation and orderly vertical access.
       </p>
 
@@ -123,23 +236,20 @@
       </div>
 
       <div class="decree-box">
-        <p class="small" style="margin:0 0 10px 0;">
+        <p class="small stack-sm">
           <strong>Decree of Administrative Order and Public Access</strong>
         </p>
-        <p class="small" style="margin:0 0 10px 0;">
+        <p class="small stack-sm">
           Let it be publicly known that the island offices listed herein are presented for ceremonial recognition, administrative order, and accessible communication within Ko Hawaiʻi Pae ʻĀina.
         </p>
-        <p class="small" style="margin:0 0 10px 0;">
+        <p class="small stack-sm">
           These offices stand as points of routing, guidance, and reception for matters concerning documents, protocol, registration, island correspondence, and public assistance.
         </p>
-        <p class="small" style="margin:0;">
+        <p class="small mb-0">
           All persons approaching these channels are asked to proceed with dignity, respect, and observance of proper protocol, so that communication may remain orderly, transparent, and beneficial to the people and the ʻāina.
         </p>
       </div>
     </section>
-
-    <!-- BOOKLET OUTLINE -->
- 
 
     <!-- ISLAND OFFICES -->
     <section class="panel" aria-label="Island office directory">
@@ -152,42 +262,92 @@
 
         <article id="hawaii-office" class="office-card" aria-label="Hawaiʻi Island Office">
           <h4>Hawaiʻi Island Office</h4>
-          <p><strong>Location:</strong> 159 Keawe St, Hilo, Hawaiʻi</p>
-          <p><strong>Hours:</strong> Hilo Hours 10:00 AM – 12:00 PM</p>
-          <p><strong>Email:</strong> <a href="mailto:khparelationsaffairs@gmail.com">khparelationsaffairs@gmail.com</a></p>
-          <p><strong>Phone:</strong> <a href="tel:+18083333459">(808) 333-3459</a></p>
-          <p class="small" style="margin-bottom:0;">
+          <div class="office-field"><span class="field-label">Location</span><span class="field-value">159 Keawe St, Hilo, Hawaiʻi</span></div>
+          <div class="office-field"><span class="field-label">Hours</span><span class="field-value">Hilo Hours 10:00 AM – 12:00 PM</span></div>
+          <div class="office-field"><span class="field-label">Email</span><span class="field-value"><a href="mailto:SCCJ.KHPA@pm.me">SCCJ.KHPA@pm.me</a></span></div>
+          <div class="office-field"><span class="field-label">Phone</span><span class="field-value"><a href="tel:+18083333459">(808) 333-3459</a></span></div>
+          <p class="small mt-xs mb-0">
             Primary public routing for assistance, office follow-up, and administrative guidance.
           </p>
+          <div class="actions">
+            <a class="button" href="tel:+18087201129">Schedule Appointment</a>
+          </div>
         </article>
 
         <article id="oahu-office" class="office-card" aria-label="Oʻahu Office">
           <h4>Oʻahu Office</h4>
-          <p><strong>Mailing:</strong> Box 23055 Makiki Station, Oʻahu</p>
-          <p><strong>Email:</strong> <a href="JUDICIARY.KHPA@io">JUDICIARY.KHPA@io</a></p>
-          <p><strong>Status:</strong> Public contact access available</p>
-          <p class="small" style="margin-bottom:0;">
+          <div class="office-field"><span class="field-label">Mailing</span><span class="field-value">Box 23055 Makiki Station, Oʻahu</span></div>
+          <div class="office-field"><span class="field-label">Email</span><span class="field-value"><a href="mailto:SCCJ.KHPA@pm.me">SCCJ.KHPA@pm.me</a></span></div>
+          <div class="office-field"><span class="field-label">Status</span><span class="field-value">Public contact access available</span></div>
+          <p class="small mt-xs mb-0">
             Oʻahu communications and administrative matters may be directed through this office contact.
           </p>
+          <div class="actions">
+            <a class="button" href="tel:+18087201129">Schedule Appointment</a>
+          </div>
         </article>
 
         <article id="maui-office" class="office-card" aria-label="Maui Office">
           <h4>Maui Office</h4>
-          <p><strong>Status:</strong> Coming Soon</p>
-          <p class="small" style="margin-bottom:0;">
+          <div class="office-field"><span class="field-label">Status</span><span class="field-value">Coming Soon</span></div>
+          <p class="small mt-xs mb-0">
             Administrative routing details for Maui will be posted here as public access information becomes available.
           </p>
+          <div class="actions">
+            <a class="button secondary" href="tel:+18087201129">Call for General Inquiries</a>
+          </div>
         </article>
 
         <article id="molokai-office" class="office-card" aria-label="Molokaʻi Office">
           <h4>Molokaʻi Office</h4>
-          <p><strong>Status:</strong> Coming Soon</p>
-          <p class="small" style="margin-bottom:0;">
+          <div class="office-field"><span class="field-label">Status</span><span class="field-value">Coming Soon</span></div>
+          <p class="small mt-xs mb-0">
             Administrative routing details for Molokaʻi will be posted here as public access information becomes available.
           </p>
+          <div class="actions">
+            <a class="button secondary" href="tel:+18087201129">Call for General Inquiries</a>
+          </div>
         </article>
 
       </div>
+    </section>
+
+    <!-- CONTACT NUMBERS RECORD -->
+    <section class="panel" aria-labelledby="contact-record-title">
+      <div class="panel-header">
+        <h3 class="panel-title" id="contact-record-title">Important Contact Numbers</h3>
+        <span class="badge">Current Record</span>
+      </div>
+
+      <p class="small stack-sm">
+        The numbers and email below are the current official contact record for Ko Hawaiʻi Pae ʻĀina, as of
+        <time datetime="2026-08-08">August 8, 2026</time>, and remain active during the office relocation. This
+        record will be updated if any number changes.
+      </p>
+
+      <ul class="doclist">
+        <li>
+          <div class="left">
+            <strong>Public Contact Line</strong>
+            <div class="meta">General public contact line</div>
+          </div>
+          <div><a class="button secondary" href="tel:+18083333459">(808) 333-3459</a></div>
+        </li>
+        <li>
+          <div class="left">
+            <strong>Appointment Line</strong>
+            <div class="meta">Schedule appointments for restricted access and administrative services</div>
+          </div>
+          <div><a class="button secondary" href="tel:+18087201129">(808) 720-1129</a></div>
+        </li>
+        <li>
+          <div class="left">
+            <strong>Email</strong>
+            <div class="meta">General assistance and judiciary correspondence</div>
+          </div>
+          <div><a class="button secondary" href="mailto:SCCJ.KHPA@pm.me">SCCJ.KHPA@pm.me</a></div>
+        </li>
+      </ul>
     </section>
 
     <!-- QUICK ACTIONS -->
@@ -198,11 +358,10 @@
       </div>
 
       <div class="island-button-stack">
-        <a class="button secondary" href="mailto:khparelationsaffairs@gmail.com">Email Primary Office</a>
-        <a class="button secondary" href="mailto:JUDICIARY.KHPA@io">Email Oʻahu Office</a>
-        <a class="button secondary" href="contact.html#direct-assistance-form">Go to Direct Assistance</a>
-        <a class="button secondary" href="registration.html">Open Registration &amp; Licensing</a>
-        <a class="button secondary" href="government-documents.html">Open Government Documents</a>
+        <a class="button secondary" href="mailto:SCCJ.KHPA@pm.me">Email KHPA</a>
+        <a class="button secondary" href="/contact.html#direct-assistance-form">Go to Direct Assistance</a>
+        <a class="button secondary" href="/registration.html">Open Registration &amp; Licensing</a>
+        <a class="button secondary" href="/government-documents.html">Open Government Documents</a>
       </div>
     </section>
 
@@ -213,7 +372,7 @@
         <span class="badge">Standard</span>
       </div>
 
-      <p class="small" style="margin:0;">
+      <p class="small mb-0">
         This directory is presented as a ceremonial and administrative access page. Its purpose is to orderly communication, office contact, document routing and navigation for the public.
       </p>
     </section>
@@ -225,15 +384,20 @@
   <div class="container footer-grid">
     <div class="footer-col">
       <h4>Contact</h4>
-      <p>Email: <a href="mailto:khparelationsaffairs@gmail.com">khparelationsaffairs@gmail.com</a></p>
+      <p>Email: <a href="mailto:SCCJ.KHPA@pm.me">SCCJ.KHPA@pm.me</a></p>
       <p>Phone: <a href="tel:+18083333459">(808) 333-3459</a></p>
-      <p>Oʻahu: <a href="mailto:JUDICIARY.KHPA@io">JUDICIARY.KHPA@io</a></p>
     </div>
     <div class="footer-col">
       <h4>Services</h4>
-      <p><a href="registration.html">Registration &amp; Licensing</a></p>
-      <p><a href="government-documents.html">Government Documents</a></p>
-      <p><a href="contact.html">Direct Assistance</a></p>
+      <p><a href="/registration.html">Registration &amp; Licensing</a></p>
+      <p><a href="/government-documents.html">Government Documents</a></p>
+      <p><a href="/contact.html">Direct Assistance</a></p>
+    </div>
+    <div class="footer-col">
+      <h4>More</h4>
+      <p><a href="/emporium.html">Emporium</a></p>
+      <p><a href="/protocols.html">Protocol</a></p>
+      <p><a href="/foreign-affairs.html">Foreign Affairs</a></p>
     </div>
     <div class="footer-col">
       <h4>Notice</h4>
@@ -243,6 +407,7 @@
   </div>
 </footer>
 
-<script src="Js/site.js"></script>
+<script src="/Js/site.js"></script>
+<script src="/Js/pwa.js"></script>
 </body>
 </html>

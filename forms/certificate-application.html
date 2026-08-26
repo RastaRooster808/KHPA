@@ -1,43 +1,283 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>KHPA Certificate Application</title>
-  <link rel="stylesheet" href="../css/style-formal.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("khpa_theme");
+        if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    })();
+  </script>
+  <title>Identification / Operator Certificate Application | KHPA</title>
+  <meta name="description" content="KHPA pre-check application for the Identification Certificate or Motor Vehicle Operator's Certificate." />
+  <link rel="canonical" href="https://khpa.io/forms/certificate-application.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Ko Hawaiʻi Pae ʻĀina (KHPA)" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:url" content="https://khpa.io/forms/certificate-application.html" />
+  <meta property="og:title" content="Identification / Operator Certificate Application | KHPA" />
+  <meta property="og:description" content="KHPA pre-check application for the Identification Certificate or Motor Vehicle Operator's Certificate." />
+  <meta property="og:image" content="https://khpa.io/icons/icon-512.png" />
+  <meta property="og:image:alt" content="Seal of Ko Hawaiʻi Pae ʻĀina" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Identification / Operator Certificate Application | KHPA" />
+  <meta name="twitter:description" content="KHPA pre-check application for the Identification Certificate or Motor Vehicle Operator's Certificate." />
+  <meta name="twitter:image" content="https://khpa.io/icons/icon-512.png" />
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Ko Hawaiʻi Pae ʻĀina (KHPA)",
+  "alternateName": "KHPA",
+  "url": "https://khpa.io/",
+  "logo": "https://khpa.io/icons/icon-512.png",
+  "email": "SCCJ.KHPA@pm.me",
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "telephone": "+1-808-333-3459",
+      "contactType": "customer service",
+      "email": "SCCJ.KHPA@pm.me",
+      "areaServed": "US-HI",
+      "availableLanguage": [
+        "English"
+      ]
+    },
+    {
+      "@type": "ContactPoint",
+      "telephone": "+1-808-720-1129",
+      "contactType": "reservations",
+      "email": "SCCJ.KHPA@pm.me",
+      "areaServed": "US-HI",
+      "availableLanguage": [
+        "English"
+      ]
+    }
+  ]
+}
+  </script>
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#1e2a36" />
+  <link rel="icon" href="/icons/favicon-32.png" sizes="32x32" type="image/png" />
+  <link rel="icon" href="/icons/favicon-16.png" sizes="16x16" type="image/png" />
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+  <link rel="stylesheet" href="/css/main.css" />
 </head>
 <body>
-  <header>
-    <img src="../img/logo.png" alt="KHPA Logo" style="width: 120px;" />
-    <h1>Certificate Application</h1>
-  </header>
+<a class="skip-link" href="#main">Skip to content</a>
 
-  <div class="help-banner">
-    Need help? Reach out to your local island office or email <strong>registration@khpa.io</strong> for assistance.
+<div id="offlineBanner" class="system-banner" role="status" hidden>
+  You&rsquo;re offline &mdash; showing saved content.
+</div>
+<div id="updateBanner" class="system-banner" role="status" hidden>
+  <span>A new version of this site is available.</span>
+  <button id="updateReload" type="button" class="button secondary">Refresh</button>
+</div>
+
+<div class="topbar">
+  <div class="container">
+    <div class="topbar-links">
+      <a href="mailto:SCCJ.KHPA@pm.me">SCCJ.KHPA@pm.me</a>
+      <a href="tel:+18083333459">(808) 333-3459</a>
+    </div>
+    <div class="topbar-controls">
+      <button type="button" id="themeToggle" class="theme-toggle" aria-pressed="false">
+        <span class="icon" aria-hidden="true">🌙</span>
+        <span class="label">Dark Mode</span>
+      </button>
+      <button type="button" id="installBtn" class="install-btn" hidden>
+        <span aria-hidden="true">⬇️</span> Install App
+      </button>
+      <div class="lang-toggle" aria-label="Language selection">
+        <button type="button" class="lang-btn active" data-lang-btn="en" aria-pressed="true">English</button>
+        <button type="button" class="lang-btn" data-lang-btn="haw" aria-pressed="false">ʻŌlelo Hawaiʻi</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand-wrap" href="/index.html" aria-label="KHPA Home">
+      <div class="seal">
+        <img src="/img/logo.png" alt="Seal of Ko Hawaiʻi Pae ʻĀina" onerror="this.style.display='none'">
+      </div>
+      <div class="brand">
+        <h1>Ko Hawaiʻi Pae ʻĀina (KHPA)</h1>
+        <p class="tagline">Certificate Application • Pre-Check Form</p>
+      </div>
+    </a>
   </div>
 
-  <form action="mailto:registration@khpa.io" method="post" enctype="text/plain" style="max-width: 600px; margin: auto;">
-    <label>Full Name:<br/><input type="text" name="Full Name" required></label><br/><br/>
-    <label>Date of Birth:<br/><input type="date" name="DOB" required></label><br/><br/>
-    <label>Height:<br/><input type="text" name="Height" required></label><br/><br/>
-    <label>Weight:<br/><input type="text" name="Weight" required></label><br/><br/>
-    <label>Hair Color:<br/><input type="text" name="Hair" required></label><br/><br/>
-    <label>Eye Color:<br/><input type="text" name="Eyes" required></label><br/><br/>
-    <label>Sex (K/W):<br/><input type="text" name="Sex" required></label><br/><br/>
-    <label>Island:<br/>
-      <select name="Island" required>
-        <option value="Hawai‘i">Hawai‘i</option>
-        <option value="Maui">Maui</option>
-        <option value="Moloka‘i">Moloka‘i</option>
-        <option value="O‘ahu">O‘ahu</option>
-      </select>
-    </label><br/><br/>
-    <input type="submit" value="Submit" />
-  </form>
+  <nav class="navbar" aria-label="Primary">
+    <div class="container nav-row">
+      <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="primaryNav">
+        <span class="bar" aria-hidden="true"></span>
+        Menu
+      </button>
+      <ul class="nav" id="primaryNav">
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/hawaii.html">Island Offices</a></li>
+        <li><a href="/government-documents.html">Government Documents</a></li>
+        <li><a href="/registration.html">Registration &amp; Licensing</a></li>
+        <li><a href="/emporium.html">Emporium</a></li>
+        <li><a href="/foreign-affairs.html">Foreign Affairs</a></li>
+        <li><a href="/protocols.html">Protocol</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
 
-  <footer>
-    <p>© 2025 Ko Hawaiʻi Pae ʻĀina</p>
-  </footer>
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <div class="container">
+    <ol>
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/registration.html">Registration &amp; Licensing</a></li>
+      <li aria-current="page">Certificate Application</li>
+    </ol>
+  </div>
+</nav>
+
+<main id="main">
+  <div class="container">
+
+    <h2 class="page-title">Identification / Operator Certificate Application</h2>
+    <div class="section-divider"></div>
+
+    <p class="lede">
+      This combined pre-check form allows you to apply for either the Identification Certificate or the
+      Motor Vehicle Operator's Certificate. Select the certificate type and provide your details below.
+    </p>
+
+    <div class="notice" role="status">
+      <strong>Pre-Check Notice:</strong> Submitting this form sends your pre-check information to the KHPA office
+      for review. Final issuance of a certificate requires office confirmation — you may also call
+      <a href="tel:+18087201129">(808) 720-1129</a> or visit an island office in person.
+    </div>
+
+    <section class="panel" aria-label="Certificate application form">
+      <div class="panel-header">
+        <h3 class="panel-title">Application Details</h3>
+        <span class="badge">Pre-Check</span>
+      </div>
+
+      <p class="required-note">Fields marked with an asterisk (*) are required.</p>
+
+      <form action="https://formspree.io/f/xdkdjvpy" method="POST" class="assist-form">
+        <fieldset>
+          <legend>Certificate Type</legend>
+          <div class="field field-full">
+            <label for="certType">Which certificate are you applying for? *</label>
+            <select id="certType" name="Certificate Type" required>
+              <option value="">Select one</option>
+              <option>Identification Certificate</option>
+              <option>Motor Vehicle Operator's Certificate</option>
+            </select>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Applicant Information</legend>
+          <p class="hint mb-sm">Enter your legal information exactly as it should appear on the certificate.</p>
+          <div class="form-grid">
+            <div class="field">
+              <label for="fullName">Full Name *</label>
+              <input id="fullName" name="Full Name" type="text" autocomplete="name" required />
+            </div>
+            <div class="field">
+              <label for="dob">Date of Birth *</label>
+              <input id="dob" name="Date of Birth" type="date" autocomplete="bday" required />
+            </div>
+            <div class="field">
+              <label for="height">Height *</label>
+              <input id="height" name="Height" type="text" required placeholder="e.g. 5'8&quot;" />
+            </div>
+            <div class="field">
+              <label for="weight">Weight *</label>
+              <input id="weight" name="Weight" type="text" required placeholder="e.g. 160 lbs" />
+            </div>
+            <div class="field">
+              <label for="hair">Hair Color *</label>
+              <input id="hair" name="Hair Color" type="text" required />
+            </div>
+            <div class="field">
+              <label for="eyes">Eye Color *</label>
+              <input id="eyes" name="Eye Color" type="text" required />
+            </div>
+            <div class="field">
+              <label for="sex">Sex *</label>
+              <select id="sex" name="Sex" required>
+                <option value="">Select one</option>
+                <option value="K">Kāne (Male)</option>
+                <option value="W">Wahine (Female)</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="island">Island *</label>
+              <select id="island" name="Island" required>
+                <option value="">Select one</option>
+                <option>Hawaiʻi</option>
+                <option>Maui</option>
+                <option>Molokaʻi</option>
+                <option>Oʻahu</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="email">Email Address *</label>
+              <input id="email" name="Email" type="email" autocomplete="email" required />
+            </div>
+            <div class="field">
+              <label for="phone">Phone Number</label>
+              <input id="phone" name="Phone" type="tel" autocomplete="tel" />
+            </div>
+          </div>
+        </fieldset>
+
+        <input type="hidden" name="_subject" value="KHPA Identification / Operator Certificate Pre-Check" />
+        <div class="form-actions">
+          <button type="submit" class="button">Submit Pre-Check Form</button>
+          <a class="button secondary" href="tel:+18087201129">Call Instead</a>
+          <a class="button secondary" href="/registration.html#identification">Back to Registration</a>
+        </div>
+      </form>
+    </section>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <p>Email: <a href="mailto:SCCJ.KHPA@pm.me">SCCJ.KHPA@pm.me</a></p>
+      <p>Phone: <a href="tel:+18083333459">(808) 333-3459</a></p>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <p><a href="/registration.html">Registration &amp; Licensing</a></p>
+      <p><a href="/government-documents.html">Government Documents</a></p>
+    </div>
+    <div class="footer-col">
+      <h4>More</h4>
+      <p><a href="/hawaii.html">Island Offices</a></p>
+      <p><a href="/contact.html">Contact</a></p>
+    </div>
+    <div class="footer-col">
+      <h4>Notice</h4>
+      <p>&copy; <span id="year"></span> KHPA</p>
+      <p class="small">Public information portal</p>
+    </div>
+  </div>
+</footer>
+
+<script src="/Js/site.js"></script>
+<script src="/Js/pwa.js"></script>
 </body>
 </html>

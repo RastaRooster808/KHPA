@@ -1,0 +1,35 @@
+{
+  "name": "Ko Hawaiʻi Pae ʻĀina (KHPA)",
+  "short_name": "KHPA",
+  "description": "Official public portal of Ko Hawaiʻi Pae ʻĀina — registration and licensing, government documents, island offices, and public assistance.",
+  "start_url": "/index.html",
+  "id": "/index.html",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f4f1e8",
+  "theme_color": "#1e2a36",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["government", "reference", "education"],
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

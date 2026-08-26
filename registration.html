@@ -3,194 +3,490 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title data-title-en="KHPA — Registration & Licensing" data-title-haw="KHPA — Kākau & Laikini">KHPA — Registration & Licensing</title>
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("khpa_theme");
+        if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    })();
+  </script>
+  <title>Registration &amp; Licensing | KHPA</title>
+  <meta name="description" content="KHPA registration and licensing services: identification certificates, motor vehicle operator certificates, vehicle and vessel registration, business registration, vital records, and wallet reference." />
+  <link rel="canonical" href="https://khpa.io/registration.html" />
 
-  <!-- Use the same formal stylesheet used by your other pages -->
-  <link rel="stylesheet" href="/css/style-formal.css" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Ko Hawaiʻi Pae ʻĀina (KHPA)" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:url" content="https://khpa.io/registration.html" />
+  <meta property="og:title" content="Registration &amp; Licensing | KHPA" />
+  <meta property="og:description" content="KHPA registration and licensing services: identification certificates, motor vehicle operator certificates, vehicle and vessel registration, business registration, vital records, and wallet reference." />
+  <meta property="og:image" content="https://khpa.io/icons/icon-512.png" />
+  <meta property="og:image:alt" content="Seal of Ko Hawaiʻi Pae ʻĀina" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Registration &amp; Licensing | KHPA" />
+  <meta name="twitter:description" content="KHPA registration and licensing services: identification certificates, motor vehicle operator certificates, vehicle and vessel registration, business registration, vital records, and wallet reference." />
+  <meta name="twitter:image" content="https://khpa.io/icons/icon-512.png" />
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Ko Hawaiʻi Pae ʻĀina (KHPA)",
+  "alternateName": "KHPA",
+  "url": "https://khpa.io/",
+  "logo": "https://khpa.io/icons/icon-512.png",
+  "email": "SCCJ.KHPA@pm.me",
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "telephone": "+1-808-333-3459",
+      "contactType": "customer service",
+      "email": "SCCJ.KHPA@pm.me",
+      "areaServed": "US-HI",
+      "availableLanguage": [
+        "English"
+      ]
+    },
+    {
+      "@type": "ContactPoint",
+      "telephone": "+1-808-720-1129",
+      "contactType": "reservations",
+      "email": "SCCJ.KHPA@pm.me",
+      "areaServed": "US-HI",
+      "availableLanguage": [
+        "English"
+      ]
+    }
+  ]
+}
+  </script>
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#1e2a36" />
+  <link rel="icon" href="/icons/favicon-32.png" sizes="32x32" type="image/png" />
+  <link rel="icon" href="/icons/favicon-16.png" sizes="16x16" type="image/png" />
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+  <link rel="stylesheet" href="/css/main.css" />
 </head>
 
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- Fixed assistance bar (matches your formal pages) -->
-  <div class="topbar">
-    <div class="container">
-      <div class="help">
-        Assistance: <a href="mailto:KHPARELATIONSAFFAIRS@gmail.com">KHPARELATIONSAFFAIRS@gmail.com</a> |
-        <a href="tel:+18083333459">(808) 333-3459</a>
-      </div>
+<div id="offlineBanner" class="system-banner" role="status" hidden>
+  You&rsquo;re offline &mdash; showing saved content.
+</div>
+<div id="updateBanner" class="system-banner" role="status" hidden>
+  <span>A new version of this site is available.</span>
+  <button id="updateReload" type="button" class="button secondary">Refresh</button>
+</div>
 
-      <div class="actions">
-        <a class="btn" href="/contact.html" data-lang-ui="en">Island Offices</a>
-        <a class="btn" href="/contact.html" data-lang-ui="haw" style="display:none;">Nā Keʻena Mokupuni</a>
-
-        <button class="btn primary" id="langToggle" type="button" aria-label="Toggle language">
-          ʻŌlelo Hawaiʻi
-        </button>
+<div class="topbar">
+  <div class="container">
+    <div class="topbar-links">
+      <a href="mailto:SCCJ.KHPA@pm.me">SCCJ.KHPA@pm.me</a>
+      <a href="tel:+18083333459">(808) 333-3459</a>
+    </div>
+    <div class="topbar-controls">
+      <button type="button" id="themeToggle" class="theme-toggle" aria-pressed="false">
+        <span class="icon" aria-hidden="true">🌙</span>
+        <span class="label">Dark Mode</span>
+      </button>
+      <button type="button" id="installBtn" class="install-btn" hidden>
+        <span aria-hidden="true">⬇️</span> Install App
+      </button>
+      <div class="lang-toggle" aria-label="Language selection">
+        <button type="button" class="lang-btn active" data-lang-btn="en" aria-pressed="true">English</button>
+        <button type="button" class="lang-btn" data-lang-btn="haw" aria-pressed="false">ʻŌlelo Hawaiʻi</button>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- Header (matches formal pages) -->
-  <header class="header">
-    <div class="container">
-      <div class="row">
-        <!-- IMPORTANT: logo.png is your Coat of Arms on khpa.io -->
-        <img src="/img/logo.png" alt="Kingdom Coat of Arms" />
-        <div>
-          <h1 data-lang="en">Registration &amp; Licensing</h1>
-          <p data-lang="en">Pre-check forms and submission instructions.</p>
-
-          <h1 data-lang="haw" style="display:none;">Kākau &amp; Laikini</h1>
-          <p data-lang="haw" style="display:none;">Nā pepa mua-nānā a me nā kuhikuhi waiho.</p>
-        </div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand-wrap" href="/index.html" aria-label="KHPA Home">
+      <div class="seal">
+        <img src="/img/logo.png" alt="Seal of Ko Hawaiʻi Pae ʻĀina" onerror="this.style.display='none'">
       </div>
-    </div>
-  </header>
+      <div class="brand">
+        <h1>Ko Hawaiʻi Pae ʻĀina (KHPA)</h1>
+        <p class="tagline">Registration &amp; Licensing • Pre-Check Forms &amp; Submission Instructions</p>
+      </div>
+    </a>
+  </div>
 
-  <!-- Nav (matches formal pages; bilingual) -->
-  <nav class="nav">
-    <div class="container">
-      <a href="/index.html" data-lang="en">Home</a>
-      <a href="/index.html" data-lang="haw" style="display:none;">Ka Home</a>
-
-      <a href="/contact.html" data-lang="en">Island Offices</a>
-      <a href="/contact.html" data-lang="haw" style="display:none;">Nā Keʻena Mokupuni</a>
-
-      <a href="/government-documents.html" data-lang="en">Government Documents</a>
-      <a href="/government-documents.html" data-lang="haw" style="display:none;">Nā Palapala Aupuni</a>
-
-      <a class="active" href="/registration.html" data-lang="en">Registration and Licensing</a>
-      <a class="active" href="/registration.html" data-lang="haw" style="display:none;">Kākau &#699;Ana a me ka Laikini</a>
-
+  <nav class="navbar" aria-label="Primary">
+    <div class="container nav-row">
+      <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="primaryNav">
+        <span class="bar" aria-hidden="true"></span>
+        Menu
+      </button>
+      <ul class="nav" id="primaryNav">
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/hawaii.html">Island Offices</a></li>
+        <li><a href="/government-documents.html">Government Documents</a></li>
+        <li><a href="/registration.html" aria-current="page">Registration &amp; Licensing</a></li>
+        <li><a href="/emporium.html">Emporium</a></li>
+        <li><a href="/foreign-affairs.html">Foreign Affairs</a></li>
+        <li><a href="/protocols.html">Protocol</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+      </ul>
     </div>
   </nav>
+</header>
 
-  <main class="container">
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <div class="container">
+    <ol>
+      <li><a href="/index.html">Home</a></li>
+      <li aria-current="page">Registration &amp; Licensing</li>
+    </ol>
+  </div>
+</nav>
 
-    <!-- ENGLISH -->
-    <section class="card" data-lang="en">
-      <h2>Pre-Check Notice</h2>
-      <p class="meta">Forms are provided for pre-information only.</p>
+<main id="main">
+  <div class="container">
 
-      <div class="notice-box">
-        <p><strong>Pre-Check Notice:</strong> The forms listed below are provided as <strong>pre-information / pre-check forms only</strong>. Online submission through this website is not available.</p>
-        <p><strong>Submission &amp; Processing:</strong> Applications shall be <strong>submitted and processed through KHPA</strong>. Applicants must <strong>call the office</strong> or <strong>visit in person during operating hours</strong> for instructions and processing.</p>
+    <h2 class="page-title">Registration &amp; Licensing</h2>
+    <div class="section-divider"></div>
+
+    <p class="lede">
+      Public service categories, pre-check forms, and submission instructions for identification, motor vehicle,
+      vehicle and vessel registration, business registration, vital records, and wallet credential reference.
+    </p>
+
+    <div class="notice" role="status">
+      <strong>Pre-Check Notice:</strong> The forms listed below are provided as <strong>pre-information / pre-check forms only</strong>.
+      Online submission through this website is not available.
+      Applications shall be <strong>submitted and processed through KHPA</strong>. Applicants must
+      <strong>call the office</strong> or <strong>visit in person during operating hours</strong> for instructions and processing.
+    </div>
+
+    <div class="notice notice-earth" role="status">
+      <strong>Submit at Island Office:</strong> Every registration and licensing matter is finalized in person or by phone
+      at a KHPA island office. The pre-check forms and PDFs on this page help you prepare — they are not a final
+      submission on their own. See <a href="/hawaii.html">Island Offices</a> for routing and contact information.
+    </div>
+
+    <!-- HOW TO APPLY -->
+    <section class="panel" aria-labelledby="how-to-apply-title">
+      <div class="panel-header">
+        <h3 class="panel-title" id="how-to-apply-title">How to Apply</h3>
+        <span class="badge">Step by Step</span>
       </div>
 
-      <h2 style="margin-top:18px;">Forms (PDF)</h2>
-      <ul class="formlist">
+      <ol class="steps">
         <li>
-          <a href="/img/APPLICATION%20FOR%20CHB_71125.pdf" target="_blank" rel="noopener">
-            Application — Certification of Hawaiian Birth (CHB)
-          </a>
+          <h4>Review Your Category</h4>
+          <p>Find the section below that matches what you need: identification, motor vehicle, vehicle/vessel, business, or vital records.</p>
         </li>
         <li>
-          <a href="/img/APPLICATION%20FOR%20VESSEL%20REGISTRATION_CGCV02-27-24.pdf" target="_blank" rel="noopener">
-            Application — Vessel Registration
-          </a>
+          <h4>Complete the Pre-Check Form</h4>
+          <p>Fill out the online pre-check form or download the PDF application listed for that category.</p>
         </li>
         <li>
-          <a href="/img/APPLICATION%20FOR%20ID%20%26%20O%20CERTIFICATE%20OF.pdf" target="_blank" rel="noopener">
-            Application — Identification / Operator Certificate
-          </a>
+          <h4>Gather Your Documents</h4>
+          <p>Collect the items in the Required Documents Checklist below before you call or visit.</p>
         </li>
-      </ul>
-
-      <p class="foot"><strong>Office:</strong> Call or visit during operating hours for submission requirements and next steps.</p>
+        <li>
+          <h4>Submit at Island Office</h4>
+          <p>Call or visit your island office to finalize the application. Pre-check forms alone do not complete your request.</p>
+        </li>
+      </ol>
     </section>
 
-    <!-- HAWAIIAN -->
-    <section class="card" data-lang="haw" style="display:none;">
-      <h2>Hoʻolaha Mua-Nānā</h2>
-      <p class="meta">Hāʻawi ʻia nā pepa no ka mua-ʻike wale nō.</p>
-
-      <div class="notice-box">
-        <p><strong>Hoʻolaha Mua-Nānā:</strong> Hāʻawi ʻia nā pepa ma lalo nei no ka <strong>mua-ʻike / mua-nānā wale nō</strong>. ʻAʻole hiki ke waiho noi ma o kēia pūnaewele.</p>
-        <p><strong>Waiho &amp; Hoʻoponopono:</strong> <strong>E waiho</strong> a <strong>e hoʻoponopono</strong> ʻia nā noi ma o ka <strong>KHPA</strong>. Pono ka mea noi e <strong>kelepona i ke keʻena</strong> a i ʻole <strong>kipa kino i ka wā hana</strong> no nā kuhikuhi a me ka hoʻoponopono ʻana.</p>
+    <!-- REQUIRED DOCUMENTS CHECKLIST -->
+    <section class="panel" aria-labelledby="required-documents-title">
+      <div class="panel-header">
+        <h3 class="panel-title" id="required-documents-title">Required Documents Checklist</h3>
+        <span class="badge">Prepare Ahead</span>
       </div>
 
-      <h2 style="margin-top:18px;">Nā Pepa (PDF)</h2>
-      <ul class="formlist">
-        <li>
-          <a href="/img/APPLICATION%20FOR%20CHB_71125.pdf" target="_blank" rel="noopener">
-            Noi — Palapala Hānau Hawaiʻi (CHB)
-          </a>
-        </li>
-        <li>
-          <a href="/img/APPLICATION%20FOR%20VESSEL%20REGISTRATION_CGCV02-27-24.pdf" target="_blank" rel="noopener">
-            Noi — Kākau Moku
-          </a>
-        </li>
-        <li>
-          <a href="/img/APPLICATION%20FOR%20ID%20%26%20O%20CERTIFICATE%20OF.pdf" target="_blank" rel="noopener">
-            Noi — Palapala ID / Palapala Kaʻa
-          </a>
-        </li>
-      </ul>
+      <p class="small mb-sm">
+        Requirements can vary by service category and are confirmed by office staff. Contact your
+        <a href="/hawaii.html">island office</a> before your visit to confirm the exact documents needed for your request.
+      </p>
 
-      <p class="foot"><strong>Keʻena:</strong> E kelepona a i ʻole e kipa i ka wā hana no nā koi waiho a me nā ʻanuʻu aʻe.</p>
+      <ul class="checklist">
+        <li>Valid photo identification</li>
+        <li>Completed pre-check form or printed PDF application for your service category</li>
+        <li>Any existing KHPA certificate, registration, or reference number related to your request</li>
+        <li>Supporting documents specific to your category (see the reference PDFs in each section below)</li>
+        <li>Current contact information for follow-up (phone number and/or email address)</li>
+      </ul>
     </section>
 
-  </main>
+    <!-- SECTION JUMP NAV -->
+    <nav class="reg-section-nav" aria-label="Jump to registration section">
+      <a href="#identification">Identification Certificate</a>
+      <a href="#operator">Motor Vehicle Operator's Certificate</a>
+      <a href="#vehicle-vessel">Vehicle &amp; Vessel Registration</a>
+      <a href="#business">Business Registration</a>
+      <a href="#vital-records">Vital Records</a>
+      <a href="#wallet">Wallet / Digital Credential Access</a>
+    </nav>
 
-  <footer class="footer">
-    <div class="container">© 2025 Ko Hawai&#699;i Pae &#699;Aina</div>
-  </footer>
+    <!-- 1. IDENTIFICATION CERTIFICATE -->
+    <section id="identification" class="panel" aria-labelledby="identification-title">
+      <div class="panel-header">
+        <h3 class="panel-title" id="identification-title">Identification Certificate</h3>
+        <span class="badge">Service Category</span>
+      </div>
 
-  <!-- Local page helpers (keeps formal style but adds the notice look) -->
-  <style>
-    .notice-box{
-      border: 1px solid rgba(0,0,0,.14);
-      border-radius: 14px;
-      padding: 14px 14px;
-      background: rgba(0,0,0,.02);
-    }
-    .notice-box p{ margin: 8px 0; }
+      <p class="small">Application and reference materials for KHPA identification certificates.</p>
 
-    .formlist{ margin: 10px 0 0 18px; }
-    .formlist li{ margin: 10px 0; }
+      <ul class="doclist">
+        <li>
+          <div class="left">
+            <strong>Application — Identification / Operator Certificate</strong>
+            <div class="meta">Pre-check application form (PDF).</div>
+          </div>
+          <div>
+            <a class="button secondary" href="/img/APPLICATION%20FOR%20ID%20%26%20O%20CERTIFICATE%20OF.pdf" target="_blank" rel="noopener">View PDF</a>
+          </div>
+        </li>
+        <li>
+          <div class="left">
+            <strong>Passport (Reference Copy)</strong>
+            <div class="meta">Identification reference document, cleaned copy with seal.</div>
+          </div>
+          <div>
+            <a class="button secondary" href="/pdf/Passport_Cleaned_With_Seal.pdf" target="_blank" rel="noopener">View PDF</a>
+          </div>
+        </li>
+        <li>
+          <div class="left">
+            <strong>Online Pre-Check Form</strong>
+            <div class="meta">Fill out the combined identification / operator certificate pre-check form.</div>
+          </div>
+          <div>
+            <a class="button" href="/forms/certificate-application.html">Fill Out Form</a>
+          </div>
+        </li>
+      </ul>
+    </section>
 
-    .foot{ margin-top: 18px; opacity: .95; }
-  </style>
+    <!-- 2. MOTOR VEHICLE OPERATOR'S CERTIFICATE -->
+    <section id="operator" class="panel" aria-labelledby="operator-title">
+      <div class="panel-header">
+        <h3 class="panel-title" id="operator-title">Motor Vehicle Operator's Certificate</h3>
+        <span class="badge">Service Category</span>
+      </div>
 
-  <script>
-    (function () {
-      const btn = document.getElementById('langToggle');
-      const KEY = 'khpa_lang';
-      let lang = 'en';
-      try { lang = localStorage.getItem(KEY) || 'en'; } catch(e) {}
+      <p class="small">This category shares the combined pre-check application with Identification Certificate above.</p>
 
-      function applyLang(next) {
-        lang = next;
-        try { localStorage.setItem(KEY, lang); } catch(e) {}
+      <ul class="doclist">
+        <li>
+          <div class="left">
+            <strong>Motor Vehicle Operator's Identification (Reference Copy)</strong>
+            <div class="meta">Cleaned reference copy with seal.</div>
+          </div>
+          <div>
+            <a class="button secondary" href="/pdf/Motor_Vehicle_Operators_Identification_Cleaned_With_Seal.pdf" target="_blank" rel="noopener">View PDF</a>
+          </div>
+        </li>
+        <li>
+          <div class="left">
+            <strong>Application — Identification / Operator Certificate</strong>
+            <div class="meta">Pre-check application form (PDF). Select the operator certificate option.</div>
+          </div>
+          <div>
+            <a class="button secondary" href="/img/APPLICATION%20FOR%20ID%20%26%20O%20CERTIFICATE%20OF.pdf" target="_blank" rel="noopener">View PDF</a>
+          </div>
+        </li>
+        <li>
+          <div class="left">
+            <strong>Online Pre-Check Form</strong>
+            <div class="meta">Fill out the combined identification / operator certificate pre-check form.</div>
+          </div>
+          <div>
+            <a class="button" href="/forms/certificate-application.html">Fill Out Form</a>
+          </div>
+        </li>
+      </ul>
+    </section>
 
-        // swap content blocks
-        document.querySelectorAll('[data-lang="en"]').forEach(el => {
-          el.style.display = (lang === 'en') ? '' : 'none';
-        });
-        document.querySelectorAll('[data-lang="haw"]').forEach(el => {
-          el.style.display = (lang === 'haw') ? '' : 'none';
-        });
+    <!-- 3. VEHICLE / VESSEL REGISTRATION -->
+    <section id="vehicle-vessel" class="panel" aria-labelledby="vehicle-vessel-title">
+      <div class="panel-header">
+        <h3 class="panel-title" id="vehicle-vessel-title">Vehicle / Vessel Registration</h3>
+        <span class="badge">Service Category</span>
+      </div>
 
-        // swap topbar button label
-        btn.textContent = (lang === 'en') ? 'ʻŌlelo Hawaiʻi' : 'English';
+      <ul class="doclist">
+        <li>
+          <div class="left">
+            <strong>Safety Check</strong>
+            <div class="meta">Vehicle safety check reference form (PDF).</div>
+          </div>
+          <div>
+            <a class="button secondary" href="/pdf/Safety_Check.pdf" target="_blank" rel="noopener">View PDF</a>
+          </div>
+        </li>
+        <li>
+          <div class="left">
+            <strong>Application — Vessel Registration</strong>
+            <div class="meta">Pre-check application form (PDF).</div>
+          </div>
+          <div>
+            <a class="button secondary" href="/img/APPLICATION%20FOR%20VESSEL%20REGISTRATION_CGCV02-27-24.pdf" target="_blank" rel="noopener">View PDF</a>
+          </div>
+        </li>
+        <li>
+          <div class="left">
+            <strong>Online Pre-Check Form — Vehicle Registration</strong>
+            <div class="meta">Fill out the vehicle registration pre-check form.</div>
+          </div>
+          <div>
+            <a class="button" href="/forms/vehicle-registration.html">Fill Out Form</a>
+          </div>
+        </li>
+      </ul>
+    </section>
 
-        // set html lang
-        document.documentElement.setAttribute('lang', (lang === 'haw') ? 'haw' : 'en');
+    <!-- 4. BUSINESS REGISTRATION -->
+    <section id="business" class="panel" aria-labelledby="business-title">
+      <div class="panel-header">
+        <h3 class="panel-title" id="business-title">Business Registration</h3>
+        <span class="badge">Service Category</span>
+      </div>
 
-        // swap title (optional but clean)
-        const t = document.querySelector('title');
-        if (t) {
-          const tEn = t.getAttribute('data-title-en') || t.textContent;
-          const tHw = t.getAttribute('data-title-haw') || t.textContent;
-          t.textContent = (lang === 'haw') ? tHw : tEn;
-        }
-      }
+      <ul class="doclist">
+        <li>
+          <div class="left">
+            <strong>Merchandise License</strong>
+            <div class="meta">Reference copy with seal (PDF).</div>
+          </div>
+          <div>
+            <a class="button secondary" href="/pdf/Merchandise_License_Cleaned_With_Seal.pdf" target="_blank" rel="noopener">View PDF</a>
+          </div>
+        </li>
+        <li>
+          <div class="left">
+            <strong>Service License</strong>
+            <div class="meta">Reference copy with seal (PDF).</div>
+          </div>
+          <div>
+            <a class="button secondary" href="/pdf/Service_License_Cleaned_With_Seal.pdf" target="_blank" rel="noopener">View PDF</a>
+          </div>
+        </li>
+        <li>
+          <div class="left">
+            <strong>Online Pre-Check Form — Business Registration</strong>
+            <div class="meta">Fill out the business registration pre-check form.</div>
+          </div>
+          <div>
+            <a class="button" href="/forms/business-registration.html">Fill Out Form</a>
+          </div>
+        </li>
+      </ul>
+    </section>
 
-      btn.addEventListener('click', () => applyLang(lang === 'en' ? 'haw' : 'en'));
-      applyLang(lang);
-    })();
-  </script>
+    <!-- 5. VITAL RECORDS -->
+    <section id="vital-records" class="panel" aria-labelledby="vital-records-title">
+      <div class="panel-header">
+        <h3 class="panel-title" id="vital-records-title">Vital Records</h3>
+        <span class="badge">Service Category</span>
+      </div>
 
+      <ul class="doclist">
+        <li>
+          <div class="left">
+            <strong>Birth Certificate</strong>
+            <div class="meta">Reference copy with seal (PDF).</div>
+          </div>
+          <div>
+            <a class="button secondary" href="/pdf/Birth_Certificate_Cleaned_With_Seal.pdf" target="_blank" rel="noopener">View PDF</a>
+          </div>
+        </li>
+        <li>
+          <div class="left">
+            <strong>Application — Certification of Hawaiian Birth (CHB)</strong>
+            <div class="meta">Pre-check application form (PDF).</div>
+          </div>
+          <div>
+            <a class="button secondary" href="/img/APPLICATION%20FOR%20CHB_71125.pdf" target="_blank" rel="noopener">View PDF</a>
+          </div>
+        </li>
+        <li>
+          <div class="left">
+            <strong>Post Office Box (Postal Service)</strong>
+            <div class="meta">Reference copy with seal (PDF).</div>
+          </div>
+          <div>
+            <a class="button secondary" href="/pdf/Post_Office_Box_Postal_Service_Cleaned_With_Seal.pdf" target="_blank" rel="noopener">View PDF</a>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- 6. WALLET / DIGITAL CREDENTIAL ACCESS -->
+    <section id="wallet" class="wallet-card" aria-labelledby="wallet-title">
+      <div class="panel-header">
+        <h3 id="wallet-title">Wallet / Digital Credential Access</h3>
+        <span class="badge">In Development</span>
+      </div>
+
+      <p>
+        The KHPA Wallet (referred to as the "Thirteen Wallet") is a planned digital credential reference area for
+        identification, registration, and licensing records. This area is presented for public awareness and is
+        not yet available for issuance or transactions.
+      </p>
+
+      <div class="actions">
+        <a class="button" href="/contact.html">Request Wallet Updates</a>
+        <a class="button secondary" href="/contact.html#khpa-bot">Ask the Assistance Bot</a>
+      </div>
+    </section>
+
+    <section class="panel" aria-label="Assistance">
+      <div class="panel-header">
+        <h3 class="panel-title">Need Assistance?</h3>
+        <span class="badge">Standard</span>
+      </div>
+
+      <p class="small">Office: Call or visit during operating hours for submission requirements and next steps.</p>
+
+      <div class="actions">
+        <a class="button" href="tel:+18087201129">Call (808) 720-1129</a>
+        <a class="button secondary" href="/hawaii.html">Island Offices</a>
+        <a class="button secondary" href="/contact.html">Direct Assistance</a>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <p>Assistance: <a href="mailto:SCCJ.KHPA@pm.me">SCCJ.KHPA@pm.me</a></p>
+      <p>Public Line: <a href="tel:+18083333459">(808) 333-3459</a></p>
+      <p>Appointments: <a href="tel:+18087201129">(808) 720-1129</a></p>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <p><a href="/government-documents.html">Government Documents</a></p>
+      <p><a href="/hawaii.html">Island Offices</a></p>
+      <p><a href="/contact.html">Contact</a></p>
+    </div>
+    <div class="footer-col">
+      <h4>More</h4>
+      <p><a href="/emporium.html">Emporium</a></p>
+      <p><a href="/protocols.html">Protocol</a></p>
+      <p><a href="/foreign-affairs.html">Foreign Affairs</a></p>
+    </div>
+    <div class="footer-col">
+      <h4>Notice</h4>
+      <p>&copy; <span id="year"></span> Ko Hawaiʻi Pae ʻĀina</p>
+      <p class="small">Public information portal</p>
+    </div>
+  </div>
+</footer>
+
+<script src="/Js/site.js"></script>
+<script src="/Js/pwa.js"></script>
 </body>
 </html>
