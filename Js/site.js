@@ -2,7 +2,9 @@
   "use strict";
 
   /* Active nav link — matches current page filename against nav hrefs */
-  var path = location.pathname.split("/").pop() || "index.html";
+  var parts = location.pathname.split("/");
+  var path = parts.pop();
+  if (!path) path = parts.length <= 1 ? "index.html" : ""; /* "/" is Home; a folder such as "/blog/" is not */
 
   document.querySelectorAll(".nav a").forEach(function (a) {
     var href = a.getAttribute("href");
