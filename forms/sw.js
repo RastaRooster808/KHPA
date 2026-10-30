@@ -1,5 +1,5 @@
 /* KHPA Forms — offline cache. Bump CACHE when you change any file so devices pick up the update. */
-const CACHE = 'khpa-forms-v2';
+const CACHE = 'khpa-forms-v3';
 const FILES = ['./', './index.html', './manifest.json', './icon-180.png', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', e => {
