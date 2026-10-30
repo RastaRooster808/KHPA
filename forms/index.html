@@ -17,7 +17,7 @@
 <!-- =====================================================================
  KHPA FORMS — one-file app. Works offline on PC, Mac and iPad.
  • Records are saved on THIS device (localStorage). Use Backup to export.
- • Add a new certificate type: add an entry to DOCS (search "DOCS =").
+ • Add a new form: use "Templates" in the app (upload a blank form, tap where each field goes).
  • Fixed certificate wording lives in renderMVC() — edit there.
  ===================================================================== -->
 <style>
@@ -131,6 +131,42 @@ dialog::backdrop{background:rgba(18,38,74,.55)}
 dialog h2{margin:0 0 .5rem;font:700 1.3rem var(--serif);color:var(--navy)}
 .dlg-actions{display:flex;gap:.5rem;justify-content:flex-end;margin-top:1rem}
 
+/* ---------- Uploaded templates (printed over the blank form image) ---------- */
+.sheet.tpl{width:min(8.5in,calc(10.98in / var(--ar,1.294)));padding:0;overflow:hidden}
+.sheet.tpl .bgimg{display:block;width:100%;height:auto}
+.sheet.tpl.nobg .bgimg{visibility:hidden}
+.sheet.tpl .tf{position:absolute;margin:0;color:#111;font-family:var(--sans);line-height:1.15;white-space:pre-wrap;overflow-wrap:anywhere}
+.tpl-miss{padding:1rem;font-size:.95rem;color:var(--red)}
+
+/* ---------- Template maker ---------- */
+dialog.ed{max-width:none;width:100%;height:100%;max-height:none;margin:0;padding:0;border:0;border-radius:0;background:var(--cream)}
+dialog.ed[open]{display:flex;flex-direction:column}
+.ed-top{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;padding:max(.6rem,env(safe-area-inset-top)) .9rem .6rem;background:var(--navy);color:#fff}
+.ed-top h2{margin:0 auto 0 0;color:#fff;font-size:1.15rem}
+.ed-top .search{color:var(--ink);margin:0;flex:1 1 14rem;max-width:26rem}
+.ed-top .btn{border-color:#fff;background:transparent;color:#fff}
+.ed-top .btn.primary{background:var(--goldl);border-color:var(--goldl);color:var(--navy)}
+.ed-tools{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;padding:.6rem .9rem;background:var(--paper);border-bottom:1px solid var(--line)}
+.ed-tools .hint{margin:0;font-size:.9rem;color:var(--muted)}
+.ed-body{display:flex;flex:1;min-height:0;flex-direction:column}
+.ed-canvas{flex:1;min-height:0;overflow:auto;padding:12px;background:#d9d2c0;-webkit-overflow-scrolling:touch}
+.ed-insp{padding:.8rem .9rem;background:var(--paper);border-top:2px solid var(--line);max-height:48%;overflow:auto}
+@media (min-width:900px){.ed-body{flex-direction:row}.ed-insp{width:330px;max-height:none;border-top:0;border-left:2px solid var(--line)}}
+.ed-page{position:relative;max-width:900px;min-height:120px;margin:0 auto;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.25)}
+.ed-page.placing{cursor:crosshair;outline:3px dashed var(--gold)}
+.ed-page img{display:block;width:100%;height:auto;user-select:none;-webkit-user-drag:none}
+.ed-box{position:absolute;min-height:22px;padding:0 2px;font:calc(var(--s,11) * var(--k,1px))/1.15 var(--sans);color:#111;background:rgba(230,200,114,.5);outline:1.5px dashed var(--gold-d);cursor:grab;touch-action:none;overflow:hidden;white-space:pre-wrap;overflow-wrap:anywhere}
+.ed-box.sel{outline:2.5px solid var(--navy);background:rgba(230,200,114,.75)}
+.ed-insp h3{margin:0 0 .4rem;font:700 1rem var(--serif);color:var(--navy)}
+.ed-insp .f:first-of-type{margin-top:.2rem}
+.nudge{display:grid;grid-template-columns:repeat(4,1fr);gap:.4rem;margin-top:.75rem}
+.fl{display:flex;flex-wrap:wrap;gap:.35rem;margin:.4rem 0 0;padding:0;list-style:none}
+.fl button{min-height:44px;padding:0 .6rem;border:1.5px solid var(--line);border-radius:6px;background:#fff;cursor:pointer}
+.fl button[aria-current="true"]{border-color:var(--navy);box-shadow:inset 0 -3px 0 var(--gold)}
+.tm-row{padding:.6rem 0;border-bottom:1px solid var(--line)}
+.tm-row span{display:block;font-size:.85rem;color:var(--muted)}
+.tm-btns{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.4rem}
+
 @media print{
   @page{size:letter;margin:0}
   html,body{height:auto;background:#fff}
@@ -139,6 +175,7 @@ dialog h2{margin:0 0 .5rem;font:700 1.3rem var(--serif);color:var(--navy)}
   #p-preview{display:block!important;padding:0;background:#fff;overflow:visible}
   .sheet{zoom:1!important;box-shadow:none;margin:0 auto;padding:.4in 0 0;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .sheet .wm{top:1.9in}
+  .sheet.tpl{padding:0!important}
   .sheet,.sheet *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
 </style>
@@ -150,6 +187,7 @@ dialog h2{margin:0 0 .5rem;font:700 1.3rem var(--serif);color:var(--navy)}
     <label class="sr" for="docPick">Document type</label>
     <select id="docPick" class="doc-pick"></select>
     <button class="btn" id="bNew" type="button">New</button>
+    <button class="btn" id="bTpl" type="button">Templates</button>
     <button class="btn" id="bSettings" type="button" aria-label="Settings">Settings</button>
     <button class="btn primary" id="bPrint" type="button">Print</button>
   </header>
@@ -171,7 +209,9 @@ dialog h2{margin:0 0 .5rem;font:700 1.3rem var(--serif);color:var(--navy)}
       <div class="actions">
         <button class="btn small" id="bRenew" type="button">Renew (copy)</button>
         <button class="btn small danger" id="bDelete" type="button">Delete</button>
+        <button class="btn small" id="bEditTpl" type="button" hidden>Edit template</button>
       </div>
+      <label class="chk" id="bgRow" hidden><input type="checkbox" id="bgChk"> Print the form image too (turn off to print on pre-printed paper)</label>
       <form id="form" autocomplete="off" novalidate></form>
     </section>
 
@@ -199,6 +239,62 @@ dialog h2{margin:0 0 .5rem;font:700 1.3rem var(--serif);color:var(--navy)}
   </form>
 </dialog>
 
+<!-- Templates list -->
+<dialog id="tmDlg" aria-labelledby="tmT">
+  <h2 id="tmT">Templates</h2>
+  <p class="hint" style="margin:0 0 .5rem">Add any form: upload a picture of the blank form, tap where each detail goes, and it appears in the document list. "Share file" makes a small file you can email to another device.</p>
+  <div id="tmList"></div>
+  <div class="dlg-actions" style="justify-content:flex-start;flex-wrap:wrap">
+    <button class="btn primary" id="tmAdd" type="button">Add new template</button>
+    <button class="btn" id="tmImp" type="button">Import template file</button>
+    <input type="file" id="tmFile" accept="application/json,.json" hidden>
+    <button class="btn" id="tmClose" type="button">Close</button>
+  </div>
+</dialog>
+
+<!-- Template maker -->
+<dialog id="edDlg" class="ed" aria-labelledby="edT">
+  <div class="ed-top">
+    <h2 id="edT">Template maker</h2>
+    <label class="sr" for="edName">Template name</label>
+    <input id="edName" class="search" placeholder="Template name, e.g. Operator's Identification" maxlength="80">
+    <button class="btn" id="edCancel" type="button">Cancel</button>
+    <button class="btn primary" id="edSave" type="button">Save template</button>
+  </div>
+  <div class="ed-tools">
+    <button class="btn small" id="edPick" type="button">Choose blank form picture</button>
+    <input type="file" id="edFile" accept="image/*" hidden>
+    <button class="btn small" id="edAdd" type="button" disabled>Add field</button>
+    <p class="hint" id="edMsg" role="status" aria-live="polite">Step 1: choose a photo or scan of the blank form (JPG or PNG).</p>
+  </div>
+  <div class="ed-body">
+    <div class="ed-canvas"><div class="ed-page" id="edPage"><img id="edImg" alt="Blank form being set up"></div></div>
+    <aside class="ed-insp" aria-label="Field settings">
+      <h3>Fields</h3>
+      <ul class="fl" id="edList"></ul>
+      <div id="edFields" hidden>
+        <div class="f"><label for="edL">Field label (shown on the Details screen)</label><input id="edL" maxlength="80"></div>
+        <div class="row2">
+          <div class="f"><label for="edTy">Type</label><select id="edTy"><option value="text">Text</option><option value="area">Several lines</option><option value="date">Date</option><option value="check">Check mark (X)</option></select></div>
+          <div class="f"><label for="edA">Align</label><select id="edA"><option value="left">Left</option><option value="center">Center</option><option value="right">Right</option></select></div>
+        </div>
+        <div class="row2">
+          <div class="f"><label for="edS">Text size (pt)</label><input id="edS" type="number" min="5" max="48" step="0.5" inputmode="decimal"></div>
+          <div class="f"><label for="edW">Box width (%)</label><input id="edW" type="number" min="3" max="100" step="1" inputmode="numeric"></div>
+        </div>
+        <p class="hint" style="margin:.5rem 0 0">Drag the box on the form to move it. Use the arrows to fine-tune.</p>
+        <div class="nudge">
+          <button class="btn small" type="button" data-n="-1,0" aria-label="Move left">&larr;</button>
+          <button class="btn small" type="button" data-n="1,0" aria-label="Move right">&rarr;</button>
+          <button class="btn small" type="button" data-n="0,-1" aria-label="Move up">&uarr;</button>
+          <button class="btn small" type="button" data-n="0,1" aria-label="Move down">&darr;</button>
+        </div>
+        <div class="actions" style="margin:.75rem 0 0"><button class="btn small danger" id="edDel" type="button">Delete this field</button></div>
+      </div>
+    </aside>
+  </div>
+</dialog>
+
 <script>
 (function(){
 'use strict';
@@ -224,25 +320,25 @@ function num(v){var n=parseFloat(String(v==null?'':v).replace(/[^0-9.\-]/g,''));
 function money(v){return num(v).toFixed(2)}
 
 /* ---------- state ---------- */
-var db={records:[],settings:{rate:'0.015',office:['Vehicle License and Registration Branch','157 Mamo Street','Waiakea, Hilo, Kingdom of the Hawaiian Islands  H. I.']}};
-var cur=null, persisted=false, view='form', docId='mvc';
-try{var raw=sget();if(raw){var j=JSON.parse(raw);if(j&&j.records){db.records=j.records;if(j.settings)db.settings=Object.assign(db.settings,j.settings)}}}catch(e){}
+var db={records:[],templates:[],settings:{rate:'0.015',office:['Vehicle License and Registration Branch','157 Mamo Street','Waiakea, Hilo, Kingdom of the Hawaiian Islands  H. I.']}};
+var cur=null, persisted=false, view='form', docId='mvc', imgs={}, imgOK=true;
+try{var raw=sget();if(raw){var j=JSON.parse(raw);if(j&&j.records){db.records=j.records;if(j.settings)db.settings=Object.assign(db.settings,j.settings);if(Array.isArray(j.templates))db.templates=j.templates.map(cleanTpl).filter(Boolean)}}}catch(e){}
 
 function defaults(){var t=todayISO(),exp=addYears(t,1);
   return {ownerName:'',ownerStreet:'',ownerArea:'',licenseNo:'',cls:'',typeModel:'',yearMake:'',vin:'',trans:'M',weight:'',
     dateIssued:t,expiration:exp,renewBy:addMonths(exp,1),dateFirstSold:'',reconCert:'n/a',lienholder:'(None)',
     feeReg:'45.00',feeTariff:'',tariffAuto:true,feeBeau:'2.00',feeExempt:'0.00',feeSp:'0.00',feePenalty:'0.00'}}
-function newRec(){return {id:'r'+Date.now().toString(36)+Math.random().toString(36).slice(2,5),doc:docId,updated:Date.now(),touched:{},d:defaults()}}
+function tplById(id){return db.templates.filter(function(t){return t.id===id})[0]}
+function curTpl(){return docId==='mvc'?null:tplById(docId)}
+function tplDefaults(t){var d={};t.fields.forEach(function(f){d[f.k]=f.t==='date'?todayISO():(f.t==='check'?false:'')});return d}
+function newRec(){var t=curTpl();return {id:'r'+Date.now().toString(36)+Math.random().toString(36).slice(2,5),doc:docId,updated:Date.now(),touched:{},d:t?tplDefaults(t):defaults()}}
 
-/* ---------- document registry (add new certificate types here) ---------- */
-var DOCS=[
-  {id:'mvc',name:'Registered Motor Vehicle Certificate',ready:true},
-  {id:'oper',name:"Motor Vehicle Operator's Identification — template not added yet",ready:false},
-  {id:'merch',name:'Merchandise License — template not added yet',ready:false},
-  {id:'serv',name:'Service License — template not added yet',ready:false},
-  {id:'safety',name:'Safety Check — template not added yet',ready:false},
-  {id:'birth',name:'Birth Certificate — template not added yet',ready:false}
-];
+/* ---------- document picker: built-in certificate + your uploaded templates ---------- */
+function buildPicker(){if(!tplById(docId)&&docId!=='mvc')docId='mvc';
+  $('#docPick').innerHTML='<option value="mvc">Registered Motor Vehicle Certificate</option>'
+   +db.templates.map(function(t){return '<option value="'+esc(t.id)+'">'+esc(t.name)+'</option>'}).join('')
+   +'<option value="__add">+ Add new template…</option>';
+  $('#docPick').value=docId}
 
 /* ---------- form definition ---------- */
 var SECTIONS=[
@@ -273,7 +369,14 @@ var SECTIONS=[
   {k:'feeSp',l:'Sp Plate',money:true},
   {k:'feePenalty',l:'Penalty',money:true}]}
 ];
-function buildForm(){var h='',i,j,s,f,rowOpen=null;
+function buildForm(){var t=curTpl();if(t)return buildTplForm(t);buildMVCForm()}
+function buildTplForm(t){var h='<fieldset><legend>'+esc(t.name)+'</legend>';
+  t.fields.forEach(function(f){var id='f_'+f.k;
+    if(f.t==='check')h+='<label class="chk"><input type="checkbox" id="'+id+'" data-k="'+f.k+'"> '+esc(f.l)+'</label>';
+    else h+='<div class="f"><label for="'+id+'">'+esc(f.l)+'</label>'+(f.t==='area'?'<textarea id="'+id+'" data-k="'+f.k+'" rows="3"></textarea>'
+      :'<input id="'+id+'" data-k="'+f.k+'" type="'+(f.t==='date'?'date':'text')+'">')+'</div>'});
+  $('#form').innerHTML=h+'</fieldset>'}
+function buildMVCForm(){var h='',i,j,s,f,rowOpen=null;
   for(i=0;i<SECTIONS.length;i++){s=SECTIONS[i];h+='<fieldset><legend>'+esc(s.t)+'</legend>';rowOpen=null;
     for(j=0;j<s.f.length;j++){f=s.f[j];
       if(f.row&&rowOpen!==f.row){if(rowOpen)h+='</div>';h+='<div class="row2">';rowOpen=f.row}
@@ -333,40 +436,55 @@ function renderMVC(d){
   +'<li><i>7</i><span><b style="font-weight:400">Bureau of Public Instructions Vehicle License Branch:</b><span class="off">'+off+'</span></span></li></ol>'
   +'<p class="safe">*safety certificate instructions see back page*</p></div>'}
 
+/* ---------- renderer for uploaded templates ---------- */
+function renderTpl(t,d){var h='<img class="bgimg" alt="" src="'+esc(imgs[t.id]||'')+'">';
+  if(!imgs[t.id])h='<p class="tpl-miss">The form picture for this template is not on this device. Use Templates, then Import template file, to add it again.</p>';
+  t.fields.forEach(function(f){var v=d[f.k],x=f.t==='check'?(v?'X':''):(f.t==='date'?fmtDate(v):(v==null?'':v));
+    h+='<div class="tf" style="left:'+f.x+'%;top:'+f.y+'%;width:'+f.w+'%;font-size:'+f.s+'pt;text-align:'+f.a+(f.t==='check'?';font-weight:700':'')+'">'+esc(x)+'</div>'});
+  return h}
+
 /* ---------- UI plumbing ---------- */
-function fillForm(){var d=cur.d;SECTIONS.forEach(function(s){s.f.forEach(function(f){var el=$('#f_'+f.k);if(!el)return;
-  if(f.chk)el.checked=!!d[f.k];else el.value=d[f.k]==null?'':d[f.k]})});syncTariff();$('#totalOut').textContent='$'+money(total(d))}
+function fieldList(){var t=curTpl(),a=[];if(t)return t.fields.map(function(f){return {k:f.k,chk:f.t==='check'}});
+  SECTIONS.forEach(function(s){s.f.forEach(function(f){a.push(f)})});return a}
+function fillForm(){var d=cur.d;fieldList().forEach(function(f){var el=$('#f_'+f.k);if(!el)return;
+  if(f.chk)el.checked=!!d[f.k];else el.value=d[f.k]==null?'':d[f.k]});if(!curTpl()){syncTariff();$('#totalOut').textContent='$'+money(total(d))}}
 function syncTariff(){var a=cur.d.tariffAuto;$('#f_feeTariff').readOnly=a;$('#f_feeTariff').style.background=a?'#f1eee6':'#fff'}
-function refresh(){recompute(cur);var d=cur.d;
-  ['expiration','renewBy','feeTariff'].forEach(function(k){var el=$('#f_'+k);if(el&&document.activeElement!==el)el.value=d[k]});
-  $('#totalOut').textContent='$'+money(total(d));syncTariff();$('#sheet').innerHTML=renderMVC(d);fit()}
+function refresh(){var t=curTpl(),sh=$('#sheet'),d=cur.d;
+  if(t){sh.className='sheet tpl'+(db.settings.printBg===false?' nobg':'');sh.style.setProperty('--ar',t.ar);sh.innerHTML=renderTpl(t,d)}
+  else{recompute(cur);sh.className='sheet';sh.style.removeProperty('--ar');
+    ['expiration','renewBy','feeTariff'].forEach(function(k){var el=$('#f_'+k);if(el&&document.activeElement!==el)el.value=d[k]});
+    $('#totalOut').textContent='$'+money(total(d));syncTariff();sh.innerHTML=renderMVC(d)}
+  fit()}
 var saveT=null;
 function save(){cur.updated=Date.now();if(!persisted){db.records.push(cur);persisted=true}
   clearTimeout(saveT);saveT=setTimeout(function(){sset(JSON.stringify(db));renderList();banner()},250)}
-function banner(){var b=$('#banner');if(storageOK){b.hidden=true}else{b.hidden=false;
+function banner(){var b=$('#banner');if(storageOK&&imgOK){b.hidden=true}else if(storageOK){b.hidden=false;b.textContent='Template pictures could not be saved on this device. Use Templates, then Share file, to keep a copy of each template.'}else{b.hidden=false;
   b.textContent='This browser is blocking saved records. Your work is kept only while this page is open — use Backup to keep a copy. For permanent saving, install the app from its web address (see the setup notes).'}}
-function title(r){return r.d.ownerName||r.d.licenseNo||'Untitled certificate'}
+function title(r){if(r.doc&&r.doc!=='mvc'){var t=tplById(r.doc);if(t)for(var i=0;i<t.fields.length;i++){var f=t.fields[i],v=r.d[f.k];if(v&&f.t!=='check'&&f.t!=='date')return String(v).split('\n')[0]}return 'Untitled record'}
+  return r.d.ownerName||r.d.licenseNo||'Untitled certificate'}
+function haystack(r){return r.doc&&r.doc!=='mvc'?Object.keys(r.d).map(function(k){return r.d[k]}).join(' '):r.d.ownerName+' '+r.d.licenseNo+' '+r.d.vin+' '+r.d.typeModel}
 function renderList(){var q=($('#q').value||'').toLowerCase(),L=db.records.filter(function(r){
-  return !q||(r.d.ownerName+' '+r.d.licenseNo+' '+r.d.vin+' '+r.d.typeModel).toLowerCase().indexOf(q)>-1})
+  return (r.doc||'mvc')===docId&&(!q||haystack(r).toLowerCase().indexOf(q)>-1)})
   .sort(function(a,b){return b.updated-a.updated});
   $('#list').innerHTML=L.length?L.map(function(r){return '<button class="rec" type="button" data-id="'+r.id+'"'+(cur&&cur.id===r.id?' aria-current="true"':'')+'><b>'+esc(title(r))
-   +'</b><span>'+esc([r.d.licenseNo,r.d.yearMake,r.d.typeModel].filter(Boolean).join(' · ')||'No vehicle details')+'</span><span>Issued '+esc(fmtDate(r.d.dateIssued))+' · Exp '+esc(fmtDate(r.d.expiration))+'</span></button>'}).join('')
-  :'<p class="empty">'+(db.records.length?'No matches.':'No saved certificates yet. Fill in the details and they save automatically.')+'</p>'}
+   +'</b>'+((r.doc||'mvc')==='mvc'?'<span>'+esc([r.d.licenseNo,r.d.yearMake,r.d.typeModel].filter(Boolean).join(' · ')||'No vehicle details')+'</span><span>Issued '+esc(fmtDate(r.d.dateIssued))+' · Exp '+esc(fmtDate(r.d.expiration))+'</span>':'<span>Saved '+esc(new Date(r.updated).toLocaleDateString())+'</span>')+'</button>'}).join('')
+  :'<p class="empty">'+(db.records.some(function(r){return (r.doc||'mvc')===docId})?'No matches.':'Nothing saved yet. Fill in the details and they save automatically.')+'</p>'}
 function open(r,persist){cur=r;persisted=persist;fillForm();refresh();renderList()}
 function go(v){view=v;document.body.setAttribute('data-view',v);document.querySelectorAll('.tabs button').forEach(function(b){b.setAttribute('aria-selected',b.dataset.go===v)})}
-function fit(){var w=$('#p-preview').clientWidth-24,px=7.7*96,z=Math.max(.3,Math.min(1.3,w/px));$('#sheet').style.setProperty('--z',z)}
+function sheetIn(t){return t?Math.min(8.5,10.98/t.ar):7.7}
+function fit(){var w=$('#p-preview').clientWidth-24,px=sheetIn(curTpl())*96,z=Math.max(.3,Math.min(1.3,w/px));$('#sheet').style.setProperty('--z',z)}
 
 /* ---------- events ---------- */
 $('#form').addEventListener('input',function(e){var el=e.target,k=el.dataset.k;if(!k)return;var d=cur.d;
-  d[k]=el.type==='checkbox'?el.checked:(k==='vin'?el.value.toUpperCase():el.value);
-  if(k==='vin'&&el.value!==d[k])el.value=d[k];
-  if(k==='expiration')cur.touched.expiration=true;if(k==='renewBy')cur.touched.renewBy=true;
-  if(k==='tariffAuto'&&!d.tariffAuto){}
+  var mvc=docId==='mvc';
+  d[k]=el.type==='checkbox'?el.checked:(mvc&&k==='vin'?el.value.toUpperCase():el.value);
+  if(mvc&&k==='vin'&&el.value!==d[k])el.value=d[k];
+  if(mvc&&k==='expiration')cur.touched.expiration=true;if(mvc&&k==='renewBy')cur.touched.renewBy=true;
   refresh();save()});
 $('#list').addEventListener('click',function(e){var b=e.target.closest('.rec');if(!b)return;
   var r=db.records.filter(function(x){return x.id===b.dataset.id})[0];if(r){open(r,true);go('form')}});
 $('#q').addEventListener('input',renderList);
-$('#bNew').addEventListener('click',function(){open(newRec(),false);go('form');$('#f_ownerName').focus()});
+$('#bNew').addEventListener('click',function(){open(newRec(),false);go('form');var f=document.querySelector('#form input,#form textarea');if(f)f.focus()});
 $('#bRenew').addEventListener('click',function(){var n=newRec(),o=cur.d,t=todayISO();n.d=Object.assign({},o,{dateIssued:t,expiration:addYears(t,1),renewBy:addMonths(addYears(t,1),1),feePenalty:'0.00'});
   open(n,false);save();go('form')});
 $('#bDelete').addEventListener('click',function(){if(!persisted){open(newRec(),false);return}
@@ -375,18 +493,145 @@ $('#bDelete').addEventListener('click',function(){if(!persisted){open(newRec(),f
 $('#bPrint').addEventListener('click',function(){refresh();window.print()});
 document.querySelectorAll('.tabs button').forEach(function(b){b.addEventListener('click',function(){go(b.dataset.go);if(b.dataset.go==='preview')setTimeout(fit,0)})});
 window.addEventListener('resize',fit);
-$('#docPick').addEventListener('change',function(e){var o=DOCS.filter(function(x){return x.id===e.target.value})[0];
-  if(!o||!o.ready){e.target.value='mvc';alert('That template has not been added yet. The Registered Motor Vehicle Certificate is ready now.')}});
+$('#docPick').addEventListener('change',function(e){var v=e.target.value;
+  if(v==='__add'){e.target.value=docId;edOpen(null);return}
+  setDoc(v);go('form')});
+function setDoc(id){docId=id;var c=!!curTpl();$('#docPick').value=docId;
+  $('#bRenew').hidden=c;$('#bEditTpl').hidden=!c;$('#bgRow').hidden=!c;$('#bgChk').checked=db.settings.printBg!==false;
+  $('#q').value='';$('#q').placeholder=c?'Search records…':'Search name, license, VIN…';
+  buildForm();open(newRec(),false)}
+$('#bgChk').addEventListener('change',function(e){db.settings.printBg=e.target.checked;sset(JSON.stringify(db));refresh()});
+$('#bEditTpl').addEventListener('click',function(){var t=curTpl();if(t)edOpen(t)});
 
-/* backup / restore */
-$('#bBackup').addEventListener('click',function(){var blob=new Blob([JSON.stringify(db,null,2)],{type:'application/json'}),a=document.createElement('a');
-  a.href=URL.createObjectURL(blob);a.download='khpa-forms-backup-'+todayISO()+'.json';document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500)});
+/* backup / restore / template files */
+function download(obj,name){var blob=new Blob([JSON.stringify(obj)],{type:'application/json'}),a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500)}
+function tplOut(t){return Object.assign({},t,{image:imgs[t.id]||''})}
+function slug(x){return String(x).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'template'}
+$('#bBackup').addEventListener('click',function(){var o=JSON.parse(JSON.stringify(db));o.templates=db.templates.map(tplOut);download(o,'khpa-forms-backup-'+todayISO()+'.json')});
 $('#bRestore').addEventListener('click',function(){$('#restoreFile').click()});
-$('#restoreFile').addEventListener('change',function(e){var f=e.target.files[0];if(!f)return;var rd=new FileReader();
-  rd.onload=function(){try{var j=JSON.parse(rd.result);if(!j||!Array.isArray(j.records))throw 0;
-    var have={};db.records.forEach(function(r){have[r.id]=1});var add=j.records.filter(function(r){return r&&r.id&&r.d&&!have[r.id]});
-    db.records=db.records.concat(add);sset(JSON.stringify(db));renderList();banner();alert('Restored '+add.length+' certificate(s).')}
-    catch(x){alert('That file is not a KHPA Forms backup.')}e.target.value=''};rd.readAsText(f)});
+function importTpl(raw,ask){var t=cleanTpl(raw);if(!t)return false;var old=tplById(t.id);
+  if(old){if(!ask||!confirm('A template named "'+old.name+'" is already here. Replace it with the one in this file?'))return false}
+  var img=typeof raw.image==='string'&&raw.image.indexOf('data:image/')===0&&raw.image.length<9e6?raw.image:'';
+  if(old)db.templates=db.templates.filter(function(x){return x.id!==t.id});
+  db.templates.push(t);if(img){imgs[t.id]=img;idbPut(t.id,img)}return true}
+function importFile(file,done){var rd=new FileReader();
+  rd.onload=function(){try{var j=JSON.parse(rd.result),nr=0,nt=0;
+    if(j&&j.khpaTemplate&&j.template){if(importTpl(j.template,true))nt=1}
+    else if(j&&Array.isArray(j.records)){var have={};db.records.forEach(function(r){have[r.id]=1});
+      var add=j.records.filter(function(r){return r&&r.id&&r.d&&!have[r.id]});db.records=db.records.concat(add);nr=add.length;
+      (Array.isArray(j.templates)?j.templates:[]).forEach(function(t){if(t&&!tplById(String(t.id||'')))if(importTpl(t,false))nt++})}
+    else throw 0;
+    sset(JSON.stringify(db));buildPicker();renderList();banner();if(done)done();
+    alert('Added '+nr+' record(s) and '+nt+' template(s).')}
+  catch(x){alert('That file is not a KHPA Forms backup or template file.')}};rd.readAsText(file)}
+$('#restoreFile').addEventListener('change',function(e){var f=e.target.files[0];if(f)importFile(f);e.target.value=''});
+
+/* ---------- picture storage for templates (IndexedDB; templates can be large) ---------- */
+function idbOpen(){return new Promise(function(res,rej){try{var r=indexedDB.open('khpa-forms-img',1);
+  r.onupgradeneeded=function(){r.result.createObjectStore('img')};r.onsuccess=function(){res(r.result)};r.onerror=function(){rej(r.error)}}catch(e){rej(e)}})}
+function idbPut(id,url){idbOpen().then(function(d){d.transaction('img','readwrite').objectStore('img').put(url,id)}).catch(function(){imgOK=false;banner()})}
+function idbDel(id){idbOpen().then(function(d){d.transaction('img','readwrite').objectStore('img').delete(id)}).catch(function(){})}
+function idbAll(){return idbOpen().then(function(d){return new Promise(function(res,rej){var out={},tx=d.transaction('img','readonly'),c=tx.objectStore('img').openCursor();
+  c.onsuccess=function(){var cu=c.result;if(cu){out[cu.key]=cu.value;cu.continue()}else res(out)};c.onerror=function(){rej(c.error)}})})}
+
+/* ---------- template data cleaning (files from email are untrusted) ---------- */
+function cl(v,a,b){v=parseFloat(v);if(!isFinite(v))v=a;return Math.min(b,Math.max(a,v))}
+function cleanTpl(t){if(!t||typeof t!=='object')return null;
+  var id=String(t.id||'').replace(/[^\w-]/g,'').slice(0,40);if(!id||id==='mvc'||id==='__add')return null;
+  var seen={},fs=(Array.isArray(t.fields)?t.fields:[]).slice(0,200).map(function(f,i){if(!f||typeof f!=='object')return null;
+    var k=String(f.k||'').replace(/[^\w-]/g,'').slice(0,20)||('f'+(i+1));while(seen[k])k+='x';seen[k]=1;
+    return {k:k,l:String(f.l||'Field').slice(0,80),t:['text','area','date','check'].indexOf(f.t)>-1?f.t:'text',
+      x:cl(f.x,0,100),y:cl(f.y,0,100),w:cl(f.w,3,100),s:cl(f.s,5,48),a:['left','center','right'].indexOf(f.a)>-1?f.a:'left'}}).filter(Boolean);
+  return {id:id,name:String(t.name||'Untitled template').slice(0,80),ar:cl(t.ar,.5,3),fields:fs,updated:+t.updated||Date.now()}}
+
+/* ---------- templates list ---------- */
+function tmRender(){$('#tmList').innerHTML=db.templates.length?db.templates.map(function(t){
+  var n=db.records.filter(function(r){return r.doc===t.id}).length;
+  return '<div class="tm-row"><b>'+esc(t.name)+'</b><span>'+t.fields.length+' fields · '+n+' saved record(s)</span><div class="tm-btns">'
+   +'<button class="btn small" type="button" data-a="edit" data-id="'+esc(t.id)+'">Edit</button>'
+   +'<button class="btn small" type="button" data-a="share" data-id="'+esc(t.id)+'">Share file</button>'
+   +'<button class="btn small danger" type="button" data-a="del" data-id="'+esc(t.id)+'">Delete</button></div></div>'}).join('')
+  :'<p class="empty">No templates yet. Tap "Add new template" to make your first one.</p>'}
+$('#bTpl').addEventListener('click',function(){tmRender();$('#tmDlg').showModal()});
+$('#tmClose').addEventListener('click',function(){$('#tmDlg').close()});
+$('#tmAdd').addEventListener('click',function(){$('#tmDlg').close();edOpen(null)});
+$('#tmImp').addEventListener('click',function(){$('#tmFile').click()});
+$('#tmFile').addEventListener('change',function(e){var f=e.target.files[0];if(f)importFile(f,tmRender);e.target.value=''});
+$('#tmList').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;var t=tplById(b.dataset.id);if(!t)return;
+  if(b.dataset.a==='edit'){$('#tmDlg').close();edOpen(t)}
+  else if(b.dataset.a==='share'){download({khpaTemplate:1,template:tplOut(t)},'khpa-template-'+slug(t.name)+'.json')}
+  else if(b.dataset.a==='del'){if(!confirm('Delete the template "'+t.name+'"?\n\nRecords already saved with it stay on this device and come back if you import the template again.'))return;
+    db.templates=db.templates.filter(function(x){return x.id!==t.id});delete imgs[t.id];idbDel(t.id);sset(JSON.stringify(db));
+    if(docId===t.id){buildPicker();setDoc('mvc')}else buildPicker();tmRender()}});
+
+/* ---------- template maker ---------- */
+var ed=null,drag=null;
+function fieldBy(k){return ed.fields.filter(function(f){return f.k===k})[0]}
+function r1(v){return Math.round(v*10)/10}
+function edOpen(t){
+  ed=t?{id:t.id,name:t.name,ar:t.ar,img:imgs[t.id]||'',fields:JSON.parse(JSON.stringify(t.fields)),sel:null,placing:false,isNew:false}
+      :{id:'t'+Date.now().toString(36)+Math.random().toString(36).slice(2,4),name:'',ar:1.294,img:'',fields:[],sel:null,placing:false,isNew:true};
+  $('#edName').value=ed.name;$('#edDlg').showModal();edImgSet();edRender()}
+function edMsg(m){$('#edMsg').textContent=m}
+function edImgSet(){$('#edImg').src=ed.img||'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
+  $('#edAdd').disabled=!ed.img;
+  edMsg(ed.img?'Tap "Add field", then tap the spot on the form where it goes. Drag a box to move it.':'Step 1: choose a photo or scan of the blank form (JPG or PNG).');
+  edLayout()}
+function edLayout(){var pg=$('#edPage'),w=pg.clientWidth;if(w)pg.style.setProperty('--k',(w/(sheetIn({ar:ed.ar})*72)).toFixed(4)+'px')}
+function edRender(){var pg=$('#edPage');pg.querySelectorAll('.ed-box').forEach(function(n){n.remove()});
+  ed.fields.forEach(function(f){var b=document.createElement('div');b.className='ed-box'+(f.k===ed.sel?' sel':'');b.dataset.k=f.k;b.tabIndex=0;b.setAttribute('role','button');
+    b.setAttribute('aria-label','Field '+f.l+'. Arrow keys move it.');b.textContent=f.t==='check'?'X':f.l;edPaint(b,f);pg.appendChild(b)});
+  $('#edList').innerHTML=ed.fields.map(function(f){return '<li><button type="button" data-k="'+esc(f.k)+'"'+(f.k===ed.sel?' aria-current="true"':'')+'>'+esc(f.l)+'</button></li>'}).join('');
+  var f=ed.sel&&fieldBy(ed.sel);$('#edFields').hidden=!f;
+  if(f){$('#edL').value=f.l;$('#edTy').value=f.t;$('#edA').value=f.a;$('#edS').value=f.s;$('#edW').value=f.w}}
+function edPaint(b,f){b.style.left=f.x+'%';b.style.top=f.y+'%';b.style.width=f.w+'%';b.style.setProperty('--s',f.s);b.style.textAlign=f.a}
+function edBox(k){return $('#edPage .ed-box[data-k="'+k+'"]')}
+function edSelect(k){ed.sel=k;edRender()}
+function edAddAt(x,y){var n=1;ed.fields.forEach(function(f){var m=/^f(\d+)$/.exec(f.k);if(m)n=Math.max(n,+m[1]+1)});
+  var f={k:'f'+n,l:'Field '+(ed.fields.length+1),t:'text',x:r1(Math.min(Math.max(x,0),70)),y:r1(Math.min(Math.max(y,0),97)),w:30,s:11,a:'left'};
+  ed.fields.push(f);ed.placing=false;$('#edPage').classList.remove('placing');edMsg('Name the field on the right (for example "Owner name"), then add the next one.');
+  edSelect(f.k);$('#edL').focus();$('#edL').select()}
+$('#edPick').addEventListener('click',function(){$('#edFile').click()});
+$('#edFile').addEventListener('change',function(e){var f=e.target.files[0];e.target.value='';if(!f)return;
+  if(!/^image\//.test(f.type)){edMsg('Please choose a picture (JPG or PNG). For a PDF, export or screenshot the page as a picture first.');return}
+  var u=URL.createObjectURL(f),im=new Image();
+  im.onload=function(){var W=im.naturalWidth,H=im.naturalHeight,k=Math.min(1,1700/W),c=document.createElement('canvas');c.width=Math.round(W*k);c.height=Math.round(H*k);
+    var x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,c.width,c.height);x.drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);
+    ed.img=c.toDataURL('image/jpeg',.85);ed.ar=c.height/c.width;edImgSet()};
+  im.onerror=function(){URL.revokeObjectURL(u);edMsg('That picture could not be opened. Try a JPG or PNG.')};im.src=u});
+$('#edImg').addEventListener('load',edLayout);
+window.addEventListener('resize',function(){if(ed&&$('#edDlg').open)edLayout()});
+$('#edAdd').addEventListener('click',function(e){if(e.detail===0){edAddAt(10,10);return}
+  ed.placing=true;$('#edPage').classList.add('placing');edMsg('Tap the spot on the form where this detail should print.')});
+$('#edPage').addEventListener('pointerdown',function(e){var bx=e.target.closest('.ed-box'),r=this.getBoundingClientRect();
+  if(ed.placing&&!bx){edAddAt((e.clientX-r.left)/r.width*100,(e.clientY-r.top)/r.height*100);return}
+  if(!bx)return;var f=fieldBy(bx.dataset.k);if(ed.sel!==f.k){edSelect(f.k);bx=edBox(f.k)}
+  drag={k:f.k,sx:e.clientX,sy:e.clientY,ox:f.x,oy:f.y,w:r.width,h:r.height,el:bx};try{bx.setPointerCapture(e.pointerId)}catch(x){}e.preventDefault()});
+$('#edPage').addEventListener('pointermove',function(e){if(!drag)return;var f=fieldBy(drag.k);
+  f.x=r1(Math.min(Math.max(drag.ox+(e.clientX-drag.sx)/drag.w*100,0),100-f.w));f.y=r1(Math.min(Math.max(drag.oy+(e.clientY-drag.sy)/drag.h*100,0),99));edPaint(drag.el,f)});
+['pointerup','pointercancel'].forEach(function(n){$('#edPage').addEventListener(n,function(){drag=null})});
+$('#edPage').addEventListener('keydown',function(e){var bx=e.target.closest('.ed-box');if(!bx)return;var d={ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,-1],ArrowDown:[0,1]}[e.key];if(!d)return;
+  e.preventDefault();edNudge(fieldBy(bx.dataset.k),d[0],d[1]);bx.focus()});
+function edNudge(f,dx,dy){f.x=r1(Math.min(Math.max(f.x+dx*.2,0),100-f.w));f.y=r1(Math.min(Math.max(f.y+dy*.2,0),99));var b=edBox(f.k);if(b)edPaint(b,f)}
+document.querySelectorAll('.nudge button').forEach(function(b){b.addEventListener('click',function(){var f=ed.sel&&fieldBy(ed.sel);if(!f)return;var n=b.dataset.n.split(',');edNudge(f,+n[0],+n[1])})});
+$('#edList').addEventListener('click',function(e){var b=e.target.closest('button');if(b)edSelect(b.dataset.k)});
+function edProp(id,fn){$(id).addEventListener('input',function(){var f=ed.sel&&fieldBy(ed.sel);if(!f)return;fn(f,this.value);var b=edBox(f.k);if(b){edPaint(b,f);b.textContent=f.t==='check'?'X':f.l}
+  var li=$('#edList button[data-k="'+f.k+'"]');if(li)li.textContent=f.l})}
+edProp('#edL',function(f,v){f.l=v.slice(0,80)||'Field'});
+edProp('#edTy',function(f,v){f.t=v});
+edProp('#edA',function(f,v){f.a=v});
+edProp('#edS',function(f,v){f.s=cl(v,5,48)});
+edProp('#edW',function(f,v){f.w=cl(v,3,100);f.x=Math.min(f.x,100-f.w)});
+$('#edDel').addEventListener('click',function(){if(!ed.sel)return;ed.fields=ed.fields.filter(function(f){return f.k!==ed.sel});ed.sel=null;edRender()});
+$('#edCancel').addEventListener('click',function(){if(ed.isNew&&ed.fields.length&&!confirm('Discard this new template?'))return;$('#edDlg').close()});
+$('#edSave').addEventListener('click',function(){var name=$('#edName').value.trim();
+  if(!name){edMsg('Give the template a name first.');$('#edName').focus();return}
+  if(!ed.img){edMsg('Choose the blank form picture first.');return}
+  if(!ed.fields.length){edMsg('Add at least one field.');return}
+  var t=cleanTpl({id:ed.id,name:name,ar:ed.ar,fields:ed.fields,updated:Date.now()});
+  db.templates=db.templates.filter(function(x){return x.id!==t.id});db.templates.push(t);imgs[t.id]=ed.img;idbPut(t.id,ed.img);sset(JSON.stringify(db));
+  $('#edDlg').close();buildPicker();setDoc(t.id);go('form')});
 
 /* settings */
 $('#bSettings').addEventListener('click',function(){$('#s_rate').value=db.settings.rate;$('#s_off').value=(db.settings.office||[]).join('\n');$('#dlg').showModal()});
@@ -395,13 +640,13 @@ $('#setForm').addEventListener('submit',function(e){var v=e.submitter&&e.submitt
 
 /* ---------- start: open straight to the first document ---------- */
 $('#logo').src=ARMS;
-$('#docPick').innerHTML=DOCS.map(function(x){return '<option value="'+x.id+'"'+(x.ready?'':' style="color:#777"')+'>'+esc(x.name)+'</option>'}).join('');
-buildForm();
 // probe storage once so the warning shows up front
 try{localStorage.setItem('__t','1');localStorage.removeItem('__t')}catch(e){storageOK=false}
-banner();
-open(newRec(),false);
-go(window.innerWidth<1000?'form':'form');
+var started=false;
+function start(){if(started)return;started=true;buildPicker();banner();setDoc('mvc');go('form')}
+if(db.templates.length&&window.indexedDB){var tm=setTimeout(start,1500);
+  idbAll().then(function(m){imgs=m;clearTimeout(tm);start()},function(){imgOK=false;clearTimeout(tm);start()})}
+else start();
 if('serviceWorker' in navigator&&/^https?:/.test(location.protocol)){navigator.serviceWorker.register('sw.js').catch(function(){})}
 })();
 </script>
