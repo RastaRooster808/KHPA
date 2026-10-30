@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("khpa_theme");
+        if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    })();
+  </script>
+  <title>Our Rendering: The Islands Beneath the Rainbow | KHPA</title>
+  <meta name="description" content="A guide to reading the KHPA archipelago rendering, planned for license plates: the islands, their colors, and the rainbow." />
+  <link rel="canonical" href="https://khpa.io/blog/our-rendering.html" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Ko Hawaiʻi Pae ʻĀina (KHPA)" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:url" content="https://khpa.io/blog/our-rendering.html" />
+  <meta property="og:title" content="Our Rendering: The Islands Beneath the Rainbow | KHPA" />
+  <meta property="og:description" content="A guide to reading the KHPA archipelago rendering, planned for license plates: the islands, their colors, and the rainbow." />
+  <meta property="og:image" content="https://khpa.io/img/blog/og-rendering.jpg" />
+  <meta property="og:image:alt" content="Rendering of the Hawaiian archipelago beneath a rainbow" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Our Rendering: The Islands Beneath the Rainbow | KHPA" />
+  <meta name="twitter:description" content="A guide to reading the KHPA archipelago rendering, planned for license plates: the islands, their colors, and the rainbow." />
+  <meta name="twitter:image" content="https://khpa.io/img/blog/og-rendering.jpg" />
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Our Rendering: The Islands Beneath the Rainbow",
+  "description": "A guide to reading the KHPA archipelago rendering, planned for license plates: the islands, their colors, and the rainbow.",
+  "url": "https://khpa.io/blog/our-rendering.html",
+  "inLanguage": "en",
+  "image": "https://khpa.io/img/blog/og-rendering.jpg",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Ko Hawaiʻi Pae ʻĀina (KHPA)",
+    "url": "https://khpa.io/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://khpa.io/icons/icon-512.png"
+    }
+  },
+  "datePublished": "2026-10-29",
+  "dateModified": "2026-10-29",
+  "author": {
+    "@type": "Organization",
+    "name": "KHPA Public Information"
+  },
+  "mainEntityOfPage": "https://khpa.io/blog/our-rendering.html"
+}
+  </script>
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#1e2a36" />
+  <link rel="icon" href="/icons/favicon-32.png" sizes="32x32" type="image/png" />
+  <link rel="icon" href="/icons/favicon-16.png" sizes="16x16" type="image/png" />
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+  <link rel="stylesheet" href="/css/main.css" />
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<div id="offlineBanner" class="system-banner" role="status" hidden>
+  You&rsquo;re offline &mdash; showing saved content.
+</div>
+<div id="updateBanner" class="system-banner" role="status" hidden>
+  <span>A new version of this site is available.</span>
+  <button id="updateReload" type="button" class="button secondary">Refresh</button>
+</div>
+
+<div class="topbar">
+  <div class="container">
+    <div class="topbar-links">
+      <a href="mailto:KHPA_KingdomOfHawaiianIslands@pm.me">KHPA_KingdomOfHawaiianIslands@pm.me</a>
+      <a href="mailto:SCCJ.KHPA@pm.me">SCCJ.KHPA@pm.me</a>
+      <a href="tel:+18083333459">(808) 333-3459</a>
+    </div>
+    <div class="topbar-controls">
+      <button type="button" id="themeToggle" class="theme-toggle" aria-pressed="false">
+        <span class="icon" aria-hidden="true">🌙</span>
+        <span class="label">Dark Mode</span>
+      </button>
+      <button type="button" id="installBtn" class="install-btn" hidden>
+        <span aria-hidden="true">⬇️</span> Install App
+      </button>
+      <div class="lang-toggle" aria-label="Language selection">
+        <button type="button" class="lang-btn active" data-lang-btn="en" aria-pressed="true">English</button>
+        <button type="button" class="lang-btn" data-lang-btn="haw" aria-pressed="false">ʻŌlelo Hawaiʻi</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand-wrap" href="/index.html" aria-label="KHPA Home">
+      <div class="seal">
+        <img src="/img/logo.png" alt="Seal of Ko Hawaiʻi Pae ʻĀina" onerror="this.style.display='none'">
+      </div>
+      <div class="brand">
+        <h1>Ko Hawaiʻi Pae ʻĀina (KHPA)</h1>
+        <p class="tagline">Public Information • Notes on the Archipelago</p>
+      </div>
+    </a>
+  </div>
+
+  <nav class="navbar" aria-label="Primary">
+    <div class="container nav-row">
+      <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="primaryNav">
+        <span class="bar" aria-hidden="true"></span>
+        Menu
+      </button>
+      <ul class="nav" id="primaryNav">
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/hawaii.html">Island Offices</a></li>
+        <li><a href="/government-documents.html">Government Documents</a></li>
+        <li><a href="/registration.html">Registration &amp; Licensing</a></li>
+        <li><a href="/emporium.html">Emporium</a></li>
+        <li><a href="/foreign-affairs.html">Foreign Affairs</a></li>
+        <li><a href="/protocols.html">Protocol</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <div class="container">
+    <ol>
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/blog/">Blog</a></li>
+      <li aria-current="page">Our Rendering</li>
+    </ol>
+  </div>
+</nav>
+
+<main id="main">
+  <div class="container">
+    <h2 class="page-title">Our Rendering: The Islands Beneath the Rainbow</h2>
+    <div class="section-divider"></div>
+    <p class="post-meta">October 29, 2026 &middot; KHPA Public Information &middot; 3 min read</p>
+
+    <div class="prose">
+      <p class="lede">
+        This rendering shows the Hawaiian archipelago as one continuous chain, with a rainbow (<span class="hw">ʻānuenue</span>)
+        arcing above it. It is the artwork planned for KHPA license plates.
+      </p>
+
+      <figure class="figure">
+        <img src="/img/blog/archipelago-rendering.webp"
+             srcset="/img/blog/archipelago-rendering-900.webp 900w, /img/blog/archipelago-rendering.webp 1774w"
+             sizes="(min-width: 900px) 760px, 100vw" width="1774" height="887" decoding="async"
+             alt="Rendering of the Hawaiian archipelago in relief. Small turquoise-ringed islands and atolls of the Northwestern Hawaiian Islands trail across the upper left. The main islands run to the lower right, each in its own color, ending with a large red Hawaiʻi Island. A rainbow arcs over the whole chain.">
+        <figcaption>The KHPA archipelago rendering. Northwest is at the upper left; Hawaiʻi Island is at the lower right.</figcaption>
+      </figure>
+
+      <h3>Reading the rendering</h3>
+      <p>
+        The chain is laid out as it lies on the map, with the Northwestern Hawaiian Islands trailing off toward the upper left and
+        Hawaiʻi Island anchoring the lower right. Each main island has its own color:
+      </p>
+      <div class="table-wrap" role="region" aria-label="The main islands in the rendering" tabindex="0">
+        <table class="data-table">
+          <caption>The main islands in the rendering</caption>
+          <thead><tr><th scope="col">Island</th><th scope="col">Where to find it</th></tr></thead>
+          <tbody>
+          <tr><th scope="row"><span class="swatch" style="background:#d62a1f" aria-hidden="true"></span>Hawaiʻi</th><td>Red, at the lower right. The largest island.</td></tr>
+          <tr><th scope="row"><span class="swatch" style="background:#e0338f" aria-hidden="true"></span>Maui</th><td>Pink, to the northwest of Hawaiʻi Island.</td></tr>
+          <tr><th scope="row"><span class="swatch" style="background:#a79ad8" aria-hidden="true"></span>Kahoʻolawe</th><td>Pale lavender, a small island just south of Maui.</td></tr>
+          <tr><th scope="row"><span class="swatch" style="background:#ee8a1f" aria-hidden="true"></span>Lānaʻi</th><td>Orange, between Maui and Molokaʻi.</td></tr>
+          <tr><th scope="row"><span class="swatch" style="background:#4f9a2a" aria-hidden="true"></span>Molokaʻi</th><td>Green, long and narrow, north of Lānaʻi.</td></tr>
+          <tr><th scope="row"><span class="swatch" style="background:#e8a915" aria-hidden="true"></span>Oʻahu</th><td>Gold, to the northwest of Molokaʻi.</td></tr>
+          <tr><th scope="row"><span class="swatch" style="background:#7b2fb5" aria-hidden="true"></span>Kauaʻi</th><td>Purple, the northwesternmost of the main islands.</td></tr>
+          <tr><th scope="row">Niʻihau</th><td>A small island southwest of Kauaʻi.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>The whole chain</h3>
+      <p>
+        The rendering includes the Northwestern Hawaiian Islands alongside the eight main islands, so the full length of the archipelago,
+        more than 1,500 miles, is in view. The small islands and atolls at the upper left are ringed by turquoise reef and include the
+        places described in <a href="/blog/papahanaumokuakea.html">Papahānaumokuākea: The Northwestern Chain</a>.
+      </p>
+
+      <h3>The rainbow</h3>
+      <p>
+        A rainbow begins faintly at the far northwestern end of the chain and arcs across the archipelago, ending near Hawaiʻi Island.
+        A fainter second band runs beneath the main arc.
+      </p>
+
+      <h3>Plates, registration, and questions</h3>
+      <p>
+        For questions about registration and licensing, see <a href="/registration.html">Registration &amp; Licensing</a>.
+        Requirements vary by category and are confirmed by office staff, so contact your
+        <a href="/hawaii.html">island office</a> before visiting, or call the public line at
+        <a href="tel:+18083333459">(808) 333-3459</a>.
+      </p>
+      <p>
+        To learn more about the land shown here, read <a href="/blog/hawaiian-archipelago.html">The Hawaiian Archipelago</a>.
+      </p>
+    </div>
+
+    <div class="post-nav">
+      <a class="button secondary" href="/blog/papahanaumokuakea.html">&larr; Papahānaumokuākea: The Northwestern Chain</a>
+      <a class="button secondary" href="/blog/">All posts</a>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <p>Email: <a href="mailto:SCCJ.KHPA@pm.me">SCCJ.KHPA@pm.me</a></p>
+      <p>Phone: <a href="tel:+18083333459">(808) 333-3459</a></p>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <p><a href="/registration.html">Registration &amp; Licensing</a></p>
+      <p><a href="/government-documents.html">Government Documents</a></p>
+      <p><a href="/contact.html">Direct Assistance</a></p>
+    </div>
+    <div class="footer-col">
+      <h4>More</h4>
+      <p><a href="/emporium.html">Emporium</a></p>
+      <p><a href="/protocols.html">Protocol</a></p>
+      <p><a href="/foreign-affairs.html">Foreign Affairs</a></p>
+      <p><a href="/forms/">KHPA Forms</a></p>
+      <p><a href="/blog/">Blog</a></p>
+      <p><a href="/blog/">Blog</a></p>
+    </div>
+    <div class="footer-col">
+      <h4>Notice</h4>
+      <p>&copy; <span id="year"></span> KHPA</p>
+      <p class="small">Public administrative portal</p>
+    </div>
+  </div>
+</footer>
+
+<script src="/Js/site.js"></script>
+<script src="/Js/pwa.js"></script>
+</body>
+</html>

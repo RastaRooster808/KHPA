@@ -15,7 +15,7 @@
  */
 "use strict";
 
-const CACHE_VERSION = "khpa-2026.03";
+const CACHE_VERSION = "khpa-2026.04";
 const SHELL_CACHE = `${CACHE_VERSION}-shell`;
 const ARCHIVE_CACHE = `${CACHE_VERSION}-archive`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
@@ -35,6 +35,10 @@ const APP_SHELL = [
   "/emporium.html",
   "/artisans.html",
   "/documents.html",
+  "/blog/",
+  "/blog/hawaiian-archipelago.html",
+  "/blog/papahanaumokuakea.html",
+  "/blog/our-rendering.html",
   "/forms/certificate-application.html",
   "/forms/business-registration.html",
   "/forms/vehicle-registration.html",

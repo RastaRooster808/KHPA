@@ -65,4 +65,24 @@
     <lastmod>2026-07-03</lastmod>
     <priority>0.5</priority>
   </url>
+  <url>
+    <loc>https://khpa.io/blog/</loc>
+    <lastmod>2026-10-29</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://khpa.io/blog/hawaiian-archipelago.html</loc>
+    <lastmod>2026-10-29</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://khpa.io/blog/papahanaumokuakea.html</loc>
+    <lastmod>2026-10-29</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://khpa.io/blog/our-rendering.html</loc>
+    <lastmod>2026-10-29</lastmod>
+    <priority>0.6</priority>
+  </url>
 </urlset>
