@@ -1538,3 +1538,33 @@ fieldset legend{
 .scroll-hint{ display:none; margin:0 0 14px; }
 @media (max-width:640px){ .scroll-hint{ display:block; } }
 .table-wrap:focus-visible{ outline:3px solid var(--focus); outline-offset:2px; }
+
+/* Island color key (rendering post): each tile shows the island, its color, and its flower or plant */
+.color-key{
+  list-style:none;
+  margin:16px 0 10px;
+  padding:0;
+  display:grid;
+  gap:8px;
+  grid-template-columns:repeat(2, 1fr);
+}
+@media (min-width:640px){
+  .color-key{ grid-template-columns:repeat(4, 1fr); }
+}
+.color-key li{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+  min-height:124px;
+  padding:14px 10px;
+  text-align:center;
+  border:1px solid rgba(0,0,0,.18);
+  border-radius:var(--radius-sm);
+}
+.color-key .isl{ font-family:var(--font-serif); font-style:italic; font-size:1.45rem; line-height:1.1; }
+.color-key .col{ font-size:.82rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
+.color-key .plant{ font-size:1rem; }
+.prose .color-key{ padding:0; margin:16px 0 10px; }
+.prose .color-key li{ margin:0; }

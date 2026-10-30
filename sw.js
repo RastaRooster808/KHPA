@@ -15,7 +15,7 @@
  */
 "use strict";
 
-const CACHE_VERSION = "khpa-2026.04";
+const CACHE_VERSION = "khpa-2026.05";
 const SHELL_CACHE = `${CACHE_VERSION}-shell`;
 const ARCHIVE_CACHE = `${CACHE_VERSION}-archive`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
