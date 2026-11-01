@@ -505,23 +505,27 @@ function coordTxt(a){var i=isle(a),la=i[3],lo=i[4];return i[1].toUpperCase()+'  
 var PSECTIONS=[{t:'License plate',f:[
   {k:'island',l:'Island (sets the abbreviation, color and number series)',sel:ISLES.map(function(i){return [i[0],i[0]+' — '+i[1]]})},
   {k:'type',l:'Plate type',sel:[['STD','Standard (passenger / truck)'],['TRL','Trailer'],['MC','Motorcycle (small plate)']]},
+  {k:'layout',l:'Plate layout',sel:[['STACK','Stacked: island code above the number'],['SIDE','Parallel: island code and number side by side']]},
   {k:'number',l:'Plate number',hint:'The next free number in this island\'s series for this plate type fills in automatically. Type over it to use a different number.'},
   {k:'label',l:'Extra plate wording (optional)',hint:'Trailer and Motorcycle plates print their type automatically. Type here to replace it.'},
   {k:'holder',l:'Registered to (filed with the record)'},
   {k:'vehicle',l:'Vehicle / VIN (filed with the record)'}]}];
-function pdefaults(){var a='HAW';return {island:a,type:'STD',number:nextPlate(a,'','STD'),label:'',holder:'',vehicle:''}}
+function pdefaults(){var a='HAW';return {island:a,type:'STD',layout:'STACK',number:nextPlate(a,'','STD'),label:'',holder:'',vehicle:''}}
 var PLATEBG={{PLATEBG}};
-function renderPlate(d){var I=isle(d.island),n=String(d.number||''),ty=ptype(d),lab=String(d.label||PTYPES[ty]||'').toUpperCase(),full=I[0]+' '+n,mc=ty==='MC',
+function renderPlate(d){var I=isle(d.island),n=String(d.number||''),ty=ptype(d),lab=String(d.label||PTYPES[ty]||'').toUpperCase(),full=I[0]+' '+n,mc=ty==='MC',side=d.layout==='SIDE',ssz=n.length<=3?150:n.length===4?128:n.length===5?106:88,
   st='fill="'+I[2]+'" stroke="#111" stroke-width="9" stroke-linejoin="round" paint-order="stroke" font-family="Impact,\'Arial Black\',\'Helvetica Neue\',Arial,sans-serif" font-weight="900"',
   sz=n.length<=3?125:n.length===4?108:n.length===5?90:76,
   px=mc?200:50,py=mc?225:175,pw=mc?700:1000,ph=mc?400:500,
-  inner='<image href="'+PLATEBG[I[0]]+'" x="215" y="98" width="785" height="392" preserveAspectRatio="xMidYMid meet"/>'
+  inner='<image href="'+PLATEBG[I[0]]+'" '+(side?'x="165" y="92" width="670" height="335" style="mix-blend-mode:multiply"':'x="215" y="98" width="785" height="392"')+' preserveAspectRatio="xMidYMid meet"/>'
    +'<text x="500" y="82" text-anchor="middle" font-size="60" '+st+'>KO HAWAIʻI PAE ʻAINA</text>'
-   +(imgs.emblem?'<image href="'+esc(imgs.emblem)+'" x="395" y="150" width="210" height="160" preserveAspectRatio="xMidYMid meet"/>':'')
-   +'<text x="40" y="228" font-size="125" '+st+'>'+esc(I[0])+'</text>'
+   +(imgs.emblem?'<image href="'+esc(imgs.emblem)+'" x="'+(side?400:395)+'" y="'+(side?150:150)+'" width="210" height="160" preserveAspectRatio="xMidYMid meet"/>':'')
+   +(side?'<text x="40" y="452" font-size="'+ssz+'" '+st+'>'+esc(I[0])+'</text><text x="960" y="452" text-anchor="end" font-size="'+ssz+'" '+st+'>'+esc(n)+'</text>'
+   +(lab?'<text x="500" y="488" text-anchor="middle" font-size="36" '+st+'>'+esc(lab)+'</text>':'')
+   +'<text x="500" y="124" text-anchor="middle" font-size="19" font-family="Arial,Helvetica,sans-serif" font-weight="700" fill="#111">'+esc(coordTxt(I[0]))+'</text>':'')
+   +(side?'':'<text x="40" y="228" font-size="125" '+st+'>'+esc(I[0])+'</text>'
    +'<text x="40" y="'+(228+Math.round(sz*.95)+6)+'" font-size="'+sz+'" '+st+'>'+esc(n)+'</text>'
    +(lab?'<text x="42" y="436" font-size="'+(lab.length>8?38:48)+'" '+st+'>'+esc(lab)+'</text>':'')
-   +'<text x="48" y="478" font-size="21" font-family="Arial,Helvetica,sans-serif" font-weight="700" fill="#111">'+esc(coordTxt(I[0]))+'</text>';
+   +'<text x="48" y="478" font-size="21" font-family="Arial,Helvetica,sans-serif" font-weight="700" fill="#111">'+esc(coordTxt(I[0]))+'</text>');
   return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 850" role="img" aria-label="'+(mc?'Motorcycle license plate ':'License plate ')+esc(full)+'"><defs><clipPath id="plc"><rect width="1000" height="500" rx="34"/></clipPath></defs><rect width="1100" height="850" fill="#fff"/>'
    +'<g transform="translate('+px+' '+py+')'+(mc?' scale(.7) translate(0 36)':'')+'"><rect width="1000" height="500" rx="34" fill="#fff"/><g clip-path="url(#plc)">'+inner+'</g><rect x="3" y="3" width="994" height="494" rx="32" fill="none" stroke="#111" stroke-width="8"/></g>'
    +'<text x="550" y="770" text-anchor="middle" font-size="22" font-family="Arial,Helvetica,sans-serif" fill="#555">Print proof, plate drawn at '+(mc?'7 in × 4 in':'10 in × 5 in')+'</text></svg>'}

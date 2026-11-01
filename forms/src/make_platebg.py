@@ -30,6 +30,7 @@ for code, (m, hue, sf) in R.items():
     cs = [i == k for k in range(6)]
     res = np.stack([np.select(cs, [nv, q, p, p, t, nv]), np.select(cs, [t, nv, nv, q, p, p]), np.select(cs, [p, p, t, nv, nv, q])], -1)
     im = Image.fromarray((np.where(sel[..., None], res, G) * 255).astype("uint8")).resize((1000, 500), Image.LANCZOS)
+    arr = np.asarray(im).copy(); arr[arr.min(axis=2) > 238] = 255; im = Image.fromarray(arr)
     b = io.BytesIO(); im.save(b, "JPEG", quality=80, optimize=True)
     out[code] = "data:image/jpeg;base64," + base64.b64encode(b.getvalue()).decode()
     if os.environ.get("PREVIEW"): im.save(os.environ["PREVIEW"] + "/bg_" + code + ".png")
