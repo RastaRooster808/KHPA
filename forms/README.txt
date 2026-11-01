@@ -26,6 +26,16 @@ BACKUP (important)
   Records are stored on the device you use. Use Backup now and then; it saves a .json file.
   Restore merges a backup into another device (move records PC <-> iPad).
 
+MERCHANDISE AND SERVICES LICENSE (built in, landscape)
+  Pick it in the document list. Fill in License No., Company, Issue Date, Valid To, Business Activity.
+  Print: Letter, LANDSCAPE, 100%, one page. Works on plain paper or on your border stock.
+  Chrome/Edge pick landscape automatically; on iPad choose landscape in the print options if it does not.
+  Fixed wording and positions were measured from your printed sample. Fonts: if Old English Text MT,
+  Edwardian Script ITC, Monotype Corsiva or Apple Chancery are installed they are used; otherwise a
+  built-in blackletter and the computer's script font are used, sized to the original widths.
+  Settings > Emblem picture: add the faint crown-and-star picture (PNG with transparent background is best).
+  Settings > Shift print right/down: nudge everything after a test print on your stock.
+
 ADDING MORE FORMS (no coding)
   1. Tap Templates, then Add new template (or pick "+ Add new template" in the document list).
   2. Choose a picture of the blank form (JPG/PNG; for a PDF, screenshot or export the page as a picture).
@@ -42,4 +52,4 @@ CHANGING THINGS
   Settings (in the app): weight tariff rate, and the office address printed in item 7.
   Fixed wording and layout: template.html → renderMVC().
   The Registered Motor Vehicle Certificate layout is fixed code: template.html → renderMVC(), then run: python3 build.py
-  When you change any file, raise CACHE in sw.js (khpa-forms-v2, v3, v4 …) so devices update.
+  When you change any file, raise CACHE in sw.js (khpa-forms-v2 … v5) so devices update.
