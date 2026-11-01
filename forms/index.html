@@ -219,6 +219,7 @@ dialog.ed[open]{display:flex;flex-direction:column}
         <button class="btn small" id="bRenew" type="button">Renew (copy)</button>
         <button class="btn small danger" id="bDelete" type="button">Delete</button>
         <button class="btn small" id="bEditTpl" type="button" hidden>Edit template</button>
+        <button class="btn small" id="bScan" type="button">Scan state ID</button>
       </div>
       <p class="hint" id="emblemNote" hidden style="margin:0 0 .8rem;padding:.5rem .7rem;background:#fff4d6;border:1px solid var(--gold)">The faint crown-and-star emblem is not set on this device yet, so it will not print behind the text. Add it in Settings (Emblem picture).</p>
       <label class="chk" id="bgRow" hidden><input type="checkbox" id="bgChk"> Print the form image too (turn off to print on pre-printed paper)</label>
@@ -256,6 +257,15 @@ dialog.ed[open]{display:flex;flex-direction:column}
     <p class="hint">Use these to line the text up with your border stock after a test print. Negative numbers move left or up.</p>
     <div class="dlg-actions"><button class="btn" value="cancel">Cancel</button><button class="btn primary" id="sSave" value="ok">Save</button></div>
   </form>
+</dialog>
+
+<!-- Scan a state ID (2D barcode scanner types the barcode text into the box) -->
+<dialog id="scDlg" aria-labelledby="scT">
+  <h2 id="scT">Scan a state ID</h2>
+  <p class="hint" style="margin:0 0 .6rem">Click the box, then scan the barcode on the <b>back</b> of the person's state driver license or ID with a 2D barcode scanner. The barcode text is <b>not saved</b>; only the details listed below are copied into this form. Please get the person's OK first, and check the spelling (state IDs are all capitals, with no ʻokina).</p>
+  <div class="f"><label for="scBox">Scanner input</label><textarea id="scBox" rows="3" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Click here, then scan…"></textarea></div>
+  <div id="scOut" aria-live="polite" class="hint" style="margin-top:.6rem"></div>
+  <div class="dlg-actions"><button class="btn" id="scClose" type="button">Cancel</button><button class="btn primary" id="scUse" type="button" disabled>Fill the form</button></div>
 </dialog>
 
 <!-- Templates list -->
@@ -297,6 +307,8 @@ dialog.ed[open]{display:flex;flex-direction:column}
           <div class="f"><label for="edTy">Type</label><select id="edTy"><option value="text">Text</option><option value="area">Several lines</option><option value="date">Date</option><option value="check">Check mark (X)</option></select></div>
           <div class="f"><label for="edA">Align</label><select id="edA"><option value="left">Left</option><option value="center">Center</option><option value="right">Right</option></select></div>
         </div>
+        <div class="f"><label for="edSrc">Fill from state ID scan</label><select id="edSrc"></select>
+          <p class="hint">Optional. Only choose "State ID number" if this form must show it.</p></div>
         <div class="row2">
           <div class="f"><label for="edS">Text size (pt)</label><input id="edS" type="number" min="5" max="48" step="0.5" inputmode="decimal"></div>
           <div class="f"><label for="edW">Box width (%)</label><input id="edW" type="number" min="3" max="100" step="1" inputmode="numeric"></div>
@@ -342,6 +354,10 @@ function money(v){return num(v).toFixed(2)}
 var db={records:[],templates:[],settings:{rate:'0.015',office:['Vehicle License and Registration Branch','159 Keawe St. Suite B1','Hilo, Kingdom of the Hawaiian Islands  H. I.']}};
 var cur=null, persisted=false, view='form', docId='mvc', imgs={}, imgOK=true;
 var BUILTIN={mvc:1,merch:1};
+var SRC=[['','Type it in'],['name','Full name'],['first','First name'],['middle','Middle name'],['last','Last name'],['lastfirst','Last, First Middle'],
+  ['dob','Date of birth'],['street','Street address'],['city','City'],['state','State'],['zip','ZIP code'],['addr','Full address (one line)'],['cityst','City, State ZIP'],
+  ['sex','Sex (M/F)'],['eye','Eye color'],['height','Height'],['dln','State ID number'],['exp','State ID expires']];
+var SRCKEYS=SRC.map(function(x){return x[0]});
 var OFFICE_NEW=['Vehicle License and Registration Branch','159 Keawe St. Suite B1','Hilo, Kingdom of the Hawaiian Islands  H. I.'];
 try{var raw=sget();if(raw){var j=JSON.parse(raw);if(j&&j.records){db.records=j.records;if(j.settings)db.settings=Object.assign(db.settings,j.settings);if(Array.isArray(j.templates))db.templates=j.templates.map(cleanTpl).filter(Boolean)}
   // the office moved from Mamo Street to Keawe Street: replace the old saved address once
@@ -580,7 +596,7 @@ $('#docPick').addEventListener('change',function(e){var v=e.target.value;
 function setDoc(id){docId=id;var c=!!curTpl();$('#docPick').value=docId;
   $('#bRenew').hidden=c;$('#bEditTpl').hidden=!c;$('#bgRow').hidden=!c;$('#emblemNote').hidden=true;$('#bgChk').checked=db.settings.printBg!==false;
   $('#q').value='';$('#q').placeholder=c?'Search records…':(docId==='merch'?'Search company, license no…':'Search name, license, VIN…');
-  var t0=curTpl();$('#pgStyle').textContent='@page{size:letter '+((docId==='merch'||(t0&&t0.ar<1))?'landscape':'portrait')+';margin:0}';
+  updScan();var t0=curTpl();$('#pgStyle').textContent='@page{size:letter '+((docId==='merch'||(t0&&t0.ar<1))?'landscape':'portrait')+';margin:0}';
   buildForm();open(newRec(),false)}
 $('#bgChk').addEventListener('change',function(e){db.settings.printBg=e.target.checked;sset(JSON.stringify(db));refresh()});
 $('#bEditTpl').addEventListener('click',function(){var t=curTpl();if(t)edOpen(t)});
@@ -610,6 +626,47 @@ function importFile(file,done){var rd=new FileReader();
   catch(x){alert('That file is not a KHPA Forms backup or template file.')}};rd.readAsText(file)}
 $('#restoreFile').addEventListener('change',function(e){var f=e.target.files[0];if(f)importFile(f);e.target.value=''});
 
+/* ---------- state ID scan: reads the AAMVA 2D barcode (PDF417) text a barcode scanner types ---------- */
+var AAMVA_IDS={DAQ:1,DCS:1,DAC:1,DAD:1,DAA:1,DBB:1,DBA:1,DBD:1,DBC:1,DAU:1,DAY:1,DAG:1,DAI:1,DAJ:1,DAK:1,DCG:1,DCT:1};
+function tcase(t){return String(t||'').toLowerCase().replace(/(^|[\s\-'])([a-z])/g,function(m,a,b){return a+b.toUpperCase()}).trim()}
+function aDate(v,ctry){v=String(v||'').replace(/\D/g,'');if(v.length!==8)return '';var y,m,d;
+  if(ctry==='CAN'||+v.slice(0,4)>1800){y=v.slice(0,4);m=v.slice(4,6);d=v.slice(6,8)}else{m=v.slice(0,2);d=v.slice(2,4);y=v.slice(4,8)}
+  if(+m<1||+m>12||+d<1||+d>31)return '';return y+'-'+m+'-'+d}
+var EYES={BLK:'Black',BLU:'Blue',BRO:'Brown',GRY:'Gray',GRN:'Green',HAZ:'Hazel',MAR:'Maroon',PNK:'Pink',DIC:'Dichromatic',UNK:'Unknown'};
+function parseAAMVA(text){var raw={},lines=String(text||'').split(/[\r\n]+/);
+  lines.forEach(function(ln){ln=ln.replace(/[\x00-\x1f]/g,'');var m,re=/(?:DL|ID)(D[A-Z]{2})/g;
+    if(/^ANSI /.test(ln)||ln.indexOf('ANSI ')>-1){var hit;while((hit=re.exec(ln))){if(AAMVA_IDS[hit[1]]){raw[hit[1]]=ln.slice(hit.index+2+3).trim();break}}return}
+    m=/^(D[A-Z]{2})(.*)$/.exec(ln);if(m&&AAMVA_IDS[m[1]])raw[m[1]]=m[2].trim()});
+  if(!raw.DAQ&&!raw.DCS&&!raw.DAA)return null;
+  var ctry=(raw.DCG||'USA').slice(0,3),first=raw.DAC,last=raw.DCS,mid=raw.DAD;
+  if(!last&&raw.DAA){var n=raw.DAA.split(/[,$]/);last=n[0];first=n[1];mid=n[2]}
+  var hgt=raw.DAU||'',mh=/(\d+)\s*(in|cm)/i.exec(hgt),height='';if(mh){if(/in/i.test(mh[2])){var inch=+mh[1];height=Math.floor(inch/12)+"'"+(inch%12)+'"'}else height=+mh[1]+' cm'}
+  var sx={'1':'M','2':'F','9':'X'}[(raw.DBC||'').trim()]||'',zip=(raw.DAK||'').replace(/\s/g,''),
+      z=zip.length>5&&/^\d+$/.test(zip)?zip.slice(0,5)+'-'+zip.slice(5,9).replace(/0+$/,''):zip;if(/-$/.test(z))z=z.slice(0,-1);
+  var p={first:tcase(first),middle:tcase(mid),last:tcase(last),street:tcase(raw.DAG),city:tcase(raw.DAI),state:(raw.DAJ||'').toUpperCase(),zip:z,
+    dob:aDate(raw.DBB,ctry),exp:aDate(raw.DBA,ctry),sex:sx,eye:EYES[(raw.DAY||'').toUpperCase()]||tcase(raw.DAY),height:height,dln:(raw.DAQ||'').trim()};
+  p.name=[p.first,p.middle,p.last].filter(Boolean).join(' ');
+  p.lastfirst=p.last+(p.first||p.middle?', '+[p.first,p.middle].filter(Boolean).join(' '):'');
+  p.cityst=[p.city,[p.state,p.zip].filter(Boolean).join(' ')].filter(Boolean).join(', ');
+  p.addr=[p.street,p.cityst].filter(Boolean).join(', ');return p}
+function srcVal(p,key,type){var v=p[key]||'';if((key==='dob'||key==='exp')&&type!=='date')v=fmtDate(v);return v}
+var scanP=null;
+function scanTargets(){var t=curTpl();if(t)return t.fields.filter(function(f){return f.src});
+  if(docId==='mvc')return [{k:'ownerName',l:'Owner full name',src:'name'},{k:'ownerStreet',l:'Street address',src:'street'},{k:'ownerArea',l:'District and island',src:'city'}];return []}
+function updScan(){$('#bScan').hidden=!scanTargets().length}
+var scT=null;
+$('#bScan').addEventListener('click',function(){$('#scBox').value='';$('#scOut').textContent='Waiting for a scan…';$('#scUse').disabled=true;scanP=null;$('#scDlg').showModal();$('#scBox').focus()});
+$('#scBox').addEventListener('input',function(){clearTimeout(scT);scT=setTimeout(function(){
+  var p=parseAAMVA($('#scBox').value);scanP=p;
+  if(!p){$('#scOut').textContent=$('#scBox').value?'That does not look like a state ID barcode yet. Make sure the scanner is a 2D scanner and you scanned the back of the card.':'Waiting for a scan…';$('#scUse').disabled=true;return}
+  var rows=scanTargets().map(function(f){return '<li><b>'+esc(f.l)+':</b> '+esc(srcVal(p,f.src,f.t))+'</li>'}).join('');
+  $('#scOut').innerHTML='Found: <b>'+esc(p.name||'(no name)')+'</b>. These will be filled in:<ul style="margin:.3rem 0 0;padding-left:1.2rem">'+rows+'</ul>';$('#scUse').disabled=false},350)});
+$('#scClose').addEventListener('click',function(){$('#scBox').value='';scanP=null;$('#scDlg').close()});
+$('#scDlg').addEventListener('close',function(){$('#scBox').value='';scanP=null});
+$('#scUse').addEventListener('click',function(){if(!scanP)return;var p=scanP;
+  scanTargets().forEach(function(f){var t=curTpl(),fd=t&&t.fields.filter(function(x){return x.k===f.k})[0];cur.d[f.k]=srcVal(p,f.src,fd?fd.t:'text')});
+  $('#scBox').value='';scanP=null;$('#scDlg').close();fillForm();refresh();save();go('form')});
+
 /* ---------- picture storage for templates (IndexedDB; templates can be large) ---------- */
 function idbOpen(){return new Promise(function(res,rej){try{var r=indexedDB.open('khpa-forms-img',1);
   r.onupgradeneeded=function(){r.result.createObjectStore('img')};r.onsuccess=function(){res(r.result)};r.onerror=function(){rej(r.error)}}catch(e){rej(e)}})}
@@ -625,7 +682,7 @@ function cleanTpl(t){if(!t||typeof t!=='object')return null;
   var seen={},fs=(Array.isArray(t.fields)?t.fields:[]).slice(0,200).map(function(f,i){if(!f||typeof f!=='object')return null;
     var k=String(f.k||'').replace(/[^\w-]/g,'').slice(0,20)||('f'+(i+1));while(seen[k])k+='x';seen[k]=1;
     return {k:k,l:String(f.l||'Field').slice(0,80),t:['text','area','date','check'].indexOf(f.t)>-1?f.t:'text',
-      x:cl(f.x,0,100),y:cl(f.y,0,100),w:cl(f.w,3,100),s:cl(f.s,5,48),a:['left','center','right'].indexOf(f.a)>-1?f.a:'left'}}).filter(Boolean);
+      x:cl(f.x,0,100),y:cl(f.y,0,100),w:cl(f.w,3,100),s:cl(f.s,5,48),a:['left','center','right'].indexOf(f.a)>-1?f.a:'left',src:SRCKEYS.indexOf(f.src)>-1?f.src:''}}).filter(Boolean);
   return {id:id,name:String(t.name||'Untitled template').slice(0,80),ar:cl(t.ar,.5,3),fields:fs,updated:+t.updated||Date.now()}}
 
 /* ---------- templates list ---------- */
@@ -650,6 +707,7 @@ $('#tmList').addEventListener('click',function(e){var b=e.target.closest('button
 
 /* ---------- template maker ---------- */
 var ed=null,drag=null;
+$('#edSrc').innerHTML=SRC.map(function(x){return '<option value="'+x[0]+'">'+esc(x[1])+'</option>'}).join('');
 function fieldBy(k){return ed.fields.filter(function(f){return f.k===k})[0]}
 function r1(v){return Math.round(v*10)/10}
 function edOpen(t){
@@ -667,12 +725,12 @@ function edRender(){var pg=$('#edPage');pg.querySelectorAll('.ed-box').forEach(f
     b.setAttribute('aria-label','Field '+f.l+'. Arrow keys move it.');b.textContent=f.t==='check'?'X':f.l;edPaint(b,f);pg.appendChild(b)});
   $('#edList').innerHTML=ed.fields.map(function(f){return '<li><button type="button" data-k="'+esc(f.k)+'"'+(f.k===ed.sel?' aria-current="true"':'')+'>'+esc(f.l)+'</button></li>'}).join('');
   var f=ed.sel&&fieldBy(ed.sel);$('#edFields').hidden=!f;
-  if(f){$('#edL').value=f.l;$('#edTy').value=f.t;$('#edA').value=f.a;$('#edS').value=f.s;$('#edW').value=f.w}}
+  if(f){$('#edSrc').value=f.src||'';$('#edL').value=f.l;$('#edTy').value=f.t;$('#edA').value=f.a;$('#edS').value=f.s;$('#edW').value=f.w}}
 function edPaint(b,f){b.style.left=f.x+'%';b.style.top=f.y+'%';b.style.width=f.w+'%';b.style.setProperty('--s',f.s);b.style.textAlign=f.a}
 function edBox(k){return $('#edPage .ed-box[data-k="'+k+'"]')}
 function edSelect(k){ed.sel=k;edRender()}
 function edAddAt(x,y){var n=1;ed.fields.forEach(function(f){var m=/^f(\d+)$/.exec(f.k);if(m)n=Math.max(n,+m[1]+1)});
-  var f={k:'f'+n,l:'Field '+(ed.fields.length+1),t:'text',x:r1(Math.min(Math.max(x,0),70)),y:r1(Math.min(Math.max(y,0),97)),w:30,s:11,a:'left'};
+  var f={k:'f'+n,src:'',l:'Field '+(ed.fields.length+1),t:'text',x:r1(Math.min(Math.max(x,0),70)),y:r1(Math.min(Math.max(y,0),97)),w:30,s:11,a:'left'};
   ed.fields.push(f);ed.placing=false;$('#edPage').classList.remove('placing');edMsg('Name the field on the right (for example "Owner name"), then add the next one.');
   edSelect(f.k);$('#edL').focus();$('#edL').select()}
 $('#edPick').addEventListener('click',function(){$('#edFile').click()});
@@ -703,6 +761,7 @@ function edProp(id,fn){$(id).addEventListener('input',function(){var f=ed.sel&&f
   var li=$('#edList button[data-k="'+f.k+'"]');if(li)li.textContent=f.l})}
 edProp('#edL',function(f,v){f.l=v.slice(0,80)||'Field'});
 edProp('#edTy',function(f,v){f.t=v});
+edProp('#edSrc',function(f,v){f.src=v});
 edProp('#edA',function(f,v){f.a=v});
 edProp('#edS',function(f,v){f.s=cl(v,5,48)});
 edProp('#edW',function(f,v){f.w=cl(v,3,100);f.x=Math.min(f.x,100-f.w)});
