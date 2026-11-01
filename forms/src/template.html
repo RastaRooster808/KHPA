@@ -505,28 +505,31 @@ function coordTxt(a){var i=isle(a),la=i[3],lo=i[4];return i[1].toUpperCase()+'  
 var PSECTIONS=[{t:'License plate',f:[
   {k:'island',l:'Island (sets the abbreviation, color and number series)',sel:ISLES.map(function(i){return [i[0],i[0]+' — '+i[1]]})},
   {k:'type',l:'Plate type',sel:[['STD','Standard (passenger / truck)'],['TRL','Trailer'],['MC','Motorcycle (small plate)']]},
-  {k:'layout',l:'Plate layout',sel:[['STACK','Stacked: island code above the number'],['SIDE','Parallel: island code and number side by side']]},
+  {k:'layout',l:'Plate layout',sel:[['SIDE','Parallel: island code and number side by side'],['STACK','Stacked: island code above the number']]},
   {k:'number',l:'Plate number',hint:'The next free number in this island\'s series for this plate type fills in automatically. Type over it to use a different number.'},
   {k:'label',l:'Extra plate wording (optional)',hint:'Trailer and Motorcycle plates print their type automatically. Type here to replace it.'},
   {k:'holder',l:'Registered to (filed with the record)'},
   {k:'vehicle',l:'Vehicle / VIN (filed with the record)'}]}];
-function pdefaults(){var a='HAW';return {island:a,type:'STD',layout:'STACK',number:nextPlate(a,'','STD'),label:'',holder:'',vehicle:''}}
+function pdefaults(){var a='HAW';return {island:a,type:'STD',layout:'SIDE',number:nextPlate(a,'','STD'),label:'',holder:'',vehicle:''}}
 var PLATEBG={{PLATEBG}};
-function renderPlate(d){var I=isle(d.island),n=String(d.number||''),ty=ptype(d),lab=String(d.label||PTYPES[ty]||'').toUpperCase(),full=I[0]+' '+n,mc=ty==='MC',side=d.layout==='SIDE',
-  st='fill="'+I[2]+'" stroke="#111" stroke-width="10" stroke-linejoin="round" paint-order="stroke" font-family="Impact,\'Arial Black\',\'Helvetica Neue\',Arial,sans-serif" font-weight="900"',
+var CROWN='data:image/png;base64,{{CROWN}}';
+function renderPlate(d){var I=isle(d.island),n=String(d.number||''),ty=ptype(d),lab=String(d.label||PTYPES[ty]||'').toUpperCase(),full=I[0]+' '+n,mc=ty==='MC',side=d.layout!=='STACK',
+  /* red letters with a black outline, as in the Canva plate design; the island color lives in the archipelago art */
+  st='fill="#c4161c" stroke="#111" stroke-width="9" stroke-linejoin="round" paint-order="stroke" font-family="Impact,\'Anton\',\'League Gothic\',\'Arial Narrow\',\'Arial Black\',sans-serif" font-weight="900"',
   px=mc?200:50,py=mc?225:175,
-  ns=n.length<=3?215:n.length===4?180:n.length===5?150:125,ls=lab.length>8?72:96,
+  ns=n.length<=3?190:n.length===4?172:n.length===5?142:118,ls=lab.length>8?74:100,
   txt=side
-   ?'<text x="22" y="318" font-size="215" '+st+'>'+esc(I[0])+'</text><text x="978" y="318" text-anchor="end" font-size="'+ns+'" '+st+'>'+esc(n)+'</text>'
-    +(lab?'<text x="26" y="438" font-size="'+ls+'" '+st+'>'+esc(lab)+'</text>':'')
-   :'<text x="22" y="262" font-size="170" '+st+'>'+esc(I[0])+'</text><text x="22" y="'+(262+Math.round(Math.min(ns,170)*.98))+'" font-size="'+Math.min(ns,170)+'" '+st+'>'+esc(n)+'</text>'
-    +(lab?'<text x="26" y="478" font-size="'+Math.min(ls,64)+'" '+st+'>'+esc(lab)+'</text>':''),
+   ?'<text x="14" y="272" font-size="190" '+st+'>'+esc(I[0])+'</text><text x="986" y="272" text-anchor="end" font-size="'+ns+'" '+st+'>'+esc(n)+'</text>'
+    +(lab?'<text x="16" y="385" font-size="'+ls+'" '+st+'>'+esc(lab)+'</text>':'')
+   :'<text x="16" y="262" font-size="170" '+st+'>'+esc(I[0])+'</text><text x="16" y="'+(262+Math.round(Math.min(ns,170)*.98))+'" font-size="'+Math.min(ns,170)+'" '+st+'>'+esc(n)+'</text>'
+    +(lab?'<text x="18" y="480" font-size="'+Math.min(ls,64)+'" '+st+'>'+esc(lab)+'</text>':''),
   inner='<image href="'+PLATEBG[I[0]]+'" x="0" y="0" width="1000" height="500" preserveAspectRatio="xMidYMid slice"/>'
-   +'<text x="500" y="96" text-anchor="middle" font-size="92" textLength="950" lengthAdjust="spacingAndGlyphs" '+st+'>KO HAWAIʻI PAE ʻAINA</text>'
-   +txt+(imgs.emblem?'<image href="'+esc(imgs.emblem)+'" x="395" y="'+(side?140:120)+'" width="210" height="170" preserveAspectRatio="xMidYMid meet"/>':'')
-   +'<text x="978" y="486" text-anchor="end" font-size="20" font-family="Arial,Helvetica,sans-serif" font-weight="700" fill="#111" stroke="#fff" stroke-width="5" paint-order="stroke">'+esc(coordTxt(I[0]))+'</text>';
-  return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 850" role="img" aria-label="'+(mc?'Motorcycle license plate ':'License plate ')+esc(full)+'"><defs><clipPath id="plc"><rect width="1000" height="500" rx="34"/></clipPath></defs><rect width="1100" height="850" fill="#fff"/>'
-   +'<g transform="translate('+px+' '+py+')'+(mc?' scale(.7) translate(0 36)':'')+'"><rect width="1000" height="500" rx="34" fill="#fff"/><g clip-path="url(#plc)">'+inner+'</g><rect x="3" y="3" width="994" height="494" rx="32" fill="none" stroke="#111" stroke-width="8"/></g>'
+   +'<text x="500" y="92" text-anchor="middle" font-size="108" textLength="930" lengthAdjust="spacingAndGlyphs" '+st+'>KO HAWAIʻI PAE ʻAINA</text>'
+   +'<image href="'+esc(imgs.emblem||CROWN)+'" x="'+(side?400:600)+'" y="'+(side?190:150)+'" width="200" height="160" preserveAspectRatio="xMidYMid meet"/>'
+   +txt
+   +'<text x="986" y="490" text-anchor="end" font-size="19" font-family="Arial,Helvetica,sans-serif" font-weight="700" fill="#111" stroke="#fff" stroke-width="5" paint-order="stroke">'+esc(coordTxt(I[0]))+'</text>';
+  return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 850" role="img" aria-label="'+(mc?'Motorcycle license plate ':'License plate ')+esc(full)+'"><defs><clipPath id="plc"><rect width="1000" height="500" rx="30"/></clipPath></defs><rect width="1100" height="850" fill="#fff"/>'
+   +'<g transform="translate('+px+' '+py+')'+(mc?' scale(.7) translate(0 36)':'')+'"><rect width="1000" height="500" rx="30" fill="#fff"/><g clip-path="url(#plc)">'+inner+'</g><rect x="2" y="2" width="996" height="496" rx="29" fill="none" stroke="#888" stroke-width="4"/></g>'
    +'<text x="550" y="770" text-anchor="middle" font-size="22" font-family="Arial,Helvetica,sans-serif" fill="#555">Print proof, plate drawn at '+(mc?'7 in × 4 in':'10 in × 5 in')+'</text></svg>'}
 
 /* ---------- calculations ---------- */
@@ -952,6 +955,7 @@ try{localStorage.setItem('__t','1');localStorage.removeItem('__t')}catch(e){stor
 var started=false;
 var PRESETS={{PRESETS}};
 function seedPresets(){db.settings.seeded=db.settings.seeded||{};var ch=false;
+  if(!imgs.emblem&&!db.settings.seeded.crown){imgs.emblem=CROWN;idbPut('emblem',CROWN);db.settings.seeded.crown=1;ch=true}
   PRESETS.forEach(function(P){if(db.settings.seeded[P.template.id])return;var t=cleanTpl(P.template);if(!t)return;
     db.templates.push(t);imgs[t.id]=P.image;idbPut(t.id,P.image);if(P.backImage){imgs[t.id+':b']=P.backImage;idbPut(t.id+':b',P.backImage)}db.settings.seeded[t.id]=1;ch=true});
   if(ch)sset(JSON.stringify(db))}
