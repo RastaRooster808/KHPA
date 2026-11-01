@@ -526,7 +526,7 @@ function renderPlate(d){var I=isle(d.island),n=String(d.number||''),ty=ptype(d),
   ns=190,ls=lab.length>8?74:100,
   txt=side
    ?'<text x="14" y="272" font-size="190" '+st+'>'+esc(I[0])+'</text><text x="986" y="272" text-anchor="end" font-size="'+ns+'" '+st+'>'+esc(n)+'</text>'
-    +(lab?'<text x="16" y="385" font-size="'+ls+'" '+st+'>'+esc(lab)+'</text>':'')
+    +(lab?'<text x="16" y="'+(mc?468:462)+'" font-size="'+(mc?70:ls)+'" '+st+'>'+esc(lab)+'</text>':'')
    :'<text x="16" y="262" font-size="170" '+st+'>'+esc(I[0])+'</text><text x="16" y="'+(262+Math.round(Math.min(ns,170)*.98))+'" font-size="'+Math.min(ns,170)+'" '+st+'>'+esc(n)+'</text>'
     +(lab?'<text x="18" y="480" font-size="'+Math.min(ls,64)+'" '+st+'>'+esc(lab)+'</text>':''),
   inner='<image href="'+PLATEBG[d.coding==='ALL'?'ALL':I[0]]+'" x="0" y="0" width="1000" height="500" preserveAspectRatio="xMidYMid slice"/>'
