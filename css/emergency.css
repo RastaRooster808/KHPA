@@ -1,0 +1,46 @@
+/* ==========================================================================
+   Emergency Assistance page (emergency.html). Builds on main.css tokens.
+   ========================================================================== */
+.ice-call{border:3px solid #a3170f;background:#fff4f2;border-radius:var(--radius);padding:1rem 1.1rem;margin:0 0 1.25rem}
+.ice-call p{margin:0 0 .75rem;color:#5c0d07;font-size:1.05rem}
+.ice-call-actions{display:flex;flex-wrap:wrap;gap:.6rem}
+.button.ice-911{background:#a3170f;border-color:#a3170f;color:#fff;min-height:52px;font-size:1.15rem}
+.button.ice-911:hover,.button.ice-911:focus-visible{background:#7d110b;border-color:#7d110b;color:#fff}
+.ice-status{margin:.5rem 0 1rem;padding:.8rem 1rem;border-radius:var(--radius-sm);border:2px solid var(--line);background:var(--surface);font-weight:700;line-height:1.4}
+.ice-status:empty{display:none}
+.ice-status.good{border-color:#2f6b2a;background:#eef7ec;color:#1f4a1b}
+.ice-status.warn{border-color:#9a6a00;background:#fff8e6;color:#5a3e00}
+.ice-status.bad{border-color:#a3170f;background:#fff1ef;color:#6e0f09}
+.ice-id{display:grid;grid-template-columns:max-content 1fr;gap:.35rem 1rem;margin:0 0 1rem;font-size:1.05rem}
+.ice-id dt{color:var(--muted);font-weight:600}
+.ice-id dd{margin:0;font-weight:700;overflow-wrap:anywhere}
+.ice-list{list-style:none;padding:0;margin:.25rem 0 1rem;display:grid;gap:.6rem}
+.ice-list li{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.6rem;border:1px solid var(--line);border-radius:var(--radius-sm);padding:.7rem .85rem;background:var(--surface)}
+.ice-who{font-size:1.05rem;overflow-wrap:anywhere}
+.button.ice-callbtn{min-height:48px}
+.ice-notes{white-space:pre-wrap;border-left:4px solid var(--gold);padding:.4rem .8rem;background:var(--tint-bg);margin:0 0 1rem}
+.ice-fine{color:var(--muted)}
+.ice-steps{padding-left:1.3rem;margin:0 0 1rem}
+.ice-steps li{margin:.35rem 0}
+.ice-contact{border:1px solid var(--line);border-radius:var(--radius-sm);padding:.6rem .9rem .2rem;margin:0 0 .8rem}
+.ice-contact legend{font-weight:700;padding:0 .3rem}
+.ice-err{color:var(--danger);font-weight:700;min-height:1.2em;margin:.25rem 0}
+.ice-out{margin-top:1rem;border-top:1px solid var(--line);padding-top:1rem}
+.ice-qr,.ice-poster-qr{max-width:320px;margin:0 auto .75rem;background:#fff;padding:.5rem;border-radius:var(--radius-sm);border:1px solid var(--line)}
+.ice-qr svg,.ice-poster-qr svg{display:block;width:100%;height:auto}
+#icePrint{display:none}
+@media print{
+  body.ice-printing > *:not(#icePrint){display:none!important}
+  body.ice-printing #icePrint{display:block!important;color:#000}
+  .ice-wallet{width:3.375in;height:2.125in;border:1px dashed #000;display:flex;gap:.12in;align-items:center;padding:.1in;box-sizing:border-box;font-family:Arial,sans-serif}
+  .ice-wallet-qr{width:1.75in;flex:none}.ice-wallet-qr svg{width:100%;height:auto;display:block}
+  .ice-wallet-txt{display:flex;flex-direction:column;gap:.03in;font-size:8pt;min-width:0;overflow-wrap:anywhere}
+  .ice-wallet-txt b{font-size:9.5pt;color:#a3170f}.ice-wallet-txt small{font-size:6pt}
+  .ice-cut{font:9pt Arial,sans-serif;margin-top:.15in}
+  .ice-poster{text-align:center;font-family:Georgia,serif;padding-top:.5in}
+  .ice-poster h1{font-size:44pt;margin:0 0 .1in}
+  .ice-poster-911{font:20pt Arial,sans-serif;color:#a3170f;margin:0 0 .3in}
+  .ice-poster-code{width:4.5in;margin:0 auto .25in}.ice-poster-code svg{width:100%;height:auto;display:block}
+  .ice-poster p{font:16pt Arial,sans-serif;margin:.1in 0}
+  .ice-poster-url{font-weight:700}
+}

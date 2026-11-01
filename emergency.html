@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="referrer" content="no-referrer" />
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("khpa_theme");
+        if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    })();
+  </script>
+  <title>Emergency Assistance | KHPA</title>
+  <meta name="description" content="In case of emergency: scan a KHPA ID card QR code to verify the card and reach the holder's emergency contacts, or create your own emergency QR code." />
+  <link rel="canonical" href="https://khpa.io/emergency.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Ko Hawaiʻi Pae ʻĀina (KHPA)" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:url" content="https://khpa.io/emergency.html" />
+  <meta property="og:title" content="Emergency Assistance | KHPA" />
+  <meta property="og:description" content="In case of emergency: scan a KHPA ID card QR code to verify the card and reach the holder's emergency contacts, or create your own emergency QR code." />
+  <meta property="og:image" content="https://khpa.io/icons/icon-512.png" />
+  <meta property="og:image:alt" content="Seal of Ko Hawaiʻi Pae ʻĀina" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Emergency Assistance | KHPA" />
+  <meta name="twitter:description" content="In case of emergency: scan a KHPA ID card QR code to verify the card and reach the holder's emergency contacts, or create your own emergency QR code." />
+  <meta name="twitter:image" content="https://khpa.io/icons/icon-512.png" />
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Ko Hawaiʻi Pae ʻĀina (KHPA)",
+  "alternateName": "KHPA",
+  "url": "https://khpa.io/",
+  "logo": "https://khpa.io/icons/icon-512.png",
+  "email": "SCCJ.KHPA@pm.me",
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "telephone": "+1-808-333-3459",
+      "contactType": "customer service",
+      "email": "SCCJ.KHPA@pm.me",
+      "areaServed": "US-HI",
+      "availableLanguage": [
+        "English"
+      ]
+    },
+    {
+      "@type": "ContactPoint",
+      "telephone": "+1-808-720-1129",
+      "contactType": "reservations",
+      "email": "SCCJ.KHPA@pm.me",
+      "areaServed": "US-HI",
+      "availableLanguage": [
+        "English"
+      ]
+    }
+  ]
+}
+  </script>
+    <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#1e2a36" />
+  <link rel="icon" href="/icons/favicon-32.png" sizes="32x32" type="image/png" />
+  <link rel="icon" href="/icons/favicon-16.png" sizes="16x16" type="image/png" />
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="/css/emergency.css" />
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<div id="offlineBanner" class="system-banner" role="status" hidden>
+  You&rsquo;re offline &mdash; showing saved content.
+</div>
+<div id="updateBanner" class="system-banner" role="status" hidden>
+  <span>A new version of this site is available.</span>
+  <button id="updateReload" type="button" class="button secondary">Refresh</button>
+</div>
+
+<div class="topbar">
+  <div class="container">
+    <div class="topbar-links">
+      <a href="mailto:SCCJ.KHPA@pm.me">SCCJ.KHPA@pm.me</a>
+      <a href="tel:+18083333459">(808) 333-3459</a>
+    </div>
+    <div class="topbar-controls">
+      <button type="button" id="themeToggle" class="theme-toggle" aria-pressed="false">
+        <span class="icon" aria-hidden="true">🌙</span>
+        <span class="label">Dark Mode</span>
+      </button>
+      <button type="button" id="installBtn" class="install-btn" hidden>
+        <span aria-hidden="true">⬇️</span> Install App
+      </button>
+      <div class="lang-toggle" aria-label="Language selection">
+        <button type="button" class="lang-btn active" data-lang-btn="en" aria-pressed="true">English</button>
+        <button type="button" class="lang-btn" data-lang-btn="haw" aria-pressed="false">ʻŌlelo Hawaiʻi</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand-wrap" href="/index.html" aria-label="KHPA Home">
+      <div class="seal">
+        <img src="/img/logo.png" alt="Seal of Ko Hawaiʻi Pae ʻĀina" onerror="this.style.display='none'">
+      </div>
+      <div class="brand">
+        <h1>Ko Hawaiʻi Pae ʻĀina (KHPA)</h1>
+        <p class="tagline">Emergency Assistance • ID Verification</p>
+      </div>
+    </a>
+  </div>
+
+  <nav class="navbar" aria-label="Primary">
+    <div class="container nav-row">
+      <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="primaryNav">
+        <span class="bar" aria-hidden="true"></span>
+        Menu
+      </button>
+      <ul class="nav" id="primaryNav">
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/hawaii.html">Island Offices</a></li>
+        <li><a href="/government-documents.html">Government Documents</a></li>
+        <li><a href="/registration.html">Registration &amp; Licensing</a></li>
+        <li><a href="/emporium.html">Emporium</a></li>
+        <li><a href="/foreign-affairs.html">Foreign Affairs</a></li>
+        <li><a href="/protocols.html">Protocol</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <div class="container">
+    <ol>
+      <li><a href="/index.html">Home</a></li>
+      <li aria-current="page">Emergency Assistance</li>
+    </ol>
+  </div>
+</nav>
+
+<main id="main">
+  <div class="container">
+    <h2 class="page-title">In Case of Emergency</h2>
+    <div class="section-divider"></div>
+
+    <!-- CALL FIRST: always visible -->
+    <div class="ice-call" role="region" aria-label="Call for help">
+      <p><strong>Life-threatening emergency? Call 911 now.</strong> This page does not contact emergency services.</p>
+      <div class="ice-call-actions">
+        <a class="button large ice-911" href="tel:911">Call 911</a>
+        <a class="button large secondary" href="tel:+18083333459">KHPA Public Line (808) 333-3459</a>
+      </div>
+    </div>
+
+    <!-- RESULT: filled in when a card QR or emergency QR is scanned (hidden until then) -->
+    <section id="iceResult" class="panel" aria-labelledby="iceResultTitle" aria-live="polite" hidden>
+      <div class="panel-header">
+        <h3 class="panel-title" id="iceResultTitle">Card Holder</h3>
+        <span class="badge" id="iceBadge">Checking…</span>
+      </div>
+      <div id="iceStatus" class="ice-status"></div>
+      <dl id="iceId" class="ice-id"></dl>
+      <div id="iceContacts"></div>
+      <p class="small ice-fine" id="iceSource"></p>
+    </section>
+
+    <!-- CHECK AN ID NUMBER -->
+    <section id="check" class="panel" aria-labelledby="checkTitle">
+      <div class="panel-header">
+        <h3 class="panel-title" id="checkTitle">Check a KHPA ID</h3>
+        <span class="badge">Verification</span>
+      </div>
+      <p>The surest check is to <strong>scan the QR code on the back of the card</strong> with a phone camera. It opens this page and confirms the card was issued by KHPA, shows who it belongs to and when it expires, and lists any emergency contacts the holder added.</p>
+      <form id="checkForm" class="assist-form" novalidate>
+        <div class="form-grid">
+          <div class="field">
+            <label for="chkId">ID number (as printed on the card)</label>
+            <input id="chkId" name="id" type="text" inputmode="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="HA0000000" aria-describedby="chkHelp" />
+            <p class="small" id="chkHelp">Two letters followed by seven digits.</p>
+          </div>
+        </div>
+        <div class="form-actions"><button type="submit" class="button">Check number</button></div>
+      </form>
+      <div id="chkOut" class="ice-status" aria-live="polite"></div>
+    </section>
+
+    <!-- HOLDER: ADD EMERGENCY CONTACTS -->
+    <section id="add" class="panel" aria-labelledby="addTitle">
+      <div class="panel-header">
+        <h3 class="panel-title" id="addTitle">Add My Emergency Contacts</h3>
+        <span class="badge">Card Holders</span>
+      </div>
+      <ol class="ice-steps">
+        <li><strong>Scan the QR code on the back of your KHPA ID</strong> with your phone camera. This page opens with your card already verified. If your card has no QR code yet, type your ID number below.</li>
+        <li>Enter up to three people to call for you.</li>
+        <li>Tap <em>Create my emergency QR code</em>. Save it to your phone&rsquo;s lock screen or print the wallet card.</li>
+      </ol>
+      <div class="notice" role="note"><strong>Your privacy:</strong> nothing you type here is sent to KHPA or stored online. Everything is kept inside your QR code, so anyone who scans it can read it. Only include what you want a helper to see.</div>
+      <form id="addForm" class="assist-form" novalidate>
+        <div class="form-grid">
+          <div class="field" id="addIdRow">
+            <label for="addId">ID number</label>
+            <input id="addId" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="HA0000000" />
+          </div>
+          <div class="field" id="addNameRow">
+            <label for="addName">Your name</label>
+            <input id="addName" type="text" autocomplete="name" />
+          </div>
+        </div>
+        <fieldset class="ice-contact">
+          <legend>Contact 1 *</legend>
+          <div class="form-grid">
+            <div class="field"><label for="c1n">Name *</label><input id="c1n" type="text" autocomplete="off" required /></div>
+            <div class="field"><label for="c1r">Relationship</label><input id="c1r" type="text" placeholder="e.g. Wife, Son, Kahu" /></div>
+            <div class="field"><label for="c1p">Phone *</label><input id="c1p" type="tel" inputmode="tel" required /></div>
+          </div>
+        </fieldset>
+        <fieldset class="ice-contact">
+          <legend>Contact 2</legend>
+          <div class="form-grid">
+            <div class="field"><label for="c2n">Name</label><input id="c2n" type="text" autocomplete="off" /></div>
+            <div class="field"><label for="c2r">Relationship</label><input id="c2r" type="text" /></div>
+            <div class="field"><label for="c2p">Phone</label><input id="c2p" type="tel" inputmode="tel" /></div>
+          </div>
+        </fieldset>
+        <fieldset class="ice-contact">
+          <legend>Contact 3</legend>
+          <div class="form-grid">
+            <div class="field"><label for="c3n">Name</label><input id="c3n" type="text" autocomplete="off" /></div>
+            <div class="field"><label for="c3r">Relationship</label><input id="c3r" type="text" /></div>
+            <div class="field"><label for="c3p">Phone</label><input id="c3p" type="tel" inputmode="tel" /></div>
+          </div>
+        </fieldset>
+        <div class="form-grid">
+          <div class="field field-full">
+            <label for="addNotes">Notes for a helper (optional)</label>
+            <textarea id="addNotes" rows="3" maxlength="200" placeholder="e.g. Speaks ʻŌlelo Hawaiʻi. Call my kahu."></textarea>
+            <p class="small">Up to 200 characters. Anyone who scans your code will see this.</p>
+          </div>
+        </div>
+        <p id="addErr" class="ice-err" role="alert"></p>
+        <div class="form-actions"><button type="submit" class="button large">Create my emergency QR code</button></div>
+      </form>
+      <div id="addOut" class="ice-out" hidden>
+        <h4>Your emergency QR code</h4>
+        <div id="addQr" class="ice-qr"></div>
+        <p class="small" id="addQrNote"></p>
+        <div class="form-actions">
+          <button type="button" class="button" id="addPng">Save as picture</button>
+          <button type="button" class="button secondary" id="addPrint">Print wallet card</button>
+          <button type="button" class="button secondary" id="addCopy">Copy link</button>
+          <a class="button secondary" id="addOpen" href="#">Test it</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- QR ACCESS TO THIS PAGE -->
+    <section id="poster" class="panel" aria-labelledby="posterTitle">
+      <div class="panel-header">
+        <h3 class="panel-title" id="posterTitle">QR Code for This Page</h3>
+        <span class="badge">Offices &amp; Posters</span>
+      </div>
+      <p>Post this code at island offices, in vehicles, or at events. Scanning it opens this emergency assistance page.</p>
+      <div class="ice-poster-qr" id="pageQr"></div>
+      <p class="text-center small">khpa.io/emergency.html</p>
+      <div class="form-actions"><button type="button" class="button secondary" id="posterPrint">Print poster</button><button type="button" class="button secondary" id="posterPng">Save QR picture</button></div>
+    </section>
+
+    <section class="panel" aria-label="How verification works">
+      <div class="panel-header"><h3 class="panel-title">How Verification Works</h3><span class="badge">Standard</span></div>
+      <p class="small m-0">Each KHPA ID card QR code carries the ID number, name and expiration date, sealed with a KHPA digital signature. This page checks that signature on your own device, so it works without any online records, and any change to the card details makes the check fail. Emergency contacts are added by the card holder and are not checked by KHPA.</p>
+    </section>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <p>Email: <a href="mailto:SCCJ.KHPA@pm.me">SCCJ.KHPA@pm.me</a></p>
+      <p>Public Line: <a href="tel:+18083333459">(808) 333-3459</a></p>
+      <p>Appointments: <a href="tel:+18087201129">(808) 720-1129</a></p>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <p><a href="/hawaii.html">Island Offices</a></p>
+      <p><a href="/registration.html">Registration &amp; Licensing</a></p>
+      <p><a href="/emergency.html">Emergency Assistance</a></p>
+      <p><a href="/foreign-affairs.html">Foreign Affairs</a></p>
+    </div>
+    <div class="footer-col">
+      <h4>More</h4>
+      <p><a href="/emporium.html">Emporium</a></p>
+      <p><a href="/protocols.html">Protocol</a></p>
+      <p><a href="/government-documents.html">Government Documents</a></p>
+      <p><a href="/forms/">KHPA Forms</a></p>
+      <p><a href="/blog/">Blog</a></p>
+    </div>
+    <div class="footer-col">
+      <h4>Notice</h4>
+      <p>&copy; <span id="year"></span> KHPA</p>
+      <p class="small">Public information portal</p>
+    </div>
+  </div>
+</footer>
+<script src="/Js/site.js"></script>
+<script src="/Js/pwa.js"></script>
+<script src="/Js/qrcode.js"></script>
+<script src="/Js/emergency.js"></script>
+</body>
+</html>

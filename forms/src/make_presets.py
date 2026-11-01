@@ -78,7 +78,7 @@ def id_front():
 
 def id_back():
     im, d = paper([])
-    text(d, (W//2, int(H*.31)), "KO HAWAIʻI PAE ʻAINA", fit("KO HAWAIʻI PAE ʻAINA", True, W-80, 60), BLUE, "mm")
+    text(d, (int(W*.405), int(H*.31)), "KO HAWAIʻI PAE ʻAINA", fit("KO HAWAIʻI PAE ʻAINA", True, int(W*.74), 60), BLUE, "mm")
     text(d, (W//2, int(H*.66)), "The person identified herein is a resident of the Hawaiian", F(23, True), INK, "mm")
     text(d, (W//2, int(H*.705)), "Islands and subject to it's laws as set forth below.", F(23, True), INK, "mm")
     body = ["All persons born within the jurisdiction of this Kingdom, whether of alien foreigners, of naturalized or",
@@ -112,8 +112,9 @@ OPF = [
  f("addr", "Address", 3.5, 82.2, 93, 6, src="addr"),
 ]
 OPB = [
- f("clsd", "Class description", 24, 67.5, 74, 4.6, t="area", **{"def": "(2) MOTORCYCLE AND MOTORSCOOTER.\n(3) PASSENGER VEHICLES OF ANY GVWR. BUSSES DESIGNED TO TRANSPORT FIFTEEN OR FEWER OCCUPANTS. TRUCKS AND VANS WITH 15,000 LBS GVWR OR LESS."}),
- f("end", "Endorsement", 33, 87.5, 62, 6, b=1),
+ f("clsd", "Class description", 24, 67.5, 55, 4.6, t="area", **{"def": "(2) MOTORCYCLE AND MOTORSCOOTER.\n(3) PASSENGER VEHICLES OF ANY GVWR. BUSSES DESIGNED TO TRANSPORT FIFTEEN OR FEWER OCCUPANTS. TRUCKS AND VANS WITH 15,000 LBS GVWR OR LESS."}),
+ f("end", "Endorsement", 33, 87.5, 45, 6, b=1),
+ f("vqr", "Verification QR code", 80.5, 69, 17.8, t="qr", h=28.2),
 ]
 IDF = [
  f("photo", "Photo", 5, 26, 30, t="photo", h=48),
@@ -131,8 +132,9 @@ IDB = [
  f("bar", "Barcode (ID number)", 5, 4.5, 90, t="bar", h=11),
  f("name", "Name", 4, 17.2, 49, 6.5, a="right", src="lastfirst", c="gray"),
  f("idno", "ID No.", 54.5, 17.2, 40, 6.5, c="gray"),
- f("sig", "Signature", 27, 40, 46, t="sign", h=17),
+ f("sig", "Signature", 22, 38, 46, t="sign", h=17),
  f("orig", "Origin line (optional)", 5, 58.5, 90, 7, a="center", b=1, c="red"),
+ f("vqr", "Verification QR code", 80.5, 24, 17.8, t="qr", h=28.2),
 ]
 # the barcode encodes the same ID number the front shows
 IDB[0]["k"] = "idno"; IDB[0]["t"] = "bar"; IDB[2]["k"] = "idno"
@@ -144,7 +146,7 @@ out = []
 for nid, name, fr, bk, ff, bf in [
     ("card-opid", "Motor Vehicle Operators Certificate (ID card, 2 sides)", op_front(), op_back(), OPF, OPB),
     ("card-id", "Identification Certificate (ID card, 2 sides)", id_front(), id_back(), IDF, IDB)]:
-    out.append({"template": {"id": nid, "name": name, "ar": round(AR, 4), "pw": 3.375, "fields": fix(ff), "bfields": fix(bf), "updated": 0},
+    out.append({"ver": 2, "template": {"id": nid, "name": name, "ar": round(AR, 4), "pw": 3.375, "fields": fix(ff), "bfields": fix(bf), "updated": 0},
                 "image": uri(fr), "backImage": uri(bk)})
 json.dump(out, open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "presets.json"), "w"), ensure_ascii=False)
 if os.environ.get("PREVIEW"):
