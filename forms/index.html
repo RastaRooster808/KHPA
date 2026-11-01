@@ -339,10 +339,13 @@ function num(v){var n=parseFloat(String(v==null?'':v).replace(/[^0-9.\-]/g,''));
 function money(v){return num(v).toFixed(2)}
 
 /* ---------- state ---------- */
-var db={records:[],templates:[],settings:{rate:'0.015',office:['Vehicle License and Registration Branch','157 Mamo Street','Waiakea, Hilo, Kingdom of the Hawaiian Islands  H. I.']}};
+var db={records:[],templates:[],settings:{rate:'0.015',office:['Vehicle License and Registration Branch','159 Keawe St. Suite B1','Hilo, Kingdom of the Hawaiian Islands  H. I.']}};
 var cur=null, persisted=false, view='form', docId='mvc', imgs={}, imgOK=true;
 var BUILTIN={mvc:1,merch:1};
-try{var raw=sget();if(raw){var j=JSON.parse(raw);if(j&&j.records){db.records=j.records;if(j.settings)db.settings=Object.assign(db.settings,j.settings);if(Array.isArray(j.templates))db.templates=j.templates.map(cleanTpl).filter(Boolean)}}}catch(e){}
+var OFFICE_NEW=['Vehicle License and Registration Branch','159 Keawe St. Suite B1','Hilo, Kingdom of the Hawaiian Islands  H. I.'];
+try{var raw=sget();if(raw){var j=JSON.parse(raw);if(j&&j.records){db.records=j.records;if(j.settings)db.settings=Object.assign(db.settings,j.settings);if(Array.isArray(j.templates))db.templates=j.templates.map(cleanTpl).filter(Boolean)}
+  // the office moved from Mamo Street to Keawe Street: replace the old saved address once
+  if(/Mamo/i.test((db.settings.office||[]).join(' ')))db.settings.office=OFFICE_NEW.slice()}}catch(e){}
 
 function defaults(){var t=todayISO(),exp=addYears(t,1);
   return {ownerName:'',ownerStreet:'',ownerArea:'',licenseNo:'',cls:'',typeModel:'',yearMake:'',vin:'',trans:'M',weight:'',

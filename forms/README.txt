@@ -52,4 +52,4 @@ CHANGING THINGS
   Settings (in the app): weight tariff rate, and the office address printed in item 7.
   Fixed wording and layout: template.html → renderMVC().
   The Registered Motor Vehicle Certificate layout is fixed code: template.html → renderMVC(), then run: python3 build.py
-  When you change any file, raise CACHE in sw.js (khpa-forms-v2 … v5) so devices update.
+  When you change any file, raise CACHE in sw.js (khpa-forms-v2 … v6) so devices update.
