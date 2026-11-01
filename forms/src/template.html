@@ -514,6 +514,8 @@ var PSECTIONS=[{t:'License plate',f:[
 function pdefaults(){var a='HAW';return {island:a,type:'STD',layout:'SIDE',coding:'ISL',number:nextPlate(a,'','STD'),label:'',holder:'',vehicle:''}}
 var PLATEBG={{PLATEBG}};
 var CROWN='data:image/png;base64,{{CROWN}}';
+var twCv=null;
+function twid(t,sz){try{twCv=twCv||document.createElement('canvas').getContext('2d');twCv.font='900 '+sz+'px Impact,Anton,"League Gothic","Arial Narrow","Arial Black",sans-serif';return twCv.measureText(t).width+10}catch(e){return t.length*sz*.5}}
 function renderPlate(d){var I=isle(d.island),n=String(d.number||''),ty=ptype(d),lab=String(d.label||PTYPES[ty]||'').toUpperCase(),full=I[0]+' '+n,mc=ty==='MC',side=d.layout!=='STACK',
   /* outlined letters as in the Canva plate design; color coding (island color or red) comes from the Color coding field */
   tc=d.coding==='RED'?'#c4161c':I[2],
@@ -527,7 +529,7 @@ function renderPlate(d){var I=isle(d.island),n=String(d.number||''),ty=ptype(d),
     +(lab?'<text x="18" y="480" font-size="'+Math.min(ls,64)+'" '+st+'>'+esc(lab)+'</text>':''),
   inner='<image href="'+PLATEBG[d.coding==='ALL'?'ALL':I[0]]+'" x="0" y="0" width="1000" height="500" preserveAspectRatio="xMidYMid slice"/>'
    +'<text x="500" y="92" text-anchor="middle" font-size="108" textLength="930" lengthAdjust="spacingAndGlyphs" '+st+'>KO HAWAIʻI PAE ʻAINA</text>'
-   +'<image href="'+esc(imgs.emblem||CROWN)+'" x="'+(side?400:600)+'" y="'+(side?190:150)+'" width="200" height="160" preserveAspectRatio="xMidYMid meet"/>'
+   +'<image href="'+esc(imgs.emblem||CROWN)+'" x="'+(side?Math.round(Math.min(Math.max((14+twid(I[0],190)+986-twid(n,ns))/2,330),670)-100):600)+'" y="'+(side?175:150)+'" width="200" height="160" preserveAspectRatio="xMidYMid meet"/>'
    +txt
    +'<text x="986" y="490" text-anchor="end" font-size="19" font-family="Arial,Helvetica,sans-serif" font-weight="700" fill="#111" stroke="#fff" stroke-width="5" paint-order="stroke">'+esc(coordTxt(I[0]))+'</text>';
   return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 850" role="img" aria-label="'+(mc?'Motorcycle license plate ':'License plate ')+esc(full)+'"><defs><clipPath id="plc"><rect width="1000" height="500" rx="30"/></clipPath></defs><rect width="1100" height="850" fill="#fff"/>'
