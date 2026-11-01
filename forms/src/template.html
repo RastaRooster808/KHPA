@@ -512,20 +512,19 @@ var PSECTIONS=[{t:'License plate',f:[
   {k:'vehicle',l:'Vehicle / VIN (filed with the record)'}]}];
 function pdefaults(){var a='HAW';return {island:a,type:'STD',layout:'STACK',number:nextPlate(a,'','STD'),label:'',holder:'',vehicle:''}}
 var PLATEBG={{PLATEBG}};
-function renderPlate(d){var I=isle(d.island),n=String(d.number||''),ty=ptype(d),lab=String(d.label||PTYPES[ty]||'').toUpperCase(),full=I[0]+' '+n,mc=ty==='MC',side=d.layout==='SIDE',ssz=n.length<=3?150:n.length===4?128:n.length===5?106:88,
-  st='fill="'+I[2]+'" stroke="#111" stroke-width="9" stroke-linejoin="round" paint-order="stroke" font-family="Impact,\'Arial Black\',\'Helvetica Neue\',Arial,sans-serif" font-weight="900"',
-  sz=n.length<=3?125:n.length===4?108:n.length===5?90:76,
-  px=mc?200:50,py=mc?225:175,pw=mc?700:1000,ph=mc?400:500,
-  inner='<image href="'+PLATEBG[I[0]]+'" '+(side?'x="165" y="92" width="670" height="335" style="mix-blend-mode:multiply"':'x="215" y="98" width="785" height="392"')+' preserveAspectRatio="xMidYMid meet"/>'
-   +'<text x="500" y="82" text-anchor="middle" font-size="60" '+st+'>KO HAWAIʻI PAE ʻAINA</text>'
-   +(imgs.emblem?'<image href="'+esc(imgs.emblem)+'" x="'+(side?400:395)+'" y="'+(side?150:150)+'" width="210" height="160" preserveAspectRatio="xMidYMid meet"/>':'')
-   +(side?'<text x="40" y="452" font-size="'+ssz+'" '+st+'>'+esc(I[0])+'</text><text x="960" y="452" text-anchor="end" font-size="'+ssz+'" '+st+'>'+esc(n)+'</text>'
-   +(lab?'<text x="500" y="488" text-anchor="middle" font-size="36" '+st+'>'+esc(lab)+'</text>':'')
-   +'<text x="500" y="124" text-anchor="middle" font-size="19" font-family="Arial,Helvetica,sans-serif" font-weight="700" fill="#111">'+esc(coordTxt(I[0]))+'</text>':'')
-   +(side?'':'<text x="40" y="228" font-size="125" '+st+'>'+esc(I[0])+'</text>'
-   +'<text x="40" y="'+(228+Math.round(sz*.95)+6)+'" font-size="'+sz+'" '+st+'>'+esc(n)+'</text>'
-   +(lab?'<text x="42" y="436" font-size="'+(lab.length>8?38:48)+'" '+st+'>'+esc(lab)+'</text>':'')
-   +'<text x="48" y="478" font-size="21" font-family="Arial,Helvetica,sans-serif" font-weight="700" fill="#111">'+esc(coordTxt(I[0]))+'</text>');
+function renderPlate(d){var I=isle(d.island),n=String(d.number||''),ty=ptype(d),lab=String(d.label||PTYPES[ty]||'').toUpperCase(),full=I[0]+' '+n,mc=ty==='MC',side=d.layout==='SIDE',
+  st='fill="'+I[2]+'" stroke="#111" stroke-width="10" stroke-linejoin="round" paint-order="stroke" font-family="Impact,\'Arial Black\',\'Helvetica Neue\',Arial,sans-serif" font-weight="900"',
+  px=mc?200:50,py=mc?225:175,
+  ns=n.length<=3?215:n.length===4?180:n.length===5?150:125,ls=lab.length>8?72:96,
+  txt=side
+   ?'<text x="22" y="318" font-size="215" '+st+'>'+esc(I[0])+'</text><text x="978" y="318" text-anchor="end" font-size="'+ns+'" '+st+'>'+esc(n)+'</text>'
+    +(lab?'<text x="26" y="438" font-size="'+ls+'" '+st+'>'+esc(lab)+'</text>':'')
+   :'<text x="22" y="262" font-size="170" '+st+'>'+esc(I[0])+'</text><text x="22" y="'+(262+Math.round(Math.min(ns,170)*.98))+'" font-size="'+Math.min(ns,170)+'" '+st+'>'+esc(n)+'</text>'
+    +(lab?'<text x="26" y="478" font-size="'+Math.min(ls,64)+'" '+st+'>'+esc(lab)+'</text>':''),
+  inner='<image href="'+PLATEBG[I[0]]+'" x="0" y="0" width="1000" height="500" preserveAspectRatio="xMidYMid slice"/>'
+   +'<text x="500" y="96" text-anchor="middle" font-size="92" textLength="950" lengthAdjust="spacingAndGlyphs" '+st+'>KO HAWAIʻI PAE ʻAINA</text>'
+   +txt+(imgs.emblem?'<image href="'+esc(imgs.emblem)+'" x="395" y="'+(side?140:120)+'" width="210" height="170" preserveAspectRatio="xMidYMid meet"/>':'')
+   +'<text x="978" y="486" text-anchor="end" font-size="20" font-family="Arial,Helvetica,sans-serif" font-weight="700" fill="#111" stroke="#fff" stroke-width="5" paint-order="stroke">'+esc(coordTxt(I[0]))+'</text>';
   return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 850" role="img" aria-label="'+(mc?'Motorcycle license plate ':'License plate ')+esc(full)+'"><defs><clipPath id="plc"><rect width="1000" height="500" rx="34"/></clipPath></defs><rect width="1100" height="850" fill="#fff"/>'
    +'<g transform="translate('+px+' '+py+')'+(mc?' scale(.7) translate(0 36)':'')+'"><rect width="1000" height="500" rx="34" fill="#fff"/><g clip-path="url(#plc)">'+inner+'</g><rect x="3" y="3" width="994" height="494" rx="32" fill="none" stroke="#111" stroke-width="8"/></g>'
    +'<text x="550" y="770" text-anchor="middle" font-size="22" font-family="Arial,Helvetica,sans-serif" fill="#555">Print proof, plate drawn at '+(mc?'7 in × 4 in':'10 in × 5 in')+'</text></svg>'}
