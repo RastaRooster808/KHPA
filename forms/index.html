@@ -17,7 +17,7 @@
 <!-- =====================================================================
  KHPA FORMS — one-file app. Works offline on PC, Mac and iPad.
  • Records are saved on THIS device (localStorage). Use Backup to export.
- • Add a new certificate type: add an entry to DOCS (search "DOCS =").
+ • Add a new form: use "Templates" in the app (upload a blank form, tap where each field goes).
  • Fixed certificate wording lives in renderMVC() — edit there.
  ===================================================================== -->
 <style>
@@ -30,6 +30,7 @@ body{margin:0;background:var(--cream);color:var(--ink);font:16px/1.4 var(--sans)
   -webkit-print-color-adjust:exact;print-color-adjust:exact}
 button,input,select,textarea{font:inherit;color:inherit}
 :focus-visible{outline:3px solid var(--navy);outline-offset:2px}
+[hidden]{display:none!important}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
 /* ---------- App bar ---------- */
@@ -131,6 +132,48 @@ dialog::backdrop{background:rgba(18,38,74,.55)}
 dialog h2{margin:0 0 .5rem;font:700 1.3rem var(--serif);color:var(--navy)}
 .dlg-actions{display:flex;gap:.5rem;justify-content:flex-end;margin-top:1rem}
 
+@font-face{font-family:"KHPA Fraktur";src:url(data:font/woff;base64,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) format("woff");font-weight:700;font-style:normal}
+/* ---------- Merchandise and Services License (landscape, drawn as SVG so text can be fitted exactly) ---------- */
+.sheet.lic{width:11in;height:8.5in;padding:0;overflow:hidden;background:#fff}
+.sheet.lic svg{display:block;width:100%;height:100%}
+
+/* ---------- Uploaded templates (printed over the blank form image) ---------- */
+.sheet.tpl{width:min(8.5in,calc(10.98in / var(--ar,1.294)));padding:0;overflow:hidden}
+.sheet.tpl.land{width:min(11in,calc(8.48in / var(--ar,.77)))}
+.sheet.tpl .bgimg{display:block;width:100%;height:auto}
+.sheet.tpl.nobg .bgimg{visibility:hidden}
+.sheet.tpl .tf{position:absolute;margin:0;color:#111;font-family:var(--sans);line-height:1.15;white-space:pre-wrap;overflow-wrap:anywhere}
+.tpl-miss{padding:1rem;font-size:.95rem;color:var(--red)}
+
+/* ---------- Template maker ---------- */
+dialog.ed{max-width:none;width:100%;height:100%;max-height:none;margin:0;padding:0;border:0;border-radius:0;background:var(--cream)}
+dialog.ed[open]{display:flex;flex-direction:column}
+.ed-top{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;padding:max(.6rem,env(safe-area-inset-top)) .9rem .6rem;background:var(--navy);color:#fff}
+.ed-top h2{margin:0 auto 0 0;color:#fff;font-size:1.15rem}
+.ed-top .search{color:var(--ink);margin:0;flex:1 1 14rem;max-width:26rem}
+.ed-top .btn{border-color:#fff;background:transparent;color:#fff}
+.ed-top .btn.primary{background:var(--goldl);border-color:var(--goldl);color:var(--navy)}
+.ed-tools{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;padding:.6rem .9rem;background:var(--paper);border-bottom:1px solid var(--line)}
+.ed-tools .hint{margin:0;font-size:.9rem;color:var(--muted)}
+.ed-body{display:flex;flex:1;min-height:0;flex-direction:column}
+.ed-canvas{flex:1;min-height:0;overflow:auto;padding:12px;background:#d9d2c0;-webkit-overflow-scrolling:touch}
+.ed-insp{padding:.8rem .9rem;background:var(--paper);border-top:2px solid var(--line);max-height:48%;overflow:auto}
+@media (min-width:900px){.ed-body{flex-direction:row}.ed-insp{width:330px;max-height:none;border-top:0;border-left:2px solid var(--line)}}
+.ed-page{position:relative;max-width:900px;min-height:120px;margin:0 auto;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.25)}
+.ed-page.placing{cursor:crosshair;outline:3px dashed var(--gold)}
+.ed-page img{display:block;width:100%;height:auto;user-select:none;-webkit-user-drag:none}
+.ed-box{position:absolute;min-height:22px;padding:0 2px;font:calc(var(--s,11) * var(--k,1px))/1.15 var(--sans);color:#111;background:rgba(230,200,114,.5);outline:1.5px dashed var(--gold-d);cursor:grab;touch-action:none;overflow:hidden;white-space:pre-wrap;overflow-wrap:anywhere}
+.ed-box.sel{outline:2.5px solid var(--navy);background:rgba(230,200,114,.75)}
+.ed-insp h3{margin:0 0 .4rem;font:700 1rem var(--serif);color:var(--navy)}
+.ed-insp .f:first-of-type{margin-top:.2rem}
+.nudge{display:grid;grid-template-columns:repeat(4,1fr);gap:.4rem;margin-top:.75rem}
+.fl{display:flex;flex-wrap:wrap;gap:.35rem;margin:.4rem 0 0;padding:0;list-style:none}
+.fl button{min-height:44px;padding:0 .6rem;border:1.5px solid var(--line);border-radius:6px;background:#fff;cursor:pointer}
+.fl button[aria-current="true"]{border-color:var(--navy);box-shadow:inset 0 -3px 0 var(--gold)}
+.tm-row{padding:.6rem 0;border-bottom:1px solid var(--line)}
+.tm-row span{display:block;font-size:.85rem;color:var(--muted)}
+.tm-btns{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.4rem}
+
 @media print{
   @page{size:letter;margin:0}
   html,body{height:auto;background:#fff}
@@ -139,9 +182,12 @@ dialog h2{margin:0 0 .5rem;font:700 1.3rem var(--serif);color:var(--navy)}
   #p-preview{display:block!important;padding:0;background:#fff;overflow:visible}
   .sheet{zoom:1!important;box-shadow:none;margin:0 auto;padding:.4in 0 0;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .sheet .wm{top:1.9in}
+  .sheet.tpl{padding:0!important}
+  .sheet.lic{height:8.48in;width:10.98in;margin:0 auto;padding:0!important}
   .sheet,.sheet *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
 </style>
+<style id="pgStyle">@page{size:letter portrait;margin:0}</style>
 </head>
 <body data-view="form">
 <div class="app">
@@ -150,6 +196,7 @@ dialog h2{margin:0 0 .5rem;font:700 1.3rem var(--serif);color:var(--navy)}
     <label class="sr" for="docPick">Document type</label>
     <select id="docPick" class="doc-pick"></select>
     <button class="btn" id="bNew" type="button">New</button>
+    <button class="btn" id="bTpl" type="button">Templates</button>
     <button class="btn" id="bSettings" type="button" aria-label="Settings">Settings</button>
     <button class="btn primary" id="bPrint" type="button">Print</button>
   </header>
@@ -171,7 +218,10 @@ dialog h2{margin:0 0 .5rem;font:700 1.3rem var(--serif);color:var(--navy)}
       <div class="actions">
         <button class="btn small" id="bRenew" type="button">Renew (copy)</button>
         <button class="btn small danger" id="bDelete" type="button">Delete</button>
+        <button class="btn small" id="bEditTpl" type="button" hidden>Edit template</button>
       </div>
+      <p class="hint" id="emblemNote" hidden style="margin:0 0 .8rem;padding:.5rem .7rem;background:#fff4d6;border:1px solid var(--gold)">The faint crown-and-star emblem is not set on this device yet, so it will not print behind the text. Add it in Settings (Emblem picture).</p>
+      <label class="chk" id="bgRow" hidden><input type="checkbox" id="bgChk"> Print the form image too (turn off to print on pre-printed paper)</label>
       <form id="form" autocomplete="off" novalidate></form>
     </section>
 
@@ -195,8 +245,73 @@ dialog h2{margin:0 0 .5rem;font:700 1.3rem var(--serif);color:var(--navy)}
       <p class="hint">Used to auto-fill Weight Tariff. Starts at 0.015 — worked out from your sample (4080 lb → $61.20). Please confirm.</p></div>
     <div class="f"><label for="s_off">Office address printed in item 7 (one line per row)</label>
       <textarea id="s_off" rows="4"></textarea></div>
+    <h3 style="margin:1rem 0 0;font:700 1rem var(--serif);color:var(--navy)">Merchandise and Services License</h3>
+    <div class="f"><label for="s_emb">Emblem picture (faint crown and star behind the text)</label>
+      <input id="s_emb" type="file" accept="image/*">
+      <p class="hint" id="s_embst"></p>
+      <button class="btn small" id="s_embclr" type="button">Remove emblem</button></div>
+    <div class="row2">
+      <div class="f"><label for="s_dx">Shift print right (inches)</label><input id="s_dx" inputmode="decimal" placeholder="0"></div>
+      <div class="f"><label for="s_dy">Shift print down (inches)</label><input id="s_dy" inputmode="decimal" placeholder="0"></div></div>
+    <p class="hint">Use these to line the text up with your border stock after a test print. Negative numbers move left or up.</p>
     <div class="dlg-actions"><button class="btn" value="cancel">Cancel</button><button class="btn primary" id="sSave" value="ok">Save</button></div>
   </form>
+</dialog>
+
+<!-- Templates list -->
+<dialog id="tmDlg" aria-labelledby="tmT">
+  <h2 id="tmT">Templates</h2>
+  <p class="hint" style="margin:0 0 .5rem">Add any form: upload a picture of the blank form, tap where each detail goes, and it appears in the document list. "Share file" makes a small file you can email to another device.</p>
+  <div id="tmList"></div>
+  <div class="dlg-actions" style="justify-content:flex-start;flex-wrap:wrap">
+    <button class="btn primary" id="tmAdd" type="button">Add new template</button>
+    <button class="btn" id="tmImp" type="button">Import template file</button>
+    <input type="file" id="tmFile" accept="application/json,.json" hidden>
+    <button class="btn" id="tmClose" type="button">Close</button>
+  </div>
+</dialog>
+
+<!-- Template maker -->
+<dialog id="edDlg" class="ed" aria-labelledby="edT">
+  <div class="ed-top">
+    <h2 id="edT">Template maker</h2>
+    <label class="sr" for="edName">Template name</label>
+    <input id="edName" class="search" placeholder="Template name, e.g. Operator's Identification" maxlength="80">
+    <button class="btn" id="edCancel" type="button">Cancel</button>
+    <button class="btn primary" id="edSave" type="button">Save template</button>
+  </div>
+  <div class="ed-tools">
+    <button class="btn small" id="edPick" type="button">Choose blank form picture</button>
+    <input type="file" id="edFile" accept="image/*" hidden>
+    <button class="btn small" id="edAdd" type="button" disabled>Add field</button>
+    <p class="hint" id="edMsg" role="status" aria-live="polite">Step 1: choose a photo or scan of the blank form (JPG or PNG).</p>
+  </div>
+  <div class="ed-body">
+    <div class="ed-canvas"><div class="ed-page" id="edPage"><img id="edImg" alt="Blank form being set up"></div></div>
+    <aside class="ed-insp" aria-label="Field settings">
+      <h3>Fields</h3>
+      <ul class="fl" id="edList"></ul>
+      <div id="edFields" hidden>
+        <div class="f"><label for="edL">Field label (shown on the Details screen)</label><input id="edL" maxlength="80"></div>
+        <div class="row2">
+          <div class="f"><label for="edTy">Type</label><select id="edTy"><option value="text">Text</option><option value="area">Several lines</option><option value="date">Date</option><option value="check">Check mark (X)</option></select></div>
+          <div class="f"><label for="edA">Align</label><select id="edA"><option value="left">Left</option><option value="center">Center</option><option value="right">Right</option></select></div>
+        </div>
+        <div class="row2">
+          <div class="f"><label for="edS">Text size (pt)</label><input id="edS" type="number" min="5" max="48" step="0.5" inputmode="decimal"></div>
+          <div class="f"><label for="edW">Box width (%)</label><input id="edW" type="number" min="3" max="100" step="1" inputmode="numeric"></div>
+        </div>
+        <p class="hint" style="margin:.5rem 0 0">Drag the box on the form to move it. Use the arrows to fine-tune.</p>
+        <div class="nudge">
+          <button class="btn small" type="button" data-n="-1,0" aria-label="Move left">&larr;</button>
+          <button class="btn small" type="button" data-n="1,0" aria-label="Move right">&rarr;</button>
+          <button class="btn small" type="button" data-n="0,-1" aria-label="Move up">&uarr;</button>
+          <button class="btn small" type="button" data-n="0,1" aria-label="Move down">&darr;</button>
+        </div>
+        <div class="actions" style="margin:.75rem 0 0"><button class="btn small danger" id="edDel" type="button">Delete this field</button></div>
+      </div>
+    </aside>
+  </div>
 </dialog>
 
 <script>
@@ -224,25 +339,29 @@ function num(v){var n=parseFloat(String(v==null?'':v).replace(/[^0-9.\-]/g,''));
 function money(v){return num(v).toFixed(2)}
 
 /* ---------- state ---------- */
-var db={records:[],settings:{rate:'0.015',office:['Vehicle License and Registration Branch','157 Mamo Street','Waiakea, Hilo, Kingdom of the Hawaiian Islands  H. I.']}};
-var cur=null, persisted=false, view='form', docId='mvc';
-try{var raw=sget();if(raw){var j=JSON.parse(raw);if(j&&j.records){db.records=j.records;if(j.settings)db.settings=Object.assign(db.settings,j.settings)}}}catch(e){}
+var db={records:[],templates:[],settings:{rate:'0.015',office:['Vehicle License and Registration Branch','159 Keawe St. Suite B1','Hilo, Kingdom of the Hawaiian Islands  H. I.']}};
+var cur=null, persisted=false, view='form', docId='mvc', imgs={}, imgOK=true;
+var BUILTIN={mvc:1,merch:1};
+var OFFICE_NEW=['Vehicle License and Registration Branch','159 Keawe St. Suite B1','Hilo, Kingdom of the Hawaiian Islands  H. I.'];
+try{var raw=sget();if(raw){var j=JSON.parse(raw);if(j&&j.records){db.records=j.records;if(j.settings)db.settings=Object.assign(db.settings,j.settings);if(Array.isArray(j.templates))db.templates=j.templates.map(cleanTpl).filter(Boolean)}
+  // the office moved from Mamo Street to Keawe Street: replace the old saved address once
+  if(/Mamo/i.test((db.settings.office||[]).join(' ')))db.settings.office=OFFICE_NEW.slice()}}catch(e){}
 
 function defaults(){var t=todayISO(),exp=addYears(t,1);
   return {ownerName:'',ownerStreet:'',ownerArea:'',licenseNo:'',cls:'',typeModel:'',yearMake:'',vin:'',trans:'M',weight:'',
     dateIssued:t,expiration:exp,renewBy:addMonths(exp,1),dateFirstSold:'',reconCert:'n/a',lienholder:'(None)',
     feeReg:'45.00',feeTariff:'',tariffAuto:true,feeBeau:'2.00',feeExempt:'0.00',feeSp:'0.00',feePenalty:'0.00'}}
-function newRec(){return {id:'r'+Date.now().toString(36)+Math.random().toString(36).slice(2,5),doc:docId,updated:Date.now(),touched:{},d:defaults()}}
+function tplById(id){return db.templates.filter(function(t){return t.id===id})[0]}
+function curTpl(){return BUILTIN[docId]?null:tplById(docId)}
+function tplDefaults(t){var d={};t.fields.forEach(function(f){d[f.k]=f.t==='date'?todayISO():(f.t==='check'?false:'')});return d}
+function newRec(){var t=curTpl();return {id:'r'+Date.now().toString(36)+Math.random().toString(36).slice(2,5),doc:docId,updated:Date.now(),touched:{},d:t?tplDefaults(t):(docId==='merch'?mdefaults():defaults())}}
 
-/* ---------- document registry (add new certificate types here) ---------- */
-var DOCS=[
-  {id:'mvc',name:'Registered Motor Vehicle Certificate',ready:true},
-  {id:'oper',name:"Motor Vehicle Operator's Identification — template not added yet",ready:false},
-  {id:'merch',name:'Merchandise License — template not added yet',ready:false},
-  {id:'serv',name:'Service License — template not added yet',ready:false},
-  {id:'safety',name:'Safety Check — template not added yet',ready:false},
-  {id:'birth',name:'Birth Certificate — template not added yet',ready:false}
-];
+/* ---------- document picker: built-in certificate + your uploaded templates ---------- */
+function buildPicker(){if(!tplById(docId)&&!BUILTIN[docId])docId='mvc';
+  $('#docPick').innerHTML='<option value="mvc">Registered Motor Vehicle Certificate</option><option value="merch">Merchandise and Services License</option>'
+   +db.templates.map(function(t){return '<option value="'+esc(t.id)+'">'+esc(t.name)+'</option>'}).join('')
+   +'<option value="__add">+ Add new template…</option>';
+  $('#docPick').value=docId}
 
 /* ---------- form definition ---------- */
 var SECTIONS=[
@@ -273,7 +392,14 @@ var SECTIONS=[
   {k:'feeSp',l:'Sp Plate',money:true},
   {k:'feePenalty',l:'Penalty',money:true}]}
 ];
-function buildForm(){var h='',i,j,s,f,rowOpen=null;
+function buildForm(){var t=curTpl();if(t)return buildTplForm(t);buildSectionForm(docId==='merch'?MSECTIONS:SECTIONS)}
+function buildTplForm(t){var h='<fieldset><legend>'+esc(t.name)+'</legend>';
+  t.fields.forEach(function(f){var id='f_'+f.k;
+    if(f.t==='check')h+='<label class="chk"><input type="checkbox" id="'+id+'" data-k="'+f.k+'"> '+esc(f.l)+'</label>';
+    else h+='<div class="f"><label for="'+id+'">'+esc(f.l)+'</label>'+(f.t==='area'?'<textarea id="'+id+'" data-k="'+f.k+'" rows="3"></textarea>'
+      :'<input id="'+id+'" data-k="'+f.k+'" type="'+(f.t==='date'?'date':'text')+'">')+'</div>'});
+  $('#form').innerHTML=h+'</fieldset>'}
+function buildSectionForm(SECTIONS){var h='',i,j,s,f,rowOpen=null;
   for(i=0;i<SECTIONS.length;i++){s=SECTIONS[i];h+='<fieldset><legend>'+esc(s.t)+'</legend>';rowOpen=null;
     for(j=0;j<s.f.length;j++){f=s.f[j];
       if(f.row&&rowOpen!==f.row){if(rowOpen)h+='</div>';h+='<div class="row2">';rowOpen=f.row}
@@ -290,9 +416,20 @@ function buildForm(){var h='',i,j,s,f,rowOpen=null;
         if(f.row)inp=inp.replace('<div class="f">','<div class="f" style="margin-top:.75rem">')}
       h+=inp}
     if(rowOpen)h+='</div>';
-    if(i===SECTIONS.length-1)h+='<div class="total" aria-live="polite"><span>Total</span><span id="totalOut">$0.00</span></div>';
+    if(i===SECTIONS.length-1&&docId==='mvc')h+='<div class="total" aria-live="polite"><span>Total</span><span id="totalOut">$0.00</span></div>';
     h+='</fieldset>'}
   $('#form').innerHTML=h}
+
+/* ---------- Merchandise and Services License: form ---------- */
+var TITLES=[['MERCHANDISE AND SERVICES LICENSE','Merchandise and Services License'],['MERCHANDISE LICENSE','Merchandise License']];
+var MSECTIONS=[{t:'Merchandise and Services License',f:[
+  {k:'title',l:'License title',sel:TITLES},
+  {k:'licenseNo',l:'License No.'},
+  {k:'company',l:'Company'},
+  {k:'issueDate',l:'Issue Date',type:'date'},
+  {k:'validTo',l:'Valid To',type:'date',hint:'Enter the expiration date for this license.'},
+  {k:'activity',l:'For Business Activity of',area:true,hint:'Prints beside the label; up to 3 short lines.'}]}];
+function mdefaults(){return {title:TITLES[0][0],licenseNo:'',company:'',issueDate:todayISO(),validTo:'',activity:''}}
 
 /* ---------- calculations ---------- */
 function total(d){return num(d.feeReg)+num(d.feeTariff)+num(d.feeBeau)+num(d.feeSp)+num(d.feePenalty)-num(d.feeExempt)}
@@ -333,41 +470,103 @@ function renderMVC(d){
   +'<li><i>7</i><span><b style="font-weight:400">Bureau of Public Instructions Vehicle License Branch:</b><span class="off">'+off+'</span></span></li></ol>'
   +'<p class="safe">*safety certificate instructions see back page*</p></div>'}
 
+/* ---------- renderer: Merchandise and Services License (SVG, 1 unit = 1/100 inch, page 11 x 8.5 in) ---------- */
+/* Fixed wording and positions were measured from the printed original. If the original fonts are installed on the
+   computer (Old English Text MT, Edwardian Script ITC, Monotype Corsiva, Apple Chancery ...) they are used; every
+   line is sized to the original's printed width either way. */
+var F_BLACK='"Old English Text MT","Engravers Old English","Blackadder ITC","KHPA Fraktur","Times New Roman",serif';
+var F_SCRIPT='"Edwardian Script ITC","Monotype Corsiva","Apple Chancery","Snell Roundhand","URW Chancery L","Z003","Lucida Calligraphy",cursive';
+var F_SERIF='"Times New Roman","Liberation Serif",Times,serif';
+var mctx=document.createElement('canvas').getContext('2d');
+function mw(t,font){mctx.font=font;return mctx.measureText(t).width}
+function fitSz(t,fam,wt,inches){var m=mw(t,wt+' 100px '+fam);return m?Math.max(8,Math.min(120,10000*inches/m)):30}
+function wrapTxt(t,font,maxU){var out=[];String(t||'').split('\n').forEach(function(line){var w=line.split(/\s+/).filter(Boolean),cur='';
+  w.forEach(function(x){var n=cur?cur+' '+x:x;if(cur&&mw(n,font)>maxU){out.push(cur);cur=x}else cur=n});out.push(cur)});return out.filter(function(l,i,a){return l||a.length===1})}
+function fa(f){return f.replace(/"/g,"'")}
+function tx(t,x,y,sz,fam,wt,anchor){return '<text x="'+x+'" y="'+y+'" font-size="'+sz.toFixed(1)+'" font-family="'+fa(fam)+'" font-weight="'+(wt||400)+'" text-anchor="'+(anchor||'start')+'">'+esc(t)+'</text>'}
+function valFit(t,fam,maxIn,maxSz,minSz){var m=mw(t,'400 100px '+fam),sz=maxSz;if(m){sz=Math.min(maxSz,10000*maxIn/m)}return Math.max(minSz,sz)}
+function renderMerch(d){var S=db.settings,dx=num(S.licDx)*100,dy=num(S.licDy)*100,h='';
+  h+='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 850" role="img" aria-label="Merchandise and Services License preview"><defs><path id="arc" d="M250,183 Q525,101 800,183"/></defs>';
+  h+='<g transform="translate('+dx+','+dy+')" fill="#111">';
+  if(imgs.emblem)h+='<image href="'+esc(imgs.emblem)+'" x="365" y="95" width="390" height="590" preserveAspectRatio="xMidYMid meet" opacity=".35" style="mix-blend-mode:multiply"/>';
+  // heading on an arch
+  var hs=fitSz('Kingdom of the Hawaiian Islands',F_BLACK,'700',5.4);
+  h+='<text font-size="'+hs.toFixed(1)+'" font-family="'+fa(F_BLACK)+'" font-weight="700"><textPath href="#arc" startOffset="50%" text-anchor="middle">Kingdom of the Hawaiian Islands</textPath></text>';
+  var sc=function(t,x,y,w,a){return tx(t,x,y,fitSz(t,F_SCRIPT,'400',w),F_SCRIPT,400,a)};
+  h+=sc('Department of Interior',550,200,2.38,'middle');
+  h+=sc('License No.',100,258,1.9,'start')+sc('Non-Transferable',949,258,2.63,'end');
+  var ts=fitSz(TITLES[0][0],F_SERIF,'700',5.85);
+  h+=tx(d.title||TITLES[0][0],550,329,ts,F_SERIF,700,'middle');
+  h+=sc('Company:',107,397,1.48,'start')+sc('Issue Date:',693,387,1.5,'start')+sc('Valid To:',698,462,1.14,'start');
+  h+=sc('For Business Activity of:',378,514,3.41,'start');
+  var l1='This license is subject to the provisions of Laws and Treaties of the',l2='Hawaiian Kingdom, as amended, License is hereby',ss=fitSz(l1,F_SERIF,'400',4.45);
+  h+=tx(l1,550,597,ss,F_SERIF,400,'middle')+tx(l2,550,613,ss,F_SERIF,400,'middle');
+  h+=tx('GRANTED',550,637,fitSz('GRANTED',F_SERIF,'400',1.1),F_SERIF,400,'middle');
+  h+=tx('@HKDOIML1',113,692,fitSz('@HKDOIML1',F_SERIF,'400',1.02),F_SERIF,400,'start');
+  h+='<line x1="700" y1="685" x2="970" y2="685" stroke="#111" stroke-width="1.2"/>';
+  h+=sc('Minister of Interior',866,717,2.13,'middle');
+  // filled-in values
+  var v=function(t,x,y,maxIn,mx){if(!t)return '';var z=valFit(t,F_SERIF,maxIn,mx||22,13);return tx(t,x,y,z,F_SERIF,400,'start')};
+  h+=v(d.licenseNo,305,258,3.2)+v(d.company,270,397,4.0)+v(fmtDate(d.issueDate),855,387,1.5,20)+v(fmtDate(d.validTo),822,462,1.8,20);
+  if(d.activity){var af='400 18px '+F_SERIF,lines=wrapTxt(d.activity,af,275).slice(0,3);
+    lines.forEach(function(l,i){h+=tx(l,735,514+i*24,18,F_SERIF,400,'start')})}
+  h+='</g></svg>';return h}
+
+/* ---------- renderer for uploaded templates (printed over the blank form image) ---------- */
+function renderTpl(t,d){var h='<img class="bgimg" alt="" src="'+esc(imgs[t.id]||'')+'">';
+  if(!imgs[t.id])h='<p class="tpl-miss">The form picture for this template is not on this device. Use Templates, then Import template file, to add it again.</p>';
+  t.fields.forEach(function(f){var v=d[f.k],x=f.t==='check'?(v?'X':''):(f.t==='date'?fmtDate(v):(v==null?'':v));
+    h+='<div class="tf" style="left:'+f.x+'%;top:'+f.y+'%;width:'+f.w+'%;font-size:'+f.s+'pt;text-align:'+f.a+(f.t==='check'?';font-weight:700':'')+'">'+esc(x)+'</div>'});
+  return h}
+
 /* ---------- UI plumbing ---------- */
-function fillForm(){var d=cur.d;SECTIONS.forEach(function(s){s.f.forEach(function(f){var el=$('#f_'+f.k);if(!el)return;
-  if(f.chk)el.checked=!!d[f.k];else el.value=d[f.k]==null?'':d[f.k]})});syncTariff();$('#totalOut').textContent='$'+money(total(d))}
+function fieldList(){var t=curTpl(),a=[];if(t)return t.fields.map(function(f){return {k:f.k,chk:f.t==='check'}});
+  SECTIONS.forEach(function(s){s.f.forEach(function(f){a.push(f)})});return a}
+function fillForm(){var d=cur.d;fieldList().forEach(function(f){var el=$('#f_'+f.k);if(!el)return;
+  if(f.chk)el.checked=!!d[f.k];else el.value=d[f.k]==null?'':d[f.k]});if(docId==='mvc'){syncTariff();$('#totalOut').textContent='$'+money(total(d))}}
 function syncTariff(){var a=cur.d.tariffAuto;$('#f_feeTariff').readOnly=a;$('#f_feeTariff').style.background=a?'#f1eee6':'#fff'}
-function refresh(){recompute(cur);var d=cur.d;
-  ['expiration','renewBy','feeTariff'].forEach(function(k){var el=$('#f_'+k);if(el&&document.activeElement!==el)el.value=d[k]});
-  $('#totalOut').textContent='$'+money(total(d));syncTariff();$('#sheet').innerHTML=renderMVC(d);fit()}
+function refresh(){var t=curTpl(),sh=$('#sheet'),d=cur.d;
+  if(t){sh.className='sheet tpl'+(t.ar<1?' land':'')+(db.settings.printBg===false?' nobg':'');sh.style.setProperty('--ar',t.ar);sh.innerHTML=renderTpl(t,d)}
+  else if(docId==='merch'){sh.className='sheet lic';sh.style.removeProperty('--ar');sh.innerHTML=renderMerch(d);$('#emblemNote').hidden=!!imgs.emblem}
+  else{recompute(cur);sh.className='sheet';sh.style.removeProperty('--ar');
+    ['expiration','renewBy','feeTariff'].forEach(function(k){var el=$('#f_'+k);if(el&&document.activeElement!==el)el.value=d[k]});
+    $('#totalOut').textContent='$'+money(total(d));syncTariff();sh.innerHTML=renderMVC(d)}
+  fit()}
 var saveT=null;
 function save(){cur.updated=Date.now();if(!persisted){db.records.push(cur);persisted=true}
   clearTimeout(saveT);saveT=setTimeout(function(){sset(JSON.stringify(db));renderList();banner()},250)}
-function banner(){var b=$('#banner');if(storageOK){b.hidden=true}else{b.hidden=false;
+function banner(){var b=$('#banner');if(storageOK&&imgOK){b.hidden=true}else if(storageOK){b.hidden=false;b.textContent='Template pictures could not be saved on this device. Use Templates, then Share file, to keep a copy of each template.'}else{b.hidden=false;
   b.textContent='This browser is blocking saved records. Your work is kept only while this page is open — use Backup to keep a copy. For permanent saving, install the app from its web address (see the setup notes).'}}
-function title(r){return r.d.ownerName||r.d.licenseNo||'Untitled certificate'}
+function title(r){if(r.doc==='merch')return r.d.company||r.d.licenseNo||'Untitled license';
+  if(r.doc&&r.doc!=='mvc'){var t=tplById(r.doc);if(t)for(var i=0;i<t.fields.length;i++){var f=t.fields[i],v=r.d[f.k];if(v&&f.t!=='check'&&f.t!=='date')return String(v).split('\n')[0]}return 'Untitled record'}
+  return r.d.ownerName||r.d.licenseNo||'Untitled certificate'}
+function haystack(r){if(r.doc==='merch')return r.d.company+' '+r.d.licenseNo+' '+r.d.activity;
+  return r.doc&&r.doc!=='mvc'?Object.keys(r.d).map(function(k){return r.d[k]}).join(' '):r.d.ownerName+' '+r.d.licenseNo+' '+r.d.vin+' '+r.d.typeModel}
 function renderList(){var q=($('#q').value||'').toLowerCase(),L=db.records.filter(function(r){
-  return !q||(r.d.ownerName+' '+r.d.licenseNo+' '+r.d.vin+' '+r.d.typeModel).toLowerCase().indexOf(q)>-1})
+  return (r.doc||'mvc')===docId&&(!q||haystack(r).toLowerCase().indexOf(q)>-1)})
   .sort(function(a,b){return b.updated-a.updated});
   $('#list').innerHTML=L.length?L.map(function(r){return '<button class="rec" type="button" data-id="'+r.id+'"'+(cur&&cur.id===r.id?' aria-current="true"':'')+'><b>'+esc(title(r))
-   +'</b><span>'+esc([r.d.licenseNo,r.d.yearMake,r.d.typeModel].filter(Boolean).join(' · ')||'No vehicle details')+'</span><span>Issued '+esc(fmtDate(r.d.dateIssued))+' · Exp '+esc(fmtDate(r.d.expiration))+'</span></button>'}).join('')
-  :'<p class="empty">'+(db.records.length?'No matches.':'No saved certificates yet. Fill in the details and they save automatically.')+'</p>'}
+   +'</b>'+(r.doc==='merch'?'<span>'+esc(r.d.licenseNo?'License '+r.d.licenseNo:'No license number')+'</span><span>Issued '+esc(fmtDate(r.d.issueDate))+(r.d.validTo?' · Valid to '+esc(fmtDate(r.d.validTo)):'')+'</span>':(r.doc||'mvc')==='mvc'?'<span>'+esc([r.d.licenseNo,r.d.yearMake,r.d.typeModel].filter(Boolean).join(' · ')||'No vehicle details')+'</span><span>Issued '+esc(fmtDate(r.d.dateIssued))+' · Exp '+esc(fmtDate(r.d.expiration))+'</span>':'<span>Saved '+esc(new Date(r.updated).toLocaleDateString())+'</span>')+'</button>'}).join('')
+  :'<p class="empty">'+(db.records.some(function(r){return (r.doc||'mvc')===docId})?'No matches.':'Nothing saved yet. Fill in the details and they save automatically.')+'</p>'}
 function open(r,persist){cur=r;persisted=persist;fillForm();refresh();renderList()}
 function go(v){view=v;document.body.setAttribute('data-view',v);document.querySelectorAll('.tabs button').forEach(function(b){b.setAttribute('aria-selected',b.dataset.go===v)})}
-function fit(){var w=$('#p-preview').clientWidth-24,px=7.7*96,z=Math.max(.3,Math.min(1.3,w/px));$('#sheet').style.setProperty('--z',z)}
+function sheetIn(t){return t?(t.ar<1?Math.min(11,8.48/t.ar):Math.min(8.5,10.98/t.ar)):(docId==='merch'?11:7.7)}
+function fit(){var w=$('#p-preview').clientWidth-24,px=sheetIn(curTpl())*96,z=Math.max(.3,Math.min(1.3,w/px));$('#sheet').style.setProperty('--z',z)}
 
 /* ---------- events ---------- */
 $('#form').addEventListener('input',function(e){var el=e.target,k=el.dataset.k;if(!k)return;var d=cur.d;
-  d[k]=el.type==='checkbox'?el.checked:(k==='vin'?el.value.toUpperCase():el.value);
-  if(k==='vin'&&el.value!==d[k])el.value=d[k];
-  if(k==='expiration')cur.touched.expiration=true;if(k==='renewBy')cur.touched.renewBy=true;
-  if(k==='tariffAuto'&&!d.tariffAuto){}
+  var mvc=docId==='mvc';
+  d[k]=el.type==='checkbox'?el.checked:(mvc&&k==='vin'?el.value.toUpperCase():el.value);
+  if(mvc&&k==='vin'&&el.value!==d[k])el.value=d[k];
+  if(mvc&&k==='expiration')cur.touched.expiration=true;if(mvc&&k==='renewBy')cur.touched.renewBy=true;
   refresh();save()});
 $('#list').addEventListener('click',function(e){var b=e.target.closest('.rec');if(!b)return;
   var r=db.records.filter(function(x){return x.id===b.dataset.id})[0];if(r){open(r,true);go('form')}});
 $('#q').addEventListener('input',renderList);
-$('#bNew').addEventListener('click',function(){open(newRec(),false);go('form');$('#f_ownerName').focus()});
-$('#bRenew').addEventListener('click',function(){var n=newRec(),o=cur.d,t=todayISO();n.d=Object.assign({},o,{dateIssued:t,expiration:addYears(t,1),renewBy:addMonths(addYears(t,1),1),feePenalty:'0.00'});
+$('#bNew').addEventListener('click',function(){open(newRec(),false);go('form');var f=document.querySelector('#form input,#form textarea');if(f)f.focus()});
+$('#bRenew').addEventListener('click',function(){var n=newRec(),o=cur.d,t=todayISO();
+  if(docId==='merch')n.d=Object.assign({},o,{issueDate:t,validTo:''});
+  else n.d=Object.assign({},o,{dateIssued:t,expiration:addYears(t,1),renewBy:addMonths(addYears(t,1),1),feePenalty:'0.00'});
   open(n,false);save();go('form')});
 $('#bDelete').addEventListener('click',function(){if(!persisted){open(newRec(),false);return}
   if(!confirm('Delete "'+title(cur)+'"? This cannot be undone.'))return;
@@ -375,33 +574,172 @@ $('#bDelete').addEventListener('click',function(){if(!persisted){open(newRec(),f
 $('#bPrint').addEventListener('click',function(){refresh();window.print()});
 document.querySelectorAll('.tabs button').forEach(function(b){b.addEventListener('click',function(){go(b.dataset.go);if(b.dataset.go==='preview')setTimeout(fit,0)})});
 window.addEventListener('resize',fit);
-$('#docPick').addEventListener('change',function(e){var o=DOCS.filter(function(x){return x.id===e.target.value})[0];
-  if(!o||!o.ready){e.target.value='mvc';alert('That template has not been added yet. The Registered Motor Vehicle Certificate is ready now.')}});
+$('#docPick').addEventListener('change',function(e){var v=e.target.value;
+  if(v==='__add'){e.target.value=docId;edOpen(null);return}
+  setDoc(v);go('form')});
+function setDoc(id){docId=id;var c=!!curTpl();$('#docPick').value=docId;
+  $('#bRenew').hidden=c;$('#bEditTpl').hidden=!c;$('#bgRow').hidden=!c;$('#emblemNote').hidden=true;$('#bgChk').checked=db.settings.printBg!==false;
+  $('#q').value='';$('#q').placeholder=c?'Search records…':(docId==='merch'?'Search company, license no…':'Search name, license, VIN…');
+  var t0=curTpl();$('#pgStyle').textContent='@page{size:letter '+((docId==='merch'||(t0&&t0.ar<1))?'landscape':'portrait')+';margin:0}';
+  buildForm();open(newRec(),false)}
+$('#bgChk').addEventListener('change',function(e){db.settings.printBg=e.target.checked;sset(JSON.stringify(db));refresh()});
+$('#bEditTpl').addEventListener('click',function(){var t=curTpl();if(t)edOpen(t)});
 
-/* backup / restore */
-$('#bBackup').addEventListener('click',function(){var blob=new Blob([JSON.stringify(db,null,2)],{type:'application/json'}),a=document.createElement('a');
-  a.href=URL.createObjectURL(blob);a.download='khpa-forms-backup-'+todayISO()+'.json';document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500)});
+/* backup / restore / template files */
+function download(obj,name){var blob=new Blob([JSON.stringify(obj)],{type:'application/json'}),a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500)}
+function tplOut(t){return Object.assign({},t,{image:imgs[t.id]||''})}
+function slug(x){return String(x).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'template'}
+$('#bBackup').addEventListener('click',function(){var o=JSON.parse(JSON.stringify(db));o.templates=db.templates.map(tplOut);if(imgs.emblem)o.emblem=imgs.emblem;download(o,'khpa-forms-backup-'+todayISO()+'.json')});
 $('#bRestore').addEventListener('click',function(){$('#restoreFile').click()});
-$('#restoreFile').addEventListener('change',function(e){var f=e.target.files[0];if(!f)return;var rd=new FileReader();
-  rd.onload=function(){try{var j=JSON.parse(rd.result);if(!j||!Array.isArray(j.records))throw 0;
-    var have={};db.records.forEach(function(r){have[r.id]=1});var add=j.records.filter(function(r){return r&&r.id&&r.d&&!have[r.id]});
-    db.records=db.records.concat(add);sset(JSON.stringify(db));renderList();banner();alert('Restored '+add.length+' certificate(s).')}
-    catch(x){alert('That file is not a KHPA Forms backup.')}e.target.value=''};rd.readAsText(f)});
+function importTpl(raw,ask){var t=cleanTpl(raw);if(!t)return false;var old=tplById(t.id);
+  if(old){if(!ask||!confirm('A template named "'+old.name+'" is already here. Replace it with the one in this file?'))return false}
+  var img=typeof raw.image==='string'&&raw.image.indexOf('data:image/')===0&&raw.image.length<9e6?raw.image:'';
+  if(old)db.templates=db.templates.filter(function(x){return x.id!==t.id});
+  db.templates.push(t);if(img){imgs[t.id]=img;idbPut(t.id,img)}return true}
+function importFile(file,done){var rd=new FileReader();
+  rd.onload=function(){try{var j=JSON.parse(rd.result),nr=0,nt=0;
+    if(j&&j.khpaTemplate&&j.template){if(importTpl(j.template,true))nt=1}
+    else if(j&&Array.isArray(j.records)){if(!imgs.emblem&&typeof j.emblem==='string'&&j.emblem.indexOf('data:image/')===0&&j.emblem.length<9e6){imgs.emblem=j.emblem;idbPut('emblem',j.emblem)}
+      var have={};db.records.forEach(function(r){have[r.id]=1});
+      var add=j.records.filter(function(r){return r&&r.id&&r.d&&!have[r.id]});db.records=db.records.concat(add);nr=add.length;
+      (Array.isArray(j.templates)?j.templates:[]).forEach(function(t){if(t&&!tplById(String(t.id||'')))if(importTpl(t,false))nt++})}
+    else throw 0;
+    sset(JSON.stringify(db));buildPicker();renderList();banner();if(done)done();
+    alert('Added '+nr+' record(s) and '+nt+' template(s).')}
+  catch(x){alert('That file is not a KHPA Forms backup or template file.')}};rd.readAsText(file)}
+$('#restoreFile').addEventListener('change',function(e){var f=e.target.files[0];if(f)importFile(f);e.target.value=''});
+
+/* ---------- picture storage for templates (IndexedDB; templates can be large) ---------- */
+function idbOpen(){return new Promise(function(res,rej){try{var r=indexedDB.open('khpa-forms-img',1);
+  r.onupgradeneeded=function(){r.result.createObjectStore('img')};r.onsuccess=function(){res(r.result)};r.onerror=function(){rej(r.error)}}catch(e){rej(e)}})}
+function idbPut(id,url){idbOpen().then(function(d){d.transaction('img','readwrite').objectStore('img').put(url,id)}).catch(function(){imgOK=false;banner()})}
+function idbDel(id){idbOpen().then(function(d){d.transaction('img','readwrite').objectStore('img').delete(id)}).catch(function(){})}
+function idbAll(){return idbOpen().then(function(d){return new Promise(function(res,rej){var out={},tx=d.transaction('img','readonly'),c=tx.objectStore('img').openCursor();
+  c.onsuccess=function(){var cu=c.result;if(cu){out[cu.key]=cu.value;cu.continue()}else res(out)};c.onerror=function(){rej(c.error)}})})}
+
+/* ---------- template data cleaning (files from email are untrusted) ---------- */
+function cl(v,a,b){v=parseFloat(v);if(!isFinite(v))v=a;return Math.min(b,Math.max(a,v))}
+function cleanTpl(t){if(!t||typeof t!=='object')return null;
+  var id=String(t.id||'').replace(/[^\w-]/g,'').slice(0,40);if(!id||id==='mvc'||id==='__add')return null;
+  var seen={},fs=(Array.isArray(t.fields)?t.fields:[]).slice(0,200).map(function(f,i){if(!f||typeof f!=='object')return null;
+    var k=String(f.k||'').replace(/[^\w-]/g,'').slice(0,20)||('f'+(i+1));while(seen[k])k+='x';seen[k]=1;
+    return {k:k,l:String(f.l||'Field').slice(0,80),t:['text','area','date','check'].indexOf(f.t)>-1?f.t:'text',
+      x:cl(f.x,0,100),y:cl(f.y,0,100),w:cl(f.w,3,100),s:cl(f.s,5,48),a:['left','center','right'].indexOf(f.a)>-1?f.a:'left'}}).filter(Boolean);
+  return {id:id,name:String(t.name||'Untitled template').slice(0,80),ar:cl(t.ar,.5,3),fields:fs,updated:+t.updated||Date.now()}}
+
+/* ---------- templates list ---------- */
+function tmRender(){$('#tmList').innerHTML=db.templates.length?db.templates.map(function(t){
+  var n=db.records.filter(function(r){return r.doc===t.id}).length;
+  return '<div class="tm-row"><b>'+esc(t.name)+'</b><span>'+t.fields.length+' fields · '+n+' saved record(s)</span><div class="tm-btns">'
+   +'<button class="btn small" type="button" data-a="edit" data-id="'+esc(t.id)+'">Edit</button>'
+   +'<button class="btn small" type="button" data-a="share" data-id="'+esc(t.id)+'">Share file</button>'
+   +'<button class="btn small danger" type="button" data-a="del" data-id="'+esc(t.id)+'">Delete</button></div></div>'}).join('')
+  :'<p class="empty">No templates yet. Tap "Add new template" to make your first one.</p>'}
+$('#bTpl').addEventListener('click',function(){tmRender();$('#tmDlg').showModal()});
+$('#tmClose').addEventListener('click',function(){$('#tmDlg').close()});
+$('#tmAdd').addEventListener('click',function(){$('#tmDlg').close();edOpen(null)});
+$('#tmImp').addEventListener('click',function(){$('#tmFile').click()});
+$('#tmFile').addEventListener('change',function(e){var f=e.target.files[0];if(f)importFile(f,tmRender);e.target.value=''});
+$('#tmList').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;var t=tplById(b.dataset.id);if(!t)return;
+  if(b.dataset.a==='edit'){$('#tmDlg').close();edOpen(t)}
+  else if(b.dataset.a==='share'){download({khpaTemplate:1,template:tplOut(t)},'khpa-template-'+slug(t.name)+'.json')}
+  else if(b.dataset.a==='del'){if(!confirm('Delete the template "'+t.name+'"?\n\nRecords already saved with it stay on this device and come back if you import the template again.'))return;
+    db.templates=db.templates.filter(function(x){return x.id!==t.id});delete imgs[t.id];idbDel(t.id);sset(JSON.stringify(db));
+    if(docId===t.id){buildPicker();setDoc('mvc')}else buildPicker();tmRender()}});
+
+/* ---------- template maker ---------- */
+var ed=null,drag=null;
+function fieldBy(k){return ed.fields.filter(function(f){return f.k===k})[0]}
+function r1(v){return Math.round(v*10)/10}
+function edOpen(t){
+  ed=t?{id:t.id,name:t.name,ar:t.ar,img:imgs[t.id]||'',fields:JSON.parse(JSON.stringify(t.fields)),sel:null,placing:false,isNew:false}
+      :{id:'t'+Date.now().toString(36)+Math.random().toString(36).slice(2,4),name:'',ar:1.294,img:'',fields:[],sel:null,placing:false,isNew:true};
+  $('#edName').value=ed.name;$('#edDlg').showModal();edImgSet();edRender()}
+function edMsg(m){$('#edMsg').textContent=m}
+function edImgSet(){$('#edImg').src=ed.img||'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
+  $('#edAdd').disabled=!ed.img;
+  edMsg(ed.img?'Tap "Add field", then tap the spot on the form where it goes. Drag a box to move it.':'Step 1: choose a photo or scan of the blank form (JPG or PNG).');
+  edLayout()}
+function edLayout(){var pg=$('#edPage'),w=pg.clientWidth;if(w)pg.style.setProperty('--k',(w/(sheetIn({ar:ed.ar})*72)).toFixed(4)+'px')}
+function edRender(){var pg=$('#edPage');pg.querySelectorAll('.ed-box').forEach(function(n){n.remove()});
+  ed.fields.forEach(function(f){var b=document.createElement('div');b.className='ed-box'+(f.k===ed.sel?' sel':'');b.dataset.k=f.k;b.tabIndex=0;b.setAttribute('role','button');
+    b.setAttribute('aria-label','Field '+f.l+'. Arrow keys move it.');b.textContent=f.t==='check'?'X':f.l;edPaint(b,f);pg.appendChild(b)});
+  $('#edList').innerHTML=ed.fields.map(function(f){return '<li><button type="button" data-k="'+esc(f.k)+'"'+(f.k===ed.sel?' aria-current="true"':'')+'>'+esc(f.l)+'</button></li>'}).join('');
+  var f=ed.sel&&fieldBy(ed.sel);$('#edFields').hidden=!f;
+  if(f){$('#edL').value=f.l;$('#edTy').value=f.t;$('#edA').value=f.a;$('#edS').value=f.s;$('#edW').value=f.w}}
+function edPaint(b,f){b.style.left=f.x+'%';b.style.top=f.y+'%';b.style.width=f.w+'%';b.style.setProperty('--s',f.s);b.style.textAlign=f.a}
+function edBox(k){return $('#edPage .ed-box[data-k="'+k+'"]')}
+function edSelect(k){ed.sel=k;edRender()}
+function edAddAt(x,y){var n=1;ed.fields.forEach(function(f){var m=/^f(\d+)$/.exec(f.k);if(m)n=Math.max(n,+m[1]+1)});
+  var f={k:'f'+n,l:'Field '+(ed.fields.length+1),t:'text',x:r1(Math.min(Math.max(x,0),70)),y:r1(Math.min(Math.max(y,0),97)),w:30,s:11,a:'left'};
+  ed.fields.push(f);ed.placing=false;$('#edPage').classList.remove('placing');edMsg('Name the field on the right (for example "Owner name"), then add the next one.');
+  edSelect(f.k);$('#edL').focus();$('#edL').select()}
+$('#edPick').addEventListener('click',function(){$('#edFile').click()});
+$('#edFile').addEventListener('change',function(e){var f=e.target.files[0];e.target.value='';if(!f)return;
+  if(!/^image\//.test(f.type)){edMsg('Please choose a picture (JPG or PNG). For a PDF, export or screenshot the page as a picture first.');return}
+  var u=URL.createObjectURL(f),im=new Image();
+  im.onload=function(){var W=im.naturalWidth,H=im.naturalHeight,k=Math.min(1,1700/W),c=document.createElement('canvas');c.width=Math.round(W*k);c.height=Math.round(H*k);
+    var x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,c.width,c.height);x.drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);
+    ed.img=c.toDataURL('image/jpeg',.85);ed.ar=c.height/c.width;edImgSet()};
+  im.onerror=function(){URL.revokeObjectURL(u);edMsg('That picture could not be opened. Try a JPG or PNG.')};im.src=u});
+$('#edImg').addEventListener('load',edLayout);
+window.addEventListener('resize',function(){if(ed&&$('#edDlg').open)edLayout()});
+$('#edAdd').addEventListener('click',function(e){if(e.detail===0){edAddAt(10,10);return}
+  ed.placing=true;$('#edPage').classList.add('placing');edMsg('Tap the spot on the form where this detail should print.')});
+$('#edPage').addEventListener('pointerdown',function(e){var bx=e.target.closest('.ed-box'),r=this.getBoundingClientRect();
+  if(ed.placing&&!bx){edAddAt((e.clientX-r.left)/r.width*100,(e.clientY-r.top)/r.height*100);return}
+  if(!bx)return;var f=fieldBy(bx.dataset.k);if(ed.sel!==f.k){edSelect(f.k);bx=edBox(f.k)}
+  drag={k:f.k,sx:e.clientX,sy:e.clientY,ox:f.x,oy:f.y,w:r.width,h:r.height,el:bx};try{bx.setPointerCapture(e.pointerId)}catch(x){}e.preventDefault()});
+$('#edPage').addEventListener('pointermove',function(e){if(!drag)return;var f=fieldBy(drag.k);
+  f.x=r1(Math.min(Math.max(drag.ox+(e.clientX-drag.sx)/drag.w*100,0),100-f.w));f.y=r1(Math.min(Math.max(drag.oy+(e.clientY-drag.sy)/drag.h*100,0),99));edPaint(drag.el,f)});
+['pointerup','pointercancel'].forEach(function(n){$('#edPage').addEventListener(n,function(){drag=null})});
+$('#edPage').addEventListener('keydown',function(e){var bx=e.target.closest('.ed-box');if(!bx)return;var d={ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,-1],ArrowDown:[0,1]}[e.key];if(!d)return;
+  e.preventDefault();edNudge(fieldBy(bx.dataset.k),d[0],d[1]);bx.focus()});
+function edNudge(f,dx,dy){f.x=r1(Math.min(Math.max(f.x+dx*.2,0),100-f.w));f.y=r1(Math.min(Math.max(f.y+dy*.2,0),99));var b=edBox(f.k);if(b)edPaint(b,f)}
+document.querySelectorAll('.nudge button').forEach(function(b){b.addEventListener('click',function(){var f=ed.sel&&fieldBy(ed.sel);if(!f)return;var n=b.dataset.n.split(',');edNudge(f,+n[0],+n[1])})});
+$('#edList').addEventListener('click',function(e){var b=e.target.closest('button');if(b)edSelect(b.dataset.k)});
+function edProp(id,fn){$(id).addEventListener('input',function(){var f=ed.sel&&fieldBy(ed.sel);if(!f)return;fn(f,this.value);var b=edBox(f.k);if(b){edPaint(b,f);b.textContent=f.t==='check'?'X':f.l}
+  var li=$('#edList button[data-k="'+f.k+'"]');if(li)li.textContent=f.l})}
+edProp('#edL',function(f,v){f.l=v.slice(0,80)||'Field'});
+edProp('#edTy',function(f,v){f.t=v});
+edProp('#edA',function(f,v){f.a=v});
+edProp('#edS',function(f,v){f.s=cl(v,5,48)});
+edProp('#edW',function(f,v){f.w=cl(v,3,100);f.x=Math.min(f.x,100-f.w)});
+$('#edDel').addEventListener('click',function(){if(!ed.sel)return;ed.fields=ed.fields.filter(function(f){return f.k!==ed.sel});ed.sel=null;edRender()});
+$('#edCancel').addEventListener('click',function(){if(ed.isNew&&ed.fields.length&&!confirm('Discard this new template?'))return;$('#edDlg').close()});
+$('#edSave').addEventListener('click',function(){var name=$('#edName').value.trim();
+  if(!name){edMsg('Give the template a name first.');$('#edName').focus();return}
+  if(!ed.img){edMsg('Choose the blank form picture first.');return}
+  if(!ed.fields.length){edMsg('Add at least one field.');return}
+  var t=cleanTpl({id:ed.id,name:name,ar:ed.ar,fields:ed.fields,updated:Date.now()});
+  db.templates=db.templates.filter(function(x){return x.id!==t.id});db.templates.push(t);imgs[t.id]=ed.img;idbPut(t.id,ed.img);sset(JSON.stringify(db));
+  $('#edDlg').close();buildPicker();setDoc(t.id);go('form')});
+
+/* emblem picture for the Merchandise and Services License */
+function embStatus(){$('#s_embst').textContent=imgs.emblem?'An emblem picture is saved on this device.':'No emblem picture yet. Choose one (PNG with a transparent background is best).'}
+$('#s_emb').addEventListener('change',function(e){var f=e.target.files[0];e.target.value='';if(!f||!/^image\//.test(f.type)){return}
+  var u=URL.createObjectURL(f),im=new Image();
+  im.onload=function(){var k=Math.min(1,1400/Math.max(im.naturalWidth,im.naturalHeight)),c=document.createElement('canvas');c.width=Math.round(im.naturalWidth*k);c.height=Math.round(im.naturalHeight*k);
+    c.getContext('2d').drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);imgs.emblem=c.toDataURL('image/png');idbPut('emblem',imgs.emblem);embStatus();if(docId==='merch')refresh()};
+  im.onerror=function(){URL.revokeObjectURL(u);$('#s_embst').textContent='That picture could not be opened. Try a PNG or JPG.'};im.src=u});
+$('#s_embclr').addEventListener('click',function(){delete imgs.emblem;idbDel('emblem');embStatus();if(docId==='merch')refresh()});
 
 /* settings */
-$('#bSettings').addEventListener('click',function(){$('#s_rate').value=db.settings.rate;$('#s_off').value=(db.settings.office||[]).join('\n');$('#dlg').showModal()});
+$('#bSettings').addEventListener('click',function(){$('#s_dx').value=db.settings.licDx||'';$('#s_dy').value=db.settings.licDy||'';embStatus();$('#s_rate').value=db.settings.rate;$('#s_off').value=(db.settings.office||[]).join('\n');$('#dlg').showModal()});
 $('#setForm').addEventListener('submit',function(e){var v=e.submitter&&e.submitter.value;if(v!=='ok')return;
-  db.settings.rate=$('#s_rate').value||'0.015';db.settings.office=$('#s_off').value.split('\n');sset(JSON.stringify(db));refresh()});
+  db.settings.licDx=$('#s_dx').value.trim();db.settings.licDy=$('#s_dy').value.trim();db.settings.rate=$('#s_rate').value||'0.015';db.settings.office=$('#s_off').value.split('\n');sset(JSON.stringify(db));refresh()});
 
 /* ---------- start: open straight to the first document ---------- */
 $('#logo').src=ARMS;
-$('#docPick').innerHTML=DOCS.map(function(x){return '<option value="'+x.id+'"'+(x.ready?'':' style="color:#777"')+'>'+esc(x.name)+'</option>'}).join('');
-buildForm();
 // probe storage once so the warning shows up front
 try{localStorage.setItem('__t','1');localStorage.removeItem('__t')}catch(e){storageOK=false}
-banner();
-open(newRec(),false);
-go(window.innerWidth<1000?'form':'form');
+var started=false;
+function start(){if(started)return;started=true;buildPicker();banner();setDoc('mvc');go('form')}
+if(window.indexedDB){var tm=setTimeout(start,1500);
+  idbAll().then(function(m){imgs=m;clearTimeout(tm);start()},function(){imgOK=false;clearTimeout(tm);start()})}
+else start();
+if(document.fonts&&document.fonts.load)document.fonts.load('700 20px "KHPA Fraktur"').then(function(){if(cur&&docId==='merch')refresh()}).catch(function(){});
 if('serviceWorker' in navigator&&/^https?:/.test(location.protocol)){navigator.serviceWorker.register('sw.js').catch(function(){})}
 })();
 </script>
