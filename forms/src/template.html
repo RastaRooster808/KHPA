@@ -506,16 +506,18 @@ var PSECTIONS=[{t:'License plate',f:[
   {k:'island',l:'Island (sets the abbreviation, color and number series)',sel:ISLES.map(function(i){return [i[0],i[0]+' — '+i[1]]})},
   {k:'type',l:'Plate type',sel:[['STD','Standard (passenger / truck)'],['TRL','Trailer'],['MC','Motorcycle (small plate)']]},
   {k:'layout',l:'Plate layout',sel:[['SIDE','Parallel: island code and number side by side'],['STACK','Stacked: island code above the number']]},
+  {k:'coding',l:'Color coding',sel:[['ISL','Island color: lettering and highlighted island'],['ALL','Island color lettering, every island color-coded'],['RED','Red lettering, island highlighted']]},
   {k:'number',l:'Plate number',hint:'The next free number in this island\'s series for this plate type fills in automatically. Type over it to use a different number.'},
   {k:'label',l:'Extra plate wording (optional)',hint:'Trailer and Motorcycle plates print their type automatically. Type here to replace it.'},
   {k:'holder',l:'Registered to (filed with the record)'},
   {k:'vehicle',l:'Vehicle / VIN (filed with the record)'}]}];
-function pdefaults(){var a='HAW';return {island:a,type:'STD',layout:'SIDE',number:nextPlate(a,'','STD'),label:'',holder:'',vehicle:''}}
+function pdefaults(){var a='HAW';return {island:a,type:'STD',layout:'SIDE',coding:'ISL',number:nextPlate(a,'','STD'),label:'',holder:'',vehicle:''}}
 var PLATEBG={{PLATEBG}};
 var CROWN='data:image/png;base64,{{CROWN}}';
 function renderPlate(d){var I=isle(d.island),n=String(d.number||''),ty=ptype(d),lab=String(d.label||PTYPES[ty]||'').toUpperCase(),full=I[0]+' '+n,mc=ty==='MC',side=d.layout!=='STACK',
-  /* red letters with a black outline, as in the Canva plate design; the island color lives in the archipelago art */
-  st='fill="#c4161c" stroke="#111" stroke-width="9" stroke-linejoin="round" paint-order="stroke" font-family="Impact,\'Anton\',\'League Gothic\',\'Arial Narrow\',\'Arial Black\',sans-serif" font-weight="900"',
+  /* outlined letters as in the Canva plate design; color coding (island color or red) comes from the Color coding field */
+  tc=d.coding==='RED'?'#c4161c':I[2],
+  st='fill="'+tc+'" stroke="#111" stroke-width="9" stroke-linejoin="round" paint-order="stroke" font-family="Impact,\'Anton\',\'League Gothic\',\'Arial Narrow\',\'Arial Black\',sans-serif" font-weight="900"',
   px=mc?200:50,py=mc?225:175,
   ns=n.length<=3?190:n.length===4?172:n.length===5?142:118,ls=lab.length>8?74:100,
   txt=side
@@ -523,7 +525,7 @@ function renderPlate(d){var I=isle(d.island),n=String(d.number||''),ty=ptype(d),
     +(lab?'<text x="16" y="385" font-size="'+ls+'" '+st+'>'+esc(lab)+'</text>':'')
    :'<text x="16" y="262" font-size="170" '+st+'>'+esc(I[0])+'</text><text x="16" y="'+(262+Math.round(Math.min(ns,170)*.98))+'" font-size="'+Math.min(ns,170)+'" '+st+'>'+esc(n)+'</text>'
     +(lab?'<text x="18" y="480" font-size="'+Math.min(ls,64)+'" '+st+'>'+esc(lab)+'</text>':''),
-  inner='<image href="'+PLATEBG[I[0]]+'" x="0" y="0" width="1000" height="500" preserveAspectRatio="xMidYMid slice"/>'
+  inner='<image href="'+PLATEBG[d.coding==='ALL'?'ALL':I[0]]+'" x="0" y="0" width="1000" height="500" preserveAspectRatio="xMidYMid slice"/>'
    +'<text x="500" y="92" text-anchor="middle" font-size="108" textLength="930" lengthAdjust="spacingAndGlyphs" '+st+'>KO HAWAIʻI PAE ʻAINA</text>'
    +'<image href="'+esc(imgs.emblem||CROWN)+'" x="'+(side?400:600)+'" y="'+(side?190:150)+'" width="200" height="160" preserveAspectRatio="xMidYMid meet"/>'
    +txt

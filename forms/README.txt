@@ -72,5 +72,6 @@ ID CARDS (two sides) AND LICENSE PLATES
   The card art is generated placeholder artwork: use Templates > Edit to swap in the original card pictures.
 - License Plate: pick the plate type (Standard, Trailer or small Motorcycle plate) and the island (HAW, MAU, OAH, MOL, LAN, KAU, NII). The background is the archipelago art with that island colored (red Hawaiʻi, pink Maui, gold Oʻahu, purple Kauaʻi, etc.); the abbreviation, text color and
   coordinates change and the next free number in that island's series is filled in automatically.
+  Color coding: island color lettering with that island highlighted (default), every island color-coded, or red lettering.
   Plate layout: Stacked (code above number) or Parallel (code and number side by side).
   Every plate is filed as a record. First numbers per island are set in Settings (one per line, e.g. HAW=501).
