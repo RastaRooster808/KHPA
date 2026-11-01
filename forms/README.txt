@@ -26,6 +26,16 @@ BACKUP (important)
   Records are stored on the device you use. Use Backup now and then; it saves a .json file.
   Restore merges a backup into another device (move records PC <-> iPad).
 
+SCAN A STATE ID (carry details over to the Kingdom form)
+  Needs a 2D barcode scanner that reads PDF417 (the barcode on the BACK of a state driver license / ID)
+  and is set to USB keyboard mode (HID). Plug in, tap "Scan state ID", click the box, scan the back of the card.
+  The app shows what it found; tap "Fill the form". The barcode text is never saved, only the filled fields.
+  Registered Motor Vehicle Certificate: fills owner name, street and city.
+  Your own templates: in the Template maker, pick "Fill from state ID scan" for each field (name, date of birth,
+  address, sex, height, eye color ...). A template with no such fields has no Scan button.
+  Check spelling after a scan: state IDs are all capitals and have no ʻokina.
+  Get the person's OK before scanning. Do not scan IDs you have no reason to handle.
+
 MERCHANDISE AND SERVICES LICENSE (built in, landscape)
   Pick it in the document list. Fill in License No., Company, Issue Date, Valid To, Business Activity.
   Print: Letter, LANDSCAPE, 100%, one page. Works on plain paper or on your border stock.
@@ -52,4 +62,14 @@ CHANGING THINGS
   Settings (in the app): weight tariff rate, and the office address printed in item 7.
   Fixed wording and layout: template.html → renderMVC().
   The Registered Motor Vehicle Certificate layout is fixed code: template.html → renderMVC(), then run: python3 build.py
-  When you change any file, raise CACHE in sw.js (khpa-forms-v2 … v6) so devices update.
+  When you change any file, raise CACHE in sw.js (khpa-forms-v2 … v7) so devices update.
+
+ID CARDS (two sides) AND LICENSE PLATES
+- Two card documents are built in: Identification Certificate and Motor Vehicle Operators Certificate,
+  front and back, printed at actual card size (3.375 x 2.125 in), two pages per card. For a plain printer,
+  tick "Test print on a Letter page". Add the photo with "Choose or take photo", sign with "Draw signature".
+  The Scan button fills name, birth date, address, height, weight, hair and eyes from a state ID.
+  The card art is generated placeholder artwork: use Templates > Edit to swap in the original card pictures.
+- License Plate: pick the plate type (Standard, Trailer or small Motorcycle plate) and the island (HAW, MAU, OAH, MOL, LAN, KAU, NII). The abbreviation, background color and
+  coordinates change and the next free number in that island's series is filled in automatically.
+  Every plate is filed as a record. First numbers per island are set in Settings (one per line, e.g. HAW=501).

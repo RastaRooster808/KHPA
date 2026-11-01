@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>KHPA Forms</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#12264a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="KHPA Forms">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" href="icon-192.png">
+
+<!-- =====================================================================
+ KHPA FORMS — one-file app. Works offline on PC, Mac and iPad.
+ • Records are saved on THIS device (localStorage). Use Backup to export.
+ • Add a new form: use "Templates" in the app (upload a blank form, tap where each field goes).
+ • Fixed certificate wording lives in renderMVC() — edit there.
+ ===================================================================== -->
+<style>
+:root{--navy:#12264a;--navy2:#1d3a68;--cream:#f8f3ea;--paper:#fffdf8;--gold:#b98f2d;--goldl:#e6c872;--gold-d:#7a5a0f;
+  --ink:#1b2231;--muted:#464f5f;--line:#d8cbae;--purple:#4b2e83;--green:#3f5f4a;--red:#8c1d1d;
+  --sans:Arial,"Liberation Sans","Helvetica Neue",sans-serif;--serif:"Times New Roman","Liberation Serif",Georgia,serif}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--cream);color:var(--ink);font:16px/1.4 var(--sans);-webkit-text-size-adjust:100%;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--navy);outline-offset:2px}
+[hidden]{display:none!important}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- App bar ---------- */
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem .6rem;background:var(--navy);color:#fff;
+  padding:max(.5rem,env(safe-area-inset-top)) max(.9rem,env(safe-area-inset-right)) .5rem max(.9rem,env(safe-area-inset-left))}
+.brand{display:flex;align-items:center;gap:.6rem;margin-right:auto;font:700 1.05rem/1.15 var(--serif)}
+.brand img{height:42px;width:auto}
+.brand small{display:block;font:400 .72rem/1.2 var(--sans);color:var(--goldl);letter-spacing:.06em;text-transform:uppercase}
+.doc-pick{min-height:44px;max-width:min(19rem,100%);flex:0 1 15rem;padding:0 .7rem;border:2px solid var(--goldl);border-radius:6px;background:var(--navy2);color:#fff;font-weight:700}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;min-height:44px;padding:0 1rem;border-radius:6px;
+  border:2px solid var(--navy);background:var(--paper);color:var(--navy);font-weight:700;cursor:pointer;text-decoration:none;white-space:nowrap}
+.bar .btn{border-color:#fff;background:transparent;color:#fff}
+.bar .btn.primary,.btn.primary{background:var(--goldl);border-color:var(--goldl);color:var(--navy)}
+.btn.danger{border-color:var(--red);color:var(--red)}
+.btn.small{min-height:44px;padding:0 .8rem}
+.banner{background:#fff4d6;border-bottom:2px solid var(--gold);padding:.55rem 1rem;font-size:.92rem}
+
+/* ---------- Layout ---------- */
+.layout{display:grid;grid-template-columns:1fr;height:calc(100% - 0px);min-height:0}
+.app{display:flex;flex-direction:column;height:100%}
+.panel{display:none;overflow:auto;min-height:0;-webkit-overflow-scrolling:touch}
+body[data-view="records"] #p-records,body[data-view="form"] #p-form,body[data-view="preview"] #p-preview{display:block}
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);background:var(--navy);padding-bottom:env(safe-area-inset-bottom)}
+.tabs button{min-height:52px;background:transparent;border:0;border-top:3px solid transparent;color:#cfd8ea;font-weight:700;cursor:pointer}
+.tabs button[aria-selected="true"]{color:#fff;border-top-color:var(--goldl)}
+@media (min-width:1000px){
+  .layout{grid-template-columns:260px minmax(330px,400px) 1fr;flex:1}
+  .panel{display:block!important}
+  .tabs{display:none}
+  #p-records,#p-form{border-right:1px solid var(--line)}
+}
+.layout{flex:1}
+
+/* ---------- Records ---------- */
+#p-records{background:#efe8d8;padding:.8rem}
+.search{width:100%;min-height:44px;padding:0 .7rem;border:1.5px solid var(--navy);border-radius:6px;background:#fff;margin-bottom:.6rem}
+.rec{display:block;width:100%;text-align:left;min-height:56px;margin:0 0 .45rem;padding:.55rem .75rem;border:1.5px solid var(--line);border-radius:6px;background:var(--paper);cursor:pointer}
+.rec b{display:block;color:var(--navy)}
+.rec span{display:block;font-size:.85rem;color:var(--muted)}
+.rec[aria-current="true"]{border-color:var(--navy);box-shadow:inset 4px 0 0 var(--gold)}
+.empty{padding:1rem .2rem;color:var(--muted);font-size:.95rem}
+
+/* ---------- Form ---------- */
+#p-form{padding:.9rem 1rem 2rem;background:var(--paper)}
+.actions{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.9rem}
+fieldset{margin:0 0 1.1rem;padding:.2rem .9rem .9rem;border:1.5px solid var(--line);border-radius:8px;background:#fff}
+legend{padding:0 .4rem;font:700 .8rem/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--gold-d)}
+.f{margin-top:.75rem}
+.f label{display:block;margin-bottom:.25rem;font-weight:700;font-size:.92rem;color:var(--navy)}
+.f input,.f select,.f textarea{width:100%;min-height:46px;padding:.5rem .65rem;border:1.5px solid #7d879a;border-radius:6px;background:#fff}
+.f textarea{min-height:76px;resize:vertical}
+.f .hint{margin:.25rem 0 0;font-size:.82rem;color:var(--muted)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+.total{margin-top:.9rem;padding:.7rem .9rem;border-left:5px solid var(--green);background:#eef3ee;font-weight:700;display:flex;justify-content:space-between}
+.chk{display:flex;align-items:center;gap:.6rem;min-height:44px;margin-top:.4rem;font-size:.92rem}
+.chk input{width:24px;height:24px;min-height:0}
+
+/* ---------- Preview ---------- */
+#p-preview{background:#d9d2c0;padding:12px}
+.sheet-wrap{display:flex;justify-content:center}
+
+/* ---------- THE CERTIFICATE SHEET (Letter, 7.7in printable width) ---------- */
+.sheet{position:relative;width:7.7in;background:#fff;color:#111;font-family:var(--sans);padding:.12in 0;box-shadow:0 2px 10px rgba(0,0,0,.25);zoom:var(--z,1)}
+.sheet .wm{position:absolute;left:50%;top:1.5in;width:5.6in;height:auto;transform:translateX(-50%);opacity:.24;pointer-events:none;z-index:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.sheet .box{position:relative;z-index:1;border:1.5px solid #111;padding:.13in .2in .12in;margin:0 .1in .22in}
+.sheet h1{margin:0;text-align:center;font:400 19.5pt/1.15 var(--serif);color:var(--purple);letter-spacing:.015em}
+.sheet h2{margin:.03in 0 0;text-align:center;font:700 11pt/1.15 var(--sans);color:var(--purple);letter-spacing:.01em}
+.sheet .sub{margin:.02in 0 .1in;text-align:center;font-size:8.5pt;font-weight:700}
+.cert-body{display:grid;grid-template-columns:1fr 2.8in;gap:.1in}
+.dg{display:grid;grid-template-columns:.95fr 1.85fr .95fr .9fr;gap:.07in .06in}
+.c.vin .v{font-size:10.5pt;white-space:nowrap;overflow-wrap:normal}
+.c{text-align:center;min-height:.42in}
+.c .l{display:block;font:700 9pt/1.2 var(--sans);color:var(--purple)}
+.c .v{display:block;font:italic 12pt/1.2 var(--serif);overflow-wrap:anywhere}
+.c.span2{grid-column:span 2}
+.fees{font-size:9.5pt}
+.fr{display:flex;align-items:baseline;gap:.06in;margin:.015in 0}
+.fr .l{flex:1;text-align:right;font:700 9pt/1.2 var(--sans);color:var(--purple)}
+.fr .v{width:.85in;text-align:right;font:12pt/1.2 "Courier New","Liberation Mono",monospace}
+.fr.tot{margin-top:.12in}.fr.tot .l{font-size:9.5pt}.fr.tot .v{font:700 13pt/1.2 "Courier New","Liberation Mono",monospace;width:1.05in}
+.fr.exp .l{font:italic 700 8.5pt/1.2 var(--sans);white-space:nowrap}.fr.exp .v{font-size:13pt;width:1.1in}
+.lower{margin-top:.04in}
+.lower .l{font:700 10pt/1.2 var(--sans);color:var(--purple);margin-top:.07in}
+.lower .lien{font:italic 11pt/1.25 var(--serif);white-space:pre-line}
+.owner{font:12.5pt/1.3 var(--sans);margin-top:.03in}
+.owner small{display:block;font-size:9.5pt}
+.gp{margin:.07in 0 0;text-align:center;font:italic 9pt/1.2 var(--serif);color:var(--purple)}
+.attn h3{margin:0;text-align:center;font:400 21pt/1.1 var(--serif);color:var(--purple)}
+.attn h4{margin:0 0 .06in;text-align:center;font:700 11.5pt/1.1 var(--sans);color:var(--purple)}
+.attn ol{margin:0;padding:0;list-style:none;font-size:9.4pt;line-height:1.3}
+.attn li{display:flex;gap:.07in;margin:.025in 0}
+.attn li>i{font-style:normal;flex:none;width:.12in}
+.attn .off{display:block;margin:.04in 0 0 .4in;font:italic 9.6pt/1.35 var(--serif)}
+.attn .safe{margin:.1in 0 0;text-align:center;font-weight:700;font-size:10.5pt}
+
+/* ---------- Settings dialog ---------- */
+dialog{max-width:34rem;width:calc(100% - 2rem);padding:1.1rem 1.2rem;border:2px solid var(--navy);border-radius:10px;background:var(--paper)}
+dialog::backdrop{background:rgba(18,38,74,.55)}
+dialog h2{margin:0 0 .5rem;font:700 1.3rem var(--serif);color:var(--navy)}
+.dlg-actions{display:flex;gap:.5rem;justify-content:flex-end;margin-top:1rem}
+
+@font-face{font-family:"KHPA Fraktur";src:url(data:font/woff;base64,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) format("woff");font-weight:700;font-style:normal}
+/* ---------- Merchandise and Services License (landscape, drawn as SVG so text can be fitted exactly) ---------- */
+.sheet.lic{width:11in;height:8.5in;padding:0;overflow:hidden;background:#fff}
+.sheet.lic svg{display:block;width:100%;height:100%}
+
+/* ---------- Uploaded templates (printed over the blank form image) ---------- */
+.sheet.tpl{width:min(8.5in,calc(10.98in / var(--ar,1.294)));padding:0;overflow:hidden}
+.sheet.tpl.land{width:min(11in,calc(8.48in / var(--ar,.77)))}
+.sheet.tpl .bgimg{display:block;width:100%;height:auto}
+.sheet.tpl.nobg .bgimg{visibility:hidden}
+.sheet.tpl .tf{position:absolute;margin:0;color:#111;font-family:var(--sans);line-height:1.15;white-space:pre-wrap;overflow-wrap:anywhere}
+.tpl-miss{padding:1rem;font-size:.95rem;color:var(--red)}
+
+/* ---------- card-size templates (CR80), photo / signature / barcode fields ---------- */
+.side{position:relative;overflow:hidden;background:#fff}
+.side+.side{border-top:2px dashed #c9c0a8}
+.sheet.tpl.card .bgimg{width:100%;height:100%;object-fit:fill}
+.tf.pimg{object-fit:cover}.tf.sg{object-fit:contain;mix-blend-mode:multiply}
+.tf svg{display:block;width:100%;height:100%}
+.phrow{display:flex;gap:.7rem;align-items:center;flex-wrap:wrap}
+.phth{width:84px;height:84px;object-fit:contain;border:1.5px solid var(--line);border-radius:6px;background:#fff}
+.phbt{display:flex;gap:.4rem;flex-wrap:wrap}
+#sgCv{width:100%;height:auto;border:2px solid var(--navy);border-radius:6px;background:#fff;touch-action:none;display:block}
+.ed-sides{display:flex;gap:.4rem}
+.ed-sides .btn[aria-pressed="true"]{background:var(--goldl);border-color:var(--goldl)}
+
+/* ---------- Template maker ---------- */
+dialog.ed{max-width:none;width:100%;height:100%;max-height:none;margin:0;padding:0;border:0;border-radius:0;background:var(--cream)}
+dialog.ed[open]{display:flex;flex-direction:column}
+.ed-top{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;padding:max(.6rem,env(safe-area-inset-top)) .9rem .6rem;background:var(--navy);color:#fff}
+.ed-top h2{margin:0 auto 0 0;color:#fff;font-size:1.15rem}
+.ed-top .search{color:var(--ink);margin:0;flex:1 1 14rem;max-width:26rem}
+.ed-top .btn{border-color:#fff;background:transparent;color:#fff}
+.ed-top .btn.primary{background:var(--goldl);border-color:var(--goldl);color:var(--navy)}
+.ed-tools{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;padding:.6rem .9rem;background:var(--paper);border-bottom:1px solid var(--line)}
+.ed-tools .hint{margin:0;font-size:.9rem;color:var(--muted)}
+.ed-body{display:flex;flex:1;min-height:0;flex-direction:column}
+.ed-canvas{flex:1;min-height:0;overflow:auto;padding:12px;background:#d9d2c0;-webkit-overflow-scrolling:touch}
+.ed-insp{padding:.8rem .9rem;background:var(--paper);border-top:2px solid var(--line);max-height:48%;overflow:auto}
+@media (min-width:900px){.ed-body{flex-direction:row}.ed-insp{width:330px;max-height:none;border-top:0;border-left:2px solid var(--line)}}
+.ed-page{position:relative;max-width:900px;min-height:120px;margin:0 auto;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.25)}
+.ed-page.placing{cursor:crosshair;outline:3px dashed var(--gold)}
+.ed-page img{display:block;width:100%;height:auto;user-select:none;-webkit-user-drag:none}
+.ed-box{position:absolute;min-height:22px;padding:0 2px;font:calc(var(--s,11) * var(--k,1px))/1.15 var(--sans);color:#111;background:rgba(230,200,114,.5);outline:1.5px dashed var(--gold-d);cursor:grab;touch-action:none;overflow:hidden;white-space:pre-wrap;overflow-wrap:anywhere}
+.ed-box.sel{outline:2.5px solid var(--navy);background:rgba(230,200,114,.75)}
+.ed-insp h3{margin:0 0 .4rem;font:700 1rem var(--serif);color:var(--navy)}
+.ed-insp .f:first-of-type{margin-top:.2rem}
+.nudge{display:grid;grid-template-columns:repeat(4,1fr);gap:.4rem;margin-top:.75rem}
+.fl{display:flex;flex-wrap:wrap;gap:.35rem;margin:.4rem 0 0;padding:0;list-style:none}
+.fl button{min-height:44px;padding:0 .6rem;border:1.5px solid var(--line);border-radius:6px;background:#fff;cursor:pointer}
+.fl button[aria-current="true"]{border-color:var(--navy);box-shadow:inset 0 -3px 0 var(--gold)}
+.tm-row{padding:.6rem 0;border-bottom:1px solid var(--line)}
+.tm-row span{display:block;font-size:.85rem;color:var(--muted)}
+.tm-btns{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.4rem}
+
+@media print{
+  @page{size:letter;margin:0}
+  html,body{height:auto;background:#fff}
+  .bar,.tabs,.banner,#p-records,#p-form,.sr-print{display:none!important}
+  .app,.layout{display:block;height:auto}
+  #p-preview{display:block!important;padding:0;background:#fff;overflow:visible}
+  .sheet{zoom:1!important;box-shadow:none;margin:0 auto;padding:.4in 0 0;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .sheet .wm{top:1.9in}
+  .sheet.tpl{padding:0!important}
+  .sheet.tpl.cardmode .side{break-after:page;page-break-after:always}
+  .sheet.tpl.cardmode .side:last-child{break-after:auto;page-break-after:auto}
+  .sheet.tpl.card.cardletter{margin:.3in!important}
+  .sheet.lic{height:8.48in;width:10.98in;margin:0 auto;padding:0!important}
+  .sheet,.sheet *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+<style id="pgStyle">@page{size:letter portrait;margin:0}</style>
+</head>
+<body data-view="form">
+<div class="app">
+  <header class="bar">
+    <div class="brand"><img id="logo" alt="KHPA coat of arms"><div>KHPA Forms<small>Certificates &amp; registrations</small></div></div>
+    <label class="sr" for="docPick">Document type</label>
+    <select id="docPick" class="doc-pick"></select>
+    <button class="btn" id="bNew" type="button">New</button>
+    <button class="btn" id="bTpl" type="button">Templates</button>
+    <button class="btn" id="bSettings" type="button" aria-label="Settings">Settings</button>
+    <button class="btn primary" id="bPrint" type="button">Print</button>
+  </header>
+  <div id="banner" class="banner" hidden></div>
+
+  <div class="layout">
+    <aside class="panel" id="p-records" aria-label="Saved records">
+      <label class="sr" for="q">Search records</label>
+      <input id="q" class="search" type="search" placeholder="Search name, license, VIN…">
+      <div id="list"></div>
+      <div class="actions" style="margin-top:.8rem">
+        <button class="btn small" id="bBackup" type="button">Backup</button>
+        <button class="btn small" id="bRestore" type="button">Restore</button>
+        <input id="restoreFile" type="file" accept="application/json,.json" hidden>
+      </div>
+    </aside>
+
+    <section class="panel" id="p-form" aria-label="Certificate details">
+      <div class="actions">
+        <button class="btn small" id="bRenew" type="button">Renew (copy)</button>
+        <button class="btn small danger" id="bDelete" type="button">Delete</button>
+        <button class="btn small" id="bEditTpl" type="button" hidden>Edit template</button>
+        <button class="btn small" id="bScan" type="button">Scan state ID</button>
+      </div>
+      <p class="hint" id="emblemNote" hidden style="margin:0 0 .8rem;padding:.5rem .7rem;background:#fff4d6;border:1px solid var(--gold)">The faint crown-and-star emblem is not set on this device yet, so it will not print behind the text. Add it in Settings (Emblem picture).</p>
+      <label class="chk" id="cardRow" hidden><input type="checkbox" id="cardChk"> Test print: put the card at actual size on a Letter page</label>
+      <label class="chk" id="bgRow" hidden><input type="checkbox" id="bgChk"> Print the form image too (turn off to print on pre-printed paper)</label>
+      <form id="form" autocomplete="off" novalidate></form>
+    </section>
+
+    <section class="panel" id="p-preview" aria-label="Certificate preview">
+      <div class="sheet-wrap"><div class="sheet" id="sheet"></div></div>
+    </section>
+  </div>
+
+  <nav class="tabs" role="tablist" aria-label="Views">
+    <button role="tab" data-go="records">Records</button>
+    <button role="tab" data-go="form">Details</button>
+    <button role="tab" data-go="preview">Preview</button>
+  </nav>
+</div>
+
+<dialog id="dlg" aria-labelledby="dlgT">
+  <form method="dialog" id="setForm">
+    <h2 id="dlgT">Settings</h2>
+    <div class="f"><label for="s_plate">License plate series: first number for each island (one per line)</label>
+      <textarea id="s_plate" rows="4" placeholder="HAW=501&#10;OAH=301" spellcheck="false"></textarea><p class="hint">Leave blank to use the built-in starting numbers. The app then hands out the next free number on each island.</p></div>
+    <div class="f"><label for="s_rate">Weight tariff rate ($ per lb)</label>
+      <input id="s_rate" inputmode="decimal">
+      <p class="hint">Used to auto-fill Weight Tariff. Starts at 0.015 — worked out from your sample (4080 lb → $61.20). Please confirm.</p></div>
+    <div class="f"><label for="s_off">Office address printed in item 7 (one line per row)</label>
+      <textarea id="s_off" rows="4"></textarea></div>
+    <h3 style="margin:1rem 0 0;font:700 1rem var(--serif);color:var(--navy)">Merchandise and Services License</h3>
+    <div class="f"><label for="s_emb">Emblem picture (faint crown and star behind the text)</label>
+      <input id="s_emb" type="file" accept="image/*">
+      <p class="hint" id="s_embst"></p>
+      <button class="btn small" id="s_embclr" type="button">Remove emblem</button></div>
+    <div class="row2">
+      <div class="f"><label for="s_dx">Shift print right (inches)</label><input id="s_dx" inputmode="decimal" placeholder="0"></div>
+      <div class="f"><label for="s_dy">Shift print down (inches)</label><input id="s_dy" inputmode="decimal" placeholder="0"></div></div>
+    <p class="hint">Use these to line the text up with your border stock after a test print. Negative numbers move left or up.</p>
+    <div class="dlg-actions"><button class="btn" value="cancel">Cancel</button><button class="btn primary" id="sSave" value="ok">Save</button></div>
+  </form>
+</dialog>
+
+<!-- Scan a state ID (2D barcode scanner types the barcode text into the box) -->
+<dialog id="scDlg" aria-labelledby="scT">
+  <h2 id="scT">Scan a state ID</h2>
+  <p class="hint" style="margin:0 0 .6rem">Click the box, then scan the barcode on the <b>back</b> of the person's state driver license or ID with a 2D barcode scanner. The barcode text is <b>not saved</b>; only the details listed below are copied into this form. Please get the person's OK first, and check the spelling (state IDs are all capitals, with no ʻokina).</p>
+  <div class="f"><label for="scBox">Scanner input</label><textarea id="scBox" rows="3" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Click here, then scan…"></textarea></div>
+  <div id="scOut" aria-live="polite" class="hint" style="margin-top:.6rem"></div>
+  <div class="dlg-actions"><button class="btn" id="scClose" type="button">Cancel</button><button class="btn primary" id="scUse" type="button" disabled>Fill the form</button></div>
+</dialog>
+
+<input type="file" id="phFile" accept="image/*" hidden>
+<!-- Signature pad -->
+<dialog id="sgDlg" aria-labelledby="sgT">
+  <h2 id="sgT">Signature</h2>
+  <p class="hint" style="margin:0 0 .5rem">Sign with a finger, stylus or mouse.</p>
+  <canvas id="sgCv" width="720" height="260" aria-label="Signature drawing area"></canvas>
+  <div class="dlg-actions"><button class="btn" id="sgClr" type="button">Clear</button><button class="btn" id="sgCancel" type="button">Cancel</button><button class="btn primary" id="sgOk" type="button">Use signature</button></div>
+</dialog>
+
+<!-- Templates list -->
+<dialog id="tmDlg" aria-labelledby="tmT">
+  <h2 id="tmT">Templates</h2>
+  <p class="hint" style="margin:0 0 .5rem">Add any form: upload a picture of the blank form, tap where each detail goes, and it appears in the document list. "Share file" makes a small file you can email to another device.</p>
+  <div id="tmList"></div>
+  <div class="dlg-actions" style="justify-content:flex-start;flex-wrap:wrap">
+    <button class="btn primary" id="tmAdd" type="button">Add new template</button>
+    <button class="btn" id="tmImp" type="button">Import template file</button>
+    <input type="file" id="tmFile" accept="application/json,.json" hidden>
+    <button class="btn" id="tmClose" type="button">Close</button>
+  </div>
+</dialog>
+
+<!-- Template maker -->
+<dialog id="edDlg" class="ed" aria-labelledby="edT">
+  <div class="ed-top">
+    <h2 id="edT">Template maker</h2>
+    <label class="sr" for="edName">Template name</label>
+    <input id="edName" class="search" placeholder="Template name, e.g. Operator's Identification" maxlength="80">
+    <button class="btn" id="edCancel" type="button">Cancel</button>
+    <button class="btn primary" id="edSave" type="button">Save template</button>
+  </div>
+  <div class="ed-tools">
+    <button class="btn small" id="edPick" type="button">Choose blank form picture</button>
+    <input type="file" id="edFile" accept="image/*" hidden>
+    <button class="btn small" id="edAdd" type="button" disabled>Add field</button>
+    <div class="ed-sides" id="edSides" hidden><button class="btn small" id="edS0" type="button" aria-pressed="true">Front</button><button class="btn small" id="edS1" type="button" aria-pressed="false">Back</button></div>
+    <button class="btn small" id="edAddBack" type="button" disabled>Add back side</button>
+    <label class="sr" for="edPw">Page size</label>
+    <select id="edPw" class="btn small" style="padding:0 .6rem"><option value="">Page size: full page</option><option value="3.375">Page size: ID card (CR80)</option></select>
+    <p class="hint" id="edMsg" role="status" aria-live="polite">Step 1: choose a photo or scan of the blank form (JPG or PNG).</p>
+  </div>
+  <div class="ed-body">
+    <div class="ed-canvas"><div class="ed-page" id="edPage"><img id="edImg" alt="Blank form being set up"></div></div>
+    <aside class="ed-insp" aria-label="Field settings">
+      <h3>Fields</h3>
+      <ul class="fl" id="edList"></ul>
+      <div id="edFields" hidden>
+        <div class="f"><label for="edL">Field label (shown on the Details screen)</label><input id="edL" maxlength="80"></div>
+        <div class="row2">
+          <div class="f"><label for="edTy">Type</label><select id="edTy"><option value="text">Text</option><option value="area">Several lines</option><option value="date">Date</option><option value="check">Check mark (X)</option><option value="photo">Photo</option><option value="sign">Signature</option><option value="bar">Barcode (Code 128)</option></select></div>
+          <div class="f"><label for="edA">Align</label><select id="edA"><option value="left">Left</option><option value="center">Center</option><option value="right">Right</option></select></div>
+        </div>
+        <div class="row2" id="edHrow" hidden><div class="f"><label for="edH">Box height (%)</label><input id="edH" type="number" min="3" max="100" step="1" inputmode="numeric"></div><div></div></div>
+        <div class="row2">
+          <div class="f"><label for="edCol">Text color</label><select id="edCol"><option value="">Black</option><option value="red">Red</option><option value="blue">Blue</option><option value="gray">Gray</option></select></div>
+          <div class="f"><label for="edDef">Starts as (optional)</label><input id="edDef" maxlength="80"></div></div>
+        <label class="chk"><input type="checkbox" id="edB"> Bold</label>
+        <label class="chk"><input type="checkbox" id="edU"> ALL CAPITALS</label>
+        <div class="f"><label for="edSrc">Fill from state ID scan</label><select id="edSrc"></select>
+          <p class="hint">Optional. Only choose "State ID number" if this form must show it.</p></div>
+        <div class="row2">
+          <div class="f"><label for="edS">Text size (pt)</label><input id="edS" type="number" min="5" max="48" step="0.5" inputmode="decimal"></div>
+          <div class="f"><label for="edW">Box width (%)</label><input id="edW" type="number" min="3" max="100" step="1" inputmode="numeric"></div>
+        </div>
+        <p class="hint" style="margin:.5rem 0 0">Drag the box on the form to move it. Use the arrows to fine-tune.</p>
+        <div class="nudge">
+          <button class="btn small" type="button" data-n="-1,0" aria-label="Move left">&larr;</button>
+          <button class="btn small" type="button" data-n="1,0" aria-label="Move right">&rarr;</button>
+          <button class="btn small" type="button" data-n="0,-1" aria-label="Move up">&uarr;</button>
+          <button class="btn small" type="button" data-n="0,1" aria-label="Move down">&darr;</button>
+        </div>
+        <div class="actions" style="margin:.75rem 0 0"><button class="btn small danger" id="edDel" type="button">Delete this field</button></div>
+      </div>
+    </aside>
+  </div>
+</dialog>
+
+<script>
+(function(){
+'use strict';
+var ARMS="data:image/png;base64,{{ARMS}}";
+var KEY='khpa.forms.v1';
+var $=function(s,r){return (r||document).querySelector(s)};
+var esc=function(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})};
+
+/* ---------- storage (safe: Safari private mode / file:// can block it) ---------- */
+var mem=null, storageOK=true;
+function sget(){try{return localStorage.getItem(KEY)}catch(e){storageOK=false;return mem}}
+function sset(v){try{localStorage.setItem(KEY,v);return true}catch(e){storageOK=false;mem=v;return false}}
+
+/* ---------- dates & money ---------- */
+function pad(n){return (n<10?'0':'')+n}
+function todayISO(){var d=new Date();return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())}
+function dim(y,m){return new Date(y,m,0).getDate()}
+function addMonths(iso,n){if(!iso)return '';var p=iso.split('-').map(Number),m=p[1]-1+n,y=p[0]+Math.floor(m/12);m=((m%12)+12)%12+1;
+  return y+'-'+pad(m)+'-'+pad(Math.min(p[2],dim(y,m)))}
+function addYears(iso,n){return addMonths(iso,n*12)}
+function fmtDate(iso){if(!iso)return '';var p=iso.split('-');return p.length===3?p[1]+'.'+p[2]+'.'+p[0]:iso}
+function num(v){var n=parseFloat(String(v==null?'':v).replace(/[^0-9.\-]/g,''));return isFinite(n)?n:0}
+function money(v){return num(v).toFixed(2)}
+
+/* ---------- state ---------- */
+var db={records:[],templates:[],settings:{rate:'0.015',office:['Vehicle License and Registration Branch','159 Keawe St. Suite B1','Hilo, Kingdom of the Hawaiian Islands  H. I.']}};
+var cur=null, persisted=false, view='form', docId='mvc', imgs={}, imgOK=true;
+var BUILTIN={mvc:1,merch:1,plate:1};
+var SRC=[['','Type it in'],['name','Full name'],['first','First name'],['middle','Middle name'],['last','Last name'],['lastfirst','Last, First Middle'],
+  ['dob','Date of birth'],['street','Street address'],['city','City'],['state','State'],['zip','ZIP code'],['addr','Full address (one line)'],['cityst','City, State ZIP'],
+  ['sex','Sex (M/F)'],['eye','Eye color'],['height','Height'],['dln','State ID number'],['exp','State ID expires']];
+SRC.push(['weight','Weight (lb)'],['hair','Hair color (3 letters)'],['eyec','Eye color (3 letters)'],['hgt2','Height (5-09 style)']);
+var TTYPES=['text','area','date','check','photo','sign','bar'],COLORS={'':'#111',red:'#b3201f',blue:'#2b3a9e',gray:'#555'};
+var SRCKEYS=SRC.map(function(x){return x[0]});
+var OFFICE_NEW=['Vehicle License and Registration Branch','159 Keawe St. Suite B1','Hilo, Kingdom of the Hawaiian Islands  H. I.'];
+try{var raw=sget();if(raw){var j=JSON.parse(raw);if(j&&j.records){db.records=j.records;if(j.settings)db.settings=Object.assign(db.settings,j.settings);if(Array.isArray(j.templates))db.templates=j.templates.map(cleanTpl).filter(Boolean)}
+  // the office moved from Mamo Street to Keawe Street: replace the old saved address once
+  if(/Mamo/i.test((db.settings.office||[]).join(' ')))db.settings.office=OFFICE_NEW.slice()}}catch(e){}
+
+function defaults(){var t=todayISO(),exp=addYears(t,1);
+  return {ownerName:'',ownerStreet:'',ownerArea:'',licenseNo:'',cls:'',typeModel:'',yearMake:'',vin:'',trans:'M',weight:'',
+    dateIssued:t,expiration:exp,renewBy:addMonths(exp,1),dateFirstSold:'',reconCert:'n/a',lienholder:'(None)',
+    feeReg:'45.00',feeTariff:'',tariffAuto:true,feeBeau:'2.00',feeExempt:'0.00',feeSp:'0.00',feePenalty:'0.00'}}
+function tplById(id){return db.templates.filter(function(t){return t.id===id})[0]}
+function curTpl(){return BUILTIN[docId]?null:tplById(docId)}
+function allFields(t){var seen={},out=[];(t.fields||[]).concat(t.bfields||[]).forEach(function(f){if(!seen[f.k]){seen[f.k]=1;out.push(f)}});return out}
+function tplDefaults(t){var d={};allFields(t).forEach(function(f){d[f.k]=f.t==='date'?todayISO():(f.t==='check'?false:(f.t==='photo'||f.t==='sign'?'':(f.def||'')))});return d}
+function newRec(){var t=curTpl();return {id:'r'+Date.now().toString(36)+Math.random().toString(36).slice(2,5),doc:docId,updated:Date.now(),touched:{},d:t?tplDefaults(t):(docId==='merch'?mdefaults():docId==='plate'?pdefaults():defaults())}}
+
+/* ---------- document picker: built-in certificate + your uploaded templates ---------- */
+function buildPicker(){if(!tplById(docId)&&!BUILTIN[docId])docId='mvc';
+  $('#docPick').innerHTML='<option value="mvc">Registered Motor Vehicle Certificate</option><option value="merch">Merchandise and Services License</option><option value="plate">License Plate (island series)</option>'
+   +db.templates.map(function(t){return '<option value="'+esc(t.id)+'">'+esc(t.name)+'</option>'}).join('')
+   +'<option value="__add">+ Add new template…</option>';
+  $('#docPick').value=docId}
+
+/* ---------- form definition ---------- */
+var SECTIONS=[
+ {t:'Registered owner',f:[
+  {k:'ownerName',l:'Owner full name',ac:'name'},
+  {k:'ownerStreet',l:'Street address'},
+  {k:'ownerArea',l:'District and island',ph:'Puna, Hawaii Island'}]},
+ {t:'Vehicle',f:[
+  {k:'licenseNo',l:'License No',ph:'HA 1845',row:'a'},{k:'cls',l:'Class',ph:'C20',row:'a'},
+  {k:'typeModel',l:'Type / Model',ph:'4X4 P/U'},
+  {k:'yearMake',l:'Year / Make',ph:'1989/Chevy'},
+  {k:'vin',l:'Vehicle Id No (VIN)',upper:true,hint:'17 characters'},
+  {k:'trans',l:'Auto / Man.',sel:[['M','M — Manual'],['A','A — Automatic']],row:'b'},
+  {k:'weight',l:'Weight (lbs)',inputmode:'numeric',row:'b'}]},
+ {t:'Dates',f:[
+  {k:'dateIssued',l:'Date Issued',type:'date'},
+  {k:'expiration',l:'Expiration',type:'date',hint:'Auto: one year after Date Issued. Edit to override.'},
+  {k:'renewBy',l:'Avoid penalty — renew by',type:'date',hint:'Auto: one month after Expiration.'},
+  {k:'dateFirstSold',l:'Date First Sold',ph:'00-00-2012',hint:'Use 00 for unknown parts.'},
+  {k:'reconCert',l:'Recon / Cert #'},
+  {k:'lienholder',l:'Lienholder & address',area:true}]},
+ {t:'Fees',f:[
+  {k:'feeReg',l:'Vehicle Reg Fee',money:true},
+  {k:'feeTariff',l:'Weight Tariff',money:true},
+  {k:'tariffAuto',l:'Auto-calculate tariff from weight',chk:true},
+  {k:'feeBeau',l:'Beau Fee',money:true},
+  {k:'feeExempt',l:'Exempt (deducted)',money:true},
+  {k:'feeSp',l:'Sp Plate',money:true},
+  {k:'feePenalty',l:'Penalty',money:true}]}
+];
+function buildForm(){var t=curTpl();if(t)return buildTplForm(t);buildSectionForm(docId==='merch'?MSECTIONS:docId==='plate'?PSECTIONS:SECTIONS)}
+function buildTplForm(t){var h='<fieldset><legend>'+esc(t.name)+'</legend>';
+  allFields(t).forEach(function(f){var id='f_'+f.k;
+    if(f.t==='check')h+='<label class="chk"><input type="checkbox" id="'+id+'" data-k="'+f.k+'"> '+esc(f.l)+'</label>';
+    else if(f.t==='photo'||f.t==='sign')h+='<div class="f"><label>'+esc(f.l)+'</label><div class="phrow"><img class="phth" id="th_'+f.k+'" alt="" hidden><div class="phbt">'
+      +(f.t==='sign'?'<button type="button" class="btn small" data-sg="'+f.k+'">Draw signature</button><button type="button" class="btn small" data-ph="'+f.k+'">Choose picture</button>'
+        :'<button type="button" class="btn small" data-ph="'+f.k+'">Choose or take photo</button>')
+      +'<button type="button" class="btn small danger" data-phx="'+f.k+'">Remove</button></div></div></div>';
+    else h+='<div class="f"><label for="'+id+'">'+esc(f.l)+'</label>'+(f.t==='area'?'<textarea id="'+id+'" data-k="'+f.k+'" rows="3"></textarea>'
+      :'<input id="'+id+'" data-k="'+f.k+'" type="'+(f.t==='date'?'date':'text')+'"'+(f.t==='text'&&f.u?' autocapitalize="characters"':'')+'>')+'</div>'});
+  $('#form').innerHTML=h+'</fieldset>'}
+function buildSectionForm(SECTIONS){var h='',i,j,s,f,rowOpen=null;
+  for(i=0;i<SECTIONS.length;i++){s=SECTIONS[i];h+='<fieldset><legend>'+esc(s.t)+'</legend>';rowOpen=null;
+    for(j=0;j<s.f.length;j++){f=s.f[j];
+      if(f.row&&rowOpen!==f.row){if(rowOpen)h+='</div>';h+='<div class="row2">';rowOpen=f.row}
+      else if(!f.row&&rowOpen){h+='</div>';rowOpen=null}
+      var id='f_'+f.k,inp;
+      if(f.chk)inp='<label class="chk"><input type="checkbox" id="'+id+'" data-k="'+f.k+'"> '+esc(f.l)+'</label>';
+      else{
+        if(f.sel){inp='<select id="'+id+'" data-k="'+f.k+'">'+f.sel.map(function(o){return '<option value="'+o[0]+'">'+esc(o[1])+'</option>'}).join('')+'</select>'}
+        else if(f.area){inp='<textarea id="'+id+'" data-k="'+f.k+'" rows="3"></textarea>'}
+        else{inp='<input id="'+id+'" data-k="'+f.k+'" type="'+(f.type||'text')+'"'+(f.ph?' placeholder="'+esc(f.ph)+'"':'')
+          +(f.money?' inputmode="decimal"':'')+(f.inputmode?' inputmode="'+f.inputmode+'"':'')
+          +(f.upper?' maxlength="17" autocapitalize="characters" spellcheck="false"':'')+(f.ac?' autocomplete="'+f.ac+'"':'')+'>'}
+        inp='<div class="f"><label for="'+id+'">'+esc(f.l)+'</label>'+inp+(f.hint?'<p class="hint">'+esc(f.hint)+'</p>':'')+'</div>';
+        if(f.row)inp=inp.replace('<div class="f">','<div class="f" style="margin-top:.75rem">')}
+      h+=inp}
+    if(rowOpen)h+='</div>';
+    if(i===SECTIONS.length-1&&docId==='mvc')h+='<div class="total" aria-live="polite"><span>Total</span><span id="totalOut">$0.00</span></div>';
+    h+='</fieldset>'}
+  $('#form').innerHTML=h}
+
+/* ---------- Merchandise and Services License: form ---------- */
+var TITLES=[['MERCHANDISE AND SERVICES LICENSE','Merchandise and Services License'],['MERCHANDISE LICENSE','Merchandise License']];
+var MSECTIONS=[{t:'Merchandise and Services License',f:[
+  {k:'title',l:'License title',sel:TITLES},
+  {k:'licenseNo',l:'License No.'},
+  {k:'company',l:'Company'},
+  {k:'issueDate',l:'Issue Date',type:'date'},
+  {k:'validTo',l:'Valid To',type:'date',hint:'Enter the expiration date for this license.'},
+  {k:'activity',l:'For Business Activity of',area:true,hint:'Prints beside the label; up to 3 short lines.'}]}];
+function mdefaults(){return {title:TITLES[0][0],licenseNo:'',company:'',issueDate:todayISO(),validTo:'',activity:''}}
+
+/* ---------- License plates: island abbreviation, island color, numbered series ---------- */
+/* abbr, island name, background color, centre latitude, centre longitude, default first number */
+var ISLES=[['HAW','Hawaiʻi','#c8102e',19.57,-155.43,501],['MAU','Maui','#e0368e',20.80,-156.33,701],['OAH','Oʻahu','#f0b323',21.47,-157.98,301],
+  ['MOL','Molokaʻi','#3c8d2f',21.14,-157.02,201],['LAN','Lānaʻi','#f28a1e',20.83,-156.92,401],['KAU','Kauaʻi','#7b3fa0',22.05,-159.53,101],['NII','Niʻihau','#8fa8e6',21.90,-160.16,601]];
+function isle(a){for(var i=0;i<ISLES.length;i++)if(ISLES[i][0]===a)return ISLES[i];return ISLES[0]}
+function plateStart(a){var m=String(db.settings.plateStart||'').split('\n'),i,r;for(i=0;i<m.length;i++){r=/^\s*([A-Za-z]{3})\s*[=:]\s*(\d{1,6})\s*$/.exec(m[i]);if(r&&r[1].toUpperCase()===a)return +r[2]}return isle(a)[5]}
+function ptype(d){return d.type==='TRL'||d.type==='MC'?d.type:'STD'}
+var PTYPES={STD:'',TRL:'TRAILER',MC:'MOTORCYCLE'};
+function nextPlate(a,skip,ty){ty=ty||'STD';var n=plateStart(a)-1;db.records.forEach(function(r){if(r.doc==='plate'&&r.d&&r.d.island===a&&ptype(r.d)===ty&&r.id!==skip&&/^\d+$/.test(r.d.number||'')&&+r.d.number>n)n=+r.d.number});return String(n+1)}
+function coordTxt(a){var i=isle(a),la=i[3],lo=i[4];return i[1].toUpperCase()+'  '+Math.abs(la).toFixed(2)+'°'+(la<0?'S':'N')+'  '+Math.abs(lo).toFixed(2)+'°'+(lo<0?'W':'E')}
+var PSECTIONS=[{t:'License plate',f:[
+  {k:'island',l:'Island (sets the abbreviation, color and number series)',sel:ISLES.map(function(i){return [i[0],i[0]+' — '+i[1]]})},
+  {k:'type',l:'Plate type',sel:[['STD','Standard (passenger / truck)'],['TRL','Trailer'],['MC','Motorcycle (small plate)']]},
+  {k:'number',l:'Plate number',hint:'The next free number in this island\'s series for this plate type fills in automatically. Type over it to use a different number.'},
+  {k:'label',l:'Extra plate wording (optional)',hint:'Trailer and Motorcycle plates print their type automatically. Type here to replace it.'},
+  {k:'holder',l:'Registered to (filed with the record)'},
+  {k:'vehicle',l:'Vehicle / VIN (filed with the record)'}]}];
+function pdefaults(){var a='HAW';return {island:a,type:'STD',number:nextPlate(a,'','STD'),label:'',holder:'',vehicle:''}}
+function renderPlate(d){var I=isle(d.island),n=String(d.number||''),sz=n.length<=3?200:n.length===4?165:n.length===5?135:110,ty=ptype(d),lab=String(d.label||PTYPES[ty]||'').toUpperCase(),
+  st='fill="#fff" stroke="#111" stroke-width="9" stroke-linejoin="round" paint-order="stroke" font-family="Impact,\'Arial Black\',\'Helvetica Neue\',Arial,sans-serif" font-weight="900"',
+  crown=imgs.emblem?'<image href="'+esc(imgs.emblem)+'" x="430" y="205" width="240" height="190" preserveAspectRatio="xMidYMid meet"/>'
+   :'<path d="M455 380 L440 250 L500 300 L550 230 L600 300 L660 250 L645 380 Z" fill="#e8b923" stroke="#111" stroke-width="7" stroke-linejoin="round"/><rect x="450" y="380" width="200" height="26" fill="#e8b923" stroke="#111" stroke-width="7"/>';
+  if(ty==='MC'){var ms=n.length<=3?125:n.length===4?105:n.length===5?88:74,full=I[0]+' '+n;
+    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 850" role="img" aria-label="Motorcycle license plate '+esc(full)+'"><rect width="1100" height="850" fill="#fff"/>'
+     +'<rect x="200" y="225" width="700" height="400" rx="26" fill="'+I[2]+'" stroke="#111" stroke-width="7"/>'
+     +'<rect x="214" y="239" width="672" height="372" rx="18" fill="none" stroke="#111" stroke-width="2.5" opacity=".55"/>'
+     +'<text x="550" y="312" text-anchor="middle" font-size="46" '+st.replace('stroke-width="9"','stroke-width="6"')+'>KO HAWAIʻI PAE ʻAINA</text>'
+     +'<text x="550" y="450" text-anchor="middle" font-size="'+ms+'" '+st+'>'+esc(full)+'</text>'
+     +(lab?'<text x="550" y="520" text-anchor="middle" font-size="54" '+st.replace('stroke-width="9"','stroke-width="6"')+'>'+esc(lab)+'</text>':'')
+     +'<text x="550" y="575" text-anchor="middle" font-size="20" font-family="Arial,Helvetica,sans-serif" font-weight="700" fill="#111">'+esc(coordTxt(I[0]))+'</text>'
+     +'<text x="550" y="770" text-anchor="middle" font-size="22" font-family="Arial,Helvetica,sans-serif" fill="#555">Print proof, plate drawn at 7 in × 4 in</text></svg>'}
+  return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 850" role="img" aria-label="License plate '+esc(I[0]+' '+n)+'"><rect width="1100" height="850" fill="#fff"/>'
+   +'<rect x="50" y="175" width="1000" height="500" rx="34" fill="'+I[2]+'" stroke="#111" stroke-width="8"/>'
+   +'<rect x="68" y="193" width="964" height="464" rx="22" fill="none" stroke="#111" stroke-width="3" opacity=".55"/>'
+   +'<text x="550" y="272" text-anchor="middle" font-size="70" '+st+'>KO HAWAIʻI PAE ʻAINA</text>'
+   +'<text x="95" y="500" font-size="200" '+st+'>'+esc(I[0])+'</text>'
+   +'<text x="1005" y="500" text-anchor="end" font-size="'+sz+'" '+st+'>'+esc(n)+'</text>'
+   +(imgs.emblem?crown:'')+(lab?'<text x="550" y="582" text-anchor="middle" font-size="80" '+st+'>'+esc(lab)+'</text>':'')
+   +'<text x="550" y="640" text-anchor="middle" font-size="26" font-family="Arial,Helvetica,sans-serif" font-weight="700" fill="#111">'+esc(coordTxt(I[0]))+'</text>'
+   +'<text x="550" y="770" text-anchor="middle" font-size="22" font-family="Arial,Helvetica,sans-serif" fill="#555">Print proof, plate drawn at 10 in × 5 in</text></svg>'}
+
+/* ---------- calculations ---------- */
+function total(d){return num(d.feeReg)+num(d.feeTariff)+num(d.feeBeau)+num(d.feeSp)+num(d.feePenalty)-num(d.feeExempt)}
+function recompute(r){var d=r.d,t=r.touched;
+  if(d.tariffAuto){var w=num(d.weight),rate=num(db.settings.rate);d.feeTariff=(w&&rate)?(Math.round(w*rate*100)/100).toFixed(2):''}
+  if(!t.expiration&&d.dateIssued)d.expiration=addYears(d.dateIssued,1);
+  if(!t.renewBy&&d.expiration)d.renewBy=addMonths(d.expiration,1)}
+
+/* ---------- certificate renderer: Registered Motor Vehicle Certificate ---------- */
+function cell(l,v,cls){return '<div class="c '+(cls||'')+'"><span class="l">'+l+'</span><span class="v">'+esc(v)+'&nbsp;</span></div>'}
+function fee(l,v){return '<div class="fr"><span class="l">'+l+'</span><span class="v">'+esc(v)+'</span></div>'}
+function renderMVC(d){
+  var off=(db.settings.office||[]).filter(Boolean).map(esc).join('<br>');
+  return '<img class="wm" src="'+ARMS+'" alt="">'
+  +'<div class="box cert"><h1>KINGDOM OF THE HAWAIIAN ISLANDS</h1><h2>REGISTERED MOTOR VEHICLE CERTIFICATE</h2>'
+  +'<p class="sub">*safety certificate instructions see back page*</p>'
+  +'<div class="cert-body"><div>'
+  +'<div class="dg">'+cell('License No',d.licenseNo)+cell('Type/Model',d.typeModel)+cell('Year/Make',d.yearMake)+cell('Weight',d.weight)
+  +cell('Class',d.cls)+cell('Vehicle Id No',d.vin,'vin')+cell('Auto/Man.',d.trans)+cell('Date Issued',fmtDate(d.dateIssued))
+  +cell('Date First Sold',d.dateFirstSold,'span2')+cell('Recon/Cert #',d.reconCert)+'<div class="c"></div></div>'
+  +'<div class="lower"><div class="l">Lienholder &amp; Address:</div><div class="lien">'+esc(d.lienholder)+'</div>'
+  +'<div class="l">Registered Owner &amp; Address:</div><div class="owner">'+esc(d.ownerName)+'<br>'+esc(d.ownerStreet)+'<br>'+esc(d.ownerArea)
+  +'<small>Kingdom of the Hawaiian Islands, H. I.</small></div></div></div>'
+  +'<div class="fees">'+fee('Vehicle Reg Fee',money(d.feeReg))+fee('Weight Tarrif',money(d.feeTariff))+fee('Beau Fee',money(d.feeBeau))
+  +fee('Exempt',money(d.feeExempt))+fee('Sp Plate',money(d.feeSp))+fee('Penalty',money(d.feePenalty))
+  +'<div class="fr tot"><span class="l">Total</span><span class="v">$'+money(total(d))+'</span></div>'
+  +'<div class="fr exp" style="margin-top:.1in"><span class="l">expiration:</span><span class="v">'+esc(fmtDate(d.expiration))+'</span></div>'
+  +'<div class="fr exp"><span class="l">*avoid penalty renew by:</span><span class="v">'+esc(fmtDate(d.renewBy))+'</span></div></div></div>'
+  +'<p class="gp">Government property ko hawaii pae \'aina</p></div>'
+  +'<div class="box attn"><h3>ATTENTION!</h3><h4>REGISTERED MOTOR VEHICLE CERTIFICATE</h4><ol>'
+  +'<li><i>1</i><span>Vehicle being registered shall be physically present in the Kingdom of the Hawaiian Islands.</span></li>'
+  +'<li><i>2</i><span>A current registration certificate for carriages (such as vehicles) shall be validated with a numbered emblem stamp.</span></li>'
+  +'<li><i>3</i><span>A penalty will be assessed if fees are not paid on or before the expiration date. Add $10 for non commercial passenger vehicles or $40 for commercial vehicles to the Total Fee Due. <b>Bureau of Public Instructions</b> HAS NO GRACE PERIOD.</span></li>'
+  +'<li><i>4</i><span>Instructions for renewal: A renewal may be mailed to you approximately 45 days before the expiration date. To avoid penalty contact your nearest <b>Bureau of Public Instructions</b> Vehicle License Branch office on your island (moku).</span></li></ol>'
+  +'<p class="gp" style="margin:.08in 0">Government property ko hawaii pae \'aina</p><ol>'
+  +'<li><i>5</i><span>Trucks or multipurpose vehicles having a net weight of 6,000 lbs. or less not being operated for compensation or commercial purposes may be taxed at the passenger rate. To obtain proper form and procedures contact <b>Bureau of Public Instructions</b> Vehicle License Branch.</span></li>'
+  +'<li><i>6</i><span>Upon sale of carriage (vehicle), registration and license plates must be returned within 30 days of sale to <b>Bureau of Public Instructions.</b> A new properly endorsed certificate of title and a new <b>registration certificate</b> shall be obtained upon transfer from the <b>Bureau of Public Instructions.</b> A penalty of $75 for non-compliance and $50 for late transfer of ownership will be assessed to the buyer.</span></li>'
+  +'<li><i>7</i><span><b style="font-weight:400">Bureau of Public Instructions Vehicle License Branch:</b><span class="off">'+off+'</span></span></li></ol>'
+  +'<p class="safe">*safety certificate instructions see back page*</p></div>'}
+
+/* ---------- renderer: Merchandise and Services License (SVG, 1 unit = 1/100 inch, page 11 x 8.5 in) ---------- */
+/* Fixed wording and positions were measured from the printed original. If the original fonts are installed on the
+   computer (Old English Text MT, Edwardian Script ITC, Monotype Corsiva, Apple Chancery ...) they are used; every
+   line is sized to the original's printed width either way. */
+var F_BLACK='"Old English Text MT","Engravers Old English","Blackadder ITC","KHPA Fraktur","Times New Roman",serif';
+var F_SCRIPT='"Edwardian Script ITC","Monotype Corsiva","Apple Chancery","Snell Roundhand","URW Chancery L","Z003","Lucida Calligraphy",cursive';
+var F_SERIF='"Times New Roman","Liberation Serif",Times,serif';
+var mctx=document.createElement('canvas').getContext('2d');
+function mw(t,font){mctx.font=font;return mctx.measureText(t).width}
+function fitSz(t,fam,wt,inches){var m=mw(t,wt+' 100px '+fam);return m?Math.max(8,Math.min(120,10000*inches/m)):30}
+function wrapTxt(t,font,maxU){var out=[];String(t||'').split('\n').forEach(function(line){var w=line.split(/\s+/).filter(Boolean),cur='';
+  w.forEach(function(x){var n=cur?cur+' '+x:x;if(cur&&mw(n,font)>maxU){out.push(cur);cur=x}else cur=n});out.push(cur)});return out.filter(function(l,i,a){return l||a.length===1})}
+function fa(f){return f.replace(/"/g,"'")}
+function tx(t,x,y,sz,fam,wt,anchor){return '<text x="'+x+'" y="'+y+'" font-size="'+sz.toFixed(1)+'" font-family="'+fa(fam)+'" font-weight="'+(wt||400)+'" text-anchor="'+(anchor||'start')+'">'+esc(t)+'</text>'}
+function valFit(t,fam,maxIn,maxSz,minSz){var m=mw(t,'400 100px '+fam),sz=maxSz;if(m){sz=Math.min(maxSz,10000*maxIn/m)}return Math.max(minSz,sz)}
+function renderMerch(d){var S=db.settings,dx=num(S.licDx)*100,dy=num(S.licDy)*100,h='';
+  h+='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 850" role="img" aria-label="Merchandise and Services License preview"><defs><path id="arc" d="M250,183 Q525,101 800,183"/></defs>';
+  h+='<g transform="translate('+dx+','+dy+')" fill="#111">';
+  if(imgs.emblem)h+='<image href="'+esc(imgs.emblem)+'" x="365" y="95" width="390" height="590" preserveAspectRatio="xMidYMid meet" opacity=".35" style="mix-blend-mode:multiply"/>';
+  // heading on an arch
+  var hs=fitSz('Kingdom of the Hawaiian Islands',F_BLACK,'700',5.4);
+  h+='<text font-size="'+hs.toFixed(1)+'" font-family="'+fa(F_BLACK)+'" font-weight="700"><textPath href="#arc" startOffset="50%" text-anchor="middle">Kingdom of the Hawaiian Islands</textPath></text>';
+  var sc=function(t,x,y,w,a){return tx(t,x,y,fitSz(t,F_SCRIPT,'400',w),F_SCRIPT,400,a)};
+  h+=sc('Department of Interior',550,200,2.38,'middle');
+  h+=sc('License No.',100,258,1.9,'start')+sc('Non-Transferable',949,258,2.63,'end');
+  var ts=fitSz(TITLES[0][0],F_SERIF,'700',5.85);
+  h+=tx(d.title||TITLES[0][0],550,329,ts,F_SERIF,700,'middle');
+  h+=sc('Company:',107,397,1.48,'start')+sc('Issue Date:',693,387,1.5,'start')+sc('Valid To:',698,462,1.14,'start');
+  h+=sc('For Business Activity of:',378,514,3.41,'start');
+  var l1='This license is subject to the provisions of Laws and Treaties of the',l2='Hawaiian Kingdom, as amended, License is hereby',ss=fitSz(l1,F_SERIF,'400',4.45);
+  h+=tx(l1,550,597,ss,F_SERIF,400,'middle')+tx(l2,550,613,ss,F_SERIF,400,'middle');
+  h+=tx('GRANTED',550,637,fitSz('GRANTED',F_SERIF,'400',1.1),F_SERIF,400,'middle');
+  h+=tx('@HKDOIML1',113,692,fitSz('@HKDOIML1',F_SERIF,'400',1.02),F_SERIF,400,'start');
+  h+='<line x1="700" y1="685" x2="970" y2="685" stroke="#111" stroke-width="1.2"/>';
+  h+=sc('Minister of Interior',866,717,2.13,'middle');
+  // filled-in values
+  var v=function(t,x,y,maxIn,mx){if(!t)return '';var z=valFit(t,F_SERIF,maxIn,mx||22,13);return tx(t,x,y,z,F_SERIF,400,'start')};
+  h+=v(d.licenseNo,305,258,3.2)+v(d.company,270,397,4.0)+v(fmtDate(d.issueDate),855,387,1.5,20)+v(fmtDate(d.validTo),822,462,1.8,20);
+  if(d.activity){var af='400 18px '+F_SERIF,lines=wrapTxt(d.activity,af,275).slice(0,3);
+    lines.forEach(function(l,i){h+=tx(l,735,514+i*24,18,F_SERIF,400,'start')})}
+  h+='</g></svg>';return h}
+
+/* ---------- renderer for uploaded templates (printed over the blank form image) ---------- */
+/* Code 128 (set B) barcode as SVG */
+var C128P='212222,222122,222221,121223,121322,131222,122213,122312,132212,221213,221312,231212,112232,122132,122231,113222,123122,123221,223211,221132,221231,213212,223112,312131,311222,321122,321221,312212,322112,322211,212123,212321,232121,111323,131123,131321,112313,132113,132311,211313,231113,231311,112133,112331,132131,113123,113321,133121,313121,211331,231131,213113,213311,213131,311123,311321,331121,312113,312311,332111,314111,221411,431111,111224,111422,121124,121421,141122,141221,112214,112412,122114,122411,142112,142211,241211,221114,413111,241112,134111,111242,121142,121241,114212,124112,124211,411212,421112,421211,212141,214121,412121,111143,111341,131141,114113,114311,411113,411311,113141,114131,311141,411131,211412,211214,211232,2331112'.split(',');
+function bar128(txt){var codes=[104],sum=104,i,c;txt=String(txt);for(i=0;i<txt.length;i++){c=txt.charCodeAt(i)-32;if(c<0||c>94)return '';codes.push(c);sum+=c*(i+1)}
+  codes.push(sum%103);codes.push(106);var x=10,p='';codes.forEach(function(cd){var w=C128P[cd],bar=true;for(var j=0;j<w.length;j++){var n=+w[j];if(bar)p+='M'+x+' 0h'+n+'v1h-'+n+'z';x+=n;bar=!bar}});
+  return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+(x+10)+' 1" preserveAspectRatio="none" shape-rendering="crispEdges" role="img" aria-label="Barcode"><path d="'+p+'" fill="#111"/></svg>'}
+function fieldHTML(f,d,rid){var st='left:'+f.x+'%;top:'+f.y+'%;width:'+f.w+'%;',v=d[f.k];
+  if(f.t==='photo'||f.t==='sign'){var u=v&&imgs['p:'+rid+':'+f.k];return u?'<img class="tf pimg'+(f.t==='sign'?' sg':'')+'" alt="" src="'+esc(u)+'" style="'+st+'height:'+(f.h||20)+'%">':''}
+  if(f.t==='bar'){var b=bar128(v==null?'':v);return b?'<div class="tf" style="'+st+'height:'+(f.h||12)+'%">'+b+'</div>':''}
+  var x=f.t==='check'?(v?'X':''):(f.t==='date'?fmtDate(v):(v==null?'':v));if(f.u)x=String(x).toUpperCase();
+  return '<div class="tf" style="'+st+'top:'+f.y+'%;font-size:'+f.s+'pt;text-align:'+f.a+';color:'+(COLORS[f.c||'']||COLORS[''])+((f.t==='check'||f.b)?';font-weight:700':'')+'">'+esc(x)+'</div>'}
+function sideHTML(t,fields,imgKey,d,rid){var im=imgs[imgKey],h=im?'<img class="bgimg" alt="" src="'+esc(im)+'">':'<p class="tpl-miss">The form picture for this template is not on this device. Use Templates, then Import template file, to add it again.</p>';
+  fields.forEach(function(f){h+=fieldHTML(f,d,rid)});
+  return '<div class="side"'+(t.pw?' style="height:'+(t.pw*t.ar-.004).toFixed(3)+'in"':'')+'>'+h+'</div>'}
+function renderTpl(t,d,rid){return sideHTML(t,t.fields,t.id,d,rid)+(t.bfields?sideHTML(t,t.bfields,t.id+':b',d,rid):'')}
+
+/* ---------- UI plumbing ---------- */
+function fieldList(){var t=curTpl(),a=[];if(t)return allFields(t).map(function(f){return {k:f.k,chk:f.t==='check'}});
+  (docId==='merch'?MSECTIONS:docId==='plate'?PSECTIONS:SECTIONS).forEach(function(s){s.f.forEach(function(f){a.push(f)})});return a}
+function fillForm(){var d=cur.d;fieldList().forEach(function(f){var el=$('#f_'+f.k);if(!el)return;
+  if(f.chk)el.checked=!!d[f.k];else el.value=d[f.k]==null?'':d[f.k]});if(docId==='mvc'){syncTariff();$('#totalOut').textContent='$'+money(total(d))}photoUI()}
+function photoUI(){var t=curTpl();if(!t)return;allFields(t).forEach(function(f){if(f.t!=='photo'&&f.t!=='sign')return;var im=$('#th_'+f.k);if(!im)return;var u=cur.d[f.k]&&imgs['p:'+cur.id+':'+f.k];if(u){im.src=u;im.hidden=false}else{im.removeAttribute('src');im.hidden=true}})}
+function syncTariff(){var a=cur.d.tariffAuto;$('#f_feeTariff').readOnly=a;$('#f_feeTariff').style.background=a?'#f1eee6':'#fff'}
+function refresh(){var t=curTpl(),sh=$('#sheet'),d=cur.d;
+  sh.style.width=(t&&t.pw)?t.pw+'in':'';
+  if(t){var cm=!!t.pw,lt=cm&&db.settings.cardLetter;sh.className='sheet tpl'+(t.ar<1&&!cm?' land':'')+(cm?' card'+(lt?' cardletter':' cardmode'):'')+(db.settings.printBg===false?' nobg':'');sh.style.setProperty('--ar',t.ar);sh.innerHTML=renderTpl(t,d,cur.id)}
+  else if(docId==='plate'){sh.className='sheet lic';sh.style.removeProperty('--ar');sh.innerHTML=renderPlate(d)}
+  else if(docId==='merch'){sh.className='sheet lic';sh.style.removeProperty('--ar');sh.innerHTML=renderMerch(d);$('#emblemNote').hidden=!!imgs.emblem}
+  else{recompute(cur);sh.className='sheet';sh.style.removeProperty('--ar');
+    ['expiration','renewBy','feeTariff'].forEach(function(k){var el=$('#f_'+k);if(el&&document.activeElement!==el)el.value=d[k]});
+    $('#totalOut').textContent='$'+money(total(d));syncTariff();sh.innerHTML=renderMVC(d)}
+  fit()}
+var saveT=null;
+function save(){cur.updated=Date.now();if(!persisted){db.records.push(cur);persisted=true}
+  clearTimeout(saveT);saveT=setTimeout(function(){sset(JSON.stringify(db));renderList();banner()},250)}
+function banner(){var b=$('#banner');if(storageOK&&imgOK){b.hidden=true}else if(storageOK){b.hidden=false;b.textContent='Template pictures could not be saved on this device. Use Templates, then Share file, to keep a copy of each template.'}else{b.hidden=false;
+  b.textContent='This browser is blocking saved records. Your work is kept only while this page is open — use Backup to keep a copy. For permanent saving, install the app from its web address (see the setup notes).'}}
+function title(r){if(r.doc==='plate')return (r.d.island||'')+' '+(r.d.number||'')+(PTYPES[ptype(r.d)]?' · '+PTYPES[ptype(r.d)]:'')+(r.d.label?' · '+r.d.label:'');
+  if(r.doc==='merch')return r.d.company||r.d.licenseNo||'Untitled license';
+  if(r.doc&&r.doc!=='mvc'){var t=tplById(r.doc);if(t)for(var i=0;i<t.fields.length;i++){var f=t.fields[i],v=r.d[f.k];if(v&&f.t!=='check'&&f.t!=='date')return String(v).split('\n')[0]}return 'Untitled record'}
+  return r.d.ownerName||r.d.licenseNo||'Untitled certificate'}
+function haystack(r){if(r.doc==='plate')return [r.d.island,r.d.number,r.d.label,r.d.holder,r.d.vehicle].join(' ');
+  if(r.doc==='merch')return r.d.company+' '+r.d.licenseNo+' '+r.d.activity;
+  return r.doc&&r.doc!=='mvc'?Object.keys(r.d).map(function(k){return r.d[k]}).join(' '):r.d.ownerName+' '+r.d.licenseNo+' '+r.d.vin+' '+r.d.typeModel}
+function renderList(){var q=($('#q').value||'').toLowerCase(),L=db.records.filter(function(r){
+  return (r.doc||'mvc')===docId&&(!q||haystack(r).toLowerCase().indexOf(q)>-1)})
+  .sort(function(a,b){return b.updated-a.updated});
+  $('#list').innerHTML=L.length?L.map(function(r){return '<button class="rec" type="button" data-id="'+r.id+'"'+(cur&&cur.id===r.id?' aria-current="true"':'')+'><b>'+esc(title(r))
+   +'</b>'+(r.doc==='merch'?'<span>'+esc(r.d.licenseNo?'License '+r.d.licenseNo:'No license number')+'</span><span>Issued '+esc(fmtDate(r.d.issueDate))+(r.d.validTo?' · Valid to '+esc(fmtDate(r.d.validTo)):'')+'</span>':(r.doc||'mvc')==='mvc'?'<span>'+esc([r.d.licenseNo,r.d.yearMake,r.d.typeModel].filter(Boolean).join(' · ')||'No vehicle details')+'</span><span>Issued '+esc(fmtDate(r.d.dateIssued))+' · Exp '+esc(fmtDate(r.d.expiration))+'</span>':'<span>Saved '+esc(new Date(r.updated).toLocaleDateString())+'</span>')+'</button>'}).join('')
+  :'<p class="empty">'+(db.records.some(function(r){return (r.doc||'mvc')===docId})?'No matches.':'Nothing saved yet. Fill in the details and they save automatically.')+'</p>'}
+function open(r,persist){cur=r;persisted=persist;fillForm();refresh();renderList()}
+function go(v){view=v;document.body.setAttribute('data-view',v);document.querySelectorAll('.tabs button').forEach(function(b){b.setAttribute('aria-selected',b.dataset.go===v)})}
+function sheetIn(t){return t?(t.pw?t.pw:t.ar<1?Math.min(11,8.48/t.ar):Math.min(8.5,10.98/t.ar)):(docId==='merch'||docId==='plate'?11:7.7)}
+function fit(){var w=$('#p-preview').clientWidth-24,px=sheetIn(curTpl())*96,z=Math.max(.3,Math.min(1.3,w/px));$('#sheet').style.setProperty('--z',z)}
+
+/* ---------- events ---------- */
+$('#form').addEventListener('input',function(e){var el=e.target,k=el.dataset.k;if(!k)return;var d=cur.d;
+  var mvc=docId==='mvc';
+  d[k]=el.type==='checkbox'?el.checked:(mvc&&k==='vin'?el.value.toUpperCase():el.value);
+  if(mvc&&k==='vin'&&el.value!==d[k])el.value=d[k];
+  if(docId==='plate'){if(k==='number')cur.touched.number=true;if((k==='island'||k==='type')&&!cur.touched.number){d.number=nextPlate(d.island,cur.id,ptype(d));var nb=$('#f_number');if(nb)nb.value=d.number}}
+  if(mvc&&k==='expiration')cur.touched.expiration=true;if(mvc&&k==='renewBy')cur.touched.renewBy=true;
+  refresh();save()});
+$('#list').addEventListener('click',function(e){var b=e.target.closest('.rec');if(!b)return;
+  var r=db.records.filter(function(x){return x.id===b.dataset.id})[0];if(r){open(r,true);go('form')}});
+$('#q').addEventListener('input',renderList);
+$('#bNew').addEventListener('click',function(){open(newRec(),false);go('form');var f=document.querySelector('#form input,#form textarea');if(f)f.focus()});
+$('#bRenew').addEventListener('click',function(){var n=newRec(),o=cur.d,t=todayISO();
+  if(docId==='merch')n.d=Object.assign({},o,{issueDate:t,validTo:''});
+  else n.d=Object.assign({},o,{dateIssued:t,expiration:addYears(t,1),renewBy:addMonths(addYears(t,1),1),feePenalty:'0.00'});
+  open(n,false);save();go('form')});
+$('#bDelete').addEventListener('click',function(){if(!persisted){open(newRec(),false);return}
+  if(!confirm('Delete "'+title(cur)+'"? This cannot be undone.'))return;
+  Object.keys(imgs).forEach(function(k){if(k.indexOf('p:'+cur.id+':')===0){delete imgs[k];idbDel(k)}});
+  db.records=db.records.filter(function(r){return r.id!==cur.id});sset(JSON.stringify(db));open(newRec(),false);go('records')});
+$('#bPrint').addEventListener('click',function(){refresh();window.print()});
+document.querySelectorAll('.tabs button').forEach(function(b){b.addEventListener('click',function(){go(b.dataset.go);if(b.dataset.go==='preview')setTimeout(fit,0)})});
+window.addEventListener('resize',fit);
+$('#docPick').addEventListener('change',function(e){var v=e.target.value;
+  if(v==='__add'){e.target.value=docId;edOpen(null);return}
+  setDoc(v);go('form')});
+function pageStyle(){var t0=curTpl(),cm=!!(t0&&t0.pw);$('#cardRow').hidden=!cm;$('#cardChk').checked=!!db.settings.cardLetter;
+  $('#pgStyle').textContent=(cm&&!db.settings.cardLetter)?'@page{size:'+t0.pw+'in '+(t0.pw*t0.ar).toFixed(3)+'in;margin:0}':'@page{size:letter '+((docId==='merch'||docId==='plate'||(t0&&t0.ar<1&&!cm))?'landscape':'portrait')+';margin:0}'}
+$('#cardChk').addEventListener('change',function(e){db.settings.cardLetter=e.target.checked;sset(JSON.stringify(db));pageStyle();refresh()});
+function setDoc(id){docId=id;var c=!!curTpl();$('#docPick').value=docId;
+  $('#bRenew').hidden=c;$('#bEditTpl').hidden=!c;$('#bgRow').hidden=!c;$('#emblemNote').hidden=true;$('#bgChk').checked=db.settings.printBg!==false;
+  $('#q').value='';$('#q').placeholder=c?'Search records…':(docId==='merch'?'Search company, license no…':docId==='plate'?'Search island, number, name…':'Search name, license, VIN…');
+  updScan();pageStyle();
+  buildForm();open(newRec(),false)}
+$('#bgChk').addEventListener('change',function(e){db.settings.printBg=e.target.checked;sset(JSON.stringify(db));refresh()});
+$('#bEditTpl').addEventListener('click',function(){var t=curTpl();if(t)edOpen(t)});
+
+/* ---------- photo and signature fields ---------- */
+var phTarget=null;
+function fieldOf(k){var t=curTpl();return t&&allFields(t).filter(function(f){return f.k===k})[0]}
+function phSet(k,url){var key='p:'+cur.id+':'+k;if(url){imgs[key]=url;idbPut(key,url);cur.d[k]=1}else{delete imgs[key];idbDel(key);cur.d[k]=''}photoUI();refresh();save()}
+$('#form').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
+  if(b.dataset.ph){phTarget=b.dataset.ph;$('#phFile').click()}else if(b.dataset.phx){phSet(b.dataset.phx,null)}else if(b.dataset.sg){sgOpen(b.dataset.sg)}});
+$('#phFile').addEventListener('change',function(e){var file=e.target.files[0];e.target.value='';var f=fieldOf(phTarget);if(!file||!f||!/^image\//.test(file.type))return;
+  var u=URL.createObjectURL(file),im=new Image(),k=phTarget;
+  im.onload=function(){var W=im.naturalWidth,H=im.naturalHeight,c=document.createElement('canvas'),x=c.getContext('2d');URL.revokeObjectURL(u);
+    if(f.t==='photo'){var t=curTpl(),asp=f.w/((f.h||20)*t.ar),sw=W,sh=W/asp;if(sh>H){sh=H;sw=H*asp}var sx=(W-sw)/2,sy=(H-sh)/2,ow=Math.min(600,Math.round(sw)),oh=Math.round(ow/asp);
+      c.width=ow;c.height=oh;x.fillStyle='#fff';x.fillRect(0,0,ow,oh);x.drawImage(im,sx,sy,sw,sh,0,0,ow,oh);phSet(k,c.toDataURL('image/jpeg',.88))}
+    else{var s=Math.min(1,900/W);c.width=Math.round(W*s);c.height=Math.round(H*s);x.drawImage(im,0,0,c.width,c.height);phSet(k,c.toDataURL('image/png'))}};
+  im.onerror=function(){URL.revokeObjectURL(u)};im.src=u});
+var sgK=null,sgDraw=false,sgLast=null,sgCv=$('#sgCv'),sgX=sgCv.getContext('2d');
+function sgReset(){sgX.clearRect(0,0,sgCv.width,sgCv.height)}
+function sgOpen(k){sgK=k;sgReset();$('#sgDlg').showModal()}
+function sgPt(e){var r=sgCv.getBoundingClientRect();return [(e.clientX-r.left)*sgCv.width/r.width,(e.clientY-r.top)*sgCv.height/r.height]}
+sgCv.addEventListener('pointerdown',function(e){sgDraw=true;sgLast=sgPt(e);try{sgCv.setPointerCapture(e.pointerId)}catch(x){}e.preventDefault()});
+sgCv.addEventListener('pointermove',function(e){if(!sgDraw)return;var p=sgPt(e);sgX.strokeStyle='#111';sgX.lineWidth=4;sgX.lineCap='round';sgX.lineJoin='round';sgX.beginPath();sgX.moveTo(sgLast[0],sgLast[1]);sgX.lineTo(p[0],p[1]);sgX.stroke();sgLast=p});
+['pointerup','pointercancel'].forEach(function(n){sgCv.addEventListener(n,function(){sgDraw=false})});
+$('#sgClr').addEventListener('click',sgReset);
+$('#sgCancel').addEventListener('click',function(){$('#sgDlg').close()});
+$('#sgOk').addEventListener('click',function(){var W=sgCv.width,H=sgCv.height,d=sgX.getImageData(0,0,W,H).data,x0=W,y0=H,x1=0,y1=0,i,j;
+  for(j=0;j<H;j++)for(i=0;i<W;i++)if(d[(j*W+i)*4+3]>10){if(i<x0)x0=i;if(i>x1)x1=i;if(j<y0)y0=j;if(j>y1)y1=j}
+  if(x1<x0){$('#sgDlg').close();return}
+  x0=Math.max(0,x0-8);y0=Math.max(0,y0-8);x1=Math.min(W-1,x1+8);y1=Math.min(H-1,y1+8);
+  var c=document.createElement('canvas');c.width=x1-x0+1;c.height=y1-y0+1;c.getContext('2d').drawImage(sgCv,x0,y0,c.width,c.height,0,0,c.width,c.height);
+  $('#sgDlg').close();phSet(sgK,c.toDataURL('image/png'))});
+
+/* backup / restore / template files */
+function download(obj,name){var blob=new Blob([JSON.stringify(obj)],{type:'application/json'}),a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500)}
+function tplOut(t){return Object.assign({},t,{image:imgs[t.id]||'',backImage:imgs[t.id+':b']||''})}
+function okImg(u){return typeof u==='string'&&u.indexOf('data:image/')===0&&u.length<9e6}
+function slug(x){return String(x).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'template'}
+$('#bBackup').addEventListener('click',function(){var o=JSON.parse(JSON.stringify(db));o.templates=db.templates.map(tplOut);o.photos={};Object.keys(imgs).forEach(function(k){if(k.indexOf('p:')===0)o.photos[k]=imgs[k]});if(imgs.emblem)o.emblem=imgs.emblem;download(o,'khpa-forms-backup-'+todayISO()+'.json')});
+$('#bRestore').addEventListener('click',function(){$('#restoreFile').click()});
+function importTpl(raw,ask){var t=cleanTpl(raw);if(!t)return false;var old=tplById(t.id);
+  if(old){if(!ask||!confirm('A template named "'+old.name+'" is already here. Replace it with the one in this file?'))return false}
+  var img=okImg(raw.image)?raw.image:'',bimg=okImg(raw.backImage)?raw.backImage:'';
+  if(old)db.templates=db.templates.filter(function(x){return x.id!==t.id});
+  db.templates.push(t);if(img){imgs[t.id]=img;idbPut(t.id,img)}if(bimg){imgs[t.id+':b']=bimg;idbPut(t.id+':b',bimg)}return true}
+function importFile(file,done){var rd=new FileReader();
+  rd.onload=function(){try{var j=JSON.parse(rd.result),nr=0,nt=0;
+    if(j&&j.khpaTemplate&&j.template){if(importTpl(j.template,true))nt=1}
+    else if(j&&Array.isArray(j.records)){if(!imgs.emblem&&typeof j.emblem==='string'&&j.emblem.indexOf('data:image/')===0&&j.emblem.length<9e6){imgs.emblem=j.emblem;idbPut('emblem',j.emblem)}
+      var have={};db.records.forEach(function(r){have[r.id]=1});
+      var add=j.records.filter(function(r){return r&&r.id&&r.d&&!have[r.id]});db.records=db.records.concat(add);nr=add.length;
+      if(j.photos&&typeof j.photos==='object')add.forEach(function(r){Object.keys(j.photos).forEach(function(k){if(k.indexOf('p:'+r.id+':')===0&&okImg(j.photos[k])){imgs[k]=j.photos[k];idbPut(k,j.photos[k])}})});
+      (Array.isArray(j.templates)?j.templates:[]).forEach(function(t){if(t&&!tplById(String(t.id||'')))if(importTpl(t,false))nt++})}
+    else throw 0;
+    sset(JSON.stringify(db));buildPicker();renderList();banner();if(done)done();
+    alert('Added '+nr+' record(s) and '+nt+' template(s).')}
+  catch(x){alert('That file is not a KHPA Forms backup or template file.')}};rd.readAsText(file)}
+$('#restoreFile').addEventListener('change',function(e){var f=e.target.files[0];if(f)importFile(f);e.target.value=''});
+
+/* ---------- state ID scan: reads the AAMVA 2D barcode (PDF417) text a barcode scanner types ---------- */
+var AAMVA_IDS={DAW:1,DAZ:1,DAQ:1,DCS:1,DAC:1,DAD:1,DAA:1,DBB:1,DBA:1,DBD:1,DBC:1,DAU:1,DAY:1,DAG:1,DAI:1,DAJ:1,DAK:1,DCG:1,DCT:1};
+function tcase(t){return String(t||'').toLowerCase().replace(/(^|[\s\-'])([a-z])/g,function(m,a,b){return a+b.toUpperCase()}).trim()}
+function aDate(v,ctry){v=String(v||'').replace(/\D/g,'');if(v.length!==8)return '';var y,m,d;
+  if(ctry==='CAN'||+v.slice(0,4)>1800){y=v.slice(0,4);m=v.slice(4,6);d=v.slice(6,8)}else{m=v.slice(0,2);d=v.slice(2,4);y=v.slice(4,8)}
+  if(+m<1||+m>12||+d<1||+d>31)return '';return y+'-'+m+'-'+d}
+var EYES={BLK:'Black',BLU:'Blue',BRO:'Brown',GRY:'Gray',GRN:'Green',HAZ:'Hazel',MAR:'Maroon',PNK:'Pink',DIC:'Dichromatic',UNK:'Unknown'};
+function parseAAMVA(text){var raw={},lines=String(text||'').split(/[\r\n]+/);
+  lines.forEach(function(ln){ln=ln.replace(/[\x00-\x1f]/g,'');var m,re=/(?:DL|ID)(D[A-Z]{2})/g;
+    if(/^ANSI /.test(ln)||ln.indexOf('ANSI ')>-1){var hit;while((hit=re.exec(ln))){if(AAMVA_IDS[hit[1]]){raw[hit[1]]=ln.slice(hit.index+2+3).trim();break}}return}
+    m=/^(D[A-Z]{2})(.*)$/.exec(ln);if(m&&AAMVA_IDS[m[1]])raw[m[1]]=m[2].trim()});
+  if(!raw.DAQ&&!raw.DCS&&!raw.DAA)return null;
+  var ctry=(raw.DCG||'USA').slice(0,3),first=raw.DAC,last=raw.DCS,mid=raw.DAD;
+  if(!last&&raw.DAA){var n=raw.DAA.split(/[,$]/);last=n[0];first=n[1];mid=n[2]}
+  var hgt=raw.DAU||'',mh=/(\d+)\s*(in|cm)/i.exec(hgt),height='';if(mh){if(/in/i.test(mh[2])){var inch=+mh[1];height=Math.floor(inch/12)+"'"+(inch%12)+'"'}else height=+mh[1]+' cm'}
+  var sx={'1':'M','2':'F','9':'X'}[(raw.DBC||'').trim()]||'',zip=(raw.DAK||'').replace(/\s/g,''),
+      z=zip.length>5&&/^\d+$/.test(zip)?zip.slice(0,5)+'-'+zip.slice(5,9).replace(/0+$/,''):zip;if(/-$/.test(z))z=z.slice(0,-1);
+  var p={first:tcase(first),middle:tcase(mid),last:tcase(last),street:tcase(raw.DAG),city:tcase(raw.DAI),state:(raw.DAJ||'').toUpperCase(),zip:z,
+    dob:aDate(raw.DBB,ctry),exp:aDate(raw.DBA,ctry),sex:sx,eye:EYES[(raw.DAY||'').toUpperCase()]||tcase(raw.DAY),height:height,dln:(raw.DAQ||'').trim(),weight:(String(raw.DAW||'').match(/\d+/)||[''])[0],hair:(raw.DAZ||'').slice(0,3).toUpperCase(),
+    eyec:({BRO:'BRN'}[(raw.DAY||'').toUpperCase()]||(raw.DAY||'').toUpperCase()).slice(0,3),hgt2:mh&&/in/i.test(mh[2])?Math.floor(+mh[1]/12)+'-'+('0'+(+mh[1]%12)).slice(-2):''};
+  p.name=[p.first,p.middle,p.last].filter(Boolean).join(' ');
+  p.lastfirst=p.last+(p.first||p.middle?', '+[p.first,p.middle].filter(Boolean).join(' '):'');
+  p.cityst=[p.city,[p.state,p.zip].filter(Boolean).join(' ')].filter(Boolean).join(', ');
+  p.addr=[p.street,p.cityst].filter(Boolean).join(', ');return p}
+function srcVal(p,key,type){var v=p[key]||'';if((key==='dob'||key==='exp')&&type!=='date')v=fmtDate(v);return v}
+var scanP=null;
+function scanTargets(){var t=curTpl();if(t)return allFields(t).filter(function(f){return f.src});
+  if(docId==='mvc')return [{k:'ownerName',l:'Owner full name',src:'name'},{k:'ownerStreet',l:'Street address',src:'street'},{k:'ownerArea',l:'District and island',src:'city'}];return []}
+function updScan(){$('#bScan').hidden=!scanTargets().length}
+var scT=null;
+$('#bScan').addEventListener('click',function(){$('#scBox').value='';$('#scOut').textContent='Waiting for a scan…';$('#scUse').disabled=true;scanP=null;$('#scDlg').showModal();$('#scBox').focus()});
+$('#scBox').addEventListener('input',function(){clearTimeout(scT);scT=setTimeout(function(){
+  var p=parseAAMVA($('#scBox').value);scanP=p;
+  if(!p){$('#scOut').textContent=$('#scBox').value?'That does not look like a state ID barcode yet. Make sure the scanner is a 2D scanner and you scanned the back of the card.':'Waiting for a scan…';$('#scUse').disabled=true;return}
+  var rows=scanTargets().map(function(f){return '<li><b>'+esc(f.l)+':</b> '+esc(srcVal(p,f.src,f.t))+'</li>'}).join('');
+  $('#scOut').innerHTML='Found: <b>'+esc(p.name||'(no name)')+'</b>. These will be filled in:<ul style="margin:.3rem 0 0;padding-left:1.2rem">'+rows+'</ul>';$('#scUse').disabled=false},350)});
+$('#scClose').addEventListener('click',function(){$('#scBox').value='';scanP=null;$('#scDlg').close()});
+$('#scDlg').addEventListener('close',function(){$('#scBox').value='';scanP=null});
+$('#scUse').addEventListener('click',function(){if(!scanP)return;var p=scanP;
+  scanTargets().forEach(function(f){var t=curTpl(),fd=t&&allFields(t).filter(function(x){return x.k===f.k})[0];cur.d[f.k]=srcVal(p,f.src,fd?fd.t:'text')});
+  $('#scBox').value='';scanP=null;$('#scDlg').close();fillForm();refresh();save();go('form')});
+
+/* ---------- picture storage for templates (IndexedDB; templates can be large) ---------- */
+function idbOpen(){return new Promise(function(res,rej){try{var r=indexedDB.open('khpa-forms-img',1);
+  r.onupgradeneeded=function(){r.result.createObjectStore('img')};r.onsuccess=function(){res(r.result)};r.onerror=function(){rej(r.error)}}catch(e){rej(e)}})}
+function idbPut(id,url){idbOpen().then(function(d){d.transaction('img','readwrite').objectStore('img').put(url,id)}).catch(function(){imgOK=false;banner()})}
+function idbDel(id){idbOpen().then(function(d){d.transaction('img','readwrite').objectStore('img').delete(id)}).catch(function(){})}
+function idbAll(){return idbOpen().then(function(d){return new Promise(function(res,rej){var out={},tx=d.transaction('img','readonly'),c=tx.objectStore('img').openCursor();
+  c.onsuccess=function(){var cu=c.result;if(cu){out[cu.key]=cu.value;cu.continue()}else res(out)};c.onerror=function(){rej(c.error)}})})}
+
+/* ---------- template data cleaning (files from email are untrusted) ---------- */
+function cl(v,a,b){v=parseFloat(v);if(!isFinite(v))v=a;return Math.min(b,Math.max(a,v))}
+function cleanFields(arr){var seen={};return (Array.isArray(arr)?arr:[]).slice(0,200).map(function(f,i){if(!f||typeof f!=='object')return null;
+    var k=String(f.k||'').replace(/[^\w-]/g,'').slice(0,20)||('f'+(i+1));
+    return {k:k,l:String(f.l||'Field').slice(0,80),t:TTYPES.indexOf(f.t)>-1?f.t:'text',
+      x:cl(f.x,0,100),y:cl(f.y,0,100),w:cl(f.w,3,100),h:cl(f.h||0,0,100),s:cl(f.s,5,48),a:['left','center','right'].indexOf(f.a)>-1?f.a:'left',
+      src:SRCKEYS.indexOf(f.src)>-1?f.src:'',b:f.b?1:0,u:f.u?1:0,c:COLORS.hasOwnProperty(f.c||'')?(f.c||''):'',def:String(f.def||'').slice(0,400)}}).filter(Boolean)}
+function uniqKeys(fs,taken){fs.forEach(function(f){while(taken[f.k])f.k+='x';taken[f.k]=1});return fs}
+function cleanTpl(t){if(!t||typeof t!=='object')return null;
+  var id=String(t.id||'').replace(/[^\w-]/g,'').slice(0,40);if(!id||id==='mvc'||id==='merch'||id==='plate'||id==='__add')return null;
+  var fs=cleanFields(t.fields),bf=Array.isArray(t.bfields)?cleanFields(t.bfields):null,own={};
+  // keys must be unique inside one side; the same key on both sides means the same data
+  var seen={};fs.forEach(function(f){while(seen[f.k])f.k+='x';seen[f.k]=1});if(bf){var s2={};bf.forEach(function(f){while(s2[f.k])f.k+='x';s2[f.k]=1})}
+  var pw=cl(t.pw||0,0,17);
+  var out={id:id,name:String(t.name||'Untitled template').slice(0,80),ar:cl(t.ar,.3,3),fields:fs,updated:+t.updated||Date.now()};
+  if(pw>=1)out.pw=pw;if(bf)out.bfields=bf;return out}
+
+/* ---------- templates list ---------- */
+function tmRender(){$('#tmList').innerHTML=db.templates.length?db.templates.map(function(t){
+  var n=db.records.filter(function(r){return r.doc===t.id}).length;
+  return '<div class="tm-row"><b>'+esc(t.name)+'</b><span>'+t.fields.length+' fields · '+n+' saved record(s)</span><div class="tm-btns">'
+   +'<button class="btn small" type="button" data-a="edit" data-id="'+esc(t.id)+'">Edit</button>'
+   +'<button class="btn small" type="button" data-a="share" data-id="'+esc(t.id)+'">Share file</button>'
+   +'<button class="btn small danger" type="button" data-a="del" data-id="'+esc(t.id)+'">Delete</button></div></div>'}).join('')
+  :'<p class="empty">No templates yet. Tap "Add new template" to make your first one.</p>'}
+$('#bTpl').addEventListener('click',function(){tmRender();$('#tmDlg').showModal()});
+$('#tmClose').addEventListener('click',function(){$('#tmDlg').close()});
+$('#tmAdd').addEventListener('click',function(){$('#tmDlg').close();edOpen(null)});
+$('#tmImp').addEventListener('click',function(){$('#tmFile').click()});
+$('#tmFile').addEventListener('change',function(e){var f=e.target.files[0];if(f)importFile(f,tmRender);e.target.value=''});
+$('#tmList').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;var t=tplById(b.dataset.id);if(!t)return;
+  if(b.dataset.a==='edit'){$('#tmDlg').close();edOpen(t)}
+  else if(b.dataset.a==='share'){download({khpaTemplate:1,template:tplOut(t)},'khpa-template-'+slug(t.name)+'.json')}
+  else if(b.dataset.a==='del'){if(!confirm('Delete the template "'+t.name+'"?\n\nRecords already saved with it stay on this device and come back if you import the template again.'))return;
+    db.templates=db.templates.filter(function(x){return x.id!==t.id});delete imgs[t.id];idbDel(t.id);delete imgs[t.id+':b'];idbDel(t.id+':b');sset(JSON.stringify(db));
+    if(docId===t.id){buildPicker();setDoc('mvc')}else buildPicker();tmRender()}});
+
+/* ---------- template maker ---------- */
+var ed=null,drag=null;
+$('#edSrc').innerHTML=SRC.map(function(x){return '<option value="'+x[0]+'">'+esc(x[1])+'</option>'}).join('');
+function EF(){return ed.side?ed.bfields:ed.fields}
+function EI(){return ed.side?ed.bimg:ed.img}
+function fieldBy(k){return EF().filter(function(f){return f.k===k})[0]}
+function r1(v){return Math.round(v*10)/10}
+function edOpen(t){
+  ed=t?{id:t.id,name:t.name,ar:t.ar,pw:t.pw||0,img:imgs[t.id]||'',bimg:imgs[t.id+':b']||'',fields:JSON.parse(JSON.stringify(t.fields)),bfields:t.bfields?JSON.parse(JSON.stringify(t.bfields)):null,side:0,sel:null,placing:false,isNew:false}
+      :{id:'t'+Date.now().toString(36)+Math.random().toString(36).slice(2,4),name:'',ar:1.294,pw:0,img:'',bimg:'',fields:[],bfields:null,side:0,sel:null,placing:false,isNew:true};
+  $('#edPw').value=ed.pw?String(ed.pw):'';edSides();
+  $('#edName').value=ed.name;$('#edDlg').showModal();edImgSet();edRender()}
+function edMsg(m){$('#edMsg').textContent=m}
+function edImgSet(){$('#edImg').src=EI()||'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
+  $('#edAdd').disabled=!EI();
+  edMsg(EI()?'Tap "Add field", then tap the spot on the form where it goes. Drag a box to move it.':'Step 1: choose a photo or scan of the blank form (JPG or PNG).');
+  edLayout()}
+function edLayout(){var pg=$('#edPage'),w=pg.clientWidth;if(w)pg.style.setProperty('--k',(w/((ed.pw||sheetIn({ar:ed.ar}))*72)).toFixed(4)+'px')}
+function edRender(){var pg=$('#edPage');pg.querySelectorAll('.ed-box').forEach(function(n){n.remove()});
+  EF().forEach(function(f){var b=document.createElement('div');b.className='ed-box'+(f.k===ed.sel?' sel':'');b.dataset.k=f.k;b.tabIndex=0;b.setAttribute('role','button');
+    b.setAttribute('aria-label','Field '+f.l+'. Arrow keys move it.');b.textContent=f.t==='check'?'X':f.l;edPaint(b,f);pg.appendChild(b)});
+  $('#edImg').src=EI()||'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
+  $('#edList').innerHTML=EF().map(function(f){return '<li><button type="button" data-k="'+esc(f.k)+'"'+(f.k===ed.sel?' aria-current="true"':'')+'>'+esc(f.l)+'</button></li>'}).join('');
+  var f=ed.sel&&fieldBy(ed.sel);$('#edFields').hidden=!f;
+  if(f){$('#edSrc').value=f.src||'';$('#edL').value=f.l;$('#edTy').value=f.t;$('#edA').value=f.a;$('#edS').value=f.s;$('#edW').value=f.w;$('#edH').value=f.h||'';$('#edHrow').hidden=!(f.t==='photo'||f.t==='sign'||f.t==='bar');$('#edCol').value=f.c||'';$('#edDef').value=f.def||'';$('#edB').checked=!!f.b;$('#edU').checked=!!f.u}}
+function edPaint(b,f){b.style.left=f.x+'%';b.style.top=f.y+'%';b.style.width=f.w+'%';b.style.setProperty('--s',f.s);b.style.textAlign=f.a;b.style.height=f.h?f.h+'%':'';b.style.minHeight=f.h?'0':''}
+function edBox(k){return $('#edPage .ed-box[data-k="'+k+'"]')}
+function edSelect(k){ed.sel=k;edRender()}
+function allEd(){return ed.fields.concat(ed.bfields||[])}
+function edSides(){$('#edSides').hidden=!ed.bfields;$('#edAddBack').hidden=!!ed.bfields;$('#edS0').setAttribute('aria-pressed',String(!ed.side));$('#edS1').setAttribute('aria-pressed',String(!!ed.side))}
+function edSwitch(n){ed.side=n;ed.sel=null;ed.placing=false;$('#edPage').classList.remove('placing');edSides();edImgSet();edRender()}
+function edAddAt(x,y){var n=1;allEd().forEach(function(f){var m=/^f(\d+)$/.exec(f.k);if(m)n=Math.max(n,+m[1]+1)});
+  var f={k:'f'+n,src:'',l:'Field '+(allEd().length+1),t:'text',x:r1(Math.min(Math.max(x,0),70)),y:r1(Math.min(Math.max(y,0),97)),w:30,s:11,a:'left'};
+  EF().push(f);ed.placing=false;$('#edPage').classList.remove('placing');edMsg('Name the field on the right (for example "Owner name"), then add the next one.');
+  edSelect(f.k);$('#edL').focus();$('#edL').select()}
+$('#edPick').addEventListener('click',function(){$('#edFile').click()});
+$('#edFile').addEventListener('change',function(e){var f=e.target.files[0];e.target.value='';if(!f)return;
+  if(!/^image\//.test(f.type)){edMsg('Please choose a picture (JPG or PNG). For a PDF, export or screenshot the page as a picture first.');return}
+  var u=URL.createObjectURL(f),im=new Image();
+  im.onload=function(){var W=im.naturalWidth,H=im.naturalHeight,k=Math.min(1,1700/W),c=document.createElement('canvas');c.width=Math.round(W*k);c.height=Math.round(H*k);
+    var x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,c.width,c.height);x.drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);
+    var u2=c.toDataURL('image/jpeg',.85);if(ed.side)ed.bimg=u2;else{ed.img=u2;ed.ar=c.height/c.width}edImgSet();edRender()};
+  im.onerror=function(){URL.revokeObjectURL(u);edMsg('That picture could not be opened. Try a JPG or PNG.')};im.src=u});
+$('#edImg').addEventListener('load',edLayout);
+window.addEventListener('resize',function(){if(ed&&$('#edDlg').open)edLayout()});
+$('#edAdd').addEventListener('click',function(e){if(e.detail===0){edAddAt(10,10);return}
+  ed.placing=true;$('#edPage').classList.add('placing');edMsg('Tap the spot on the form where this detail should print.')});
+$('#edPage').addEventListener('pointerdown',function(e){var bx=e.target.closest('.ed-box'),r=this.getBoundingClientRect();
+  if(ed.placing&&!bx){edAddAt((e.clientX-r.left)/r.width*100,(e.clientY-r.top)/r.height*100);return}
+  if(!bx)return;var f=fieldBy(bx.dataset.k);if(ed.sel!==f.k){edSelect(f.k);bx=edBox(f.k)}
+  drag={k:f.k,sx:e.clientX,sy:e.clientY,ox:f.x,oy:f.y,w:r.width,h:r.height,el:bx};try{bx.setPointerCapture(e.pointerId)}catch(x){}e.preventDefault()});
+$('#edPage').addEventListener('pointermove',function(e){if(!drag)return;var f=fieldBy(drag.k);
+  f.x=r1(Math.min(Math.max(drag.ox+(e.clientX-drag.sx)/drag.w*100,0),100-f.w));f.y=r1(Math.min(Math.max(drag.oy+(e.clientY-drag.sy)/drag.h*100,0),99));edPaint(drag.el,f)});
+['pointerup','pointercancel'].forEach(function(n){$('#edPage').addEventListener(n,function(){drag=null})});
+$('#edPage').addEventListener('keydown',function(e){var bx=e.target.closest('.ed-box');if(!bx)return;var d={ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,-1],ArrowDown:[0,1]}[e.key];if(!d)return;
+  e.preventDefault();edNudge(fieldBy(bx.dataset.k),d[0],d[1]);bx.focus()});
+function edNudge(f,dx,dy){f.x=r1(Math.min(Math.max(f.x+dx*.2,0),100-f.w));f.y=r1(Math.min(Math.max(f.y+dy*.2,0),99));var b=edBox(f.k);if(b)edPaint(b,f)}
+document.querySelectorAll('.nudge button').forEach(function(b){b.addEventListener('click',function(){var f=ed.sel&&fieldBy(ed.sel);if(!f)return;var n=b.dataset.n.split(',');edNudge(f,+n[0],+n[1])})});
+$('#edList').addEventListener('click',function(e){var b=e.target.closest('button');if(b)edSelect(b.dataset.k)});
+function edProp(id,fn){$(id).addEventListener('input',function(){var f=ed.sel&&fieldBy(ed.sel);if(!f)return;fn(f,this.value);var b=edBox(f.k);if(b){edPaint(b,f);b.textContent=f.t==='check'?'X':f.l}
+  var li=$('#edList button[data-k="'+f.k+'"]');if(li)li.textContent=f.l})}
+edProp('#edL',function(f,v){f.l=v.slice(0,80)||'Field'});
+edProp('#edTy',function(f,v){f.t=v;if((v==='photo'||v==='sign'||v==='bar')&&!f.h)f.h=v==='bar'?12:20;$('#edHrow').hidden=!(v==='photo'||v==='sign'||v==='bar');$('#edH').value=f.h||''});
+edProp('#edH',function(f,v){f.h=cl(v,3,100)});
+edProp('#edCol',function(f,v){f.c=v});
+edProp('#edDef',function(f,v){f.def=v.slice(0,400)});
+$('#edB').addEventListener('change',function(){var f=ed.sel&&fieldBy(ed.sel);if(f)f.b=this.checked?1:0});
+$('#edU').addEventListener('change',function(){var f=ed.sel&&fieldBy(ed.sel);if(f)f.u=this.checked?1:0});
+$('#edS0').addEventListener('click',function(){edSwitch(0)});
+$('#edS1').addEventListener('click',function(){edSwitch(1)});
+$('#edAddBack').addEventListener('click',function(){ed.bfields=[];edSwitch(1)});
+$('#edPw').addEventListener('change',function(){ed.pw=+this.value||0;edLayout()});
+edProp('#edSrc',function(f,v){f.src=v});
+edProp('#edA',function(f,v){f.a=v});
+edProp('#edS',function(f,v){f.s=cl(v,5,48)});
+edProp('#edW',function(f,v){f.w=cl(v,3,100);f.x=Math.min(f.x,100-f.w)});
+$('#edDel').addEventListener('click',function(){if(!ed.sel)return;var keep=EF().filter(function(f){return f.k!==ed.sel});if(ed.side)ed.bfields=keep;else ed.fields=keep;ed.sel=null;edRender()});
+$('#edCancel').addEventListener('click',function(){if(ed.isNew&&allEd().length&&!confirm('Discard this new template?'))return;$('#edDlg').close()});
+$('#edSave').addEventListener('click',function(){var name=$('#edName').value.trim();
+  if(!name){edMsg('Give the template a name first.');$('#edName').focus();return}
+  if(!ed.img){edMsg('Choose the blank form picture first.');return}
+  if(!allEd().length){edMsg('Add at least one field.');return}
+  var o={id:ed.id,name:name,ar:ed.ar,fields:ed.fields,updated:Date.now()};if(ed.pw)o.pw=ed.pw;if(ed.bfields)o.bfields=ed.bfields;var t=cleanTpl(o);
+  db.templates=db.templates.filter(function(x){return x.id!==t.id});db.templates.push(t);imgs[t.id]=ed.img;idbPut(t.id,ed.img);if(t.bfields&&ed.bimg){imgs[t.id+':b']=ed.bimg;idbPut(t.id+':b',ed.bimg)}else if(!t.bfields){delete imgs[t.id+':b'];idbDel(t.id+':b')}sset(JSON.stringify(db));
+  $('#edDlg').close();buildPicker();setDoc(t.id);go('form')});
+
+/* emblem picture for the Merchandise and Services License */
+function embStatus(){$('#s_embst').textContent=imgs.emblem?'An emblem picture is saved on this device.':'No emblem picture yet. Choose one (PNG with a transparent background is best).'}
+$('#s_emb').addEventListener('change',function(e){var f=e.target.files[0];e.target.value='';if(!f||!/^image\//.test(f.type)){return}
+  var u=URL.createObjectURL(f),im=new Image();
+  im.onload=function(){var k=Math.min(1,1400/Math.max(im.naturalWidth,im.naturalHeight)),c=document.createElement('canvas');c.width=Math.round(im.naturalWidth*k);c.height=Math.round(im.naturalHeight*k);
+    c.getContext('2d').drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);imgs.emblem=c.toDataURL('image/png');idbPut('emblem',imgs.emblem);embStatus();if(docId==='merch')refresh()};
+  im.onerror=function(){URL.revokeObjectURL(u);$('#s_embst').textContent='That picture could not be opened. Try a PNG or JPG.'};im.src=u});
+$('#s_embclr').addEventListener('click',function(){delete imgs.emblem;idbDel('emblem');embStatus();if(docId==='merch')refresh()});
+
+/* settings */
+$('#bSettings').addEventListener('click',function(){$('#s_dx').value=db.settings.licDx||'';$('#s_dy').value=db.settings.licDy||'';embStatus();$('#s_rate').value=db.settings.rate;$('#s_plate').value=db.settings.plateStart||'';$('#s_off').value=(db.settings.office||[]).join('\n');$('#dlg').showModal()});
+$('#setForm').addEventListener('submit',function(e){var v=e.submitter&&e.submitter.value;if(v!=='ok')return;
+  db.settings.licDx=$('#s_dx').value.trim();db.settings.licDy=$('#s_dy').value.trim();db.settings.rate=$('#s_rate').value||'0.015';db.settings.plateStart=$('#s_plate').value;db.settings.office=$('#s_off').value.split('\n');sset(JSON.stringify(db));refresh()});
+
+/* ---------- start: open straight to the first document ---------- */
+$('#logo').src=ARMS;
+// probe storage once so the warning shows up front
+try{localStorage.setItem('__t','1');localStorage.removeItem('__t')}catch(e){storageOK=false}
+var started=false;
+var PRESETS={{PRESETS}};
+function seedPresets(){db.settings.seeded=db.settings.seeded||{};var ch=false;
+  PRESETS.forEach(function(P){if(db.settings.seeded[P.template.id])return;var t=cleanTpl(P.template);if(!t)return;
+    db.templates.push(t);imgs[t.id]=P.image;idbPut(t.id,P.image);if(P.backImage){imgs[t.id+':b']=P.backImage;idbPut(t.id+':b',P.backImage)}db.settings.seeded[t.id]=1;ch=true});
+  if(ch)sset(JSON.stringify(db))}
+function start(){if(started)return;started=true;seedPresets();buildPicker();banner();setDoc('mvc');go('form')}
+if(window.indexedDB){var tm=setTimeout(start,1500);
+  idbAll().then(function(m){imgs=m;clearTimeout(tm);start()},function(){imgOK=false;clearTimeout(tm);start()})}
+else start();
+if(document.fonts&&document.fonts.load)document.fonts.load('700 20px "KHPA Fraktur"').then(function(){if(cur&&docId==='merch')refresh()}).catch(function(){});
+if('serviceWorker' in navigator&&/^https?:/.test(location.protocol)){navigator.serviceWorker.register('sw.js').catch(function(){})}
+})();
+</script>
+</body>
+</html>
