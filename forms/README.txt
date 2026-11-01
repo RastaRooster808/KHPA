@@ -73,5 +73,7 @@ ID CARDS (two sides) AND LICENSE PLATES
 - License Plate: pick the plate type (Standard, Trailer or small Motorcycle plate) and the island (HAW, MAU, OAH, MOL, LAN, KAU, NII). The background is the archipelago art with that island colored (red Hawaiʻi, pink Maui, gold Oʻahu, purple Kauaʻi, etc.); the abbreviation, text color and
   coordinates change and the next free number in that island's series is filled in automatically.
   Color coding: island color lettering with that island highlighted (default), every island color-coded, or red lettering.
+  Plates print at true size: 12 x 6 in (standard and trailer) or 7 x 4 in (motorcycle), numbers up to 3 digits.
+  Tick "Print on a Letter page" for a scaled proof on an office printer.
   Plate layout: Stacked (code above number) or Parallel (code and number side by side).
   Every plate is filed as a record. First numbers per island are set in Settings (one per line, e.g. HAW=501).
