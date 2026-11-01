@@ -510,28 +510,21 @@ var PSECTIONS=[{t:'License plate',f:[
   {k:'holder',l:'Registered to (filed with the record)'},
   {k:'vehicle',l:'Vehicle / VIN (filed with the record)'}]}];
 function pdefaults(){var a='HAW';return {island:a,type:'STD',number:nextPlate(a,'','STD'),label:'',holder:'',vehicle:''}}
-function renderPlate(d){var I=isle(d.island),n=String(d.number||''),sz=n.length<=3?200:n.length===4?165:n.length===5?135:110,ty=ptype(d),lab=String(d.label||PTYPES[ty]||'').toUpperCase(),
-  st='fill="#fff" stroke="#111" stroke-width="9" stroke-linejoin="round" paint-order="stroke" font-family="Impact,\'Arial Black\',\'Helvetica Neue\',Arial,sans-serif" font-weight="900"',
-  crown=imgs.emblem?'<image href="'+esc(imgs.emblem)+'" x="430" y="205" width="240" height="190" preserveAspectRatio="xMidYMid meet"/>'
-   :'<path d="M455 380 L440 250 L500 300 L550 230 L600 300 L660 250 L645 380 Z" fill="#e8b923" stroke="#111" stroke-width="7" stroke-linejoin="round"/><rect x="450" y="380" width="200" height="26" fill="#e8b923" stroke="#111" stroke-width="7"/>';
-  if(ty==='MC'){var ms=n.length<=3?125:n.length===4?105:n.length===5?88:74,full=I[0]+' '+n;
-    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 850" role="img" aria-label="Motorcycle license plate '+esc(full)+'"><rect width="1100" height="850" fill="#fff"/>'
-     +'<rect x="200" y="225" width="700" height="400" rx="26" fill="'+I[2]+'" stroke="#111" stroke-width="7"/>'
-     +'<rect x="214" y="239" width="672" height="372" rx="18" fill="none" stroke="#111" stroke-width="2.5" opacity=".55"/>'
-     +'<text x="550" y="312" text-anchor="middle" font-size="46" '+st.replace('stroke-width="9"','stroke-width="6"')+'>KO HAWAIʻI PAE ʻAINA</text>'
-     +'<text x="550" y="450" text-anchor="middle" font-size="'+ms+'" '+st+'>'+esc(full)+'</text>'
-     +(lab?'<text x="550" y="520" text-anchor="middle" font-size="54" '+st.replace('stroke-width="9"','stroke-width="6"')+'>'+esc(lab)+'</text>':'')
-     +'<text x="550" y="575" text-anchor="middle" font-size="20" font-family="Arial,Helvetica,sans-serif" font-weight="700" fill="#111">'+esc(coordTxt(I[0]))+'</text>'
-     +'<text x="550" y="770" text-anchor="middle" font-size="22" font-family="Arial,Helvetica,sans-serif" fill="#555">Print proof, plate drawn at 7 in × 4 in</text></svg>'}
-  return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 850" role="img" aria-label="License plate '+esc(I[0]+' '+n)+'"><rect width="1100" height="850" fill="#fff"/>'
-   +'<rect x="50" y="175" width="1000" height="500" rx="34" fill="'+I[2]+'" stroke="#111" stroke-width="8"/>'
-   +'<rect x="68" y="193" width="964" height="464" rx="22" fill="none" stroke="#111" stroke-width="3" opacity=".55"/>'
-   +'<text x="550" y="272" text-anchor="middle" font-size="70" '+st+'>KO HAWAIʻI PAE ʻAINA</text>'
-   +'<text x="95" y="500" font-size="200" '+st+'>'+esc(I[0])+'</text>'
-   +'<text x="1005" y="500" text-anchor="end" font-size="'+sz+'" '+st+'>'+esc(n)+'</text>'
-   +(imgs.emblem?crown:'')+(lab?'<text x="550" y="582" text-anchor="middle" font-size="80" '+st+'>'+esc(lab)+'</text>':'')
-   +'<text x="550" y="640" text-anchor="middle" font-size="26" font-family="Arial,Helvetica,sans-serif" font-weight="700" fill="#111">'+esc(coordTxt(I[0]))+'</text>'
-   +'<text x="550" y="770" text-anchor="middle" font-size="22" font-family="Arial,Helvetica,sans-serif" fill="#555">Print proof, plate drawn at 10 in × 5 in</text></svg>'}
+var PLATEBG={{PLATEBG}};
+function renderPlate(d){var I=isle(d.island),n=String(d.number||''),ty=ptype(d),lab=String(d.label||PTYPES[ty]||'').toUpperCase(),full=I[0]+' '+n,mc=ty==='MC',
+  st='fill="'+I[2]+'" stroke="#111" stroke-width="9" stroke-linejoin="round" paint-order="stroke" font-family="Impact,\'Arial Black\',\'Helvetica Neue\',Arial,sans-serif" font-weight="900"',
+  sz=n.length<=3?125:n.length===4?108:n.length===5?90:76,
+  px=mc?200:50,py=mc?225:175,pw=mc?700:1000,ph=mc?400:500,
+  inner='<image href="'+PLATEBG[I[0]]+'" x="215" y="98" width="785" height="392" preserveAspectRatio="xMidYMid meet"/>'
+   +'<text x="500" y="82" text-anchor="middle" font-size="60" '+st+'>KO HAWAIʻI PAE ʻAINA</text>'
+   +(imgs.emblem?'<image href="'+esc(imgs.emblem)+'" x="395" y="150" width="210" height="160" preserveAspectRatio="xMidYMid meet"/>':'')
+   +'<text x="40" y="228" font-size="125" '+st+'>'+esc(I[0])+'</text>'
+   +'<text x="40" y="'+(228+Math.round(sz*.95)+6)+'" font-size="'+sz+'" '+st+'>'+esc(n)+'</text>'
+   +(lab?'<text x="42" y="436" font-size="'+(lab.length>8?38:48)+'" '+st+'>'+esc(lab)+'</text>':'')
+   +'<text x="48" y="478" font-size="21" font-family="Arial,Helvetica,sans-serif" font-weight="700" fill="#111">'+esc(coordTxt(I[0]))+'</text>';
+  return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 850" role="img" aria-label="'+(mc?'Motorcycle license plate ':'License plate ')+esc(full)+'"><defs><clipPath id="plc"><rect width="1000" height="500" rx="34"/></clipPath></defs><rect width="1100" height="850" fill="#fff"/>'
+   +'<g transform="translate('+px+' '+py+')'+(mc?' scale(.7) translate(0 36)':'')+'"><rect width="1000" height="500" rx="34" fill="#fff"/><g clip-path="url(#plc)">'+inner+'</g><rect x="3" y="3" width="994" height="494" rx="32" fill="none" stroke="#111" stroke-width="8"/></g>'
+   +'<text x="550" y="770" text-anchor="middle" font-size="22" font-family="Arial,Helvetica,sans-serif" fill="#555">Print proof, plate drawn at '+(mc?'7 in × 4 in':'10 in × 5 in')+'</text></svg>'}
 
 /* ---------- calculations ---------- */
 function total(d){return num(d.feeReg)+num(d.feeTariff)+num(d.feeBeau)+num(d.feeSp)+num(d.feePenalty)-num(d.feeExempt)}

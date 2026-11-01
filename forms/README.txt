@@ -70,6 +70,6 @@ ID CARDS (two sides) AND LICENSE PLATES
   tick "Test print on a Letter page". Add the photo with "Choose or take photo", sign with "Draw signature".
   The Scan button fills name, birth date, address, height, weight, hair and eyes from a state ID.
   The card art is generated placeholder artwork: use Templates > Edit to swap in the original card pictures.
-- License Plate: pick the plate type (Standard, Trailer or small Motorcycle plate) and the island (HAW, MAU, OAH, MOL, LAN, KAU, NII). The abbreviation, background color and
+- License Plate: pick the plate type (Standard, Trailer or small Motorcycle plate) and the island (HAW, MAU, OAH, MOL, LAN, KAU, NII). The background is the archipelago art with that island colored (red Hawaiʻi, pink Maui, gold Oʻahu, purple Kauaʻi, etc.); the abbreviation, text color and
   coordinates change and the next free number in that island's series is filled in automatically.
   Every plate is filed as a record. First numbers per island are set in Settings (one per line, e.g. HAW=501).
