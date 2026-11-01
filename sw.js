@@ -15,7 +15,7 @@
  */
 "use strict";
 
-const CACHE_VERSION = "khpa-2026.05";
+const CACHE_VERSION = "khpa-2026.06";
 const SHELL_CACHE = `${CACHE_VERSION}-shell`;
 const ARCHIVE_CACHE = `${CACHE_VERSION}-archive`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
@@ -29,6 +29,8 @@ const APP_SHELL = [
   "/government-documents.html",
   "/registration.html",
   "/contact.html",
+  "/emergency.html",
+  "/e.html",
   "/hawaii.html",
   "/protocols.html",
   "/foreign-affairs.html",
@@ -45,6 +47,9 @@ const APP_SHELL = [
   "/offline.html",
   "/manifest.json",
   "/css/main.css",
+  "/css/emergency.css",
+  "/Js/emergency.js",
+  "/Js/qrcode.js",
   "/Js/site.js",
   "/Js/doc-library.js",
   "/Js/khpa-bot.js",

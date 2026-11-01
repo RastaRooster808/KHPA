@@ -77,3 +77,11 @@ ID CARDS (two sides) AND LICENSE PLATES
   Tick "Print on a Letter page" for a scaled proof on an office printer.
   Plate layout: Stacked (code above number) or Parallel (code and number side by side).
   Every plate is filed as a record. First numbers per island are set in Settings (one per line, e.g. HAW=501).
+
+ID CARD VERIFICATION QR CODE (khpa.io/e)
+- ID card backs carry a QR code. Scanning it opens khpa.io/emergency.html, which shows the card as VERIFIED,
+  EXPIRED or NOT VERIFIED, and any emergency contacts the holder added. KHPA keeps no online records.
+- The QR is signed with the KHPA signing key. Import the key file once on each office device:
+  Settings > ID cards > KHPA signing key. Keep that file private (do not email it around or post it).
+  Without the key the card prints with no QR code. The key is never included in Backup files.
+- The QR code uses the ID number, name and expiration fields. Fill those before printing.
