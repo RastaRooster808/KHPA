@@ -534,7 +534,7 @@ function renderPlate(d){var I=isle(d.island),n=String(d.number||''),ty=ptype(d),
    +'<image href="'+esc(imgs.emblem||CROWN)+'" x="'+(side?Math.round(Math.min(Math.max((14+twid(I[0],190)+986-twid(n,ns))/2,330),670)-100):600)+'" y="'+(side?175:150)+'" width="200" height="160" preserveAspectRatio="xMidYMid meet"/>'
    +txt
    +'<text x="986" y="490" text-anchor="end" font-size="19" font-family="Arial,Helvetica,sans-serif" font-weight="700" fill="#111" stroke="#fff" stroke-width="5" paint-order="stroke">'+esc(coordTxt(I[0]))+'</text>';
-  var H=mc?571:500,off=mc?35:0;
+  var H=mc?571:500,off=mc?66:0;
   return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 '+H+'" width="100%" height="100%" role="img" aria-label="'+(mc?'Motorcycle license plate ':'License plate ')+esc(full)+'"><defs><clipPath id="plc"><rect width="1000" height="'+H+'" rx="30"/></clipPath></defs>'
    +'<rect width="1000" height="'+H+'" rx="30" fill="#fff"/><g clip-path="url(#plc)"><g transform="translate(0 '+off+')">'+inner.replace('y="0" width="1000" height="500" preserveAspectRatio="xMidYMid slice"','y="'+(-off)+'" width="1000" height="'+H+'" preserveAspectRatio="xMidYMid slice"')+'</g></g>'
    +'<rect x="2" y="2" width="996" height="'+(H-4)+'" rx="29" fill="none" stroke="#888" stroke-width="4"/></svg>'}
